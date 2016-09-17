@@ -1,2 +1,0 @@
-module Employee::EmployeeControllerHelper
-end
