@@ -82,12 +82,13 @@ company_id		=> foreign key of company
 1) Company has_many employees
 2) company has_many resources
 3) company has_many bookings
+4)company has_many roles
 ```
 
 * employees
 ```sh
 1) employee belongs to company
-2) employee has_one to role
+2) employee belongs to role
 3) employee has_many booking
 4) employee has_one manager(i.e. employee)(self join)
 5) employee has_many complaints
@@ -110,8 +111,18 @@ company_id		=> foreign key of company
 ```sh
 1) message belongs to booking
 2) message belongs to employee
-```
 
+```
+* resources
+```sh
+1) resource belongs to company
+
+```
+* roles
+```sh
+1) role has many employee
+2) role belongs to comapny
+```
 
 # ROLES
 
