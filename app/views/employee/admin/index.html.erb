@@ -1,0 +1,46 @@
+<div>
+<table>
+	<tr>
+
+		<td><b>Resource name</td>
+		<td><b>Count</td>
+	</tr>
+	<td>
+	<%@resources.each do |resource|%>
+	<%=resource.name%></td>
+	<td>
+	<%=resource.count%></td>
+	<td>
+	<% end %>
+	<%=link_to 'update resources',update_resources_path%>
+<!-- 	<select name="resource">
+	<!%@resource.each do |resource|%>
+  <option value=<!%=resource.name%><!%resource.name%></option>
+</select>
+<select name="resource-count">
+	<!%@resource.each do |resource|%>
+  <option value=<!%=resource.count%><!%resource.count%></option>
+</select> -->
+</table> 
+</div>
+
+<div>
+<table>
+<tr>
+<td><b>Request</td>
+		<td><b>employee id</td>
+		<td><b>status</td>
+		<td><b>priority</td>
+	</tr>
+	<td>
+	<%@bookings.each do |booking|%>
+	<td>
+	<%=booking.id%></td>
+	<%=booking.employee_id%></td>
+	<td>
+	<%=booking.status%></td>
+	<td>
+	<%=booking.priority%></td>
+	<% end %>	
+</table>
+</div>

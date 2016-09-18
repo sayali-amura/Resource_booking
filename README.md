@@ -25,7 +25,7 @@ name
 email
 password
 doj
-role_id
+role_id         => foreign key of role
 manager_id		=>	employee id of manager
 company_id		=> foreign key of company
 ```
