@@ -3,8 +3,7 @@ class Employee::AdminController < ApplicationController
 		@resources = Resource.all
 		@bookings = Booking.all
 	end
-	def update_resources
-	end
+	
 
 
 

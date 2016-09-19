@@ -7,6 +7,7 @@
 id
 name
 address
+password_digest
 ```
 
 
@@ -23,11 +24,10 @@ company_id		=> foreign key of company
 id
 name
 email
-password
-doj
-role_id         => foreign key of role
+password_digest
+date_of_joining
+role_id         => foreign key
 manager_id		=>	employee id of manager
-company_id		=> foreign key of company
 ```
 
 * roles
@@ -36,21 +36,21 @@ id
 designation	
 department		=>	dept in company
 priority		
-company_id		=> foreign key of company
+company_id		=> foreign key of company    
 ```
 * complaints
 ```sh
 id
-owner_id		=> 	employee id who files complain
+owner_id		=> 	foreign key of employee  
 comment
 status
-resource_id	=> foreign key of resources
+resource_id	=> resource id
 ```
 
 * bookings
 ```sh
 id
-owner_id		=> employee id
+employee_id		=> foreign key of employee 
 status			=> status of booking.   
     expected values=	[0=request,	1=grant,	2=reject,	3=release ]
 priority		=> define priority of booking. 
@@ -60,17 +60,14 @@ timestamp		=> booking timestamp
 comment		=> additional comments for booking. Also used to decide priority of booking.
 shift			=> to check whether booking is shifted or not
 feedback		=> feedback about resource use
-company_id		=> foreign key of company
+
 ```
 
 * messages
 ```sh
 id
-sender_id		=> foreign key of employee 
-receiver_id
 content	
 booking_id		=> foreign key of booking
-company_id		=> foreign key of company
 ```
 
 
@@ -81,13 +78,11 @@ company_id		=> foreign key of company
 ```sh
 1) Company has_many employees
 2) company has_many resources
-3) company has_many bookings
-4)company has_many roles
+3) company has_many roles
 ```
 
 * employees
 ```sh
-1) employee belongs to company
 2) employee belongs to role
 3) employee has_many booking
 4) employee has_one manager(i.e. employee)(self join)
@@ -98,19 +93,17 @@ company_id		=> foreign key of company
 * bookings
 ```sh
 1) booking belongs to employee
-2) booking belongs to company
+2) has_many messages
 ```
 
 * complaints
 ```sh
 1) complaint belongs to employee
-2) complaint belongs to company
 ```
 
 * messages
 ```sh
-1) message belongs to booking
-2) message belongs to employee
+1) belongs to booking
 
 ```
 * resources

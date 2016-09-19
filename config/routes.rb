@@ -4,14 +4,12 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   
   namespace :employee do 
-    resources :employee
-    resources :admin do 
-      
-    end
-
+    resources :employees
+    resources :admin
   end
+resources :resources, :bookings 
   root 'employee/employee#index'
-get 'update_resources' => 'employee/admin#update_resources'
+#get 'update_resources' => 'employee/admin#update_resources'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
