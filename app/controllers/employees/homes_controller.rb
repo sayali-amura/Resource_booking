@@ -6,4 +6,8 @@ class Employees::HomesController < ApplicationController
 			redirect_to employees_admins_path
 		end
 	end
+
+
+	
+	
 end

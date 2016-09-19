@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   namespace :employees do 
     resources :admins,:homes
   end
+  resources :bookings
   devise_for :employees, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register', edit: 'settings' }
   root 'employees/homes#index'
 
