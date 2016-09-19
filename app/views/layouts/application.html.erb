@@ -1,26 +1,7 @@
-<!-- <!DOCTYPE html>
-<html>
-<head>
-  <title>ResourceBooking</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-
-<body>
-
-<%= yield %>
-
-</body>
-</html>
-
- -->
 <!DOCTYPE html>
 <html>
 <head>
-<!-- -->
+
 <%= stylesheet_link_tag 'application', media: 'all',
 'data-turbolinks-track' => true %>
 <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -30,7 +11,7 @@
 </head>
 <body>
 <% if employee_signed_in?  %>
-<%= render 'layouts/adminheader' if current_employee.role_id == 3 %>
+<%=	(current_employee.role_id == 3 )?( render 'layouts/adminheader') : (render 'layouts/employeeheader') %>
 <% else %>
 <%= render 'layouts/employeeheader'  %>
 <% end %>
