@@ -1,6 +1,6 @@
 class Employee < ActiveRecord::Base
-	belongs_to :role
-	has_many :bookings
-	has_many :complaints
-	has_many :messages
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
 end

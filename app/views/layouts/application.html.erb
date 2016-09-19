@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
   <title>ResourceBooking</title>
@@ -6,9 +6,41 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
 <body>
 
 <%= yield %>
 
 </body>
+</html>
+
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<!-- -->
+<%= stylesheet_link_tag 'application', media: 'all',
+'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<%= csrf_meta_tags %>
+<%= render 'layouts/shim' %>
+
+</head>
+<body>
+<% if employee_signed_in?  %>
+<%= render 'layouts/adminheader' if current_employee.role_id == 3 %>
+<% else %>
+<%= render 'layouts/employeeheader'  %>
+<% end %>
+<div class="container">
+<% flash.each do |message_type, message| %>
+<div class="alert alert-<%= message_type %>"><%= message %></div>
+<% end %>
+<%= yield %>
+</div>
+</body>
+<%= render 'layouts/footer' %>
+<%= debug(params) if Rails.env.development? %>
 </html>
