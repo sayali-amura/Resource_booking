@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
 
   namespace :employees do 
-    resources :admins,:homes,:resources
+    resources :admins,:homes
   end
   devise_for :employees, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register', edit: 'settings' }
   root 'employees/homes#index'
