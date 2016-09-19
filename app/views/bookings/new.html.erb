@@ -1,0 +1,11 @@
+<%= form_for :booking ,url: bookings_path do |f|%>
+Booking Subject
+<%= f.text_field :comment, placeholder: "Purpose of booking" %>
+Estimated Duration
+<%= f.time_field :duration %>
+Priority
+<%= f.select_tag :priority do %>
+<%= [['Low',0],['Medium',1],['High',2]].each do |c| %>
+<%= content_tag(:option,c.first,value: c.last) %>
+<%end %>
+<%end %>

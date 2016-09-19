@@ -4,7 +4,7 @@ class CreateComplaints < ActiveRecord::Migration
       t.string :comment
       t.integer :status
       t.integer :resource_id
-      t.refernces :employee, index: :true 
+      t.references :employee, index: :true 
       t.timestamps null: false
     end
   end

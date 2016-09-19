@@ -1,2 +1,0 @@
-module Employee::AdminHelper
-end
