@@ -1,5 +1,7 @@
 class ResourcesController < ApplicationController
 	layout "_layout",only: [:edit, :new]
+	before_action :find_resource, only: [:show, :edit, :update]
+
 	def index
 		@resources = Resource.all
 	end
@@ -16,13 +18,12 @@ class ResourcesController < ApplicationController
 
 	end
 	def show
-		@resource = Resource.find(params[:id])
+		
 	end
 	def edit
-		@resource = Resource.find(params[:id])
+		
 	end
 	def update
-		@resource = Resource.find(params[:id])
 		if @resource.update(resource_params)
 			redirect_to @resource
 		else
@@ -32,5 +33,8 @@ class ResourcesController < ApplicationController
 	private
 	def resource_params
 		params.require(:resource).permit(:name, :count, :company_id)
+	end
+	def find_resource
+		@resource = Resource.find(params[:id])
 	end
 end
