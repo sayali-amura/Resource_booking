@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919094527) do
+ActiveRecord::Schema.define(version: 20160919134408) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer  "employee_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "status"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "status",      default: 0
     t.integer  "priority"
     t.string   "feedback"
     t.string   "comment"
-    t.integer  "shift"
+    t.boolean  "shift",       default: false
   end
 
   add_index "bookings", ["employee_id"], name: "index_bookings_on_employee_id"
@@ -77,6 +77,8 @@ ActiveRecord::Schema.define(version: 20160919094527) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "resources", ["name"], name: "index_resources_on_name", unique: true
 
   create_table "roles", force: :cascade do |t|
     t.string   "designation"
