@@ -6,13 +6,13 @@ class BookingsController < ApplicationController
 		
 	end
 	def create
-		new_booking = Booking.new(booking_params)
-		new_booking = 
+		new_booking = Booking.create(booking_params)
+
 	end
 
 	protected
 	def booking_params
-		params.require[:booking],permit(:comment,:duration,:priority)
+		params.require[:booking].permit(:comment,:duration,:priority)
 	end
 
 end
