@@ -32,6 +32,12 @@ class BookingsController < ApplicationController
 			render :edit
 		end
 	end
+
+	def destroy
+		Booking.destroy(params[:id])
+		redirect_to new_booking_path
+	end
+
 	private
 	def booking_params
 		params.require(:booking).permit(:comment,:duration,:priority, :date_of_booking)
