@@ -13,17 +13,18 @@ th {
 </style>
 </head>
 <body>
+<b>Resources</b>
 <table cellpadding="10"><tr>
 <td><strong>Name</strong></td>
 <td><strong>Count</strong></td>
-<td><strong>Company Id</strong></td>
+<td><strong>Update link</strong></td>
 </tr>
 
 <% @resources.each do |resource|%>
 <tr>
 <td><%=resource.name%></td>
 <td><%=resource.count%></td>
-<td><%=resource.company_id%></td>
+<td><%= link_to 'Update Resource',edit_admin_resource_path(resource)%></td>
 </tr>
 <% end %>
 </table>

@@ -1,6 +1,6 @@
 
 
-<%= form_for @resource do | f |%>
+<%= form_for ["admin",@resource] do | f |%>
 <table>
 	<tr>
 		<td>
@@ -14,13 +14,6 @@
 		<td>
 			<%=f.label :Count%></td>
 		<td><%=f.text_field :count %>
-		</td>
-	</tr>
-	<tr></tr>
-<tr>
-		<td>
-			<%=f.label :Company_Id%></td>
-		<td><%=f.text_field :company_id %>
 		</td>
 	</tr>
 	<tr></tr>

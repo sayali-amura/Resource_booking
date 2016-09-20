@@ -1,5 +1,5 @@
-class ResourcesController < ApplicationController
-	layout "_layout",only: [:edit, :new]
+class Admin::ResourcesController < ApplicationController
+	#layout "_layout",only: [:edit, :new]
 	before_action :find_resource, only: [:show, :edit, :update]
 
 	def index
@@ -11,7 +11,7 @@ class ResourcesController < ApplicationController
 	def create
 		@resource = Resource.new(resource_params)
 		if @resource.save
-			redirect_to @resource 
+			redirect_to ["admin",@resource] 
 		else 
 			render :new
 		end
@@ -25,7 +25,7 @@ class ResourcesController < ApplicationController
 	end
 	def update
 		if @resource.update(resource_params)
-			redirect_to @resource
+			redirect_to ["admin",@resource]
 		else
 			render :edit
 		end

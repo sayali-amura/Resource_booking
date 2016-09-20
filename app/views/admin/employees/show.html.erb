@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th {
+    text-align: left;
+}
+</style>
+</head>
+<body>
+<table cellpadding="10"><tr>
+<td><strong>Name</strong></td>
+<!-- <td><strong>Count</strong></td> -->
+
+</tr>
+
+<tr>
+<td><%= @employee.name%></td>
+</tr>
+</table>
+</body>
+<%= link_to "Home", admin_employees_path %>
