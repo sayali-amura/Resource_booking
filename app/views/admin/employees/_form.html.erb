@@ -1,0 +1,25 @@
+<%= form_for ['admin', @employee] do | f |%>
+<table>
+	<tr>
+		<td>
+			<%=f.label :Name%></td>
+		<td>
+			<%=f.text_field :name %>
+		</td>
+	</tr>
+	<tr></tr>
+	<tr>
+		<td>
+			<%=f.label :Email%></td>
+		<td><%=f.text_field :email %>
+		</td>
+	</tr>
+	<tr></tr>
+<tr>
+	<td>
+	<%= f.submit 'Save Employee'%>
+	</td>
+</tr>
+
+</table>
+<% end %>

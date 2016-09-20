@@ -1,5 +1,5 @@
 class ResourcesController < ApplicationController
-	layout "_layout",only: [:edit, :new]
+	#layout "_layout",only: [:edit, :new]
 	before_action :find_resource, only: [:show, :edit, :update]
 
 	def index

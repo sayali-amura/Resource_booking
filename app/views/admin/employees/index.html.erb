@@ -1,10 +1,20 @@
 you are admin
 <br>
-<%= link_to "View Resources", resources_path %>
+<ul>
+	<li><%= link_to "View Resources", resources_path %></li>
+	<li><%= link_to 'Add New Resource',new_resource_path%></li>
+</ul>
+
 <br>
-<%= link_to "View Bookings", bookings_path %>
+
+<ul>
+	<li><%= link_to "View Bookings", bookings_path %></li>
+</ul>
 <br>
-<%= link_to "View employees", employees_admins_path %>
+<ul>
+<li>
+<%= link_to 'Add New Employee',new_admin_employee_path%></li>
+</ul>
 <br>
 
 
@@ -22,12 +32,14 @@ th {
 </style>
 </head>
 <body>
+<b>Employees</b>
 <table cellpadding="10"><tr>
 <td><strong>Name</strong></td>
 <td><strong>Email</strong></td>
 <td><strong>Date of Joining</strong></td>
 <td><strong>Role Id</strong></td>
 <td><strong>Manager Id</strong></td>
+<td><strong>Edit Link</strong></td>
 </tr>
 
 <% @employees.each do |employee|%>
@@ -37,9 +49,8 @@ th {
 <td><%=employee.date_of_joining%></td>
 <td><%=employee.role_id%></td>
 <td><%=employee.manager_id%></td>
-<td><%= link_to 'edit details', edit_employees_admin_path(employee) %></td>
+<td><%= link_to 'edit details', edit_admin_employee_path(employee) %></td>
 </tr>
 <% end %>
 </table>
 </body>
-<%= link_to 'Add New Employee',new_employees_admin_path%>

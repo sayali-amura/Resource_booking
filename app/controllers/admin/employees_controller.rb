@@ -1,10 +1,10 @@
-class Employees::AdminsController < ApplicationController
+class Admin::EmployeesController < ApplicationController
 	before_action :find_employee, only: [:show, :edit, :update]
 	def index
 		@employees = Employee.all
 	end
 	def new
-		@employee = employee.new
+		@employee = Employee.new
 	end
 
 	def create
@@ -23,7 +23,7 @@ class Employees::AdminsController < ApplicationController
 	end
 	def update 
 		if @employee.update(employee_params)
-			redirect_to @employee
+			redirect_to ["admin",@employee]
 		else
 			render :edit
 		end
@@ -37,3 +37,4 @@ class Employees::AdminsController < ApplicationController
 	end
  
 end
+

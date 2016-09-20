@@ -4,12 +4,12 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
 
 
-  namespace :employees do 
-    resources :admins,:homes
+  namespace :admin do 
+    resources :employees
   end
-  resources :bookings, :resources
+  resources :bookings, :resources, :employees
   devise_for :employees, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register', edit: 'settings' }
-  root 'employees/homes#index'
+  # root '/login'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
