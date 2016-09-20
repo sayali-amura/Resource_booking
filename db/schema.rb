@@ -11,20 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919090836) do
+ActiveRecord::Schema.define(version: 20160919134408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "bookings", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.datetime "duration"
-    t.integer  "status"
+    t.integer  "status",      default: 0
     t.integer  "priority"
     t.string   "feedback"
     t.string   "comment"
-    t.boolean  "shift"
+    t.boolean  "shift",       default: false
     t.integer  "employee_id"
   end
 
@@ -50,17 +50,32 @@ ActiveRecord::Schema.define(version: 20160919090836) do
   add_index "complaints", ["employee_id"], name: "index_complaints_on_employee_id", using: :btree
 
   create_table "employees", force: :cascade do |t|
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
     t.string   "name"
-    t.string   "email"
-    t.string   "password_digest"
+    t.integer  "age"
     t.date     "date_of_joining"
     t.integer  "manager_id"
     t.integer  "role_id"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
-  add_index "employees", ["role_id"], name: "index_employees_on_role_id", using: :btree
+  add_index "employees", ["confirmation_token"], name: "index_employees_on_confirmation_token", unique: true, using: :btree
+  add_index "employees", ["email"], name: "index_employees_on_email", unique: true, using: :btree
+  add_index "employees", ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true, using: :btree
 
   create_table "messages", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -76,10 +91,9 @@ ActiveRecord::Schema.define(version: 20160919090836) do
     t.datetime "updated_at", null: false
     t.string   "name"
     t.integer  "count"
-    t.integer  "company_id"
   end
 
-  add_index "resources", ["company_id"], name: "index_resources_on_company_id", using: :btree
+  add_index "resources", ["name"], name: "index_resources_on_name", unique: true, using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.datetime "created_at",  null: false
@@ -87,9 +101,6 @@ ActiveRecord::Schema.define(version: 20160919090836) do
     t.string   "designation"
     t.string   "department"
     t.integer  "priority"
-    t.integer  "company_id"
   end
-
-  add_index "roles", ["company_id"], name: "index_roles_on_company_id", using: :btree
 
 end
