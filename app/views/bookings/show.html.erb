@@ -1,0 +1,19 @@
+<h2>Your booking is done.</h2>
+<h4>Details</h4>
+
+<div class="col-md-12">
+	<div class="col-md-6">
+		<%= @booking.comment %>
+	</div>
+	<div class="col-md-2">
+		<%=@booking.date_of_booking %>
+	</div>
+	<div class="col-md-2">
+		<%=  @booking.duration%>
+	</div>
+	<div class="col-md-2">
+
+		<%= status_normalization(@booking.status) %>
+	</div>
+	
+</div>

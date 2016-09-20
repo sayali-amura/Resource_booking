@@ -1,17 +1,27 @@
 <h2>Booking Request</h2>
 <div class="row">
 <div class="col-md-6 col-md-offset-3">
+
+<%if @booking.errors.any? %>
+	<% @booking.errors.full_messages.each do |x| %>
+		<%= x %><br>
+	<%end %>
+<% end %>
+
 <%= form_for :booking ,url: bookings_path do |f|%>
 Booking Subject
 <%= f.text_field :comment, placeholder: "Purpose of booking", class: 'form-control' %>
-Estimated Duration
-<%= f.time_field :duration , class: 'form-control'%>
+Date
+<%= f.date_field :date_of_booking, class: 'form-control' %>
+Estimated Duration (Hr.)
+<%= f.text_field :duration , class: 'form-control'%>
 Priority
 <%= f.select :priority  do %>
 <%= [['Low',0],['Medium',1],['High',2]].each do |c| %>
 <%= content_tag(:option,c.first,value: c.last, class: 'form-control') %>
 <%end %>
 <%end %>
+<%= f.submit "Book", class: "btn btn-primary" %>
 <%end %>
 </div>
 </div>
