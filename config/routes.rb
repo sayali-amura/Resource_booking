@@ -3,13 +3,13 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   # You can have the root of your site routed with "root"
 
+
   namespace :employees do 
     resources :admins,:homes
   end
-  resources :bookings
+  resources :bookings, :resources
   devise_for :employees, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register', edit: 'settings' }
   root 'employees/homes#index'
-
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

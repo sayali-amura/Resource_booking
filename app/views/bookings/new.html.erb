@@ -1,11 +1,17 @@
+<h2>Booking Request</h2>
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
 <%= form_for :booking ,url: bookings_path do |f|%>
 Booking Subject
-<%= f.text_field :comment, placeholder: "Purpose of booking" %>
+<%= f.text_field :comment, placeholder: "Purpose of booking", class: 'form-control' %>
 Estimated Duration
-<%= f.time_field :duration %>
+<%= f.time_field :duration , class: 'form-control'%>
 Priority
-<%= f.select_tag :priority do %>
+<%= f.select :priority  do %>
 <%= [['Low',0],['Medium',1],['High',2]].each do |c| %>
-<%= content_tag(:option,c.first,value: c.last) %>
+<%= content_tag(:option,c.first,value: c.last, class: 'form-control') %>
 <%end %>
 <%end %>
+<%end %>
+</div>
+</div>

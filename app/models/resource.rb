@@ -1,8 +1,4 @@
 class Resource < ActiveRecord::Base
-	belongs_to :company
-
-
-	validates :name, presence: :true
-	validates :count , presence: :true, numericality: {greater_than: 0, only_integer: true}
-
+	validates :count, numericality: { only_integer: true, greater_than: 0 }
+	validates :name, :count, presence: true
 end

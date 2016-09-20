@@ -13,29 +13,41 @@
 
 ActiveRecord::Schema.define(version: 20160919134408) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "bookings", force: :cascade do |t|
-    t.integer  "employee_id"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.datetime "duration"
     t.integer  "status",      default: 0
     t.integer  "priority"
     t.string   "feedback"
     t.string   "comment"
     t.boolean  "shift",       default: false
+    t.integer  "employee_id"
   end
 
-  add_index "bookings", ["employee_id"], name: "index_bookings_on_employee_id"
+  add_index "bookings", ["employee_id"], name: "index_bookings_on_employee_id", using: :btree
+
+  create_table "companies", force: :cascade do |t|
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "name"
+    t.string   "address"
+    t.string   "password_digest"
+  end
 
   create_table "complaints", force: :cascade do |t|
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "comment"
     t.integer  "status"
     t.integer  "resource_id"
     t.integer  "employee_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
   end
 
-  add_index "complaints", ["employee_id"], name: "index_complaints_on_employee_id"
+  add_index "complaints", ["employee_id"], name: "index_complaints_on_employee_id", using: :btree
 
   create_table "employees", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -61,31 +73,34 @@ ActiveRecord::Schema.define(version: 20160919134408) do
     t.datetime "updated_at",                          null: false
   end
 
-  add_index "employees", ["email"], name: "index_employees_on_email", unique: true
-  add_index "employees", ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
+  add_index "employees", ["confirmation_token"], name: "index_employees_on_confirmation_token", unique: true, using: :btree
+  add_index "employees", ["email"], name: "index_employees_on_email", unique: true, using: :btree
+  add_index "employees", ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true, using: :btree
 
   create_table "messages", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "content"
     t.integer  "booking_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
+
+  add_index "messages", ["booking_id"], name: "index_messages_on_booking_id", using: :btree
 
   create_table "resources", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "name"
+    t.integer  "count"
   end
 
-  add_index "resources", ["name"], name: "index_resources_on_name", unique: true
+  add_index "resources", ["name"], name: "index_resources_on_name", unique: true, using: :btree
 
   create_table "roles", force: :cascade do |t|
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "designation"
     t.string   "department"
     t.integer  "priority"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
   end
 
 end
