@@ -5,9 +5,9 @@ Rails.application.routes.draw do
 
 
   namespace :admin do 
-    resources :employees
+    resources :employees,:resources
   end
-  resources :bookings, :resources, :employees
+  resources :bookings, :employees
   devise_for :employees, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register', edit: 'settings' }
   # root '/login'
   # Example of regular route:
