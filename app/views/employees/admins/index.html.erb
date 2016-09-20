@@ -1,3 +1,43 @@
 you are admin
+<br>
 <%= link_to "View Resources", resources_path %>
+<br>
 <%= link_to "View Bookings", bookings_path %>
+<br>
+<%= link_to "View employees", employees_admins_path %>
+<br>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th {
+    text-align: center;
+}
+</style>
+</head>
+<body>
+<table cellpadding="10"><tr>
+<td><strong>Name</strong></td>
+<td><strong>Email</strong></td>
+<td><strong>Date of Joining</strong></td>
+<td><strong>Role Id</strong></td>
+<td><strong>Manager Id</strong></td>
+</tr>
+
+<% @employees.each do |employee|%>
+<tr>
+<td><%=employee.name%></td>
+<td><%=employee.email%></td>
+<td><%=employee.date_of_joining%></td>
+<td><%=employee.role_id%></td>
+<td><%=employee.manager_id%></td>
+</tr>
+<% end %>
+</table>
+</body>
