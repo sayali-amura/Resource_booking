@@ -3,7 +3,7 @@ module BookingsHelper
 def status_normalization(status_code)
 	case 
 	when status_code == 0
-		 "Request"
+		 "Pending"
 	when status_code == 1
 		 "Grant"
 	when status_code == 2
