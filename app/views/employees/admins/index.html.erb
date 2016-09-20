@@ -37,7 +37,9 @@ th {
 <td><%=employee.date_of_joining%></td>
 <td><%=employee.role_id%></td>
 <td><%=employee.manager_id%></td>
+<td><%= link_to 'edit details', edit_employees_admin_path(employee) %></td>
 </tr>
 <% end %>
 </table>
 </body>
+<%= link_to 'Add New Employee',new_employees_admin_path%>

@@ -19,6 +19,8 @@ class Employees::AdminsController < ApplicationController
 	def show
 	 
 	end
+	def edit
+	end
 	def update 
 		if @employee.update(employee_params)
 			redirect_to @employee
