@@ -33,6 +33,17 @@ class Admin::EmployeesController < ApplicationController
 	def dashbord
 		@bookings = Booking.where(status:0)
 	end
+	def change_status
+		booking = Booking.find(params[:status][:booking_id])
+		if params[:status][:status] =="Grant"
+			booking.status = 1
+	elsif params[:status][:status] == "Reject"
+			booking.status = 2
+	end	
+		if booking.save
+			redirect_to :admin_dashbord
+		end
+	end
 	private
 	def employee_params
 		params.require(:employee).permit(:name, :email, :password_digest, :date_of_joining, :role_id, :manager_id)

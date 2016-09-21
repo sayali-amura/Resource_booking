@@ -18,6 +18,12 @@ you are admin
  	<div class="col-md-2">
 	<strong>Employee_id</strong>
 	</div>
+	<div class="col-md-1">
+	<%= label_tag(:status_grant, "Grant") %>
+	</div>
+	<div class="col-md-1">
+	<%= label_tag(:status_reject, "Reject") %>
+	</div>
 </div>
 <div class="col-md-12">
 	
@@ -37,8 +43,23 @@ you are admin
 	<div class="col-md-2">
 	<%=booking.employee_id%>
 	</div>
+<%= form_for:status, url:admin_change_status_path do | f |%>
+	<div class="col-md-1">
+
+	<%= f.hidden_field :booking_id,value: booking.id%>
+	<%= f.radio_button(:status,'Grant') %>
+	</div>
+	<div class="col-md-1">
+	<%= f.radio_button(:status,'Reject') %>
+	</div>
+	<div class="col-md-2">
+	<%= f.submit "Change status"%>
+	<% end %>
+	</div>
+
 </div>
 <% end %>
+
 
 
 <br>

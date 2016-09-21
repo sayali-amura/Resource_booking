@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   namespace :admin do 
     get 'dashbord' => 'employees#dashbord'
+    post 'change_status' => 'employees#change_status'
     resources :employees,:resources
   end
   resources :bookings, :employees, :complaints
