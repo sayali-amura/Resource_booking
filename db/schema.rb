@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160920150010) do
+ActiveRecord::Schema.define(version: 20160921054057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,17 +27,16 @@ ActiveRecord::Schema.define(version: 20160920150010) do
     t.integer  "employee_id"
     t.date     "date_of_booking"
     t.float    "duration"
-    t.string   "reply"
   end
 
   add_index "bookings", ["employee_id"], name: "index_bookings_on_employee_id", using: :btree
 
   create_table "companies", force: :cascade do |t|
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
     t.string   "name"
-    t.string   "address"
-    t.string   "password_digest"
+    t.string   "email"
+    t.string   "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "complaints", force: :cascade do |t|
@@ -73,6 +72,7 @@ ActiveRecord::Schema.define(version: 20160920150010) do
     t.integer  "role_id"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.integer  "company_id"
   end
 
   add_index "employees", ["confirmation_token"], name: "index_employees_on_confirmation_token", unique: true, using: :btree
@@ -80,10 +80,12 @@ ActiveRecord::Schema.define(version: 20160920150010) do
   add_index "employees", ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true, using: :btree
 
   create_table "messages", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.string   "content"
     t.integer  "booking_id"
+    t.integer  "property_id"
+    t.string   "property_type"
   end
 
   add_index "messages", ["booking_id"], name: "index_messages_on_booking_id", using: :btree
@@ -93,6 +95,7 @@ ActiveRecord::Schema.define(version: 20160920150010) do
     t.datetime "updated_at", null: false
     t.string   "name"
     t.integer  "count"
+    t.integer  "company_id"
   end
 
   add_index "resources", ["name"], name: "index_resources_on_name", unique: true, using: :btree
@@ -103,6 +106,7 @@ ActiveRecord::Schema.define(version: 20160920150010) do
     t.string   "designation"
     t.string   "department"
     t.integer  "priority"
+    t.integer  "company_id"
   end
 
 end
