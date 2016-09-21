@@ -13,8 +13,8 @@ def status_normalization(status_code)
 	end
 end
 
-def check_reply booking, status_code
-	(!booking.reply.nil?) && (status_code==1 || status_code ==2)
-end
+# def check_reply booking, status_code
+# 	(!booking.reply.nil?) && (status_code==1 || status_code ==2)
+# end
 
 end
