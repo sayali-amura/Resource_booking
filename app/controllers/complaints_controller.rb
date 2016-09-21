@@ -8,12 +8,14 @@ class ComplaintsController < ApplicationController
 	def new
 		@complaint = Complaint.new
 
+
 	end
 	def create
 		complaint_param = complaint_params
 		complaint_param[:status] = 0
+
 		#add employee id to complaint_param after devise setup
-		#complaint_param[:employee_id] = current_user.id
+		complaint_param[:employee_id] = current_employee.id
 		@complaint = Complaint.new(complaint_param)
 		if @complaint.save
 			redirect_to @complaint 
@@ -21,7 +23,9 @@ class ComplaintsController < ApplicationController
 			render :new
 		end
 	end
-	def show; end
+	def show
+		@resource = Resource.find(@complaint.resource_id)
+	end
 	def edit; end
 	def update
 		if @complaint.update(complaint_params)
@@ -35,10 +39,10 @@ class ComplaintsController < ApplicationController
 		params.require(:complaint).permit(:comment, :resource_id, :employee_id)
 	end
 	def find_complaint
-		@complaint = complaint.find(params[:id])
+		@complaint = Complaint.find(params[:id])
 		@resources = Resource.all
 	end
 	def list_resources
 		@resources = Resource.all
-	end
+		end
 end

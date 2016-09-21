@@ -23,9 +23,15 @@ def priority_normalization(priority_code)
 	end
 end
 
+def resource_array
+	resource = current_employee.company.resources.collect {|x|  [x.name.to_s,x.id] }
+end
 
-# def check_reply booking, status_code
-# 	(!booking.reply.nil?) && (status_code==1 || status_code ==2)
-# end
+def resource_time_slot resource
+	check_avability resource
+end
+
+
+
 
 end

@@ -5,12 +5,8 @@
 
 			<%=f.label :Resource%>		
 		</td>
-		<%@arr = []%>
-		<%@resources.each do |res|%>
-		<%@arr << [res.name,res.id]%>
-		<% end %>
 		<%= f.select :resource_id  do %>
-			<%= @arr.each do | c | %>
+			<%= build_resourcelist.each do | c | %>
 			<%= content_tag(:option,c.first,value: c.last, class: 'form-control') %>
 			<% end %>
 			<% end %>

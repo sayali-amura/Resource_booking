@@ -9,13 +9,28 @@
 <% end %>
 
 <%= form_for :booking ,url: bookings_path do |f|%>
+<%= hidden_field_tag("resource_id",@resource.id) %>
 Booking Subject
 <%= f.text_field :comment, placeholder: "Purpose of booking", class: 'form-control' %>
 Date
 <%= f.date_field :date_of_booking, class: 'form-control' %>
+<<<<<<< HEAD
+=======
+Time Slot
+
+<%= f.select :slot do  %>
+		<%  resource_time_slot(@resource).each do |c| %>
+			<%= content_tag(:option,c.first,value: c.last, class: 'form-control') %>
+			<br>
+		<%end %>
+		
+	<%end %>
+
+>>>>>>> 0c7266ccf5d01206e38cdd218f44e3d715d10ecb
 Priority
+
 <%= f.select :priority  do %>
-<%= [['Low',0],['Medium',1],['High',2]].each do |c| %>
+<% [['Low',0],['Medium',1],['High',2]].each do |c| %>
 <%= content_tag(:option,c.first,value: c.last, class: 'form-control') %>
 <%end %>
 <%end %>
