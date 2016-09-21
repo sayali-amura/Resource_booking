@@ -36,7 +36,7 @@ class BookingsController < ApplicationController
 
 	def destroy
 		Booking.destroy(params[:id])
-		redirect_to new_booking_path
+		redirect_to bookings_path
 	end
 
 	private

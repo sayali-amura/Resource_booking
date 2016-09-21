@@ -1,4 +1,7 @@
+you are admin
+<br>
 
+<b>Pending Bookings</b>
 <div class="col-md-12">
 	<div class="col-md-1">
 	<strong>Status</strong>
@@ -12,9 +15,6 @@
 	<div class="col-md-2">
 	<strong>Comment</strong>
 	</div>
-	<div class="col-md-2">
- 	<strong>Shift</strong>
- 	</div>
  	<div class="col-md-2">
 	<strong>Employee_id</strong>
 	</div>
@@ -34,37 +34,12 @@
 	<div class="col-md-2">
 	<%=booking.comment%>
 	</div>
-	
 	<div class="col-md-2">
 	<%=booking.employee_id%>
 	</div>
 </div>
 <% end %>
 
-<hr><br><br>
 
-<div class="col-md-10">
-	<div class="col-md-2">
-		Create Booking
-	</div>
-	
-	<%= form_for :resource, url: new_booking_path , method: 'get' do |f| %>
-	<div class="col-md-6">
-
-	<%= f.select :resource_id do  %>
-		<% resource_array.each do |c| %>
-			<%= content_tag(:option,c.first,value: c.last, class: 'form-control') %>
-			<br>
-		<%end %>
-	<%end %>
-	</div>
-	<div class="col-md-2">
-		
-	<%= f.submit "Create"  %>
-
-	</div>
-	<%end%>
-
-</div>
-
-</body>	
+<br>
+<br>
