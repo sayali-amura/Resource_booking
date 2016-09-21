@@ -19,9 +19,6 @@ you are admin
 
 <b>Pending Bookings</b>
 <div class="col-md-14">
-	<div class="col-md-2">
-	<strong>Duration</strong>
-	</div>
 	<div class="col-md-1">
 	<strong>Status</strong>
 	</div>
@@ -34,9 +31,6 @@ you are admin
 	<div class="col-md-2">
 	<strong>Comment</strong>
 	</div>
-	<div class="col-md-2">
- 	<strong>Shift</strong>
- 	</div>
  	<div class="col-md-2">
 	<strong>Employee_id</strong>
 	</div>
@@ -44,9 +38,6 @@ you are admin
 <div class="col-md-14">
 	
 <% @bookings.each do |booking|%>
-	<div class="col-md-2">
-	<%=booking.duration%>
-	</div>
 	<div class="col-md-1">
 	<%=status_normalization(booking.status)%>
 	</div>
@@ -58,9 +49,6 @@ you are admin
 	</div>
 	<div class="col-md-2">
 	<%=booking.comment%>
-	</div>
-	<div class="col-md-2">
-	<%=booking.shift%>
 	</div>
 	<div class="col-md-2">
 	<%=booking.employee_id%>

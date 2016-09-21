@@ -1,8 +1,6 @@
-
+<div class="row">
 <div class="col-md-14">
-	<div class="col-md-2">
-	<strong>Duration</strong>
-	</div>
+
 	<div class="col-md-1">
 	<strong>Status</strong>
 	</div>
@@ -22,10 +20,11 @@
 	<strong>Employee_id</strong>
 	</div>
 </div>
+</div>
+
 <div class="col-md-14">
-	
 <% @bookings.each do |booking|%>
-	
+	<div class="row">
 	<div class="col-md-1">
 	<%=status_normalization(booking.status)%>
 	</div>
@@ -42,8 +41,9 @@
 	<div class="col-md-2">
 	<%=booking.employee_id%>
 	</div>
-</div>
+	</div>
 <% end %>
+</div>
 
 <hr><br><br>
 
@@ -51,7 +51,6 @@
 	<div class="col-md-2">
 		Create Booking
 	</div>
-	
 	<%= form_for :resource, url: new_booking_path , method: 'get' do |f| %>
 	<div class="col-md-6">
 
@@ -63,12 +62,8 @@
 	<%end %>
 	</div>
 	<div class="col-md-2">
-		
-	<%= f.submit "Create"  %>
-
+		<%= f.submit "Create"  %>
 	</div>
 	<%end%>
-
 </div>
-
 </body>	
