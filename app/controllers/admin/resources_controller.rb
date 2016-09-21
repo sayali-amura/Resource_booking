@@ -4,6 +4,7 @@ class Admin::ResourcesController < ApplicationController
 
 	def index
 		@resources = Resource.all
+		
 	end
 	def new
 		@resource = Resource.new
@@ -18,7 +19,7 @@ class Admin::ResourcesController < ApplicationController
 
 	end
 	def show
-		
+			
 	end
 	def edit
 		
@@ -32,7 +33,7 @@ class Admin::ResourcesController < ApplicationController
 	end
 	private
 	def resource_params
-		params.require(:resource).permit(:name, :count, :company_id)
+		params.require(:resource).permit(:name, :count, :company_id,:time_slot)
 	end
 	def find_resource
 		@resource = Resource.find(params[:id])

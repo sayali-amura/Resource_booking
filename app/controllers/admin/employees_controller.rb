@@ -36,6 +36,9 @@ class Admin::EmployeesController < ApplicationController
 	def find_employee
 		@employee = Employee.find(params[:id])
 	end
+	def change_status
+		
+	end
  
 end
 
