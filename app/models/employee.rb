@@ -1,5 +1,6 @@
 class Employee < ActiveRecord::Base
 	belongs_to :role
+	belongs_to :company
 	has_many :bookings
 	has_many :complaints
 	has_many :messages
