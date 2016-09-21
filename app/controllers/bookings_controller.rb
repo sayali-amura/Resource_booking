@@ -10,11 +10,7 @@ class BookingsController < ApplicationController
 		@booking = Booking.new
 	end
 
-<<<<<<< HEAD
-	def create
-=======
 	def create		
->>>>>>> 0c7266ccf5d01206e38cdd218f44e3d715d10ecb
 		@booking = @employee.bookings.new(booking_params)
 		@booking.resource_id = params[:resource_id]
 		if @booking.save
@@ -40,16 +36,12 @@ class BookingsController < ApplicationController
 
 	def destroy
 		Booking.destroy(params[:id])
-		redirect_to new_booking_path
+		redirect_to bookings_path
 	end
 
 	private
 	def booking_params
-<<<<<<< HEAD
-		params.require(:booking).permit(:comment,:priority, :date_of_booking)
-=======
 		params.require(:booking).permit(:comment,:slot,:priority, :date_of_booking)
->>>>>>> 0c7266ccf5d01206e38cdd218f44e3d715d10ecb
 	end
 	def find_employee
 		@employee = current_employee
