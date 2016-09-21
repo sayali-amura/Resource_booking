@@ -8,9 +8,11 @@
 	<div class="col-md-2">
 		<%=@booking.date_of_booking %>
 	</div>
+
 	<div class="col-md-2">
-		<%=  @booking.duration%>
+		<%= show_slot_time @booking.resource_id, @booking.slot %>
 	</div>
+
 	<div class="col-md-2">
 		<%= status_normalization(@booking.status) %>
 	</div>
