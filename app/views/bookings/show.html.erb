@@ -1,0 +1,26 @@
+<h2>Your booking is done.</h2>
+<h4>Details</h4>
+
+<div class="col-md-12">
+	<div class="col-md-4">
+		<%= @booking.comment %>
+	</div>
+	<div class="col-md-2">
+		<%=@booking.date_of_booking %>
+	</div>
+	<div class="col-md-2">
+		<%=  @booking.duration%>
+	</div>
+	<div class="col-md-2">
+		<%= status_normalization(@booking.status) %>
+	</div>
+	<% if check_reply @booking,@booking.status %>
+		<div class="col-md-2">
+			<%= @booking.reply %>
+		</div>
+	<% end %>
+	<div class="col-md-2">
+		<%= link_to "Re - Request", @booking, method: :delete, data: {confirm: "Your request will delete.You will have to re-request."} %>
+	</div>
+	
+</div>
