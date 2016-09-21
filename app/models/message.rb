@@ -1,3 +1,3 @@
 class Message < ActiveRecord::Base
-	belongs_to :booking
+	belongs_to :property, polymorphic: true
 end
