@@ -24,8 +24,8 @@ def priority_normalization(priority_code)
 end
 
 
-def check_reply booking, status_code
-	(!booking.reply.nil?) && (status_code==1 || status_code ==2)
-end
+# def check_reply booking, status_code
+# 	(!booking.reply.nil?) && (status_code==1 || status_code ==2)
+# end
 
 end
