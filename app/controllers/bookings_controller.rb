@@ -1,5 +1,6 @@
 class BookingsController < ApplicationController
-	before_action :find_booking, only: [:show, :edit, :update]
+	# before_action :find_booking, only: [:show, :edit, :update]
+	before_action :find_employee
 	def index
 		@bookings = Booking.all
 	end
@@ -9,16 +10,20 @@ class BookingsController < ApplicationController
 	end
 
 	def create
-		@booking = Booking.new(booking_params)
+		
+		@booking = @employee.bookings.new(booking_params)
 		if @booking.save
+			# render plain: "booking done"
+			flash[:success] = "Your booking is done"
 			redirect_to @booking
 		else
-			render :new
+			render new_booking_path
 		end
-	end 
+	end
+
 
 	def show
-	 
+	 @booking = Booking.find(params[:id])
 	end
 	def update 
 		if @booking.update(booking_params)
@@ -27,13 +32,18 @@ class BookingsController < ApplicationController
 			render :edit
 		end
 	end
+
+	def destroy
+		Booking.destroy(params[:id])
+		redirect_to new_booking_path
+	end
+
 	private
 	def booking_params
-		params.require(:booking).permit(:duration, :status, :priority,
-											 :feedback, :comment, :shift, :employee_id)
+		params.require(:booking).permit(:comment,:duration,:priority, :date_of_booking)
 	end
-	def find_booking
-		@booking = Booking.find(params[:id])
+	def find_employee
+		@employee = current_employee
 	end
 
 end
