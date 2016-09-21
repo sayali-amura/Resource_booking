@@ -6,12 +6,13 @@ class BookingsController < ApplicationController
 	end
 
 	def new
+		@resource = Resource.find(params[:resource][:resource_id])
 		@booking = Booking.new
 	end
 
-	def create
-		
+	def create		
 		@booking = @employee.bookings.new(booking_params)
+		@booking.resource_id = params[:resource_id]
 		if @booking.save
 			# render plain: "booking done"
 			flash[:success] = "Your booking is done"
@@ -19,6 +20,7 @@ class BookingsController < ApplicationController
 		else
 			render new_booking_path
 		end
+		# render plain: params
 	end
 
 	def show
@@ -39,7 +41,7 @@ class BookingsController < ApplicationController
 
 	private
 	def booking_params
-		params.require(:booking).permit(:comment,:duration,:priority, :date_of_booking)
+		params.require(:booking).permit(:comment,:slot,:priority, :date_of_booking)
 	end
 	def find_employee
 		@employee = current_employee
