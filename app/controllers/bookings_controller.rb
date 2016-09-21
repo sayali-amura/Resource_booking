@@ -10,7 +10,6 @@ class BookingsController < ApplicationController
 	end
 
 	def create
-		
 		@booking = @employee.bookings.new(booking_params)
 		if @booking.save
 			# render plain: "booking done"
@@ -39,7 +38,7 @@ class BookingsController < ApplicationController
 
 	private
 	def booking_params
-		params.require(:booking).permit(:comment,:duration,:priority, :date_of_booking)
+		params.require(:booking).permit(:comment,:priority, :date_of_booking)
 	end
 	def find_employee
 		@employee = current_employee

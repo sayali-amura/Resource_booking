@@ -1,8 +1,9 @@
 class Admin::EmployeesController < ApplicationController
+	layout "adminlayout"
 	before_action :find_employee, only: [:show, :edit, :update]
 	def index
 		@employees = Employee.all
-		@bookings = Booking.where(status:0)
+		
 	end
 	def new
 		@employee = Employee.new
@@ -29,6 +30,9 @@ class Admin::EmployeesController < ApplicationController
 			render :edit
 		end
 	end
+	def dashbord
+		@bookings = Booking.where(status:0)
+	end
 	private
 	def employee_params
 		params.require(:employee).permit(:name, :email, :password_digest, :date_of_joining, :role_id, :manager_id)
@@ -36,9 +40,7 @@ class Admin::EmployeesController < ApplicationController
 	def find_employee
 		@employee = Employee.find(params[:id])
 	end
-	def change_status
-		
-	end
+
  
 end
 
