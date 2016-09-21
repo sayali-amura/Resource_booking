@@ -2,6 +2,7 @@ class Admin::EmployeesController < ApplicationController
 	before_action :find_employee, only: [:show, :edit, :update]
 	def index
 		@employees = Employee.all
+		@bookings = Booking.where(status:0)
 	end
 	def new
 		@employee = Employee.new
@@ -34,6 +35,9 @@ class Admin::EmployeesController < ApplicationController
 	end
 	def find_employee
 		@employee = Employee.find(params[:id])
+	end
+	def change_status
+		
 	end
  
 end

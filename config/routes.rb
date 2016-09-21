@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   # You can have the root of your site routed with "root"
@@ -7,7 +9,7 @@ Rails.application.routes.draw do
   namespace :admin do 
     resources :employees,:resources
   end
-  resources :bookings, :employees
+  resources :bookings, :employees, :complaints
   devise_for :employees, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register', edit: 'settings' }
   root "employees#index"
   # root '/login'

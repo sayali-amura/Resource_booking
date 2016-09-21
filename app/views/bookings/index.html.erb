@@ -1,38 +1,74 @@
 
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-th {
-    text-align: left;
-}
-</style>
-</head>
-<body>
-<table cellpadding="10"><tr>
-<td><strong>Duration</strong></td>
-<td><strong>Status</strong></td>
-<td><strong>Priority</strong></td>
-<td><strong>Feedback</strong></td>
-<td><strong>Comment</strong></td>
-<td><strong>Shift</strong></td>
-<td><strong>Employee_id</strong></td>
-</tr>
-
+<div class="col-md-14">
+	<div class="col-md-2">
+	<strong>Duration</strong>
+	</div>
+	<div class="col-md-1">
+	<strong>Status</strong>
+	</div>
+	<div class="col-md-1">
+	<strong>Priority</strong>
+	</div>
+	<div class="col-md-2">
+	<strong>Feedback</strong>
+	</div>
+	<div class="col-md-2">
+	<strong>Comment</strong>
+	</div>
+	<div class="col-md-2">
+ 	<strong>Shift</strong>
+ 	</div>
+ 	<div class="col-md-2">
+	<strong>Employee_id</strong>
+	</div>
+</div>
+<div class="col-md-14">
+	
 <% @bookings.each do |booking|%>
-<tr>
-<td><%=booking.duration%></td>
-<td><%=booking.status%></td>
-<td><%=booking.priority%></td>
-<td><%=booking.feedback%></td>
-<td><%=booking.comment%></td>
-<td><%=booking.shift%></td>
-<td><%=booking.employee_id%></td>
-</tr>
+	
+	<div class="col-md-1">
+	<%=status_normalization(booking.status)%>
+	</div>
+	<div class="col-md-1">
+	<%=priority_normalization(booking.priority)%>
+	</div>
+	<div class="col-md-2	">
+	<%=booking.feedback%>
+	</div>
+	<div class="col-md-2">
+	<%=booking.comment%>
+	</div>
+	
+	<div class="col-md-2">
+	<%=booking.employee_id%>
+	</div>
+</div>
 <% end %>
-</table>
-</body>
+
+<hr><br><br>
+
+<div class="col-md-10">
+	<div class="col-md-2">
+		Create Booking
+	</div>
+	
+	<%= form_for :resource, url: new_booking_path , method: 'get' do |f| %>
+	<div class="col-md-6">
+
+	<%= f.select :resource_id do  %>
+		<% resource_array.each do |c| %>
+			<%= content_tag(:option,c.first,value: c.last, class: 'form-control') %>
+			<br>
+		<%end %>
+	<%end %>
+	</div>
+	<div class="col-md-2">
+		
+	<%= f.submit "Create"  %>
+
+	</div>
+	<%end%>
+
+</div>
+
+</body>	

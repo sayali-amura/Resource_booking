@@ -17,40 +17,104 @@ you are admin
 </ul>
 <br>
 
-
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-th {
-    text-align: center;
-}
-</style>
-</head>
-<body>
-<b>Employees</b>
-<table cellpadding="10"><tr>
-<td><strong>Name</strong></td>
-<td><strong>Email</strong></td>
-<td><strong>Date of Joining</strong></td>
-<td><strong>Role Id</strong></td>
-<td><strong>Manager Id</strong></td>
-<td><strong>Edit Link</strong></td>
-</tr>
-
-<% @employees.each do |employee|%>
-<tr>
-<td><%=employee.name%></td>
-<td><%=employee.email%></td>
-<td><%=employee.date_of_joining%></td>
-<td><%=employee.role_id%></td>
-<td><%=employee.manager_id%></td>
-<td><%= link_to 'edit details', edit_admin_employee_path(employee) %></td>
-</tr>
+<b>Pending Bookings</b>
+<div class="col-md-14">
+	<div class="col-md-2">
+	<strong>Duration</strong>
+	</div>
+	<div class="col-md-1">
+	<strong>Status</strong>
+	</div>
+	<div class="col-md-1">
+	<strong>Priority</strong>
+	</div>
+	<div class="col-md-2">
+	<strong>Feedback</strong>
+	</div>
+	<div class="col-md-2">
+	<strong>Comment</strong>
+	</div>
+	<div class="col-md-2">
+ 	<strong>Shift</strong>
+ 	</div>
+ 	<div class="col-md-2">
+	<strong>Employee_id</strong>
+	</div>
+</div>
+<div class="col-md-14">
+	
+<% @bookings.each do |booking|%>
+	<div class="col-md-2">
+	<%=booking.duration%>
+	</div>
+	<div class="col-md-1">
+	<%=status_normalization(booking.status)%>
+	</div>
+	<div class="col-md-1">
+	<%=priority_normalization(booking.priority)%>
+	</div>
+	<div class="col-md-2	">
+	<%=booking.feedback%>
+	</div>
+	<div class="col-md-2">
+	<%=booking.comment%>
+	</div>
+	<div class="col-md-2">
+	<%=booking.shift%>
+	</div>
+	<div class="col-md-2">
+	<%=booking.employee_id%>
+	</div>
+</div>
 <% end %>
-</table>
+
+
+<br>
+<br>
+<br>
+<b>Employees</b>
+<div class="col-md-14">
+	<div class="col-md-2">
+	<strong>Name</strong>
+	</div>
+	<div class="col-md-2">
+	<strong>Email</strong>
+	</div>
+	<div class="col-md-2">
+	<strong>Date of Joining</strong>
+	</div>
+	<div class="col-md-2">
+	<strong>Role Id</strong>
+	</div>
+	<div class="col-md-2">
+	<strong>Manager Id</strong>
+	</div>
+	<div class="col-md-2">
+	<strong>Edit Link</strong>
+	</div>
+</div>
+<div class="col-md-14">
+<% @employees.each do |employee|%>
+<div class="col-md-2">
+	<%=employee.name%>
+	</div>
+	<div class="col-md-2">
+<%=employee.email%>
+</div>
+<div class="col-md-2">
+<%=employee.date_of_joining%>
+</div>
+<div class="col-md-2">
+<%=employee.role_id%>
+</div>
+<div class="col-md-2">
+<%=employee.manager_id%>
+</div>
+<div class="col-md-2">
+<%= link_to 'edit details', edit_admin_employee_path(employee) %>
+</div>
+<% end %>
+</div>
+
+
 </body>
