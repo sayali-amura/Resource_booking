@@ -8,7 +8,8 @@
 
 
 Company.create(name:"Amura",email:"amura@gmail.com",phone:"8765432123",start_time:9.0,end_time:18.0)
-Resource.create(name:"conference_room_1",count:1,company_id:1,time_slot:1.0)
+Resource.create([{name:"conference_room_1",count:1,company_id:1,time_slot:1.0},
+				{name:"Projector",count:1,company_id:1,time_slot:1.0}])
 
 Role.create([{designation: "Founder",department: "Company", priority: "1",company_id:1},
 	{designation: "Cofounder",department: "Company", priority: "2",company_id:1},
