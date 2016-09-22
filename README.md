@@ -26,11 +26,7 @@ name
 email
 password_digest
 date_of_joining
-<<<<<<< HEAD
 role_id         => foreign key
-=======
-role_id
->>>>>>> f138b4d0f1f76c5447c2df71fc69d36b8dabe4e4
 manager_id		=>	employee id of manager
 ```
 
