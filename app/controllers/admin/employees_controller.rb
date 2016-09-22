@@ -10,10 +10,14 @@ class Admin::EmployeesController < ApplicationController
 	end
 
 	def create
-		@employee = employee.new(employee_params)
+		dummy_param = employee_params
+		dummy_param[:password] = "123456"
+		@company = Company.find(current_employee.company_id)
+		@employee = @company.employees.new(dummy_param)
 		if @employee.save
-			redirect_to @employee
+			redirect_to ["admin",@employee]
 		else
+			flash[:alert] = "#{@employee.errors.full_messages}"
 			render :new
 		end
 	end 
@@ -59,7 +63,7 @@ class Admin::EmployeesController < ApplicationController
 	end
 	private
 	def employee_params
-		params.require(:employee).permit(:name, :email, :password_digest, :date_of_joining, :role_id, :manager_id)
+		params.require(:employee).permit(:name, :email, :password_digest,:age, :date_of_joining, :role_id, :manager_id)
 	end
 	def find_employee
 		@employee = Employee.find(params[:id])
