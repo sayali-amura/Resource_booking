@@ -14,11 +14,7 @@
 </head>
 <body>
 
-<% if employee_signed_in?  %>
-<%=	(current_employee.role_id == 3 )?( render 'layouts/adminlayout') : (render 'layouts/employeeheader') %>
-<% else %>
 <%= render 'layouts/employeeheader'  %>
-<% end %>
 <div class="container">
 <% flash.each do |message_type, message| %>
 <div class="alert alert-<%= message_type %>"><%= message %></div>

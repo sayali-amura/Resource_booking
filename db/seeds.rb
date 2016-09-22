@@ -18,6 +18,6 @@ Role.create([{designation: "Founder",department: "Company", priority: "1",compan
 Employee.create([{name: "hello",age:34,date_of_joining:" 2012-12-03",manager_id:0,role_id:1,password:"123456",password_confirmation:"123456",email: "hello@gmail.com",company_id:1},
 	{name: "hi",age:29,date_of_joining: "2012-12-04",manager_id:1,role_id:2,password:"123456",password_confirmation:"123456",email: "hi@gmail.com",company_id:1},
 	{name: "a",age:23,date_of_joining: "2016-12-03",manager_id:2,role_id:4,password:"123456",password_confirmation:"123456",email: "a@gmail.com",company_id:1},
-	{name: "amrut",age:22,date_of_joining:"2016-12-5",manager_id:2,role_id:3,password:"123456",password_confirmation:"123456",email: "amrut@gmail.com",company_id:1}])
+	{name: "admin",age:22,date_of_joining:"2016-12-5",manager_id:2,role_id:3,password:"123456",password_confirmation:"123456",email: "admin@gmail.com",company_id:1}])
 Booking.create(status:0,priority:0,feedback:"ok",comment:"hello",employee_id:1,date_of_booking:"Mon, 01 Jan -4712",resource_id:1,slot:1.0)
 # Employee.create([{}])
