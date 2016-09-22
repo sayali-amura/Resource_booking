@@ -9,9 +9,10 @@ Rails.application.routes.draw do
   namespace :admin do 
     resources :employees,:resources
   end
-  resources :bookings, :employees, :complaints
+  resources :bookings, :employees, :complaints, :company
   devise_for :employees, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register', edit: 'settings' }
   root "employees#index"
+  
   # root '/login'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
