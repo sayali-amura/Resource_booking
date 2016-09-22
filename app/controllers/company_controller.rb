@@ -11,12 +11,14 @@ class CompanyController < ApplicationController
 		if @company.save
 			@role = Role.new(designation: "Admin",department: @company.name,priority: 0 )
 			@employee = @company.employees.new(name: "Admin",email: "admin@#{@company.name}.com",age:22,date_of_joining: Date.today,
-									 manger_id: 0,role_id: 0,password:123456,password_confirmation: 123456)
+									 manager_id: 0,role_id: 0,password:123456,password_confirmation: 123456)
 			if !(@employee.save && @role.save)
 				flash[:alert] = "There is error while adding default user to company account"
 				render new_company_path
+			else
+				redirect_to @company
 			end
-			redirect_to @company
+			
 		else
 			render :new
 		end
