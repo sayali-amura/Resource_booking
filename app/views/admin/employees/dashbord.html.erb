@@ -75,8 +75,8 @@ you are admin
 	<div class="col-md-2">
 	<strong>Comment</strong>
 	</div>
-	<div class="col-md-1">
-	<strong>Resource</strong>
+	<div class="col-md-2">
+	<strong>Resource Name</strong>
 	</div>
 	<div class="col-md-1">
 	<strong>Employee Id</strong>
@@ -96,8 +96,8 @@ you are admin
 	<div class="col-md-2	">
 	<%=complaint.comment%>
 	</div>
-	<div class="col-md-1">
-	<%=complaint.resource_id%>
+	<div class="col-md-2">
+	<%=resource_name(complaint.resource_id)%>
 	</div>
 	<div class="col-md-1">
 	<%=complaint.employee_id%>

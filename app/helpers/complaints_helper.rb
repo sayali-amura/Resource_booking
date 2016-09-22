@@ -15,4 +15,8 @@ def status_normalization(status_code)
 		 "Solved"
 	end
 end
+def resource_name(resource_id)
+	@resource = Resource.find(resource_id)
+	@resource.name
+end
 end
