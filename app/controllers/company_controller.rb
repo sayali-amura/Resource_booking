@@ -1,4 +1,4 @@
-class CompanyController < ApplicationController
+	class CompanyController < ApplicationController
 	def index
 
 	end
@@ -9,7 +9,7 @@ class CompanyController < ApplicationController
 	def create
 		@company = Company.new(company_params)
 		if @company.save
-			@role = Role.new(designation: "Admin",department: @company.name,priority: 0 )
+			@role = @company.roles.new(designation: "Admin",department: @company.name,priority: 0 )
 			@employee = @company.employees.new(name: "Admin",email: "admin@#{@company.name}.com",age:22,date_of_joining: Date.today,
 									 manager_id: 0,role_id: 0,password:123456,password_confirmation: 123456)
 			if !(@employee.save && @role.save)
