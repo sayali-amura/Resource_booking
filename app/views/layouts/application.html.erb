@@ -1,10 +1,9 @@
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <%= stylesheet_link_tag 'application', media: 'all',
 'data-turbolinks-track' => true %>
 <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -14,10 +13,20 @@
 </head>
 <body>
 
-<%= render 'layouts/employeeheader'  %>
+<% if employee_signed_in? %>
+<%= (current_employee.role_id==0 )? (render 'layouts/adminheader') :( render   'layouts/employeeheader') %>
+<% else %>
+<%= render 'layouts/employeeheader' %>
+<% end %>
 <div class="container">
 <% flash.each do |message_type, message| %>
-<div class="alert alert-<%= message_type %>"><%= message %></div>
+<% if message.include?"[" %>
+	<% message.split(",").each do |x| %>
+		<div class="alert alert-<%= message_type %>"><%= x %></div>
+	<% end %>
+<% else %>
+	<div class="alert alert-<%= message_type %>"><%= message %></div>
+<% end %>
 <% end %>
 
 <%= yield %>
