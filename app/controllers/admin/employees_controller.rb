@@ -1,5 +1,4 @@
 class Admin::EmployeesController < ApplicationController
-	layout "adminlayout"
 	before_action :find_employee, only: [:show, :edit, :update]
 	def index
 		@employees = Employee.all
@@ -10,10 +9,11 @@ class Admin::EmployeesController < ApplicationController
 	end
 
 	def create
-		dummy_param = employee_params
-		dummy_param[:password] = "123456"
+		dummy_employee = employee_params
+		dummy_employee[:password] = "123456"
+		dummy_employee[:email]<<"@#{current_employee.company.name}.com"
 		@company = Company.find(current_employee.company_id)
-		@employee = @company.employees.new(dummy_param)
+		@employee = @company.employees.new(dummy_employee)
 		if @employee.save
 			redirect_to ["admin",@employee]
 		else
@@ -25,8 +25,10 @@ class Admin::EmployeesController < ApplicationController
 	def show
 	 
 	end
+
 	def edit
 	end
+	
 	def update 
 		if @employee.update(employee_params)
 			redirect_to ["admin",@employee]
@@ -34,10 +36,12 @@ class Admin::EmployeesController < ApplicationController
 			render :edit
 		end
 	end
+	
 	def dashbord
 		@bookings = Booking.where(status:0)
 		@complaints = Complaint.where(status:0)
 	end
+	
 	def change_status
 		if(params[:status])
 			booking = Booking.find(params[:status][:booking_id])
@@ -63,10 +67,10 @@ class Admin::EmployeesController < ApplicationController
 	end
 	private
 	def employee_params
-		params.require(:employee).permit(:name, :email, :password_digest,:age, :date_of_joining, :role_id, :manager_id)
+		params.require(:employee).permit(:name, :email,:age, :date_of_joining, :role_id, :manager_id)
 	end
 	def find_employee
-		@employee = Employee.find(params[:id])
+		@employee = current_employee
 	end
 
  
