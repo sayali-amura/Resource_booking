@@ -1,6 +1,6 @@
-<div class="row">
-<div class="col-md-14">
 
+<div class="row">
+<div class="col-md-12">
 	<div class="col-md-1">
 	<strong>Status</strong>
 	</div>
@@ -13,16 +13,13 @@
 	<div class="col-md-2">
 	<strong>Comment</strong>
 	</div>
-	<div class="col-md-2">
- 	<strong>Shift</strong>
- 	</div>
  	<div class="col-md-2">
 	<strong>Employee_id</strong>
 	</div>
 </div>
 </div>
 
-<div class="col-md-14">
+<div class="col-md-12">
 <% @bookings.each do |booking|%>
 	<div class="row">
 	<div class="col-md-1">
@@ -41,10 +38,9 @@
 	<div class="col-md-2">
 	<%=booking.employee_id%>
 	</div>
-	</div>
 <% end %>
 </div>
-
+</div>
 <hr><br><br>
 
 <div class="col-md-10">

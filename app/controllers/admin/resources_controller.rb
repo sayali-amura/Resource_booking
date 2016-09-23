@@ -10,7 +10,8 @@ class Admin::ResourcesController < ApplicationController
 		@resource = Resource.new
 	end
 	def create
-		@resource = Resource.new(resource_params)
+		@company = current_employee.company
+		@resource = @company.resources.new(resource_params)
 		if @resource.save
 			redirect_to ["admin",@resource] 
 		else 

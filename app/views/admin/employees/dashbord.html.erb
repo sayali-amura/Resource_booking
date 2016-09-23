@@ -1,0 +1,138 @@
+you are admin
+<br>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Admin Dashboard</title>
+</head>
+<body>
+
+</body>
+</html>
+<b>Pending Bookings</b>
+<div class="col-md-12">
+	<div class="col-md-1">
+	<strong>Status</strong>
+	</div>
+	<div class="col-md-1">
+	<strong>Priority</strong>
+	</div>
+	<div class="col-md-2">
+	<strong>Feedback</strong>
+	</div>
+	<div class="col-md-2">
+	<strong>Comment</strong>
+	</div>
+ 	<div class="col-md-2">
+	<strong>Employee_id</strong>
+	</div>
+	<div class="col-md-1">
+	<%= label_tag(:status_grant, "Grant") %>
+	</div>
+	<div class="col-md-1">
+	<%= label_tag(:status_reject, "Reject") %>
+	</div>
+</div>
+<div class="col-md-12">
+	
+<% @bookings.each do |booking|%>
+	<div class="col-md-1">
+	<%=status_normalization(booking.status)%>
+	</div>
+	<div class="col-md-1">
+	<%=priority_normalization(booking.priority)%>
+	</div>
+	<div class="col-md-2	">
+	<%=booking.feedback%>
+	</div>
+	<div class="col-md-2">
+	<%=booking.comment%>
+	</div>
+	<div class="col-md-2">
+	<%=booking.employee_id%>
+	</div>
+<%= form_for:status, url:admin_change_status_path do | f |%>
+	<div class="col-md-1">
+
+	<%= f.hidden_field :booking_id,value: booking.id%>
+	<%= f.radio_button(:status,'Grant') %>
+	</div>
+	<div class="col-md-1">
+	<%= f.radio_button(:status,'Reject') %>
+	</div>
+	<div class="col-md-2">
+	<%= f.submit "Change status"%>
+	<% end %>
+	</div>
+
+</div>
+<% end %>
+<b>Pending Complaints</b>
+<div class="col-md-12">
+	<div class="col-md-1">
+	<strong>Status</strong>
+	</div>
+	<div class="col-md-2">
+	<strong>Comment</strong>
+	</div>
+	<div class="col-md-2">
+	<strong>Resource Name</strong>
+	</div>
+	<div class="col-md-1">
+	<strong>Employee Id</strong>
+	</div>
+	<div class="col-md-1">
+	<%= label_tag(:status_solve, "Solve") %>
+	</div>
+</div>
+
+
+<div class="col-md-12">
+	
+<% @complaints.each do | complaint |%>
+	<div class="col-md-1">
+	<%=status_normalization(complaint.status)%>
+	</div>
+	<div class="col-md-2	">
+	<%=complaint.comment%>
+	</div>
+	<div class="col-md-2">
+	<%=resource_name(complaint.resource_id)%>
+	</div>
+	<div class="col-md-1">
+	<%=complaint.employee_id%>
+	</div>
+<%= form_for:status_complaint, url:admin_change_status_path do | f |%>
+	<div class="col-md-1">
+
+	<%= f.hidden_field :complaint_id,value: complaint.id%>
+	<%= f.radio_button(:status,'Solve') %>
+	</div>
+	<div class="col-md-2">
+	<%= f.submit "Change status"%>
+	<% end %>
+	</div>
+
+</div>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+<br>

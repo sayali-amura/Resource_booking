@@ -1,2 +1,29 @@
-<h1>Complaints#show</h1>
-<p>Find me in app/views/complaints/show.html.erb</p>
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<div class="col-md-12">
+	<div class="col-md-4">
+	<strong>Resource name</strong>
+	</div>
+	<div class="col-md-4">
+	<strong>Comment</strong>
+	</div>
+	<div class="col-md-4">
+	<strong>Status</strong>
+	</div>
+</div>
+<div class="col-md-12">
+	<div class="col-md-4">
+	<%= @resource.name%></td>
+	</div>
+	<div class="col-md-4">
+	<%= @complaint.comment%>
+	</div>
+	<div class="col-md-4">
+	<%= status_normalization(@complaint.status)%>
+	</div>
+</div>
+</body>
+<%= link_to "Home", employees_path %>
