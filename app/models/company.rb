@@ -1,3 +1,12 @@
+class TimeValidator < ActiveModel::EachValidator
+  def validate_each(record, attribute, value)
+    unless value > record.start_time
+      record.errors[attribute] << (options[:message] || "Enter End Time greater than start time")
+    end
+  end
+end
+
+
 class Company < ActiveRecord::Base
 	has_many :roles
 	has_many :resources
@@ -10,7 +19,8 @@ class Company < ActiveRecord::Base
 	validates :name,:phone,:start_time,:end_time , presence: true
 	# validates :end_time, numericality:{greater_than: end_time }
 	validates :phone ,format: {with: VALID_PHONE_REGEX}
-
+	validates :start_time, :end_time, inclusion: {in: 0..23 }
+	validates :end_time, presence: true, time: true
 
 	before_save :lower_email
 
