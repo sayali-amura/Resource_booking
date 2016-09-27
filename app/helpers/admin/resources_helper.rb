@@ -1,17 +1,17 @@
 module Admin::ResourcesHelper
 
-	# def timeslots(resource)
-	# 	company = Company.find(resource.company_id)
-	# 	start_time = company.start_time
-	# 	end_time = company.end_time
-	# 	company_duration = end_time - start_time
-	# 	no_of_slots = ( company_duration / resource.time_slot ).to_i
-	# 	time_slot_array =Array.new
-	# 	no_of_slots.times do | index | 
-	# 		time_slot_array << ["#{index+start_time}-#{index+start_time+resource.time_slot}", index]
-	# 	end
-	# 	time_slot_array
-	# end
+	def timeslots(resource)
+		company = Company.find(resource.company_id)
+		start_time = company.start_time
+		end_time = company.end_time
+		company_duration = end_time - start_time
+		no_of_slots = ( company_duration / resource.time_slot ).to_i
+		time_slot_array =Array.new
+		no_of_slots.times do | index | 
+			time_slot_array << ["#{index+start_time}-#{index+start_time+resource.time_slot}", index]
+		end
+		time_slot_array
+	end
 
 	def check_avability resource
 		time_slot_array = resource.timeslots

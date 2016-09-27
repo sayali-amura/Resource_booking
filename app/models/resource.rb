@@ -6,6 +6,8 @@ class Resource < ActiveRecord::Base
 	has_many :complaints
 	validates :count, numericality: { only_integer: true, greater_than: 0 }
 	validates :name, :count, presence: true
+	validates :name, uniqueness: { scope: :company_id,
+    message: "should have one per company" }
 
 
 	def timeslots
