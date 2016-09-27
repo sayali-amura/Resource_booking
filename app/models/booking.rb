@@ -21,25 +21,24 @@ class Booking < ActiveRecord::Base
 	end
 
 	def check_holiday?
-		unless self.date_of_booking.wday==7  
+		unless self.date_of_booking.wday!=7  
 			self.errors[:day_validation] << "Booking can't be done on holidays"
 		end
 	end
 
 	def is_slot_alloted?
-		todays_booking = Booking.where("created_at >= ? and created_at<=?", Time.zone.now.beginning_of_day,Time.zone.now.end_of_day)
-		if todays_booking.any?
-			todays_booking.each do |booking|
-				if booking.slot == self.slot
+		if Booking.find_by_date_of_booking(self.date_of_booking)
+			days_booking = Booking.where(date_of_booking: self.date_of_booking)
+			days_booking.each do |x|
+				if x.slot == self.slot
 					self.errors[:allocated_slot] << "This slot is already alloted"
-					break
 				end
 			end
 		end
 	end
 
 	def slot_valid? 
-		if self.slot > self.resource.timeslots.length
+		if self.slot > self.resource.available_time_slot(self.date_of_booking).length
 			self.errors[:slot_invalid] << "This slot is invalid"
 		end
 	end
