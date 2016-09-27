@@ -1,4 +1,9 @@
-<%= form_for :booking ,url: bookings_path do |f|%>
+<h2>Edit Booking Request</h2>
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+
+<%= render "error" %>
+<%= form_for (@booking) do |f|%>
 			Booking Subject
 		<%= f.text_field :comment, placeholder: "Purpose of booking", class: 'form-control' %>
 			Date
@@ -29,3 +34,5 @@
 		<%end %>
 		<%= f.submit "Book", class: "btn btn-primary" %>
 	<%end %>
+	</div>
+	</div>
