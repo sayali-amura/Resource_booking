@@ -10,7 +10,6 @@ class Admin::EmployeesController < ApplicationController
 
 	def create
 		dummy_employee = employee_params
-		dummy_employee[:password] = "123456"
 		dummy_employee[:email]<<"@#{current_employee.company.name}.com"
 		@company = Company.find(current_employee.company_id)
 		@employee = @company.employees.new(dummy_employee)
