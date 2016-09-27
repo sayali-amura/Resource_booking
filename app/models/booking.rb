@@ -8,8 +8,7 @@ class Booking < ActiveRecord::Base
 	validates :slot,:date_of_booking,:comment , presence: true
 	validates :priority ,inclusion: {in:[0,1,2]}	
 
-	validate :is_slot_alloted?, :slot_valid?, :is_resource_valid?, :is_date_valid?,:check_holiday?
-	validate :is_resource_available?, on: :index
+	validate :is_slot_alloted?,:slot_valid?, :is_resource_valid?, :is_date_valid?,:check_holiday?
 
 	before_save :add_company_id
 	before_validation 	:ensure_date_has_value
@@ -32,7 +31,11 @@ class Booking < ActiveRecord::Base
 
 	def is_slot_alloted?
 		if Booking.find_by_date_of_booking(self.date_of_booking)
-			days_booking = Booking.where(date_of_booking: self.date_of_booking)
+			if self.new_record?
+				days_booking = Booking.where(date_of_booking: self.date_of_booking)
+			else
+				days_booking = Booking.where(date_of_booking: self.date_of_booking).where.not(id: self.id)
+			end
 			days_booking.each do |x|
 				if x.slot == self.slot
 					self.errors[:allocated_slot] << "This slot is already alloted"
