@@ -9,10 +9,8 @@ class Admin::EmployeesController < ApplicationController
 	end
 
 	def create
-		dummy_employee = employee_params
-		dummy_employee[:email]<<"@#{current_employee.company.name}.com"
 		@company = Company.find(current_employee.company_id)
-		@employee = @company.employees.new(dummy_employee)
+		@employee = @company.employees.new(Employee.edited_employee( employee_params,@company ))
 		if @employee.save
 			redirect_to ["admin",@employee]
 		else
@@ -37,7 +35,8 @@ class Admin::EmployeesController < ApplicationController
 	end
 	
 	def dashbord
-		@bookings = Booking.where(status:0)
+		@company = current_employee.company_id
+		@bookings = Booking.where(status:0,company_id:@company)
 		@complaints = Complaint.where(status:0)
 	end
 	

@@ -2,12 +2,8 @@ class ComplaintsController < ApplicationController
   before_action :find_complaint, only: [:show, :edit, :update]
   before_action :list_resources, only: [:new,:edit]
 	def index
-		@resources = Resource.where(company_id:current_employee.company_id)
-		@id_array = []
-		@resources.each do | resource |
-			@id_array << resource.id
-		end
-		@complaints = Complaint.where(resource_id:@id_array)
+		
+		@complaints = Complaint.where(resource_id:resource_ids(current_employee.company_id))
 		
 	end
 	def new

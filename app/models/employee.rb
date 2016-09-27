@@ -46,9 +46,15 @@ class Employee < ActiveRecord::Base
     pending_any_confirmation {yield}
   end
 
+  def self.edited_employee(employee_parameters,company)
+    employee_parameters[:email]<<"@#{company.name}.com"
+    employee_parameters
+  end
+
   private
     def lower_email
 		self.email.downcase!
 	end
 
+  
 end
