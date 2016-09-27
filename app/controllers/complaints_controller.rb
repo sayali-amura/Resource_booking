@@ -45,5 +45,5 @@ class ComplaintsController < ApplicationController
 	end
 	def list_resources
 		@resources = Resource.all
-		end
+	end
 end
