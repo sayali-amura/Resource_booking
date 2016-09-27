@@ -3,7 +3,7 @@ class Admin::ResourcesController < ApplicationController
 	before_action :find_resource, only: [:show, :edit, :update]
 
 	def index
-		@resources = Resource.all
+		@resources = Resource.where(company_id:current_employee.company_id)
 		
 	end
 	def new
