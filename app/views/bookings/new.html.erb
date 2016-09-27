@@ -7,7 +7,6 @@
 		<%= x %><br>
 	<%end %>
 <% end %>
-<% if @resource %>
 	<%= form_for :booking ,url: bookings_path do |f|%>
 
 		<%= f.select :resource_id , id: "resource_id"  do  %>
@@ -40,9 +39,6 @@
 		<%end %>
 		<%= f.submit "Book", class: "btn btn-primary" %>
 	<%end %>
-<% else %>
-	Sorry. No resources are available in your company
-<% end %>
 </div>
 </div>
 <div id="check">
