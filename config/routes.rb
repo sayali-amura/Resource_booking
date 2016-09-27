@@ -13,7 +13,10 @@ Rails.application.routes.draw do
     resources :employees,:resources, :roles
   end
   resources :bookings, :employees, :complaints, :company
-  devise_for :employees, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register', edit: 'settings' }
+  devise_for :employees, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register', edit: 'settings' }, controllers: {
+        confirmations: 'employees/confirmations'
+      }
+
   root "employees#index"
   
   # root '/login'
