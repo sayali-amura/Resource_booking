@@ -1,0 +1,14 @@
+<%= form_for ['admin', @role] do | f |%>
+<div class="row">
+<div class="col-md-3 col-md-offset-3">
+		<%=f.label :Designation%>
+		<%=f.text_field :designation , class: "form-control", required: true, placeholder: "Designation of Employee"%>
+		<%=f.label :Department%>
+		<%=f.text_field :department , class: "form-control", required: true, placeholder: "Department of Employee"%>
+		<%=f.label :Priority%>
+		<%=f.text_field :priority , class: "form-control", required: true, placeholder: "Priority of Employee in Company"%>
+		<%= f.submit 'Create Role', class: "btn btn-primary btn-default"%>
+<% end %>
+
+</div>
+</div>

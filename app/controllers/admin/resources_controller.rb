@@ -17,7 +17,6 @@ class Admin::ResourcesController < ApplicationController
 		else 
 			render :new
 		end
-
 	end
 	def show
 			
