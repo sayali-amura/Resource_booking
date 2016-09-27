@@ -7,12 +7,17 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
 
 
+  get 'resource_time_slot/:name' , to: 'bookings#resource_time_slot', as: :timeslots
+  get 'booking_date_slots/:resource/date_of_booking=:date_of_booking', to: 'bookings#booking_date_slots', as: :date_slots
   namespace :admin do 
     get 'dashbord' => 'employees#dashbord'
     post 'change_status' => 'employees#change_status'
     resources :employees,:resources, :roles
   end
-  resources :bookings, :employees, :complaints, :company
+  resources  :employees, :complaints, :company
+
+resources :bookings 
+
   devise_for :employees, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register', edit: 'settings' }
   root "employees#index"
   
