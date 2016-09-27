@@ -6,7 +6,7 @@ class EmployeesController < ApplicationController
 		if !employee_signed_in?
 			redirect_to new_employee_session_path
 		elsif current_employee.role_id ==0
-			redirect_to admin_employees_path
+			redirect_to admin_dashbord_path
 		end
 		@bookings = @employee.bookings
 		@complaints = @employee.complaints
