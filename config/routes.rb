@@ -17,6 +17,10 @@ Rails.application.routes.draw do
         confirmations: 'employees/confirmations'
       }
 
+      as :employee do
+      patch '/employee/confirmation' => 'employees/confirmations#update', :via => :patch, :as => :update_employee_confirmation
+  end
+
   root "employees#index"
   
   # root '/login'
