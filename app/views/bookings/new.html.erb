@@ -7,31 +7,44 @@
 		<%= x %><br>
 	<%end %>
 <% end %>
+<% if @resource %>
+	<%= form_for :booking ,url: bookings_path do |f|%>
 
-<%= form_for :booking ,url: bookings_path do |f|%>
-<%= hidden_field_tag("resource_id",@resource.id) %>
-Booking Subject
-<%= f.text_field :comment, placeholder: "Purpose of booking", class: 'form-control' %>
-Date
-<%= f.date_field :date_of_booking, class: 'form-control' %>
-Time Slot
-
-<%= f.select :slot do  %>
-		<%  resource_time_slot(@resource).each do |c| %>
-			<%= content_tag(:option,c.first,value: c.last, class: 'form-control') %>
-			<br>
+		<%= f.select :resource_id , id: "resource_id"  do  %>
+					<% resource_array.each do |c| %>
+						
+						<%= content_tag(:option,c.first,value: c.last, class: 'form-control') %>
+						
+						<br>
+					<%end %>
 		<%end %>
-		
+			Booking Subject
+		<%= f.text_field :comment, placeholder: "Purpose of booking", class: 'form-control' %>
+			Date
+		<%= f.date_field :date_of_booking %>
+			Time Slot
+		<%= f.select :slot do  %>
+			
+			<div id="timeslot_options">
+				
+			</div>	
+					
+		<%end %>
+
+		Priority
+
+		<%= f.select :priority  do %>
+			<% [['Low',0],['Medium',1],['High',2]].each do |c| %>
+				<%= content_tag(:option,c.first,value: c.last, class: 'form-control') %>
+			<%end %>
+		<%end %>
+		<%= f.submit "Book", class: "btn btn-primary" %>
 	<%end %>
-
-Priority
-
-<%= f.select :priority  do %>
-<% [['Low',0],['Medium',1],['High',2]].each do |c| %>
-<%= content_tag(:option,c.first,value: c.last, class: 'form-control') %>
-<%end %>
-<%end %>
-<%= f.submit "Book", class: "btn btn-primary" %>
-<%end %>
+<% else %>
+	Sorry. No resources are available in your company
+<% end %>
 </div>
+</div>
+<div id="check">
+	
 </div>
