@@ -3,29 +3,38 @@ class BookingsController < ApplicationController
 
 	# include Admin::ResourcesHelper
 
-	before_action :find_employee
+
+	before_action :find_company
 
 
 	def index
-		if @employee.company.is_resource_available?
-			@bookings = @employee.company.bookings
+		if @company.is_resource_available?
+			@bookings = @company.bookings
 		end
 	end
 
 	def new
-		@booking = @employee.bookings.new
-		if @employee.company.is_resource_available?
-			@resource = Resource.find(params[:resource][:resource_id])
+		if @company.is_resource_available?
+			@booking = current_employee.bookings.new
+			@resource = Resource.all
 		end
 	end
 
+
+	def resource_time_slot
+		@resource = @company.resources.find_by_name(params[:name])
+	end
+
+	def booking_date_slots
+		resource = @company.resources.find_by_name(params[:resource])
+		@slot_array = available_time_slot(resource,params[:date_of_booking])
+	end
 	def edit
 		@booking = Booking.find(params[:id])
 	end
 
 	def create		
-		@booking = @employee.bookings.new(booking_params)
-		@booking.resource_id = params[:resource_id]
+		@booking = current_employee.bookings.new(booking_params)
 			if @booking.save
 				flash[:success] = "Your booking is done"
 				redirect_to @booking
@@ -55,12 +64,12 @@ class BookingsController < ApplicationController
 	private
 
 	def booking_params
-		params.require(:booking).permit(:comment,:slot,:priority, :date_of_booking)
+		params.require(:booking).permit(:comment,:slot,:priority, :date_of_booking,:resource_id)
 	end
 	
-	def find_employee
+	def find_company
 		if employee_signed_in?
-			@employee = current_employee
+			@company = current_employee.company
 		else
 			redirect_to root_path
 		end

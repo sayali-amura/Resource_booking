@@ -55,6 +55,4 @@ class Employee < ActiveRecord::Base
     def lower_email
 		self.email.downcase!
 	end
-
-  
 end

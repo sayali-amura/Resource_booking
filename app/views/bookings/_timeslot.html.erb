@@ -1,0 +1,4 @@
+<%  resource_time_slot(resource).each do |c| %>
+					<%= content_tag(:option,c.first,value: c.last, class: 'form-control') %>
+					<br>
+<%end %>

@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
 
 
+  get 'resource_time_slot/:name' , to: 'bookings#resource_time_slot', as: :timeslots
+  get 'booking_date_slots/:resource/date_of_booking=:date_of_booking', to: 'bookings#booking_date_slots', as: :date_slots
   namespace :admin do 
     get 'dashbord' => 'employees#dashbord'
     post 'change_status' => 'employees#change_status'
@@ -20,7 +22,6 @@ Rails.application.routes.draw do
       as :employee do
       patch '/employee/confirmation' => 'employees/confirmations#update', :via => :patch, :as => :update_employee_confirmation
   end
-
   root "employees#index"
   
   # root '/login'

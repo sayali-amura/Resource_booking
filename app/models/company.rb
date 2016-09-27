@@ -17,7 +17,6 @@ class Company < ActiveRecord::Base
 																uniqueness: { case_sensitive: false }
 	VALID_PHONE_REGEX = /\A\+\d+\z/
 	validates :name,:phone,:start_time,:end_time , presence: true
-	# validates :end_time, numericality:{greater_than: end_time }
 	validates :phone ,format: {with: VALID_PHONE_REGEX}
 	validates :start_time, :end_time, inclusion: {in: 0..23 }
 	validates :end_time, presence: true, time: true

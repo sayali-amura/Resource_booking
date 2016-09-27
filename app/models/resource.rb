@@ -22,7 +22,4 @@ class Resource < ActiveRecord::Base
 		end
 		time_slot_array
 	end
-
-	
-
 end
