@@ -22,4 +22,15 @@ class Resource < ActiveRecord::Base
 		end
 		time_slot_array
 	end
+
+	def available_time_slot date_of_booking
+		resource_slot = self.timeslots
+		if self.bookings.where(date_of_booking:date_of_booking)
+			bookings_of_day = self.bookings.where(date_of_booking: date_of_booking)
+			bookings_of_day.each do |x|
+				resource_slot.delete_at(x.slot)
+			end
+		end
+		resource_slot
+	end
 end

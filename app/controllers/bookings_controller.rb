@@ -27,7 +27,7 @@ class BookingsController < ApplicationController
 
 	def booking_date_slots
 		resource = @company.resources.find_by_name(params[:resource])
-		@slot_array = available_time_slot(resource,params[:date_of_booking])
+		@slot_array = resource.available_time_slot params[:date_of_booking]
 	end
 	def edit
 		@booking = Booking.find(params[:id])
