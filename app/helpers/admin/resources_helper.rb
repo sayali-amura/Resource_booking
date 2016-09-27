@@ -1,22 +1,10 @@
 module Admin::ResourcesHelper
-	def timeslots(resource)
-		company = Company.find(resource.company_id)
-		start_time = company.start_time
-		end_time = company.end_time
-		company_duration = end_time - start_time
-		no_of_slots = ( company_duration / resource.time_slot ).to_i
-		time_slot_array =Array.new
-		no_of_slots.times do | index | 
-			time_slot_array << ["#{index+start_time}-#{index+start_time+resource.time_slot}", index]
-		end
-		time_slot_array
-	end
-
 
 	def check_avability resource
-		time_slot_array = timeslots resource
-		days_booking =	Booking.where("created_at >= ?", Time.zone.now.beginning_of_day)
-		if !days_booking.nil?
+		time_slot_array = resource.timeslots
+		days_booking =	Booking.where("created_at >= ? and created_at<=?", Time.zone.now.beginning_of_day,Time.zone.now.end_of_day)
+		puts "days_booking are #{days_booking.inspect}"
+		if days_booking.any?
 			days_booking.each{|x| time_slot_array.delete_at(x.slot) }
 		end
 		time_slot_array
@@ -24,8 +12,23 @@ module Admin::ResourcesHelper
 
 	def show_slot_time resource_id,slot_id
 		resource = Resource.find(resource_id)
-		time_slot_array =	timeslots resource
+		time_slot_array =	resource.timeslots
 		time_slot_array[slot_id].first
 	end
+
+	def available_time_slot resource,date_of_booking
+		resource_slot = resource.timeslots
+		if resource.bookings.where(date_of_booking:date_of_booking)
+			bookings_of_day = resource.bookings.where(date_of_booking: date_of_booking)
+			bookings_of_day.each do |x|
+				resource_slot.delete_at(x.slot)
+			end
+			# byebug
+		end
+		# byebug
+		resource_slot
+	end
+
+
 
 end
