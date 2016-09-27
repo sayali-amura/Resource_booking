@@ -7,7 +7,6 @@ gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'devise'
 gem 'simple_form'
 
-gem 'pry'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets
@@ -42,6 +41,7 @@ group :development, :test do
 	gem 'rspec-rails', '~> 3.5'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  
 end
 
 group :development do
@@ -50,5 +50,6 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'pry'
 end
 
