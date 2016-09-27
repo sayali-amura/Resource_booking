@@ -26,7 +26,7 @@ class BookingsController < ApplicationController
 
 	def booking_date_slots
 		resource = @company.resources.find_by_name(params[:resource])
-		@slot_array = available_time_slot(resource,params[:date_of_booking])
+		@slot_array = resource.available_time_slot params[:date_of_booking]
 	end
 
 	def edit
@@ -35,7 +35,6 @@ class BookingsController < ApplicationController
 
 	def create		
 		@booking = current_employee.bookings.new(booking_params)
-		@booking.resource_id = params[:resource_id]
 			if @booking.save
 				flash[:success] = "Your booking is done"
 				redirect_to @booking
@@ -65,7 +64,7 @@ class BookingsController < ApplicationController
 	private
 
 	def booking_params
-		params.require(:booking).permit(:comment,:slot,:priority, :date_of_booking)
+		params.require(:booking).permit(:comment,:slot,:priority, :date_of_booking,:resource_id)
 	end
 	
 	def find_company
