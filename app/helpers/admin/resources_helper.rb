@@ -16,19 +16,6 @@ module Admin::ResourcesHelper
 		time_slot_array[slot_id].first
 	end
 
-	def available_time_slot resource,date_of_booking
-		resource_slot = resource.timeslots
-		if resource.bookings.where(date_of_booking:date_of_booking)
-			bookings_of_day = resource.bookings.where(date_of_booking: date_of_booking)
-			bookings_of_day.each do |x|
-				resource_slot.delete_at(x.slot)
-			end
-			# byebug
-		end
-		# byebug
-		resource_slot
-	end
-
 
 
 end
