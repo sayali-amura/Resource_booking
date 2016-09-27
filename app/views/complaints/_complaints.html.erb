@@ -1,0 +1,33 @@
+
+<div class="col-md-12">
+	<div class="col-md-1">
+	<strong>Status</strong>
+	</div>
+	<div class="col-md-1">
+	<strong>Comment</strong>
+	</div>
+	<div class="col-md-1">
+	<strong>Resource Id</strong>
+	</div>
+	<div class="col-md-1`">
+	<strong>Employee Id</strong>
+	</div>
+</div>
+<div class="col-md-12">
+	
+<% @complaints.each do |complaint|%>
+	<div class="col-md-1">
+	<%=status_normalization(complaint.status)%>
+	</div>
+	<div class="col-md-1	">
+	<%=complaint.comment%>
+	</div>
+	<div class="col-md-1">
+	<%=complaint.resource_id%>
+	</div>
+	<div class="col-md-1">
+	<%=complaint.employee_id%>
+	</div>
+</div>
+<% end %>
+</body>	
