@@ -15,10 +15,7 @@ class Company < ActiveRecord::Base
 	before_save :lower_email
 
 	def is_resource_available?
-		if !self.resources.any?
-			return false
-		end
-		true
+		(self.resources.any?) ? true : false
 	end
 
 	protected 
