@@ -16,6 +16,8 @@ class BookingsController < ApplicationController
 		if @company.is_resource_available?
 			@booking = current_employee.bookings.new
 			@resource = Resource.all
+		else
+			flash[:notice] = "No resources are available in your company"
 		end
 	end
 
@@ -33,14 +35,18 @@ class BookingsController < ApplicationController
 		@booking = Booking.find(params[:id])
 	end
 
-	def create		
-		@booking = current_employee.bookings.new(booking_params)
-			if @booking.save
+	def create
+		begin
+			@booking = current_employee.bookings.new(booking_params)
+			if  @booking.save
 				flash[:success] = "Your booking is done"
 				redirect_to @booking
 			else
-				render new_booking_path
+				render :new
 			end
+		rescue
+			render :new
+		end
 	end
 
 	def show
