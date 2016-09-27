@@ -1,7 +1,7 @@
 class Admin::EmployeesController < ApplicationController
 	before_action :find_employee, only: [:show, :edit, :update]
 	def index
-		@employees = Employee.all
+		@employees = Employee.where(company_id:current_employee.company_id)
 		
 	end
 	def new
