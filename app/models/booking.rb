@@ -13,8 +13,6 @@ class Booking < ActiveRecord::Base
 	before_save :add_company_id
 	before_validation 	:ensure_date_has_value
 
-
-
 	protected
 
 	def is_date_valid?
@@ -30,14 +28,17 @@ class Booking < ActiveRecord::Base
 	end
 
 	def is_slot_alloted?
-		if Booking.find_by_date_of_booking(self.date_of_booking)
+		if self.company.bookings.find_by_date_of_booking(self.date_of_booking)
 			if self.new_record?
-				days_booking = Booking.where(date_of_booking: self.date_of_booking)
+				days_booking = self.company.bookings.where(date_of_booking: self.date_of_booking)
 			else
-				days_booking = Booking.where(date_of_booking: self.date_of_booking).where.not(id: self.id)
+				# byebug
+				days_booking = self.company.bookings.where(date_of_booking: self.date_of_booking).where.not(id: self.id)
 			end
+			# binding.pry
+			# byebug
 			days_booking.each do |x|
-				if x.slot == self.slot
+				unless x.slot != self.slot
 					self.errors[:allocated_slot] << "This slot is already alloted"
 				end
 			end
@@ -58,7 +59,7 @@ class Booking < ActiveRecord::Base
 	end
 
 	def is_resource_valid?
-		unless (Resource.find(self.resource_id))
+		unless (self.company.resources.find(self.resource_id))
 			self.errors[:resource_not_present] << "Requested resource is not available."
 		end
 	end
