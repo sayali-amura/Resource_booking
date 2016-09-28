@@ -1,5 +1,5 @@
 class Admin::RolesController < ApplicationController
-	before_action :find_company
+	before_action :find_company, :verify_user
 	before_action :find_role, only: [:edit, :show]
   def index
   end
@@ -34,7 +34,19 @@ class Admin::RolesController < ApplicationController
   	@role = @company.roles.find(params[:id])
   end
 
-  def find_company
-  	@company = current_employee.company
+  def verify_user
+    unless current_employee.id == session["warden.user.employee.key"][0][0] && current_employee.role_id == 0
+      flash[:alert] << "You dont't have privilage to add resources" 
+      redirect_to request.referer
+    end
   end
+  
+  def find_company
+    if employee_signed_in?
+      @company = current_employee.company
+    else
+      redirect_to root_path
+    end
+  end
+
 end
