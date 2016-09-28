@@ -8,10 +8,10 @@ class Booking < ActiveRecord::Base
 	validates :slot,:date_of_booking,:comment , presence: true
 	validates :priority ,inclusion: {in:[0,1,2]}	
 
-	validate :is_slot_alloted?,:slot_valid?, :is_resource_valid?, :is_date_valid?,:check_holiday?
+	validate :is_slot_alloted?,:slot_valid?, :is_date_valid?,:check_holiday?
 
-	before_save :add_company_id
-	before_validation 	:ensure_date_has_value
+	# before_save :add_company_id
+	before_validation 	:ensure_date_has_value,:add_company_id, :ensure_is_resource_valid
 
 	protected
 
@@ -46,7 +46,7 @@ class Booking < ActiveRecord::Base
 	end
 
 	def slot_valid? 
-		if self.slot.to_i > self.resource.available_time_slot(self.date_of_booking).length
+		if self.slot.to_i > self.resource.available_time_slot(self.date_of_booking).length || self.slot%1!=0
 			self.errors[:slot_invalid] << "This slot is invalid"
 		end
 	end
@@ -58,9 +58,10 @@ class Booking < ActiveRecord::Base
 		true
 	end
 
-	def is_resource_valid?
-		unless (self.company.resources.find(self.resource_id))
+	def ensure_is_resource_valid
+		unless self.company.resources.find_by_id(self.resource_id)  
 			self.errors[:resource_not_present] << "Requested resource is not available."
+			raise "resource is not valid"
 		end
 	end
 
