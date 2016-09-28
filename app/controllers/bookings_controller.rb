@@ -1,13 +1,10 @@
 class BookingsController < ApplicationController
-	# before_action :find_booking, only: [:show, :edit, :update]
 
-	# include Admin::ResourcesHelper
-
-
-	before_action :find_company
-
+	before_action :find_company, :verify_user
+	skip_before_action :verify_user , only: [:index, :show]
 
 	def index
+
 		if @company.is_resource_available?
 			@bookings = @company.bookings
 		end
@@ -17,6 +14,8 @@ class BookingsController < ApplicationController
 		if @company.is_resource_available?
 			@booking = current_employee.bookings.new
 			@resource = Resource.all
+		else
+			flash[:notice] = "No resources are available in your company"
 		end
 	end
 
@@ -33,14 +32,18 @@ class BookingsController < ApplicationController
 		@booking = Booking.find(params[:id])
 	end
 
-	def create		
-		@booking = current_employee.bookings.new(booking_params)
-			if @booking.save
+	def create
+		begin
+			@booking = current_employee.bookings.new(booking_params)
+			if  @booking.save
 				flash[:success] = "Your booking is done"
 				redirect_to @booking
 			else
 				render :new
 			end
+		rescue
+			render :new
+		end
 	end
 
 	def show
@@ -48,8 +51,9 @@ class BookingsController < ApplicationController
 	end
 
 	def update
-
-		if @booking.update(booking_params)
+		@booking = Booking.find(params[:id])
+		if @booking.update_attributes(booking_params)
+			flash[:success] = "Your booking is successfully updated"
 			redirect_to @booking
 		else
 			render :edit
@@ -68,9 +72,17 @@ class BookingsController < ApplicationController
 	end
 	
 	def find_company
-		if employee_signed_in?
+		# byebug
+		if employee_signed_in? 
 			@company = current_employee.company
 		else
+			redirect_to root_path
+		end
+	end
+
+	def verify_user
+		unless current_employee.id == session["warden.user.employee.key"][0][0]
+			flash[:alert] = "You can't access other employees functionalities."
 			redirect_to root_path
 		end
 	end

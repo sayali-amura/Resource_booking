@@ -5,28 +5,6 @@
 	<% else %>
 	<h2>No Bookings</h2>
 	<% end %>
-		<hr><br><br>
-
-		<div class="col-md-10">
-			<div class="col-md-2">
-				Create Booking
-			</div>
-			
-			<%= form_for :resource, url: new_booking_path , method: 'get' do |f| %>
-			<div class="col-md-6">
-				<%= f.select :resource_id do  %>
-					<% resource_array.each do |c| %>
-						<%= content_tag(:option,c.first,value: c.last, class: 'form-control') %>
-						<br>
-					<%end %>
-				<%end %>
-			</div>
-			<div class="col-md-2">
-				<%= f.submit "Create"  %>
-			</div>
-			<%end%>
-		</div>
-
 <% else %>
 	Sorry. No resources are available in your company. So no bookings.
 <% end %>
