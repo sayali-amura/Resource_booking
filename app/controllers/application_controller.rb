@@ -5,7 +5,12 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_employee!
   include Admin::ResourcesHelper
   before_action :configure_permitted_parameters, if: :devise_controller?
-  load_and_authorize_resource
+  
+
+  def current_ability
+  @current_ability ||= Ability.new(current_employee)
+  end
+
 
   protected
 
@@ -22,7 +27,6 @@ class ApplicationController < ActionController::Base
   end
   def admin?
     find_company
-    print "-----------------hello-----------------------"
     if current_employee.email != "admin@#{@company.name}.com"
       redirect_to root_path
     end

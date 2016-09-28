@@ -8,7 +8,9 @@
 <li class="dropdown">
 	<a  class="dropdown-toggle" data-toggle="dropdown" href="#">Employee<span class="caret"></span></a>
 	<ul class="dropdown-menu">
+	<% if can? :create, Employee.new %>
 		<li><%= link_to "Add", new_admin_employee_path %></li>
+	<% end %>
 		<li><%= link_to "View",admin_employees_path %></li>
 	</ul>
 </li>

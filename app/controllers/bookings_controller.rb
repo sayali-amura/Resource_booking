@@ -2,9 +2,8 @@ class BookingsController < ApplicationController
 
 	before_action :find_company, :verify_user
 	skip_before_action :verify_user , only: [:index, :show]
-
+	load_and_authorize_resource :booking
 	def index
-
 		if @company.is_resource_available?
 			@bookings = @company.bookings
 		end

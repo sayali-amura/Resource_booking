@@ -22,7 +22,7 @@ Rails.application.routes.draw do
       as :employee do
       patch '/employee/confirmation' => 'employees/confirmations#update', :via => :patch, :as => :update_employee_confirmation
   end
-  root "employees#index"
+  root "employees#entry"
   
   # root '/login'
   # Example of regular route:

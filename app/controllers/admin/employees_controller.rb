@@ -3,6 +3,8 @@ class Admin::EmployeesController < ApplicationController
 	before_action :find_company, only: [:index, :create, :dashbord,:change_status]
 	before_action :find_complaints, only: [:index, :dashbord, :change_status]
 	before_action :admin?
+	load_and_authorize_resource :employee
+
 	def index
 		@bookings = @company.bookings.where("date_of_booking >= ?",Date.today)
 		@employees = @company.employees
@@ -80,12 +82,6 @@ class Admin::EmployeesController < ApplicationController
 		give_id(current_employee.company_id)
 		@complaints = Complaint.where(resource_id:@id_array)
 	end
-	def admin?
-		find_company
-		print "-----------------hello-----------------------"
-		if current_employee.email != "admin@#{@company.name}.com"
-			redirect_to root_path
-		end
- 	end
+
 end
 
