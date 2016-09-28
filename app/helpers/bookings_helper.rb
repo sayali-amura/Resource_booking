@@ -1,6 +1,6 @@
 module BookingsHelper
 
-def status_normalization(status_code)
+def status_normalization1(status_code)
 	case 
 	when status_code == 0
 		 "Pending"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160921074314) do
+ActiveRecord::Schema.define(version: 20160927091630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20160921074314) do
     t.date     "date_of_booking"
     t.integer  "resource_id"
     t.integer  "slot"
+    t.integer  "company_id"
   end
 
   add_index "bookings", ["employee_id"], name: "index_bookings_on_employee_id", using: :btree
@@ -40,6 +41,9 @@ ActiveRecord::Schema.define(version: 20160921074314) do
     t.float    "start_time"
     t.float    "end_time"
   end
+
+  add_index "companies", ["email"], name: "index_companies_on_email", unique: true, using: :btree
+  add_index "companies", ["phone"], name: "index_companies_on_phone", unique: true, using: :btree
 
   create_table "complaints", force: :cascade do |t|
     t.datetime "created_at",  null: false
@@ -100,8 +104,6 @@ ActiveRecord::Schema.define(version: 20160921074314) do
     t.integer  "company_id"
     t.float    "time_slot"
   end
-
-  add_index "resources", ["name"], name: "index_resources_on_name", unique: true, using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.datetime "created_at",  null: false

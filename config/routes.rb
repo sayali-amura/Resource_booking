@@ -1,18 +1,29 @@
 Rails.application.routes.draw do
 
 
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   # You can have the root of your site routed with "root"
 
 
+  get 'resource_time_slot/:name' , to: 'bookings#resource_time_slot', as: :timeslots
+  get 'booking_date_slots/:resource/date_of_booking=:date_of_booking', to: 'bookings#booking_date_slots', as: :date_slots
   namespace :admin do 
     get 'dashbord' => 'employees#dashbord'
-    resources :employees,:resources
+    post 'change_status' => 'employees#change_status'
+    resources :employees,:resources, :roles
   end
-  resources :bookings, :employees, :complaints
-  devise_for :employees, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register', edit: 'settings' }
-  root "employees#index"
+  resources :bookings, :employees, :complaints, :company
+  devise_for :employees, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register', edit: 'settings' }, controllers: {
+        confirmations: 'employees/confirmations'
+      }
+
+      as :employee do
+      patch '/employee/confirmation' => 'employees/confirmations#update', :via => :patch, :as => :update_employee_confirmation
+  end
+  root "employees#entry"
+  
   # root '/login'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

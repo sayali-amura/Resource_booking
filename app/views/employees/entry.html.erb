@@ -1,0 +1,13 @@
+<%  if @bookings.any?%>
+	<h2>Your Bookings</h2>
+	<%= render "bookings/bookings" %>
+<% else %>
+	<h2>You dont have any bookings</h2>
+<% end %>
+<br><br><hr>
+<%  if @complaints.any?%>
+	<h2>Your Complaints</h2>
+	<%= render "complaints/complaints" %>
+<% else %>
+	<h2>You dont have any complaints</h2>
+<% end %>
