@@ -1,7 +1,8 @@
 class Admin::ResourcesController < ApplicationController
 	#layout "_layout",only: [:edit, :new]
-	before_action :find_resource, only: [:show, :edit, :update]
 
+	before_action :find_resource, only: [:show, :edit, :update]
+	
 	def index
 		@resources = Resource.where(company_id:current_employee.company_id)
 		

@@ -1,11 +1,10 @@
 class Admin::EmployeesController < ApplicationController
 	before_action :find_employee, only: [:show, :edit, :update]
+	before_action :find_company, only: [:index, :create, :dashbord,:change_status]
+	before_action :find_complaints, only: [:index, :dashbord, :change_status]
 	def index
-		@company_id = current_employee.company_id
-		@bookings = Booking.where("date_of_booking >= ?",Date.tomorrow)
-		@bookings = @bookings.where(company_id:@company_id)
-		@complaints = Complaint.where(company_id:@company_id)
-		@employees = Employee.where(company_id:@company_id)
+		@bookings = @company.bookings.where("date_of_booking >= ?",Date.today)
+		@employees = Employee.where(company_id:@company.id)
 		
 	end
 	def new
@@ -13,7 +12,6 @@ class Admin::EmployeesController < ApplicationController
 	end
 
 	def create
-		@company = Company.find(current_employee.company_id)
 		@employee = @company.employees.new(Employee.edited_employee( employee_params,@company ))
 		if @employee.save
 			redirect_to ["admin",@employee]
@@ -39,15 +37,14 @@ class Admin::EmployeesController < ApplicationController
 	end
 	
 	def dashbord
-		@company = current_employee.company_id
-		@bookings = Booking.where(status:0,company_id:@company)
-		@bookings = @bookings.where("date_of_booking >= ?",Date.today)
-		@complaints = Complaint.where(status:0)
+
+		@bookings = @company.bookings.where(status:0).where("date_of_booking >= ?",Date.today) if @company.bookings
+		@complaints = @complaints.where(status:0) if @complaints
 	end
 	
 	def change_status
 		if(params[:status])
-			booking = Booking.find(params[:status][:booking_id])
+			booking = @company.bookings.find(params[:status][:booking_id])
 			if params[:status][:status] =="Grant"
 				booking.status = 1
 			elsif params[:status][:status] == "Reject"
@@ -59,7 +56,8 @@ class Admin::EmployeesController < ApplicationController
 			redirect_to :admin_dashbord
 		end
 		if(params[:status_complaint])
-			complaint = Complaint.find(params[:status_complaint][:complaint_id])
+			@complaints = find_complaints
+			complaint = @complaints.find(params[:status_complaint][:complaint_id])
 			if params[:status_complaint][:status] == "Solve"
 				complaint.status = 1
 			end
@@ -76,7 +74,13 @@ class Admin::EmployeesController < ApplicationController
 	def find_employee
 		@employee = current_employee
 	end
-
+	def find_company
+		@company = Company.find(current_employee.company_id)
+	end
+	def find_complaints
+		give_id(current_employee.company_id)
+		@complaints = Complaint.where(resource_id:@id_array)
+	end
  
 end
 
