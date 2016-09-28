@@ -39,7 +39,7 @@ class BookingsController < ApplicationController
 				flash[:success] = "Your booking is done"
 				redirect_to @booking
 			else
-				render new_booking_path
+				render :new
 			end
 	end
 

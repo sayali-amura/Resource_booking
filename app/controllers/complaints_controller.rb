@@ -2,8 +2,8 @@ class ComplaintsController < ApplicationController
   before_action :find_complaint, only: [:show, :edit, :update]
   before_action :list_resources, only: [:new,:edit]
 	def index
-		
-		@complaints = Complaint.where(resource_id:resource_ids(current_employee.company_id))
+		give_id(current_employee.company_id)
+		@complaints = Complaint.where(resource_id:@id_array)
 		
 	end
 	def new

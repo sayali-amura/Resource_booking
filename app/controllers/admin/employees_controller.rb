@@ -2,7 +2,8 @@ class Admin::EmployeesController < ApplicationController
 	before_action :find_employee, only: [:show, :edit, :update]
 	def index
 		@company_id = current_employee.company_id
-		@bookings = Booking.where(company_id:@company_id)
+		@bookings = Booking.where("date_of_booking >= ?",Date.tomorrow)
+		@bookings = @bookings.where(company_id:@company_id)
 		@complaints = Complaint.where(company_id:@company_id)
 		@employees = Employee.where(company_id:@company_id)
 		
@@ -40,6 +41,7 @@ class Admin::EmployeesController < ApplicationController
 	def dashbord
 		@company = current_employee.company_id
 		@bookings = Booking.where(status:0,company_id:@company)
+		@bookings = @bookings.where("date_of_booking >= ?",Date.today)
 		@complaints = Complaint.where(status:0)
 	end
 	
@@ -51,9 +53,10 @@ class Admin::EmployeesController < ApplicationController
 			elsif params[:status][:status] == "Reject"
 				booking.status = 2
 			end
-			if booking.save 
-			redirect_to :admin_dashbord
+			if !booking.save
+				flash[:alert] = "#{booking.errors.full_messages}"
 			end
+			redirect_to :admin_dashbord
 		end
 		if(params[:status_complaint])
 			complaint = Complaint.find(params[:status_complaint][:complaint_id])
