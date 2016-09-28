@@ -53,9 +53,9 @@ RSpec.describe Booking, type: :model do
 			@booking.resource_id = 8999999999
 			expect{@booking}.to raise_error
 		end
-
 	end
 
+	
 
   end
 

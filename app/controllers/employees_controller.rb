@@ -1,8 +1,7 @@
 class EmployeesController < ApplicationController
 
 	before_action :find_employee
-
-		# byebug
+	
 	def index
 		if !employee_signed_in?
 			redirect_to new_employee_session_path
@@ -13,8 +12,6 @@ class EmployeesController < ApplicationController
 			@complaints = @employee.complaints
 		end
 	end
-
-	
 
 	private
 	

@@ -16,6 +16,4 @@ module Admin::ResourcesHelper
 		time_slot_array[slot_id].first
 	end
 
-
-
 end

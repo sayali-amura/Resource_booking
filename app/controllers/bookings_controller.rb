@@ -19,7 +19,6 @@ class BookingsController < ApplicationController
 		end
 	end
 
-
 	def resource_time_slot
 		@resource = @company.resources.find_by_name(params[:name])
 	end
