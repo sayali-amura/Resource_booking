@@ -20,4 +20,11 @@ class ApplicationController < ActionController::Base
     end
     @id_array
   end
+  def admin?
+    find_company
+    print "-----------------hello-----------------------"
+    if current_employee.email != "admin@#{@company.name}.com"
+      redirect_to root_path
+    end
+  end
 end

@@ -2,9 +2,10 @@ class Admin::EmployeesController < ApplicationController
 	before_action :find_employee, only: [:show, :edit, :update]
 	before_action :find_company, only: [:index, :create, :dashbord,:change_status]
 	before_action :find_complaints, only: [:index, :dashbord, :change_status]
+	before_action :admin?
 	def index
 		@bookings = @company.bookings.where("date_of_booking >= ?",Date.today)
-		@employees = Employee.where(company_id:@company.id)
+		@employees = @company.employees
 		
 	end
 	def new
@@ -22,7 +23,6 @@ class Admin::EmployeesController < ApplicationController
 	end 
 
 	def show
-	 
 	end
 
 	def edit
@@ -56,7 +56,6 @@ class Admin::EmployeesController < ApplicationController
 			redirect_to :admin_dashbord
 		end
 		if(params[:status_complaint])
-			@complaints = find_complaints
 			complaint = @complaints.find(params[:status_complaint][:complaint_id])
 			if params[:status_complaint][:status] == "Solve"
 				complaint.status = 1
@@ -81,6 +80,12 @@ class Admin::EmployeesController < ApplicationController
 		give_id(current_employee.company_id)
 		@complaints = Complaint.where(resource_id:@id_array)
 	end
- 
+	def admin?
+		find_company
+		print "-----------------hello-----------------------"
+		if current_employee.email != "admin@#{@company.name}.com"
+			redirect_to root_path
+		end
+ 	end
 end
 

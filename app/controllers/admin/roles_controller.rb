@@ -1,6 +1,7 @@
 class Admin::RolesController < ApplicationController
 	before_action :find_company
 	before_action :find_role, only: [:edit, :show]
+  before_action :admin?
   def index
   end
 

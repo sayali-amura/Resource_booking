@@ -10,6 +10,9 @@
 	<div class="col-md-4">
 	<strong>Count</strong>
 	</div>
+	<div class="col-md-4">
+	<strong>Timeslot</strong>
+	</div>
 </div>
 <div class="col-md-12">
 	<div class="col-md-4">
@@ -18,7 +21,9 @@
 	<div class="col-md-4">
 	<%= @resource.count%>
 	</div>
+	<div class="col-md-4">
+	<%= @resource.time_slot%>
+	</div>
 </div>
-<%= @timeslots = timeslots(@resource)%>
+<!%= @timeslots = timeslots(@resource)%>
 </body>
-<%= link_to "Home", admin_employees_path %>
