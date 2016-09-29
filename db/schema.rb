@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160927091630) do
+ActiveRecord::Schema.define(version: 20160929095125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(version: 20160927091630) do
     t.string   "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.float    "start_time"
-    t.float    "end_time"
+    t.time     "start_time"
+    t.time     "end_time"
   end
 
   add_index "companies", ["email"], name: "index_companies_on_email", unique: true, using: :btree
@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(version: 20160927091630) do
     t.string   "name"
     t.integer  "count"
     t.integer  "company_id"
-    t.float    "time_slot"
+    t.time     "time_slot"
   end
 
   create_table "roles", force: :cascade do |t|

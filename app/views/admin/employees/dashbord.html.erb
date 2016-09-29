@@ -10,6 +10,7 @@ you are admin
 </body>
 </html>
 <b>Pending Bookings</b>
+<div class="row">
 <div class="col-md-12">
 	<div class="col-md-1">
 	<strong>Status</strong>
@@ -36,12 +37,15 @@ you are admin
 	<%= label_tag(:status_reject, "Reject") %>
 	</div>
 	<div class="col-md-2">
-	<strong>Change</strong>	
+	<strong></strong>	
 	</div>
 </div>
-<div class="col-md-12">
+</div>
 	
 <% @bookings.each do |booking|%>
+<div class="row">
+<hr>
+<div class="col-md-12">
 	<div class="col-md-1">
 	<%=status_normalization1(booking.status)%>
 	</div>
@@ -62,21 +66,21 @@ you are admin
 	</div>
 	<%= form_for:status, url:admin_change_status_path do | f |%>
 		<div class="col-md-1">
-
 		<%= f.hidden_field :booking_id,value: booking.id%>
-		<%= f.radio_button(:status,'Grant') %>
+		<%= f.submit "Grant",class: 'btn btn-success'%>
 		</div>
 		<div class="col-md-1">
-		<%= f.radio_button(:status,'Reject') %>
+		<%= f.submit "Reject",class: "btn btn-danger"%>
 		</div>
 		<div class="col-md-2">
-		<%= f.submit "Change status"%>
-		<% end %>
 		</div>
-	
+		<% end %>
+
 		
+</div>	
+</div>	
 <% end %>
-</div>
+
 <br>
 <br>
 <br>
@@ -106,9 +110,12 @@ you are admin
 </div>
 
 
-<div class="col-md-12">
 	
 <% @complaints.each do | complaint |%>
+<div class="row">
+<hr>
+<div class="col-md-12">
+
 	<div class="col-md-2">
 	<%=status_normalization(complaint.status)%>
 	</div>
@@ -123,18 +130,19 @@ you are admin
 	</div>
 <%= form_for:status_complaint, url:admin_change_status_path do | f |%>
 	<div class="col-md-1">
-
+	<%= f.submit "Solve",class: 'btn btn-success'%>
 	<%= f.hidden_field :complaint_id,value: complaint.id%>
-	<%= f.radio_button(:status,'Solve') %>
 	</div>
 	<div class="col-md-2">
-	<%= f.submit "Change status"%>
-	<% end %>
+	
 	</div>
+	<% end %>
+	
 	<div class="col-md-2">
 		
 	</div>
 
+</div>
 </div>
 <% end %>
 

@@ -4,14 +4,14 @@ class Ability
   def initialize(employee)
     # Define abilities for the passed in user here. For example:
     #
-    alias_action :create, :read, :update, :destroy, :to => :crud
+   # alias_action :create, :read, :update, :destroy, :to => :crud
 
       employee ||= Employee.new # guest user (not logged in)
       @company =employee.company
       admin_role_id = @company.roles.find_by_designation("Admin").id
       if employee.role_id == admin_role_id
         can :manage, [Employee,Resource,Role]
-        can [:read,:change_status], [Booking,Complaint]
+        can [:read,:change_status,:destroy], [Booking,Complaint]
       else
         can :manage, [Booking,Complaint] 
         cannot :change_status, [Booking,Complaint]
@@ -38,3 +38,4 @@ class Ability
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
   end
 end
+#7507897864

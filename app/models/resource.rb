@@ -11,16 +11,28 @@ class Resource < ActiveRecord::Base
 
 
 	def timeslots
-		company = self.company
-		start_time = company.start_time
-		end_time = company.end_time
-		company_duration = end_time - start_time
-		no_of_slots = ( company_duration / self.time_slot ).to_i
-		time_slot_array =Array.new
-		no_of_slots.times do | index |
-			time_slot_array << ["#{index+start_time}-#{index+start_time+self.time_slot}", index]
+		if (self != nil)
+			company = self.company
+			start_time = company.start_time
+			end_time = company.end_time
+			#byebug
+			company_duration = (( end_time - start_time )/60).round(2)
+			no_of_slots = ( company_duration / (self.time_slot.hour*60 + self.time_slot.min) ).to_i
+			time_slot_array =Array.new
+			remember_hour = start_time.hour.round
+			remember_min = start_time.min
+			#byebug
+			no_of_slots.times do | index |
+				p "-------------------------#{time_slot_array}----------------------------------"
+				time_slot_array << ["#{remember_hour}:#{remember_min}-#{((remember_min + self.time_slot.min)/60 )+remember_hour+self.time_slot.hour}:#{(remember_min + self.time_slot.min) % 60}", index]
+				#byebug
+				remember_hour = ((remember_min + self.time_slot.min)/60 )+remember_hour+self.time_slot.hour
+				remember_min = (remember_min + self.time_slot.min) % 60
+				#byebug
+			end
+			time_slot_array
 		end
-		time_slot_array
+		#byebug
 	end
 
 	def available_time_slot date_of_booking

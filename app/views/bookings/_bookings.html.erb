@@ -20,14 +20,14 @@
 			<strong>Status</strong>
 			</div>
 			<div class="col-md-2">
-			
 			</div>
 		</div>
 </div>
 <hr>
+<% @bookings.each do |booking|%>
 <div class="row">
+<hr>
 		<div class="col-md-12">
-			<% @bookings.each do |booking|%>
 				<div class="col-md-1">
 					<%=booking.comment%>
 				</div>
@@ -38,6 +38,7 @@
 					<%=booking.date_of_booking.to_formatted_s(:long)%>
 				</div>
 				<div class="col-md-2">
+					<%byebug%>
 					<%=show_slot_time(booking.resource_id,booking.slot)%>
 				</div>
 				<div class="col-md-2">
@@ -47,24 +48,25 @@
 					<%=status_normalization1(booking.status)%>
 				</div>
 				
-					<% if booking.employee_id == current_employee.id %>
+					<% if booking.employee_id == current_employee.id and booking.status!= 1 %>
 						<div class="col-md-1">
-							<%= link_to "Delete", [booking],method: "delete" %>
+							<%= button_to "Delete", [booking],method: "delete",:class =>"btn btn-danger" %>
 						</div>	
 						<% if booking.status == 0 %>
 							<div class="col-md-1">
-							<%= link_to "Edit",[:edit, booking] %>
+							<%= button_to "Edit",[:edit, booking],:class =>"btn btn-info"%>
 							</div>
 						<% else %>
 							<div class="col-md-1">
-						.
+						
 							</div>
 						<% end %>	
 					<% else %>
 						<div class="col-md-2">
-						.
+						
 						</div>
 					<% end %> <! end for checking employee id>
+			</div>
+</div>
+
 			<% end %>
-		</div>
-	</div>
