@@ -12,7 +12,8 @@ class Admin::ResourcesController < ApplicationController
 		@resource = Resource.new
 	end
 	def create
-		@resource = @company.resources.build(resource_params)
+		
+		@resource = @company.resources.new(resource_params)
 		if @resource.save
 			redirect_to ["admin",@resource] 
 		else 
@@ -33,8 +34,7 @@ class Admin::ResourcesController < ApplicationController
 		end
 	end
 	def destroy
-		@company.resources.destroy(params[:id])
-		@company.bookings.where(resource_id:params[:id]).destroy_all
+		Resource.destroy(params[:id])
 		redirect_to admin_dashbord_path
 	end
 	private

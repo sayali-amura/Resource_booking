@@ -47,29 +47,26 @@ class Admin::EmployeesController < ApplicationController
 	def change_status
 		if(params[:status])
 			booking = @company.bookings.find(params[:status][:booking_id])
-			if params[:commit]=="Grant"
+			if params[:status][:status] =="Grant"
 				booking.status = 1
-			elsif params[:commit]== "Reject"
+			elsif params[:status][:status] == "Reject"
 				booking.status = 2
 			end
 			if !booking.save
 				flash[:alert] = "#{booking.errors.full_messages}"
-			else
-			redirect_to :admin_dashbord
 			end
+			redirect_to :admin_dashbord
 		end
 		if(params[:status_complaint])
 			complaint = @complaints.find(params[:status_complaint][:complaint_id])
-			if params[:commit] == "Solve"
+			if params[:status_complaint][:status] == "Solve"
 				complaint.status = 1
 			end
-			if !complaint.save
-				flash[:alert] = "#{booking.errors.full_messages}"
-			else
+			if complaint.save
 			redirect_to :admin_dashbord
-			end
 		end
-		#redirect_to :admin_dashbord
+		end
+		
 	end
 	private
 	def employee_params

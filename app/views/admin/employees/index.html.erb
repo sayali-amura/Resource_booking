@@ -1,56 +1,45 @@
 <b>Employees</b>
-<div class="row">
-	<hr>
-	<div class="col-md-14">
-		<div class="col-md-2">
-		<strong>Name</strong>
-		</div>
-		<div class="col-md-2">
-		<strong>Email</strong>
-		</div>
-		<div class="col-md-2">
-		<strong>Date of Joining</strong>
-		</div>
-		<div class="col-md-1">
-		<strong>Role Id</strong>
-		</div>
-		<div class="col-md-1">
-		<strong>Manager Id</strong>
-		</div>
-		<div class="col-md-2">
-		<strong>Edit Link</strong>
-		</div>
-		<div class="col-md-2">
-		</div>
+<div class="col-md-14">
+	<div class="col-md-2">
+	<strong>Name</strong>
+	</div>
+	<div class="col-md-2">
+	<strong>Email</strong>
+	</div>
+	<div class="col-md-2">
+	<strong>Date of Joining</strong>
+	</div>
+	<div class="col-md-2">
+	<strong>Role Id</strong>
+	</div>
+	<div class="col-md-2">
+	<strong>Manager Id</strong>
+	</div>
+	<div class="col-md-2">
+	<strong>Edit Link</strong>
 	</div>
 </div>
-
+<div class="col-md-14">
 <% @employees.each do |employee|%>
-<div class="row">
-	<hr>
-	<div class="col-md-14">
-		<div class="col-md-2">
-			<%=employee.name%>
-		</div>
-		<div class="col-md-2">
-			<%=employee.email%>
-		</div>
-		<div class="col-md-2">
-			<%=employee.date_of_joining%>
-		</div>
-		<div class="col-md-1">
-			<%=employee.role_id%>
-		</div>
-		<div class="col-md-1">
-			<%=employee.manager_id%>
-		</div>
-		<div class="col-md-2">
-			<%= button_to "Edit Details", edit_admin_employee_path(employee), :method => "get",:class => "btn btn-info" %>
-		</div>
-		<div class="col-md-4">
-		</div>
+<div class="col-md-2">
+	<%=employee.name%>
 	</div>
+	<div class="col-md-2">
+<%=employee.email%>
+</div>
+<div class="col-md-2">
+<%=employee.date_of_joining%>
+</div>
+<div class="col-md-2">
+<%=employee.role_id%>
+</div>
+<div class="col-md-2">
+<%=employee.manager_id%>
+</div>
+<div class="col-md-2">
+<%= link_to 'edit details', edit_admin_employee_path(employee) %>
 </div>
 <% end %>
-	
+</div>
+
 </body>
