@@ -1,8 +1,10 @@
 class ComplaintsController < ApplicationController
   before_action :find_complaint, only: [:show, :edit, :update]
   before_action :list_resources, only: [:new,:edit]
+  load_and_authorize_resource :complaint
 	def index
-		@complaints = Complaint.all
+		give_id(current_employee.company_id)
+		@complaints = Complaint.where(resource_id:@id_array)
 		
 	end
 	def new
@@ -34,6 +36,10 @@ class ComplaintsController < ApplicationController
 			render :edit
 		end
 	end
+	def destroy
+		Complaint.destroy(params[:id])
+		redirect_to complaints_path
+	end
 	private
 	def complaint_params
 		params.require(:complaint).permit(:comment, :resource_id, :employee_id)
@@ -44,5 +50,5 @@ class ComplaintsController < ApplicationController
 	end
 	def list_resources
 		@resources = Resource.all
-		end
+	end
 end

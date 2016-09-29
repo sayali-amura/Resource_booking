@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160926101921) do
+ActiveRecord::Schema.define(version: 20160927091630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,8 +104,6 @@ ActiveRecord::Schema.define(version: 20160926101921) do
     t.integer  "company_id"
     t.float    "time_slot"
   end
-
-  add_index "resources", ["name"], name: "index_resources_on_name", unique: true, using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.datetime "created_at",  null: false

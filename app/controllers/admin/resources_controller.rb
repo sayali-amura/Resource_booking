@@ -1,10 +1,15 @@
 class Admin::ResourcesController < ApplicationController
 	#layout "_layout",only: [:edit, :new]
-	before_action :find_company,:verify_user
+# <<<<<<< HEAD
+# 	before_action :find_company,:verify_user
+# =======
+	before_action :find_company, only: [:create]
+# >>>>>>> 2e4f78022a72264c35ba1536919638fa55eb1d4d
 	before_action :find_resource, only: [:show, :edit, :update]
-
+	#before_action :admin?
+	load_and_authorize_resource :resource
 	def index
-		@resources = Resource.all
+		@resources = Resource.where(company_id:current_employee.company_id)
 		
 	end
 
@@ -13,7 +18,7 @@ class Admin::ResourcesController < ApplicationController
 	end
 	
 	def create
-		@company = current_employee.company
+		
 		@resource = @company.resources.new(resource_params)
 		if @resource.save
 			redirect_to ["admin",@resource] 
@@ -37,11 +42,22 @@ class Admin::ResourcesController < ApplicationController
 			render :edit
 		end
 	end
+	def destroy
+		Resource.destroy(params[:id])
+		redirect_to admin_dashbord_path
+	end
 	private
 	def resource_params
 		params.require(:resource).permit(:name, :count, :company_id,:time_slot)
 	end
+	def find_company
+		@company = Company.find(current_employee.company_id)
+	end
 	def find_resource
+<<<<<<< HEAD
+=======
+		find_company
+>>>>>>> 2e4f78022a72264c35ba1536919638fa55eb1d4d
 		@resource = @company.resources.find(params[:id])
 	end
 

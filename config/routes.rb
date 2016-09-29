@@ -14,12 +14,15 @@ Rails.application.routes.draw do
     post 'change_status' => 'employees#change_status'
     resources :employees,:resources, :roles
   end
-  resources  :employees, :complaints, :company
+  resources :bookings, :employees, :complaints, :company
+  devise_for :employees, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register', edit: 'settings' }, controllers: {
+        confirmations: 'employees/confirmations'
+      }
 
-resources :bookings 
-
-  devise_for :employees, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register', edit: 'settings' }
-  root "employees#index"
+      as :employee do
+      patch '/employee/confirmation' => 'employees/confirmations#update', :via => :patch, :as => :update_employee_confirmation
+  end
+  root "employees#entry"
   
   # root '/login'
   # Example of regular route:

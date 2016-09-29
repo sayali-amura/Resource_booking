@@ -8,7 +8,16 @@ class Booking < ActiveRecord::Base
 	validates :slot,:date_of_booking,:comment , presence: true
 	validates :priority ,inclusion: {in:[0,1,2]}	
 
+# <<<<<<< HEAD
 	validate :is_slot_alloted?,:slot_valid?, :is_date_valid?,:check_holiday?
+# =======
+# 	before_create :is_slot_alloted?, :slot_valid?, :is_resource_valid?, :is_date_valid?,:check_holiday?
+# 	#validate :is_resource_available?, on: :index
+
+# 	before_save :add_company_id
+# 	before_validation 	:ensure_date_has_value
+
+# >>>>>>> 2e4f78022a72264c35ba1536919638fa55eb1d4d
 
 	# before_save :add_company_id
 	before_validation 	:ensure_date_has_value,:add_company_id, :ensure_is_resource_valid

@@ -6,6 +6,8 @@ class Resource < ActiveRecord::Base
 	has_many :complaints
 	validates :count, numericality: { only_integer: true, greater_than: 0 }
 	validates :name, :count, presence: true
+	validates :name, uniqueness: { scope: :company_id,
+    message: "should have one per company" }
 
 
 	def timeslots
@@ -21,8 +23,6 @@ class Resource < ActiveRecord::Base
 		time_slot_array
 	end
 
-
-
 	def available_time_slot date_of_booking
 		resource_slot = self.timeslots
 		if self.bookings.where(date_of_booking:date_of_booking)
@@ -33,7 +33,4 @@ class Resource < ActiveRecord::Base
 		end
 		resource_slot
 	end
-
-
-
 end

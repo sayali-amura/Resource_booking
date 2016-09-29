@@ -1,5 +1,6 @@
 module Admin::ResourcesHelper
 
+
 	def check_avability resource
 		time_slot_array = resource.timeslots
 		days_booking =	Booking.where("created_at >= ? and created_at<=?", Time.zone.now.beginning_of_day,Time.zone.now.end_of_day)
@@ -10,10 +11,6 @@ module Admin::ResourcesHelper
 		time_slot_array
 	end
 
-	def show_slot_time resource_id,slot_id
-		resource = Resource.find(resource_id)
-		time_slot_array =	resource.timeslots
-		time_slot_array[slot_id].first
-	end
+	
 
 end

@@ -2,9 +2,8 @@ class BookingsController < ApplicationController
 
 	before_action :find_company, :verify_user
 	skip_before_action :verify_user , only: [:index, :show]
-
+	load_and_authorize_resource :booking
 	def index
-
 		if @company.is_resource_available?
 			@bookings = @company.bookings
 		end
@@ -27,7 +26,6 @@ class BookingsController < ApplicationController
 		resource = @company.resources.find_by_name(params[:resource])
 		@slot_array = resource.available_time_slot params[:date_of_booking]
 	end
-
 	def edit
 		@booking = Booking.find(params[:id])
 	end

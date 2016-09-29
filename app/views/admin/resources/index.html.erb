@@ -1,32 +1,48 @@
 
+<h4><%= current_employee.inspect%></h4>
+<%= session["warden.user.employee.key"][0][0] %>
+
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-th {
-    text-align: left;
-}
-<%=@timeslots%>
-</style>
+<title>Resources</title>
 </head>
 <body>
-<b>Resources</b>
-<table cellpadding="10"><tr>
-<td><strong>Name</strong></td>
-<td><strong>Count</strong></td>
-<td><strong>Update link</strong></td>
-</tr>
-
+<div class="col-md-12">
+	<div class="col-md-4">
+	<strong>Name</strong>
+	</div>
+	<div class="col-md-2">
+	<strong>Count</strong>
+	</div>
+	<div class="col-md-2">
+	<strong>TimeSlot</strong>
+	</div>
+	<div class="col-md-2">
+	<strong>Update</strong>
+	</div>
+	<div class="col-md-2">
+	<strong>Delete</strong>
+	</div>
+</div>
 <% @resources.each do |resource|%>
-<tr>
-<td><%=resource.name%></td>
-<td><%=resource.count%></td>
-<td><%= link_to 'Update Resource',edit_admin_resource_path(resource)%></td>
-</tr>
+<div class="col-md-12">
+	<div class="col-md-4">
+	<%= resource.name%></td>
+	</div>
+	<div class="col-md-2">
+	<%= resource.count%>
+	</div>
+	<div class="col-md-2">
+	<%= resource.time_slot%>
+	</div>
+	<div class="col-md-2">
+	<%= link_to 'Update Resource',edit_admin_resource_path(resource)%>
+	</div>
+	<div class="col-md-2">
+	<%= link_to 'Delete Resource',admin_resource_path(resource),method:"delete"%>
+	</div>
+	
+</div>
 <% end %>
-</table>
 </body>

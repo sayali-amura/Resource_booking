@@ -1,12 +1,23 @@
 class EmployeesController < ApplicationController
 
 	before_action :find_employee
+# <<<<<<< HEAD
 	
-	def index
+# 	def index
+# =======
+	load_and_authorize_resource :employee
+	#load_and_authorize_resource :complaint
+	skip_authorize_resource :only => :index
+
+		# byebug
+	def entry
+		@company =current_employee.company
+      	admin_role_id = @company.roles.find_by_designation("Admin").id
+# >>>>>>> 2e4f78022a72264c35ba1536919638fa55eb1d4d
 		if !employee_signed_in?
 			redirect_to new_employee_session_path
-		elsif current_employee.role_id == 0
-			redirect_to admin_employees_path
+		elsif current_employee.role_id == admin_role_id 
+			redirect_to admin_dashbord_path
 		else
 			@bookings = @employee.bookings
 			@complaints = @employee.complaints
