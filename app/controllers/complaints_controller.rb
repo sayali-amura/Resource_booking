@@ -9,8 +9,6 @@ class ComplaintsController < ApplicationController
 	end
 	def new
 		@complaint = Complaint.new
-
-
 	end
 	def create
 		complaint_param = complaint_params

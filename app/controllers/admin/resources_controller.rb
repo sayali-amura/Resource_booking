@@ -54,10 +54,10 @@ class Admin::ResourcesController < ApplicationController
 		@company = Company.find(current_employee.company_id)
 	end
 	def find_resource
-<<<<<<< HEAD
-=======
+# <<<<<<< HEAD
+# =======
 		find_company
->>>>>>> 2e4f78022a72264c35ba1536919638fa55eb1d4d
+# >>>>>>> 2e4f78022a72264c35ba1536919638fa55eb1d4d
 		@resource = @company.resources.find(params[:id])
 	end
 

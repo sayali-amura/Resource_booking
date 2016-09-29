@@ -18,7 +18,7 @@ class Admin::RolesController < ApplicationController
   		render :new
   	end
   end
-
+  
   def show
   	
   end

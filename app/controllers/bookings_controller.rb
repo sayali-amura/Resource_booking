@@ -70,7 +70,6 @@ class BookingsController < ApplicationController
 	end
 	
 	def find_company
-		# byebug
 		if employee_signed_in? 
 			@company = current_employee.company
 		else

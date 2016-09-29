@@ -6,6 +6,7 @@ gem 'rails', '4.2.6'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'devise'
 gem 'simple_form'
+# gem 'rubocop', '~> 0.43.0', require: false
 
 gem 'cancan'
 
@@ -40,10 +41,10 @@ gem 'pg'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-	gem 'rspec-rails', '~> 3.5'
+  gem 'rspec-rails', '~> 3.5'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   # gem 'byebug'
-  
+
 end
 
 group :development do
@@ -52,7 +53,6 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-   gem 'byebug'
+  gem 'byebug'
   gem 'pry'
 end
-
