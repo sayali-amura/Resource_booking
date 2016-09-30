@@ -8,6 +8,7 @@ class Employee < ActiveRecord::Base
     message: "email format" }, uniqueness: true
     validates :name,:email, presence: true
     before_save :lower_email
+  validates :role_id, :manager_id, numericality: { only_integer: true }
 	
   devise :database_authenticatable, :registerable,:recoverable, :rememberable, :trackable, :validatable, :confirmable
 
