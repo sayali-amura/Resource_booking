@@ -24,12 +24,12 @@ class BookingsController < ApplicationController
 		@slot_array = resource.available_time_slot params[:date_of_booking]
 	end
 	def edit
-		@booking = Booking.find(params[:id])
+		@booking = @company.bookings.find(params[:id])
 	end
 
 	def create
 		begin
-			@booking = current_employee.bookings.new(booking_params)
+			@booking = current_employee.bookings.build(booking_params)
 			if  @booking.save
 				flash[:success] = "Your booking is done"
 				redirect_to @booking
@@ -42,11 +42,11 @@ class BookingsController < ApplicationController
 	end
 
 	def show
-		@booking = Booking.find(params[:id])
+		@booking = @company.bookings.find(params[:id])
 	end
 
 	def update
-		@booking = Booking.find(params[:id])
+		@booking = @company.bookings.find(params[:id])
 		if @booking.update_attributes(booking_params)
 			flash[:success] = "Your booking is successfully updated"
 			redirect_to @booking
@@ -56,7 +56,7 @@ class BookingsController < ApplicationController
 	end
 
 	def destroy
-		Booking.destroy(params[:id])
+		@company.bookings.destroy(params[:id])
 		redirect_to bookings_path
 	end
 
