@@ -5,9 +5,16 @@ class Resource < ActiveRecord::Base
 	has_many :bookings
 	has_many :complaints
 	validates :count, numericality: { only_integer: true, greater_than: 0 }
-	validates :name, :count, presence: {message: "name should be present"}
+	validates :name, :count,:time_slot presence: true
 	validates :name, uniqueness: { scope: :company_id,  message: "should have one per company" }
+	# validate :valid_slot?
 
+
+	private 
+
+	# def valid_slot?
+	# 	self.time_slot
+	# end
 
 	def timeslots
 		if (self != nil)
@@ -31,7 +38,6 @@ class Resource < ActiveRecord::Base
 			end
 			time_slot_array
 		end
-		#byebug
 	end
 
 	def available_time_slot date_of_booking
