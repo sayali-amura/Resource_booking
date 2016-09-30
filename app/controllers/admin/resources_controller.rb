@@ -18,7 +18,7 @@ class Admin::ResourcesController < ApplicationController
 		@resource = @company.resources.build(resource_params)
 		# @company.resources.build(resource_params)
 		if @resource.save
-			flash[:success] << "Resource is successfully created."
+			flash[:success] = "Resource is successfully created."
 			redirect_to ["admin",@resource] 
 		else
 			render :new
@@ -32,7 +32,7 @@ class Admin::ResourcesController < ApplicationController
 
 	def update
 		if @resource.update(resource_params)
-			flash[:success] << "Resource is successfully updated."
+			flash[:success] = "Resource is successfully updated."
 			redirect_to ["admin",@resource]
 		else
 			render :edit
@@ -44,17 +44,17 @@ class Admin::ResourcesController < ApplicationController
 		if @resource.destroy
 			if @company.bookings.where(resource_id:params[:id]).destroy_all 
 				if @company.complaints.where(resource_id:params[:id]).destroy_all 
-					flash[:success] << "Resource, complaints and bookings are destroyed."
+					flash[:success] = "Resource, complaints and bookings are destroyed."
 					redirect_to admin_dashbord_path
 				else
-					flash[:error]<<"Error while deleting complaints"
+					flash[:error] = "Error while deleting complaints"
 				end
 			else
-				flash[:error] << "Error while deleting bookings"
+				flash[:error] = "Error while deleting bookings"
 			end
 
 		else
-			flash[:error] << "Error while deleting resource"
+			flash[:error] = "Error while deleting resource"
 		end
 		redirect_to request.referer
 	end
