@@ -6,6 +6,9 @@ class Booking < ActiveRecord::Base
 	belongs_to :company
 	has_many	:messages, as: :property
 
+	before_create :is_slot_alloted?, :slot_valid?, :is_resource_valid?, :is_date_valid?,:check_holiday?
+	before_validation 	:ensure_date_has_value,:add_company_id, :ensure_is_resource_valid
+
 
 	validates :slot,:date_of_booking,:comment , presence: true
 	validates :priority ,inclusion: {in:[0,1,2]}	
@@ -15,8 +18,7 @@ class Booking < ActiveRecord::Base
 
 
 	# before_save :add_company_id
-	before_validation 	:ensure_date_has_value,:add_company_id, :ensure_is_resource_valid
-
+	
 	protected
 
 	def is_date_valid?
@@ -36,7 +38,10 @@ class Booking < ActiveRecord::Base
 			if self.new_record?
 				days_booking = self.company.bookings.where(date_of_booking: self.date_of_booking)
 			else
+<<<<<<< HEAD
 				# byebug
+=======
+>>>>>>> c2c41e314988f9bfa7686e017b2aa6d4d14e1906
 				days_booking = self.company.bookings.where(date_of_booking: self.date_of_booking).where.not(id: self.id)
 			end
 			# binding.pry
@@ -62,8 +67,13 @@ class Booking < ActiveRecord::Base
 		true
 	end
 
+<<<<<<< HEAD
 	def ensure_is_resource_valid
 		unless self.company.resources.find_by_id(self.resource_id)  
+=======
+	def is_resource_valid?
+		unless (self.company.resources.find(self.resource_id))
+>>>>>>> c2c41e314988f9bfa7686e017b2aa6d4d14e1906
 			self.errors[:resource_not_present] << "Requested resource is not available."
 			raise "resource is not valid"
 		end

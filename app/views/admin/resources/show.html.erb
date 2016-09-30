@@ -8,7 +8,7 @@
 	<strong>Name</strong>
 	</div>
 	<div class="col-md-4">
-	<strong>Timeslot</strong>
+	<strong>Alloted Time Slot</strong>
 	</div>
 </div>
 <div class="col-md-12">
@@ -16,9 +16,11 @@
 	<%= @resource.name%></td>
 	</div>
 	<div class="col-md-4">
-	<%= @resource.time_slot.hour%>:<%= @resource.time_slot.min%><%if @resource.time_slot.min==0 %>0<%end%>
-
+	<%= @resource.count%>
+	</div>
+	<div class="col-md-4">
+	<%= humanize @resource%>
 	</div>
 </div>
-<!%= @timeslots = timeslots(@resource)%>
+
 </body>

@@ -1,7 +1,7 @@
 class Admin::RolesController < ApplicationController
 	before_action :find_company
 	before_action :find_role, only: [:edit, :show]
-  #before_action :admin?
+
   load_and_authorize_resource :role
   def index
     @roles = @company.roles
