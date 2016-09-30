@@ -5,6 +5,7 @@ class Resource < ActiveRecord::Base
 	has_many :bookings
 	has_many :complaints
 	#validates :count, numericality: { only_integer: true, greater_than: 0 }
+	validates :time_slot, presence:true
 	validates :name, presence: {message: "name should be present"}
 	validates :name, uniqueness: { scope: :company_id,  message: "should have one per company" }
 
@@ -23,7 +24,11 @@ class Resource < ActiveRecord::Base
 			#byebug
 			no_of_slots.times do | index |
 				p "-------------------------#{time_slot_array}----------------------------------"
-				time_slot_array << ["#{remember_hour}:#{remember_min}-#{((remember_min + self.time_slot.min)/60 )+remember_hour+self.time_slot.hour}:#{(remember_min + self.time_slot.min) % 60}", index]
+				a = remember_hour == 0 ? "00" : remember_hour
+				b = remember_min == 0 ? "00" : remember_min
+				c = ((remember_min + self.time_slot.min)/60 )+remember_hour+self.time_slot.hour == 0 ? "00" :((remember_min + self.time_slot.min)/60 )+remember_hour+self.time_slot.hour
+				d = (remember_min + self.time_slot.min) % 60 == 0 ? "00" : (remember_min + self.time_slot.min) % 60
+				time_slot_array << ["#{a}:#{b}-#{c}:#{d}", index]
 				#byebug
 				remember_hour = ((remember_min + self.time_slot.min)/60 )+remember_hour+self.time_slot.hour
 				remember_min = (remember_min + self.time_slot.min) % 60
