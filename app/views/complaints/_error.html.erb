@@ -1,17 +1,16 @@
 <div class="row">
 <div class="col-md-6 col-md-offset-3">
-<% if @resource.errors.any? %>
+<% if @complaint.errors.any? %>
 <div id="error_explanation">
 <div class="alert alert-danger">
-The form contains <%= pluralize(@resource.errors.count, "error") %>.
+The form contains <%= pluralize(@complaint.errors.count, "error") %>.
 </div>
 <ul>
-<% @resource.errors.full_messages.each do |msg| %>
+<% @complaint.errors.full_messages.each do |msg| %>
 <li><%= msg %></li>
 <% end %>
 </ul>
 </div>
 <% end %>
-
 </div>
 </div>
