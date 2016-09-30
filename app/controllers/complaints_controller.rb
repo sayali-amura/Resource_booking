@@ -6,22 +6,27 @@ class ComplaintsController < ApplicationController
 	def index
 		# give_id(current_employee.company_id)
 		# @complaints = @company.complaints.where(resource_id:@id_array)
-		@complaints = @company.complaints		
+		if @company.resources.any?
+			@complaints = @company.complaints		
+		end
 	end
 	def new
-		@complaint = @company.complaints.build
+		if @company.resources.any?
+			@complaint = @company.complaints.build
+		end
 	end
 	def create
-		complaint_param = complaint_params
-		complaint_param[:status] = 0
+		if @company.resources.any?
+			complaint_param = complaint_params
+			complaint_param[:status] = 0
 
-		#add employee id to complaint_param after devise setup
-		complaint_param[:employee_id] = current_employee.id
-		@complaint = @company.complaints.build(complaint_param)
-		if @complaint.save
-			redirect_to @complaint 
-		else 
-			render :new
+			complaint_param[:employee_id] = current_employee.id
+			@complaint = @company.complaints.build(complaint_param)
+			if @complaint.save
+				redirect_to @complaint 
+			else 
+				render :new
+			end
 		end
 	end
 	def show
@@ -50,11 +55,13 @@ class ComplaintsController < ApplicationController
 	end
 
 	def find_complaint
+		# find_company
 		@complaint = @company.complaints.find(params[:id])
 		# @resources = Resource.all
 	end
 
 	def list_resources
+		# find_company
 		@resources = @company.resources
 	end
 end
