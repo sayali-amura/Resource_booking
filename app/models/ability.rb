@@ -6,6 +6,7 @@ class Ability
     #
    # alias_action :create, :read, :update, :destroy, :to => :crud
 
+      # byebug
       employee ||= Employee.new # guest user (not logged in)
       @company =employee.company
       admin_role_id = @company.roles.find_by_designation("Admin").id
