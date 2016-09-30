@@ -1,1 +1,5 @@
-<%= render "form" %>
+<% if @company.resources.any?%> 
+	<%= render "form" %>
+<% else %>
+<h4 align="center">Resources are not available in your company.</h4>
+<% end %>

@@ -34,8 +34,11 @@
 	def show
 		@company = Company.find(params[:id])
 	end
+
 	private
+
 	def company_params
 		params.require(:company).permit(:name,:email,:phone,:start_time,:end_time)
 	end
+
 end

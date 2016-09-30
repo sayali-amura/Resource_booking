@@ -1,51 +1,74 @@
 class Admin::ResourcesController < ApplicationController
 	#layout "_layout",only: [:edit, :new]
-	before_action :find_company, only: [:create]
-	before_action :find_resource, only: [:show, :edit, :update]
+	before_action :find_company
+	before_action :find_resource, only: [:show, :edit, :update, :destroy]
 	#before_action :admin?
 	load_and_authorize_resource :resource
 	def index
-		@resources = Resource.where(company_id:current_employee.company_id)
-		
+		@resources = @company.resources
 	end
+
 	def new
-		@resource = Resource.new
+		@resource = @company.resources.build
 	end
+	
 	def create
 		@resource = @company.resources.build(resource_params)
+		# @company.resources.build(resource_params)
 		if @resource.save
+			flash[:success] << "Resource is successfully created."
 			redirect_to ["admin",@resource] 
-		else 
+		else
 			render :new
 		end
 	end
-	def show
-			
-	end
-	def edit
-		
-	end
+	
+	def show; end
+	
+	def edit; 	end
+	
 	def update
 		if @resource.update(resource_params)
+			flash[:success] << "Resource is successfully updated."
 			redirect_to ["admin",@resource]
 		else
 			render :edit
 		end
 	end
+	
 	def destroy
-		@company.resources.destroy(params[:id])
-		@company.bookings.where(resource_id:params[:id]).destroy_all
-		redirect_to admin_dashbord_path
+		# @company.resources.destroy(params[:id])
+		if @resource.destroy
+			if @company.bookings.where(resource_id:params[:id]).destroy_all 
+				if @company.complaints.where(resource_id:params[:id]).destroy_all 
+					flash[:success] << "Resource, complaints and bookings are destroyed."
+					redirect_to admin_dashbord_path
+				else
+					flash[:error]<<"Error while deleting complaints"
+				end
+			else
+				flash[:error] << "Error while deleting bookings"
+			end
+
+		else
+			flash[:error] << "Error while deleting resource"
+		end
+		redirect_to request.referer
 	end
+
 	private
+	
 	def resource_params
 		params.require(:resource).permit(:name, :count, :company_id,:time_slot)
 	end
-	def find_company
-		@company = Company.find(current_employee.company_id)
-	end
+
+	# def find_company
+	# 	@company = Company.find(current_employee.company_id)
+	# end
+	
 	def find_resource
-		find_company
+		# find_company
 		@resource = @company.resources.find(params[:id])
 	end
+
 end
