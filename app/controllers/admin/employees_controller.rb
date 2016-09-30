@@ -36,6 +36,11 @@ class Admin::EmployeesController < ApplicationController
 			render :edit
 		end
 	end
+
+  def destroy
+    @company.employees.destroy(params[:id])
+    redirect_to request.referer
+  end
 	
 	def dashbord
 		if @company.resources.any?
