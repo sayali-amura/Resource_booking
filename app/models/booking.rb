@@ -9,7 +9,6 @@ class Booking < ActiveRecord::Base
 	validates :priority ,inclusion: {in:[0,1,2]}	
 
 	before_create :is_slot_alloted?, :slot_valid?, :is_resource_valid?, :is_date_valid?,:check_holiday?
-	#validate :is_resource_available?, on: :index
 
 	before_save :add_company_id
 	before_validation 	:ensure_date_has_value
@@ -31,11 +30,11 @@ class Booking < ActiveRecord::Base
 	end
 
 	def is_slot_alloted?
-		if Booking.find_by_date_of_booking(self.date_of_booking)
+		if self.company.bookings.find_by_date_of_booking(self.date_of_booking)
 			if self.new_record?
-				days_booking = Booking.where(date_of_booking: self.date_of_booking)
+				days_booking = self.company.bookings.where(date_of_booking: self.date_of_booking)
 			else
-				days_booking = Booking.where(date_of_booking: self.date_of_booking).where.not(id: self.id)
+				days_booking = self.company.bookings.where(date_of_booking: self.date_of_booking).where.not(id: self.id)
 			end
 			days_booking.each do |x|
 				if x.slot == self.slot
@@ -59,7 +58,7 @@ class Booking < ActiveRecord::Base
 	end
 
 	def is_resource_valid?
-		unless (Resource.find(self.resource_id))
+		unless (self.company.resources.find(self.resource_id))
 			self.errors[:resource_not_present] << "Requested resource is not available."
 		end
 	end

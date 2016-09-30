@@ -2,13 +2,10 @@ class Admin::EmployeesController < ApplicationController
 	before_action :find_employee, only: [:show, :edit, :update]
 	before_action :find_company, only: [:index, :create, :dashbord,:change_status]
 	before_action :find_complaints, only: [ :dashbord, :change_status]
-	# before_action :admin?
 	load_and_authorize_resource :employee
 
 	def index
-		# @bookings = @company.bookings.where("date_of_booking >= ?",Date.today)
 		@employees = @company.employees
-		
 	end
 	def new
 		@employee = Employee.new
@@ -19,7 +16,6 @@ class Admin::EmployeesController < ApplicationController
 		if @employee.save
 			redirect_to ["admin",@employee]
 		else
-			# flash[:alert] << "#{@employee.errors.full_messages}"
 			render :new
 		end
 	end 
