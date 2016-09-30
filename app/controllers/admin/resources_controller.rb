@@ -13,8 +13,9 @@ class Admin::ResourcesController < ApplicationController
 	end
 	
 	def create
-		@resource = @company.resources.build(resource_params)
-		if @resource.save
+		# @resource = @company.resources.build(resource_params)
+		@company.resources.build(resource_params)
+		if @company.save
 			flash[:success] << "Resource is successfully created."
 			redirect_to ["admin",@resource] 
 		else
