@@ -12,9 +12,14 @@ class Admin::ResourcesController < ApplicationController
 	end
 	
 	def create
+<<<<<<< HEAD
 		# byebug
 		@resource = @company.resources.build(resource_params)
 		# byebug
+=======
+		
+		@resource = @company.resources.new(resource_params)
+>>>>>>> 74186252a111fe4213bce2efb3f6f85c7927e7a4
 		if @resource.save
 			flash[:success] = "Resource is successfully created."
 			redirect_to ["admin",@resource] 
@@ -54,7 +59,6 @@ class Admin::ResourcesController < ApplicationController
 			flash[:error] = "Error while deleting resource"
 		end
 		redirect_to request.referer
-		
 	end
 
 	private

@@ -2,7 +2,6 @@ class Ability
   include CanCan::Ability
 
   def initialize(employee)
-
       employee ||= Employee.new # guest user (not logged in)
 
       if !employee.new_record?
@@ -17,11 +16,13 @@ class Ability
           can [:read,:index], [Resource]
           can [:entry], [Employee]
         end
-
       else
         can [:entry], [Employee]
       end
 
   end
 end
+<<<<<<< HEAD
 #7507897864
+=======
+>>>>>>> 74186252a111fe4213bce2efb3f6f85c7927e7a4

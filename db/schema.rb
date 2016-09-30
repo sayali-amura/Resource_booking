@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(version: 20160930091642) do
     t.string   "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.time     "start_time"
-    t.time     "end_time"
+    t.float    "start_time"
+    t.float    "end_time"
   end
 
   add_index "companies", ["email"], name: "index_companies_on_email", unique: true, using: :btree
@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(version: 20160930091642) do
     t.datetime "updated_at", null: false
     t.string   "name"
     t.integer  "company_id"
-    t.time     "time_slot"
+    t.float    "time_slot"
   end
 
   create_table "roles", force: :cascade do |t|

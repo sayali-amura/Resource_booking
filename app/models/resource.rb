@@ -18,7 +18,7 @@ class Resource < ActiveRecord::Base
 			remember_hour = start_time.hour.round
 			remember_min = start_time.min
 			no_of_slots.times do | index |
-				p "-------------------------#{time_slot_array}----------------------------------"
+				#p "-------------------------#{time_slot_array}----------------------------------"
 				a = remember_hour == 0 ? "00" : remember_hour
 				b = remember_min == 0 ? "00" : remember_min
 				c = ((remember_min + self.time_slot.min)/60 )+remember_hour+self.time_slot.hour == 0 ? "00" :((remember_min + self.time_slot.min)/60 )+remember_hour+self.time_slot.hour

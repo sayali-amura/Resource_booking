@@ -20,7 +20,7 @@ class Company < ActiveRecord::Base
 	VALID_PHONE_REGEX = /\A\+\d+\z/
 	validates :name,:phone,:start_time,:end_time , presence: true
 	validates :phone ,format: {with: VALID_PHONE_REGEX}
-	#validates :start_time, :end_time, inclusion: {in: 0..23 }
+	validates :start_time, :end_time, inclusion: {in: 0..23 }
 	validates :end_time, presence: true, time: true
 
 	before_save :lower_email
