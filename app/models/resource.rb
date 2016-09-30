@@ -4,8 +4,8 @@ class Resource < ActiveRecord::Base
 	belongs_to :company
 	has_many :bookings
 	has_many :complaints
-	validates :count, numericality: { only_integer: true, greater_than: 0 }
-	validates :name, :count, presence: {message: "name should be present"}
+	#validates :count, numericality: { only_integer: true, greater_than: 0 }
+	validates :name, presence: {message: "name should be present"}
 	validates :name, uniqueness: { scope: :company_id,  message: "should have one per company" }
 
 

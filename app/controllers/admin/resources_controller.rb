@@ -62,7 +62,7 @@ class Admin::ResourcesController < ApplicationController
 	private
 	
 	def resource_params
-		params.require(:resource).permit(:name, :count, :company_id,:time_slot)
+		params.require(:resource).permit(:name, :company_id,:time_slot)
 	end
 
 	# def find_company
