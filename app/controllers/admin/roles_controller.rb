@@ -12,8 +12,8 @@ class Admin::RolesController < ApplicationController
   end
 
   def create
-    @company.roles.build(role_params)
-  	if @company.save
+    @role =  @company.roles.build(role_params)
+  	if @role.save
       flash[:success] = "Role has successfully created"
   		redirect_to ["admin",@role]
   	else
@@ -37,6 +37,7 @@ class Admin::RolesController < ApplicationController
   end
 
   def find_role
+    # find_company
   	@role = @company.roles.find(params[:id])
   end
 

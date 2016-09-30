@@ -1,6 +1,6 @@
 class Admin::ResourcesController < ApplicationController
 	#layout "_layout",only: [:edit, :new]
-	before_action :find_company, only: [:create]
+	before_action :find_company
 	before_action :find_resource, only: [:show, :edit, :update, :destroy]
 	#before_action :admin?
 	load_and_authorize_resource :resource
@@ -13,9 +13,9 @@ class Admin::ResourcesController < ApplicationController
 	end
 	
 	def create
-		# @resource = @company.resources.build(resource_params)
-		@company.resources.build(resource_params)
-		if @company.save
+		@resource = @company.resources.build(resource_params)
+		# @company.resources.build(resource_params)
+		if @resource.save
 			flash[:success] << "Resource is successfully created."
 			redirect_to ["admin",@resource] 
 		else
@@ -39,14 +39,19 @@ class Admin::ResourcesController < ApplicationController
 	def destroy
 		# @company.resources.destroy(params[:id])
 		if @resource.destroy
-			if @company.bookings.where(resource_id:params[:id]).destroy_all
-				flash["success"] << "Resource and bookings are destroyed."
-				redirect_to admin_dashbord_path
+			if @company.bookings.where(resource_id:params[:id]).destroy_all 
+				if @company.complaints.where(resource_id:params[:id]).destroy_all 
+					flash[:success] << "Resource, complaints and bookings are destroyed."
+					redirect_to admin_dashbord_path
+				else
+					flash[:error]<<"Error while deleting complaints"
+				end
 			else
-				flash["error"] << "Error while deleting bookings"
+				flash[:error] << "Error while deleting bookings"
 			end
+
 		else
-			flash["error"] << "Error while deleting resource"
+			flash[:error] << "Error while deleting resource"
 		end
 		redirect_to request.referer
 	end
@@ -62,7 +67,7 @@ class Admin::ResourcesController < ApplicationController
 	# end
 	
 	def find_resource
-		find_company
+		# find_company
 		@resource = @company.resources.find(params[:id])
 	end
 

@@ -15,11 +15,11 @@ class Admin::EmployeesController < ApplicationController
 	end
 
 	def create
-		@employee = @company.employees.build(Employee.edited_employee( employee_params,@company ))
+		@employee = @company.employees.build(Employee.edited_employee( employee_params,@company ) )
 		if @employee.save
 			redirect_to ["admin",@employee]
 		else
-			flash[:alert] = "#{@employee.errors.full_messages}"
+			# flash[:alert] << "#{@employee.errors.full_messages}"
 			render :new
 		end
 	end 
@@ -37,8 +37,10 @@ class Admin::EmployeesController < ApplicationController
 	end
 	
 	def dashbord
-		@bookings = @company.bookings.where(status:0).where("date_of_booking >= ?",Date.today) if @company.bookings
-		@complaints = @complaints.where(status:0) if @complaints
+		if @company.resources.any?
+			@bookings = @company.bookings.where(status:0).where("date_of_booking >= ?",Date.today) if @company.bookings
+			@complaints = @complaints.where(status:0) if @complaints
+		end
 	end
 	
 	def change_status
@@ -81,6 +83,7 @@ class Admin::EmployeesController < ApplicationController
 	def find_complaints
 		# give_id(current_employee.company_id)
 		# @complaints = Complaint.where(resource_id:@id_array)
+		# find_company
 		@complaints = @company.complaints
 	end
 
