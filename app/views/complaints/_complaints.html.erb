@@ -38,7 +38,7 @@
 			</div>	
 			<% if complaint.status == 0 %>
 				<div class="col-md-2">
-				<%= button_to "Edit",[:edit, complaint],:class =>"btn btn-info" %>
+				<%= button_to "Edit",[:edit, complaint],:class =>"btn btn-info", :method => "get" %>
 				</div>
 			<% else %>
 				<div class="col-md-2">

@@ -16,7 +16,8 @@
 	<%= @resource.name%></td>
 	</div>
 	<div class="col-md-4">
-	<%= @resource.time_slot%>
+	<%= @resource.time_slot.hour%>:<%= @resource.time_slot.min%><%if @resource.time_slot.min==0 %>0<%end%>
+
 	</div>
 </div>
 <!%= @timeslots = timeslots(@resource)%>
