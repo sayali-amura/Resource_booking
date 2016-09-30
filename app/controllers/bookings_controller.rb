@@ -1,7 +1,6 @@
 class BookingsController < ApplicationController
 
-	before_action :find_company, :verify_user
-	skip_before_action :verify_user , only: [:index, :show]
+	before_action :find_company
 	load_and_authorize_resource :booking
 	def index
 		if @company.is_resource_available?
@@ -13,8 +12,6 @@ class BookingsController < ApplicationController
 		if @company.is_resource_available?
 			@booking = current_employee.bookings.new
 			@resource = Resource.all
-		else
-			flash[:notice] = "No resources are available in your company"
 		end
 	end
 
@@ -70,20 +67,18 @@ class BookingsController < ApplicationController
 		params.require(:booking).permit(:comment,:slot,:priority, :date_of_booking,:resource_id)
 	end
 	
-	def find_company
-		# byebug
-		if employee_signed_in? 
-			@company = current_employee.company
-		else
-			redirect_to root_path
-		end
-	end
+	# def find_company
+	# 	if employee_signed_in? 
+	# 		@company = current_employee.company
+	# 	end
+	# end
 
-	def verify_user
-		unless current_employee.id == session["warden.user.employee.key"][0][0]
-			flash[:alert] = "You can't access other employees functionalities."
-			redirect_to root_path
-		end
-	end
+	# def verify_user
+	# 	unless current_employee.id == session["warden.user.employee.key"][0][0]
+	# 		flash[:alert] = "You can't access other employees functionalities."
+	# 		# byebug	
+	# 		# redirect_to root_path
+	# 	end
+	# end
 
 end
