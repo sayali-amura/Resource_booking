@@ -34,7 +34,7 @@
 		</div>
 		<% if complaint.employee_id == current_employee.id and complaint.status!=1%>
 			<div class="col-md-2">
-				<%= button_to "Delete", [complaint],method: "delete",:class =>"btn btn-danger" %>
+				<%= button_to "Delete", [complaint],method: "delete",:class =>"btn btn-danger", data: {confirm: "Are you sure?"}  %>
 			</div>	
 			<% if complaint.status == 0 %>
 				<div class="col-md-2">

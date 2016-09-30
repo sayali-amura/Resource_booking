@@ -38,7 +38,7 @@
 	<%= button_to "Update Resource", edit_admin_resource_path(resource), :method => "get",:class => "btn btn-info" %>
 	</div>
 	<div class="col-md-2">
-	<%= button_to "Delete Resource", admin_resource_path(resource),method:"delete",:class => "btn btn-danger" %>
+	<%= button_to "Delete Resource", admin_resource_path(resource),method:"delete",:class => "btn btn-danger", data: {confirm: "Are you sure?"}  %>
 	</div>
 	<div class="col-md-4">
 	</div>
