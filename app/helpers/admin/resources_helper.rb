@@ -25,5 +25,11 @@ module Admin::ResourcesHelper
 	    @id_array
   	end
 
+  	def humanize resource
+  		slot = resource.time_slot
+  		hour = slot.strftime("%H")
+  		minute = slot.strftime("%M")
+  		"#{pluralize(hour.to_i, "Hour")}, #{pluralize(minute.to_i, "Minute")}"
+  	end
 
 end
