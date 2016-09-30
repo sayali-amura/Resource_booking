@@ -1,0 +1,26 @@
+
+<div class="row">
+<hr>
+<div class="col-md-12" align="center">
+	<div class="col-md-2">
+	<strong>Name</strong>
+	</div>
+	<div class="col-md-2">
+	<strong>Department</strong>
+	</div>
+	
+</div>
+</div>
+<% @roles.each do |role|%>
+<div class="row" align="center">
+<hr>
+<div class="col-md-12">
+	<div class="col-md-2">
+		<%= role.designation%></td>
+	</div>
+	<div class="col-md-2">
+		<%= role.department%></td>
+	</div>
+</div>
+</div>
+<% end %>

@@ -1,55 +1,6 @@
 
-
-<!DOCTYPE html>
-<html>
-<head>
-<title>Resources</title>
-</head>
-<body>
-<div class="row">
-<hr>
-<div class="col-md-12">
-	<div class="col-md-2">
-	<strong>Name</strong>
-	</div>
-	<div class="col-md-1">
-	<strong>Count</strong>
-	</div>
-	<div class="col-md-1">
-	<strong>TimeSlot</strong>
-	</div>
-	<div class="col-md-2">
-	<strong>Update</strong>
-	</div>
-	<div class="col-md-2">
-	<strong>Delete</strong>
-	</div>
-	<div class="col-md-4">
-	</div>
-</div>
-</div>
-<% @resources.each do |resource|%>
-<div class="row">
-<hr>
-<div class="col-md-12">
-	<div class="col-md-2">
-	<%= resource.name%></td>
-	</div>
-	<div class="col-md-1">
-	<%= resource.count%>
-	</div>
-	<div class="col-md-1">
-	<%= resource.time_slot%>
-	</div>
-	<div class="col-md-2">
-	<%= button_to "Update Resource", edit_admin_resource_path(resource), :method => "get",:class => "btn btn-info" %>
-	</div>
-	<div class="col-md-2">
-	<%= button_to "Delete Resource", admin_resource_path(resource),method:"delete",:class => "btn btn-danger" %>
-	</div>
-	<div class="col-md-4">
-	</div>
-</div>
-</div>
+<% if @company.resources.any? %>
+<%= render "resources" %>
+<% else %>
+<h2 align="center">No resources are available in your company.</h2>
 <% end %>
-</body>
