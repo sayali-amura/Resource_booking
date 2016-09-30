@@ -1,12 +1,12 @@
 class Admin::EmployeesController < ApplicationController
 	before_action :find_employee, only: [:show, :edit, :update]
 	before_action :find_company, only: [:index, :create, :dashbord,:change_status]
-	before_action :find_complaints, only: [:index, :dashbord, :change_status]
-	before_action :admin?
+	before_action :find_complaints, only: [ :dashbord, :change_status]
+	# before_action :admin?
 	load_and_authorize_resource :employee
 
 	def index
-		@bookings = @company.bookings.where("date_of_booking >= ?",Date.today)
+		# @bookings = @company.bookings.where("date_of_booking >= ?",Date.today)
 		@employees = @company.employees
 		
 	end
@@ -15,7 +15,7 @@ class Admin::EmployeesController < ApplicationController
 	end
 
 	def create
-		@employee = @company.employees.new(Employee.edited_employee( employee_params,@company ))
+		@employee = @company.employees.build(Employee.edited_employee( employee_params,@company ))
 		if @employee.save
 			redirect_to ["admin",@employee]
 		else
@@ -24,11 +24,9 @@ class Admin::EmployeesController < ApplicationController
 		end
 	end 
 
-	def show
-	end
+	def show;	end
 
-	def edit
-	end
+	def edit;	end
 	
 	def update 
 		if @employee.update(employee_params)
@@ -39,7 +37,6 @@ class Admin::EmployeesController < ApplicationController
 	end
 	
 	def dashbord
-
 		@bookings = @company.bookings.where(status:0).where("date_of_booking >= ?",Date.today) if @company.bookings
 		@complaints = @complaints.where(status:0) if @complaints
 	end
@@ -55,7 +52,7 @@ class Admin::EmployeesController < ApplicationController
 			if !booking.save
 				flash[:alert] = "#{booking.errors.full_messages}"
 			else
-			redirect_to :admin_dashbord
+				redirect_to :admin_dashbord
 			end
 		end
 		if(params[:status_complaint])
@@ -75,15 +72,16 @@ class Admin::EmployeesController < ApplicationController
 	def employee_params
 		params.require(:employee).permit(:name, :email,:age, :date_of_joining, :role_id, :manager_id)
 	end
-	def find_employee
-		@employee = current_employee
-	end
-	def find_company
-		@company = Company.find(current_employee.company_id)
-	end
+	# def find_employee
+	# 	@employee = current_employee
+	# end
+	# def find_company
+	# 	@company = Company.find(current_employee.company_id)
+	# end
 	def find_complaints
-		give_id(current_employee.company_id)
-		@complaints = Complaint.where(resource_id:@id_array)
+		# give_id(current_employee.company_id)
+		# @complaints = Complaint.where(resource_id:@id_array)
+		@complaints = @company.complaints
 	end
 
 end
