@@ -11,9 +11,11 @@ class ComplaintsController < ApplicationController
 		end
 	end
 	def new
+
 		if @company.resources.any?
 			@complaint = @company.complaints.build
 		end
+
 	end
 	def create
 		if @company.resources.any?

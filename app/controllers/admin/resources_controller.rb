@@ -1,7 +1,9 @@
 class Admin::ResourcesController < ApplicationController
 	#layout "_layout",only: [:edit, :new]
+
 	before_action :find_company
 	before_action :find_resource, only: [:show, :edit, :update, :destroy]
+
 	#before_action :admin?
 	load_and_authorize_resource :resource
 	def index
@@ -23,10 +25,11 @@ class Admin::ResourcesController < ApplicationController
 		end
 	end
 	
+
 	def show; end
 	
 	def edit; 	end
-	
+
 	def update
 		if @resource.update(resource_params)
 			flash[:success] << "Resource is successfully updated."
@@ -67,8 +70,10 @@ class Admin::ResourcesController < ApplicationController
 	# end
 	
 	def find_resource
+
 		# find_company
 		@resource = @company.resources.find(params[:id])
 	end
 
 end
+

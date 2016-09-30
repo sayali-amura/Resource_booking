@@ -47,7 +47,7 @@ GEM
       sass (>= 3.3.4)
     builder (3.2.2)
     byebug (9.0.5)
-    cancancan (1.15.0)
+    cancan (1.6.10)
     coderay (1.1.1)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -194,7 +194,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass (~> 3.3, >= 3.3.7)
   byebug
-  cancancan (~> 1.10)
+  cancan
   coffee-rails (~> 4.1.0)
   devise
   jbuilder (~> 2.0)

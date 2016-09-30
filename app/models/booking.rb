@@ -8,13 +8,19 @@ class Booking < ActiveRecord::Base
 	validates :slot,:date_of_booking,:comment , presence: true
 	validates :priority ,inclusion: {in:[0,1,2]}	
 
-	before_create :is_slot_alloted?, :slot_valid?, :is_resource_valid?, :is_date_valid?,:check_holiday?
-	#validate :is_resource_available?, on: :index
+# <<<<<<< HEAD
+	validate :is_slot_alloted?,:slot_valid?, :is_date_valid?,:check_holiday?
+# =======
+# 	before_create :is_slot_alloted?, :slot_valid?, :is_resource_valid?, :is_date_valid?,:check_holiday?
+# 	#validate :is_resource_available?, on: :index
 
-	before_save :add_company_id
-	before_validation 	:ensure_date_has_value
+# 	before_save :add_company_id
+# 	before_validation 	:ensure_date_has_value
 
+# >>>>>>> 2e4f78022a72264c35ba1536919638fa55eb1d4d
 
+	# before_save :add_company_id
+	before_validation 	:ensure_date_has_value,:add_company_id, :ensure_is_resource_valid
 
 	protected
 
@@ -31,14 +37,17 @@ class Booking < ActiveRecord::Base
 	end
 
 	def is_slot_alloted?
-		if Booking.find_by_date_of_booking(self.date_of_booking)
+		if self.company.bookings.find_by_date_of_booking(self.date_of_booking)
 			if self.new_record?
-				days_booking = Booking.where(date_of_booking: self.date_of_booking)
+				days_booking = self.company.bookings.where(date_of_booking: self.date_of_booking)
 			else
-				days_booking = Booking.where(date_of_booking: self.date_of_booking).where.not(id: self.id)
+				# byebug
+				days_booking = self.company.bookings.where(date_of_booking: self.date_of_booking).where.not(id: self.id)
 			end
+			# binding.pry
+			# byebug
 			days_booking.each do |x|
-				if x.slot == self.slot
+				unless x.slot != self.slot
 					self.errors[:allocated_slot] << "This slot is already alloted"
 				end
 			end
@@ -46,7 +55,7 @@ class Booking < ActiveRecord::Base
 	end
 
 	def slot_valid? 
-		if self.slot.to_i > self.resource.available_time_slot(self.date_of_booking).length
+		if self.slot.to_i > self.resource.available_time_slot(self.date_of_booking).length || self.slot%1!=0
 			self.errors[:slot_invalid] << "This slot is invalid"
 		end
 	end
@@ -58,9 +67,10 @@ class Booking < ActiveRecord::Base
 		true
 	end
 
-	def is_resource_valid?
-		unless (Resource.find(self.resource_id))
+	def ensure_is_resource_valid
+		unless self.company.resources.find_by_id(self.resource_id)  
 			self.errors[:resource_not_present] << "Requested resource is not available."
+			raise "resource is not valid"
 		end
 	end
 
