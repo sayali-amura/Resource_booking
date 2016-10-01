@@ -4,8 +4,9 @@ class Resource < ActiveRecord::Base
 	belongs_to :company
 	has_many :bookings
 	has_many :complaints
+
 	validates :count, numericality: { only_integer: true, greater_than: 0 }
-	validates :name, :count, presence: {message: "name should be present"}
+	validates :name, :count, :time_slot, presence: {message: "name should be present"}
 	validates :name, uniqueness: { scope: :company_id,  message: "should have one per company" }
 
 
@@ -14,24 +15,19 @@ class Resource < ActiveRecord::Base
 			company = self.company
 			start_time = company.start_time
 			end_time = company.end_time
-			#byebug
 			company_duration = (( end_time - start_time )/60).round(2)
 			no_of_slots = ( company_duration / (self.time_slot.hour*60 + self.time_slot.min) ).to_i
 			time_slot_array =Array.new
 			remember_hour = start_time.hour.round
 			remember_min = start_time.min
-			#byebug
 			no_of_slots.times do | index |
 				p "-------------------------#{time_slot_array}----------------------------------"
 				time_slot_array << ["#{remember_hour}:#{remember_min}-#{((remember_min + self.time_slot.min)/60 )+remember_hour+self.time_slot.hour}:#{(remember_min + self.time_slot.min) % 60}", index]
-				#byebug
 				remember_hour = ((remember_min + self.time_slot.min)/60 )+remember_hour+self.time_slot.hour
 				remember_min = (remember_min + self.time_slot.min) % 60
-				#byebug
 			end
 			time_slot_array
 		end
-		#byebug
 	end
 
 	def available_time_slot date_of_booking
