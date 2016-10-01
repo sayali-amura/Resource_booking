@@ -1,10 +1,12 @@
 <div class="row">
-<div class="col-md-3 col-md-offset-3">
+<div class="col-md-12">
+	
 <%= render "error" %>
+<div class="col-md-6">
 </div>
 </div>
 <div class="row">
-<div class="col-md-3 col-md-offset-3">
+<div class="col-md-6">
 		<%= form_for ['admin', @role] do | f |%>
 		<%=f.label :Designation%>
 		<%=f.text_field :designation , class: "form-control", required: true, placeholder: "Designation of Employee"%>
@@ -15,4 +17,7 @@
 		<%= f.submit 'Create Role', class: "btn btn-primary btn-default"%>
 <% end %>
 </div>
+<%= render "priority" %>
+</div>
+
 </div>
