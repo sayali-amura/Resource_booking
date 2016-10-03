@@ -57,5 +57,6 @@ class Employee < ActiveRecord::Base
   private
   def lower_email
 	 self.email.downcase!
+   self.name.downcase!
 	end
 end

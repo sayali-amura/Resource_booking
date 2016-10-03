@@ -13,7 +13,6 @@ def status_normalization1(status_code)
 	end
 end
 
-
 def resource_time_slot resource
 	resource.timeslots
 end

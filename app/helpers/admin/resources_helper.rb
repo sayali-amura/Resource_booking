@@ -16,4 +16,9 @@ module Admin::ResourcesHelper
   		minute = slot.strftime("%M")
   		"#{pluralize(hour.to_i, "Hour")}, #{pluralize(minute.to_i, "Minute")}"
   	end
+
+  	def resource_array
+		resource = current_employee.company.resources.collect {|x|  [x.name.to_s,x.id] }
+	end
+
 end
