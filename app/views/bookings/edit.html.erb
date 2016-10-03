@@ -25,13 +25,6 @@
 					<%end %>
 				<%end %>
 
-		Priority
-
-		<%= f.select :priority  do %>
-			<% [['Low',0],['Medium',1],['High',2]].each do |c| %>
-				<%= content_tag(:option,c.first,value: c.last, class: 'form-control') %>
-			<%end %>
-		<%end %>
 		<%= f.submit "Book", class: "btn btn-primary" %>
 	<%end %>
 	</div>

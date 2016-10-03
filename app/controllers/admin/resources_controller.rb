@@ -40,7 +40,7 @@ class Admin::ResourcesController < ApplicationController
 			if @company.bookings.where(resource_id:params[:id]).destroy_all 
 				if @company.complaints.where(resource_id:params[:id]).destroy_all 
 					flash[:success] = "Resource, complaints and bookings are destroyed."
-					redirect_to admin_dashbord_path
+					redirect_to request.referer
 				else
 					flash[:error] = "Error while deleting complaints"
 				end
@@ -51,7 +51,6 @@ class Admin::ResourcesController < ApplicationController
 		else
 			flash[:error] = "Error while deleting resource"
 		end
-		redirect_to request.referer
 	end
 
 	private

@@ -12,16 +12,6 @@ def status_normalization1(status_code)
 			"Realease"
 	end
 end
-def priority_normalization(priority_code)
-	case 
-		when priority_code == 0
-			"Low"
-		when priority_code == 1
-			"Medium"
-		when priority_code == 2
-			"High"
-	end
-end
 
 def resource_array
 	resource = current_employee.company.resources.collect {|x|  [x.name.to_s,x.id] }
