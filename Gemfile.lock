@@ -68,6 +68,11 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.7.0)
+    factory_girl (4.7.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.7.0)
+      factory_girl (~> 4.7.0)
+      railties (>= 3.0.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
@@ -181,6 +186,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.0.1)
       execjs (>= 0.3.0, < 3)
+    w (0.0.0)
     warden (1.2.6)
       rack (>= 1.0)
     web-console (2.0.0)
@@ -188,6 +194,7 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (~> 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    will_paginate (3.1.3)
 
 PLATFORMS
   ruby
@@ -199,6 +206,7 @@ DEPENDENCIES
   cancancan
   coffee-rails (~> 4.1.0)
   devise
+  factory_girl_rails
   jbuilder (~> 2.0)
   jquery-rails
   pg
@@ -212,7 +220,9 @@ DEPENDENCIES
   sqlite3
   turbolinks
   uglifier (>= 1.3.0)
+  w
   web-console (~> 2.0)
+  will_paginate (~> 3.1.0)
 
 BUNDLED WITH
    1.13.1

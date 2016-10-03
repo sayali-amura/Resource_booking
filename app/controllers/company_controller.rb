@@ -1,5 +1,5 @@
 	class CompanyController < ApplicationController
-		skip_before_action :authenticate_employee!, only: [:new, :create]
+		skip_before_action :authenticate_employee!, only: [:new, :create, :show]
 	def index
 
 	end

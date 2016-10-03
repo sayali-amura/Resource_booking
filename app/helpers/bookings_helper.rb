@@ -1,5 +1,5 @@
 module BookingsHelper
-
+#status translation to text from ids
 def status_normalization1(status_code)
 	case 
 		when status_code == 0
@@ -12,8 +12,6 @@ def status_normalization1(status_code)
 			"Realease"
 	end
 end
-
-
 
 def resource_time_slot resource
 	resource.timeslots

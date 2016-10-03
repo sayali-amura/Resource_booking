@@ -4,7 +4,6 @@ class Booking < ActiveRecord::Base
 	belongs_to :employee
 	belongs_to :resource
 	belongs_to :company
-	has_many	:messages, as: :property
 
 	before_create :is_slot_alloted?, :slot_valid?, :is_resource_valid?, :is_date_valid?,:check_holiday?
 	before_validation 	:ensure_date_has_value,:add_company_id
@@ -45,7 +44,7 @@ class Booking < ActiveRecord::Base
 	end
 
 	def slot_valid? 
-		if self.slot.to_i > self.resource.available_time_slot(self.date_of_booking).length || self.slot%1!=0
+		if self.slot.to_i > self.resource.available_time_slot(self.date_of_booking.strftime("%Y%m%d") ).length || self.slot%1!=0
 			self.errors[:slot_invalid] << "This slot is invalid"
 		end
 	end
@@ -68,14 +67,14 @@ class Booking < ActiveRecord::Base
 	def is_resource_valid?
 		unless (self.company.resources.find(self.resource_id))
 			self.errors[:resource_not_present] << "Requested resource is not available."
-			raise "resource is not valid"
+			# raise "resource is not valid"
 		end
 	end
 
 	def ensure_date_has_value
 		unless !self.date_of_booking.blank?
 			self.errors[:date_of_booking] << "=>Date of booking can't be empty"
-			raise "date_of_booking empty"
+			# raise "date_of_booking empty"
 		end
 	end	
 
@@ -83,6 +82,7 @@ class Booking < ActiveRecord::Base
 		company = self.employee.company
 		self.company_id = company[:id]
 	end
+	#returns all ongoing bookings of company
 	def self.ongoing_bookings(company)
 		bookings_of_today = company.bookings.where("date_of_booking = ?",Date.today)
 		granted = bookings_of_today.where(status:1)

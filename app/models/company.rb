@@ -1,13 +1,10 @@
 class TimeValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
-  	# byebug	
     unless value > record.start_time
       record.errors[attribute] << (options[:message] || "Enter End Time greater than start time")
     end
   end
 end
-
-
 class Company < ActiveRecord::Base
 	has_many :roles
 	has_many :resources
@@ -53,3 +50,5 @@ class Company < ActiveRecord::Base
 
 
 end
+
+
