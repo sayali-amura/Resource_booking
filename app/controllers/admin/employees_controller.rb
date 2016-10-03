@@ -41,7 +41,6 @@ class Admin::EmployeesController < ApplicationController
 		if @company.resources.any?
 			@bookings = @company.bookings.where(status:0).where("date_of_booking >= ?",Date.today) if @company.bookings
 			@complaints = @complaints.where(status:0) if @complaints
-			#@ongoing_bookings = @company.bookings.ongoing_bookings
 		end
 	end
 	
@@ -73,16 +72,7 @@ class Admin::EmployeesController < ApplicationController
 	def employee_params
 		params.require(:employee).permit(:name, :email,:age, :date_of_joining, :role_id, :manager_id)
 	end
-	# def find_employee
-	# 	@employee = current_employee
-	# end
-	# def find_company
-	# 	@company = Company.find(current_employee.company_id)
-	# end
 	def find_complaints
-		# give_id(current_employee.company_id)
-		# @complaints = Complaint.where(resource_id:@id_array)
-		# find_company
 		@complaints = @company.complaints
 	end
 

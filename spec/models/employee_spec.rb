@@ -22,6 +22,7 @@ RSpec.describe Employee, type: :model do
     assc = Employee.reflect_on_association(:complaints)
     expect(assc.macro).to eq :has_many
   end
+  it "returns Employee's all bookings"
 end
 
 

@@ -4,7 +4,6 @@ class Booking < ActiveRecord::Base
 	belongs_to :employee
 	belongs_to :resource
 	belongs_to :company
-	has_many	:messages, as: :property
 
 	before_create :is_slot_alloted?, :slot_valid?, :is_resource_valid?, :is_date_valid?,:check_holiday?
 	before_validation 	:ensure_date_has_value,:add_company_id
@@ -83,6 +82,7 @@ class Booking < ActiveRecord::Base
 		company = self.employee.company
 		self.company_id = company[:id]
 	end
+	#returns all ongoing bookings of company
 	def self.ongoing_bookings(company)
 		bookings_of_today = company.bookings.where("date_of_booking = ?",Date.today)
 		granted = bookings_of_today.where(status:1)

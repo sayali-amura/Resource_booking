@@ -2,6 +2,7 @@ module Admin::EmployeesHelper
 	def company_domain
 		"   @"<<current_employee.company.name<<".com"
 	end
+	#listing roles present in company
 	def list_roles
 		roles = current_employee.company.roles
 		@roles = []
@@ -11,6 +12,7 @@ module Admin::EmployeesHelper
 			end
 		end
 	end
+	#listing employees in company
 	def list_employees
 		employees = current_employee.company.employees
 		@employees = []

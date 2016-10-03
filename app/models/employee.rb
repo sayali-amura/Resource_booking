@@ -3,7 +3,6 @@ class Employee < ActiveRecord::Base
 	belongs_to :company
 	has_many :bookings
 	has_many :complaints
-	has_many :messages
 	
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i,
     message: "email format" }, uniqueness: true

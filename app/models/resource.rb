@@ -1,13 +1,11 @@
 class Resource < ActiveRecord::Base
-
-
 	belongs_to :company
 	has_many :bookings
 	has_many :complaints
 	validates :time_slot, presence:true
 	validates :name, presence: {message: "name should be present"}, uniqueness: { scope: :company_id,  message: "should have one per company" }
 
-
+#gives time slot array from resource
 	def timeslots
 		if (self != nil)
 			company = self.company

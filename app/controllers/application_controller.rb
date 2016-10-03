@@ -17,35 +17,12 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
   end
-
-  # def give_id(company_id)
-  #   resources = Resource.where(company_id:company_id)
-  #   @id_array = []
-  #   resources.each do |res|
-  #     @id_array << res.id 
-  #   end
-  #   @id_array
-  # end
   
   def find_company
-    # if employee_signed_in? 
       @company = current_employee.company
-    # end
   end
 
   def find_employee
-    # if employee_signed_in?
     @employee = current_employee
-    # else
-    #   redirect_to new_employee_session
-    # end
   end
-
-  # def admin?
-  #   find_company
-  #   if current_employee.email != "admin@#{@company.name}.com"
-  #     redirect_to root_path
-  #   end
-  # end
-
 end

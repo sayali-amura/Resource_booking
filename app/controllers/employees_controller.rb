@@ -8,15 +8,11 @@ class EmployeesController < ApplicationController
 	def entry
 		
 		@company =current_employee.company
-      	admin_role_id = @company.roles.find_by_designation("Admin").id
-		# if !employee_signed_in?
-		# 	redirect_to new_employee_session_path
-		# elsif current_employee.role_id == admin_role_id 
+      	admin_role_id = @company.roles.find_by_designation("admin").id
 		if current_employee.role_id == admin_role_id 
-
 			redirect_to admin_dashbord_path
 		end
-			@bookings = @employee.bookings
+			@bookings = @employee.bookings.where("date_of_booking >= ?",Date.today)
 			@complaints = @employee.complaints
 	end
 

@@ -6,7 +6,6 @@ class BookingsController < ApplicationController
 		if @company.is_resource_available?
 			@bookings = @company.bookings.where("date_of_booking >= ?",Date.today)
 			@ongoing_bookings = Booking.ongoing_bookings(current_employee.company)
-			#byebug
 		end
 	end
 
@@ -21,7 +20,6 @@ class BookingsController < ApplicationController
 		begin
 			@booking = current_employee.bookings.build(booking_params)
 			@booking.company_id = current_employee.company_id
-			#byebug
 			if  @booking.save
 
 				flash[:success] = "Your booking is done"
