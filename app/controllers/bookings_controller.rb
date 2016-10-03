@@ -15,7 +15,6 @@ class BookingsController < ApplicationController
 		end
 	end
 
-
 	def resource_time_slot
 		@resource = @company.resources.find_by_name(params[:name])
 	end
@@ -67,6 +66,7 @@ class BookingsController < ApplicationController
 		params.require(:booking).permit(:comment,:slot,:priority, :date_of_booking,:resource_id)
 	end
 	
+
 	# def find_company
 	# 	if employee_signed_in? 
 	# 		@company = current_employee.company

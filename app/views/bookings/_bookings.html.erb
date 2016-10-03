@@ -47,8 +47,10 @@
 				<div class="col-md-1">
 					<%=status_normalization1(booking.status)%>
 				</div>
+
 				
 					<% if booking.employee_id == current_employee.id and booking.status!= 1 %>
+
 						<div class="col-md-1">
 							<%= button_to "Delete", [booking],method: "delete",:class =>"btn btn-danger" %>
 						</div>	
@@ -65,8 +67,10 @@
 						<div class="col-md-2">
 						
 						</div>
+
 					<% end %> <! end for checking employee id>
 			</div>
 </div>
+
 
 			<% end %>
