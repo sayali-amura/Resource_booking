@@ -13,12 +13,10 @@ def status_normalization1(status_code)
 	end
 end
 
-def resource_array
-	resource = current_employee.company.resources.collect {|x|  [x.name.to_s,x.id] }
-end
+
 
 def resource_time_slot resource
-	check_avability resource
+	resource.timeslots
 end
 
 
