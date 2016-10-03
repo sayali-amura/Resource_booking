@@ -17,12 +17,22 @@
 			<%=f.label :Age%>
 			<%=f.text_field :age , class: "form-control",required: true%>	
 		</div>
+		<%list_roles%>
 		<div class="col-md-6">
 			<%=f.label :RoleId%>
-			<%=f.text_field :role_id , class: "form-control",required: true%>
-		</div>		
+			<%= f.select(:role_id) do %>
+			  <% @roles.each do |c| %>
+			    <%= content_tag(:option, c.first, value: c.last) %>
+			  <% end %>
+			<% end %>
+		</div>
+		<%list_employees%>		
 		<%=f.label :Manager%>
-		<%=f.text_field :manager_id , class: "form-control",required: true%>
+		<%= f.select(:manager_id) do %>
+			  <% @employees.each do |c| %>
+			    <%= content_tag(:option, c.first, value: c.last) %>
+			  <% end %>
+		<% end %>
 		<%=f.label "Date Of Joining" %>
 		<%=f.date_field :date_of_joining , class: "form-control",required: true%>
 		
