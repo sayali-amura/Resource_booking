@@ -1,5 +1,6 @@
 
 <div class="row">
+<hr>
 		<div class="col-md-12">
 			<div class="col-md-1", align="center">
 			<strong align = "center">Subject</strong>
@@ -25,9 +26,10 @@
 		</div>
 </div>
 <hr>
-<div class="row">
+
+<% @bookings.each do |booking|%>
+	<div class="row">
 		<div class="col-md-12">
-			<% @bookings.each do |booking|%>
 				<div class="col-md-1", align="center">
 					<%=booking.comment%>
 				</div>
@@ -63,7 +65,7 @@
 							</div>
 						<% end %>	
 					<% else %>
-
+					<% if @ongoing_bookings %>
 						<% if @ongoing_bookings.include?(booking) %>	
 							<div class="col-md-2", align="center">
 							<b>
@@ -75,8 +77,10 @@
 							.
 							</div>
 						<% end %>
+					<% end %>
 
 					<% end %> <! end for checking employee id>
-			<% end %>
 		</div>
 	</div>
+<% end %>
+		

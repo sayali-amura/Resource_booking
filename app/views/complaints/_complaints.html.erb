@@ -31,21 +31,21 @@
 	<%=complaint.employee_id%>
 	</div>
 	<% if complaint.employee_id == current_employee.id %>
-			<div class="col-md-2">
+			<div class="col-md-1">
 				<%= button_to "Delete", [complaint],method: "delete",:class =>"btn btn-danger", data: {confirm: "Are you sure?"}  %>
 			</div>	
 			<% if complaint.status == 0 %>
-				<div class="col-md-2">
+				<div class="col-md-1">
 				<%= button_to "Edit",[:edit, complaint],:class =>"btn btn-info", :method => "get" %>
 				</div>
 			<% else %>
-				<div class="col-md-2">
-			.
+				<div class="col-md-1">
+			
 				</div>
 			<% end %>	
 	<% else %>
-			<div class="col-md-4">
-			.
+			<div class="col-md-6">
+			
 			</div>
 
 	<% end %>
