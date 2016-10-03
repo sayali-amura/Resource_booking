@@ -4,7 +4,7 @@ class BookingsController < ApplicationController
 	load_and_authorize_resource :booking
 	def index
 		if @company.is_resource_available?
-			@bookings = @company.bookings
+			@bookings = @company.bookings.where("date_of_booking >= ?",Date.today)
 			@ongoing_bookings = Booking.ongoing_bookings(current_employee.company)
 			#byebug
 		end

@@ -6,7 +6,9 @@ module Admin::EmployeesHelper
 		roles = current_employee.company.roles
 		@roles = []
 		roles.each do | role |
-			@roles << [role.designation, role.id]
+			if role.designation!="Admin"
+				@roles << [role.designation, role.id]
+			end
 		end
 	end
 	def list_employees
