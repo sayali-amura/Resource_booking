@@ -4,8 +4,6 @@ class ComplaintsController < ApplicationController
   before_action :list_resources, only: [:new,:edit]
   load_and_authorize_resource :complaint
 	def index
-		# give_id(current_employee.company_id)
-		# @complaints = @company.complaints.where(resource_id:@id_array)
 		if @company.resources.any?
 			@complaints = @company.complaints		
 		end
@@ -45,7 +43,6 @@ class ComplaintsController < ApplicationController
 	end
 	
 	def destroy
-		# @company.complaints.destroy(params[:id])
 		@complaint.destroy
 		redirect_to complaints_path
 	end
@@ -57,13 +54,10 @@ class ComplaintsController < ApplicationController
 	end
 
 	def find_complaint
-		# find_company
 		@complaint = @company.complaints.find(params[:id])
-		# @resources = Resource.all
 	end
 
 	def list_resources
-		# find_company
 		@resources = @company.resources
 	end
 end

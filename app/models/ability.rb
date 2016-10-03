@@ -22,7 +22,3 @@ class Ability
 
   end
 end
-<<<<<<< HEAD
-#7507897864
-=======
->>>>>>> 74186252a111fe4213bce2efb3f6f85c7927e7a4
