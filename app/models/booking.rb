@@ -11,7 +11,6 @@ class Booking < ActiveRecord::Base
 
 
 	validates :slot,:date_of_booking,:comment , presence: true
-	validates :priority ,inclusion: {in:[0,1,2]}	
 	validates :status , inclusion: {in:[0,1,2]}
 	validates :resource_id,:employee_id, :slot,:company_id, numericality: { only_integer: true }	
 	validate :is_slot_alloted?,:slot_valid?, :is_date_valid?,:check_holiday?
