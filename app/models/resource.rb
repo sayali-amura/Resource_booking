@@ -43,4 +43,13 @@ class Resource < ActiveRecord::Base
 		end
 		resource_slot
 	end
+
+	def next_time_slots
+		time_slot_array = self.timeslots
+		# byebug
+		time_slot_array.drop_while do |x|
+			x[0].split("-")[0].to_time < Time.now.strftime("%H:%M")
+		end
+	end
+
 end
