@@ -33,7 +33,10 @@ class Admin::EmployeesController < ApplicationController
 	end
 
 	def destroy
-		@company.employees.destroy(params[:id])
+		if emp = @company.employees.destroy(params[:id])
+			@company.complaints.where(employee_id:params[:id]).destroy_all
+			@company.bookings.where(employee_id:params[:id]).destroy_all
+		end
 		redirect_to admin_employees_path
 	end
 	

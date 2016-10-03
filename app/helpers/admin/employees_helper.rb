@@ -7,7 +7,7 @@ module Admin::EmployeesHelper
 		roles = current_employee.company.roles
 		@roles = []
 		roles.each do | role |
-			if role.designation!="Admin"
+			if role.designation!="admin"
 				@roles << [role.designation, role.id]
 			end
 		end

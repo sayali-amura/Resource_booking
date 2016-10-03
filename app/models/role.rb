@@ -4,9 +4,9 @@ class Role < ActiveRecord::Base
 	# validates :priority ,inclusion: {in: 0..19}
 	validates :designation, :department, :priority, presence: true
 	validates :priority, numericality: { only_integer: true, greater_than: 0 }
-	validates :designation, uniqueness:{scope: :department, message: "Designation in department should be unique"}
+	validates :designation, uniqueness:{scope: [:company_id,:department], message: "Designation in department should be unique"}
 	validates :priority, uniqueness:{scope: :company_id, message: "Priority should be uniq across the company"}
-	validates :department, uniqueness:{scope: :company_id, message: "Department should be uniq across the company"}
+	#validates :department, uniqueness:{scope: :company_id, message: "Department should be uniq across the company"}
 
 	validate :is_name_admin?
 
