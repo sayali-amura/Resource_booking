@@ -19,13 +19,11 @@ class Resource < ActiveRecord::Base
 			remember_hour = start_time.hour.round
 			remember_min = start_time.min
 			no_of_slots.times do | index |
-				#p "-------------------------#{time_slot_array}----------------------------------"
 				a = remember_hour == 0 ? "00" : remember_hour
 				b = remember_min == 0 ? "00" : remember_min
 				c = ((remember_min + self.time_slot.min)/60 )+remember_hour+self.time_slot.hour == 0 ? "00" :((remember_min + self.time_slot.min)/60 )+remember_hour+self.time_slot.hour
 				d = (remember_min + self.time_slot.min) % 60 == 0 ? "00" : (remember_min + self.time_slot.min) % 60
 				time_slot_array << ["#{a}:#{b}-#{c}:#{d}", index]
-
 				remember_hour = ((remember_min + self.time_slot.min)/60 )+remember_hour+self.time_slot.hour
 				remember_min = (remember_min + self.time_slot.min) % 60
 			end
@@ -34,21 +32,24 @@ class Resource < ActiveRecord::Base
 	end
 
 	def available_time_slot date_of_booking
-		resource_slot = self.timeslots
-		if self.bookings.where(date_of_booking:date_of_booking)
-			bookings_of_day = self.bookings.where(date_of_booking: date_of_booking)
-			bookings_of_day.each do |x|
-				resource_slot.delete_at(x.slot)
+		if date_of_booking.gsub(/[-]+/,"").to_i != Time.zone.now.strftime("%Y%m%d").to_i
+			resource_slot = self.timeslots
+			if self.bookings.where(date_of_booking:date_of_booking)
+				bookings_of_day = self.bookings.where(date_of_booking: date_of_booking)
+				bookings_of_day.each do |x|
+					resource_slot.delete_at(x.slot)
+				end
 			end
+		else
+			resource_slot = next_time_slots
 		end
 		resource_slot
 	end
 
 	def next_time_slots
 		time_slot_array = self.timeslots
-		# byebug
 		time_slot_array.drop_while do |x|
-			x[0].split("-")[0].to_time < Time.now.strftime("%H:%M")
+			x[0].split("-")[0].to_time < Time.now
 		end
 	end
 
