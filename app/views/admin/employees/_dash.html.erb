@@ -1,141 +1,145 @@
-
-<h3>Pending Bookings</h3>
-<div class="row">
-<div class="col-md-12">
-	<div class="col-md-1">
-	<strong>Status</strong>
-	</div>
-	<div class="col-md-1">
-	<strong>Comment</strong>
-	</div>
- 	<div class="col-md-1">
-	<strong>Employee_id</strong>
-	</div>
-	<div class="col-md-2">
-	<strong>Resource Name</strong>	
-	</div>
-	<div class="col-md-2">
-	<strong>Date</strong>	
-	</div>
-	<div class="col-md-1">
-	<strong>Time</strong>	
-	</div>
-	<div class="col-md-1">
-	<%= label_tag(:status_grant, "Grant") %>
-	</div>
-	<div class="col-md-1">
-	<%= label_tag(:status_reject, "Reject") %>
-	</div>
-	<div class="col-md-2">
-	<strong></strong>	
-	</div>
-</div>
-</div>
-	
-<% @bookings.each do |booking|%>
-<div class="row">
-<hr>
-<div class="col-md-12">
-	<div class="col-md-1">
-	<%=status_normalization1(booking.status)%>
-	</div>
-	<div class="col-md-1">
-	<%=booking.comment%>
-	</div>
-	<div class="col-md-1">
-	<%=booking.employee_id%>
-	</div>
-	<div class="col-md-2">
-	<%=resource_name(booking.resource_id)%>
-	</div>
-	<div class="col-md-2">
-	<%=booking.date_of_booking%>
-	</div>
-	<div class="col-md-1">
-	<%=show_slot_time(booking.resource_id,booking.slot)%>
-	</div>
-	<%= form_for:status, url:admin_change_status_path do | f |%>
+<b>Pending Bookings</b>
+<% if @company.bookings.any? %>
+	<div class="row">
+	<div class="col-md-12">
 		<div class="col-md-1">
-		<%= f.hidden_field :booking_id,value: booking.id%>
-		<%= f.submit "Grant",class: 'btn btn-success'%>
+		<strong>Status</strong>
 		</div>
 		<div class="col-md-1">
-		<%= f.submit "Reject",class: "btn btn-danger"%>
+		<strong>Comment</strong>
+		</div>
+	 	<div class="col-md-1">
+		<strong>Employee_id</strong>
 		</div>
 		<div class="col-md-2">
+		<strong>Resource Name</strong>	
+		</div>
+		<div class="col-md-2">
+		<strong>Date</strong>	
+		</div>
+		<div class="col-md-1">
+		<strong>Time</strong>	
+		</div>
+		<div class="col-md-1">
+		<%= label_tag(:status_grant, "Grant") %>
+		</div>
+		<div class="col-md-1">
+		<%= label_tag(:status_reject, "Reject") %>
+		</div>
+		<div class="col-md-2">
+		<strong></strong>	
+		</div>
+	</div>
+	</div>
+		
+	<% @bookings.each do |booking|%>
+	<div class="row">
+	<hr>
+	<div class="col-md-12">
+		<div class="col-md-1">
+		<%=status_normalization1(booking.status)%>
+		</div>
+		<div class="col-md-1">
+		<%=booking.comment%>
+		</div>
+		<div class="col-md-1">
+		<%=booking.employee_id%>
+		</div>
+		<div class="col-md-2">
+		<%=resource_name(booking.resource_id)%>
+		</div>
+		<div class="col-md-2">
+		<%=booking.date_of_booking%>
+		</div>
+		<div class="col-md-1">
+		<%=show_slot_time(booking.resource_id,booking.slot)%>
+		</div>
+		<%= form_for:status, url:admin_change_status_path do | f |%>
+			<div class="col-md-1">
+			<%= f.hidden_field :booking_id,value: booking.id%>
+			<%= f.submit "Grant",class: 'btn btn-success'%>
+			</div>
+			<div class="col-md-1">
+			<%= f.submit "Reject",class: "btn btn-danger"%>
+			</div>
+			<div class="col-md-2">
+			</div>
+			<% end %>
+
+			
+	</div>	
+	</div>	
+	<% end %>
+<% else %>
+	<h2>No any pending bookings</h2>
+<% end %>
+<br>
+<br>
+<br>
+<br>
+<b>Pending Complaints</b>
+<% if @company.complaints.any? %>
+	<div class="col-md-12">
+		<div class="col-md-2">
+		<strong>Status</strong>
+		</div>
+		<div class="col-md-2">
+		<strong>Comment</strong>
+		</div>
+		<div class="col-md-2">
+		<strong>Resource Name</strong>
+		</div>
+		<div class="col-md-1">
+		<strong>Employee Id</strong>
+		</div>
+		<div class="col-md-1">
+		<%= label_tag(:status_solve, "Solve") %>
+		</div>
+		<div class="col-md-4">
+
+		</div>
+
+	</div>
+
+
+		
+	<% @complaints.each do | complaint |%>
+	<div class="row">
+	<hr>
+	<div class="col-md-12">
+
+		<div class="col-md-2">
+		<%=status_normalization(complaint.status)%>
+		</div>
+		<div class="col-md-2	">
+		<%=complaint.comment%>
+		</div>
+		<div class="col-md-2">
+		<%=resource_name(complaint.resource_id)%>
+		</div>
+		<div class="col-md-1">
+		<%=complaint.employee_id%>
+		</div>
+	<%= form_for:status_complaint, url:admin_change_status_path do | f |%>
+		<div class="col-md-1">
+		<%= f.submit "Solve",class: 'btn btn-success'%>
+		<%= f.hidden_field :complaint_id,value: complaint.id%>
+		</div>
+		<div class="col-md-2">
+		
 		</div>
 		<% end %>
-
 		
-</div>	
-</div>	
-<% end %>
-
-<br>
-<br>
-<br>
-<br>
-
-<b>Pending Complaints</b>
-<div class="col-md-12">
-	<div class="col-md-2">
-	<strong>Status</strong>
-	</div>
-	<div class="col-md-2">
-	<strong>Comment</strong>
-	</div>
-	<div class="col-md-2">
-	<strong>Resource Name</strong>
-	</div>
-	<div class="col-md-1">
-	<strong>Employee Id</strong>
-	</div>
-	<div class="col-md-1">
-	<%= label_tag(:status_solve, "Solve") %>
-	</div>
-	<div class="col-md-4">
+		<div class="col-md-2">
+			
+		</div>
 
 	</div>
-
-</div>
-
-
-	
-<% @complaints.each do | complaint |%>
-<div class="row">
-<hr>
-<div class="col-md-12">
-
-	<div class="col-md-2">
-	<%=status_normalization(complaint.status)%>
-	</div>
-	<div class="col-md-2	">
-	<%=complaint.comment%>
-	</div>
-	<div class="col-md-2">
-	<%=resource_name(complaint.resource_id)%>
-	</div>
-	<div class="col-md-1">
-	<%=complaint.employee_id%>
-	</div>
-<%= form_for:status_complaint, url:admin_change_status_path do | f |%>
-	<div class="col-md-1">
-	<%= f.submit "Solve",class: 'btn btn-success'%>
-	<%= f.hidden_field :complaint_id,value: complaint.id%>
-	</div>
-	<div class="col-md-2">
-	
 	</div>
 	<% end %>
-	
-	<div class="col-md-2">
-		
-	</div>
 
-</div>
-</div>
+<% else %>
+<h2>No any pending complaints</h2>
 <% end %>
-
-
 <br>
 <br>

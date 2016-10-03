@@ -7,6 +7,7 @@ class Resource < ActiveRecord::Base
 	validates :time_slot, presence:true
 	validates :name, presence: {message: "name should be present"}, uniqueness: { scope: :company_id,  message: "should have one per company" }
 
+
 	def timeslots
 		if (self != nil)
 			company = self.company
@@ -24,6 +25,7 @@ class Resource < ActiveRecord::Base
 				c = ((remember_min + self.time_slot.min)/60 )+remember_hour+self.time_slot.hour == 0 ? "00" :((remember_min + self.time_slot.min)/60 )+remember_hour+self.time_slot.hour
 				d = (remember_min + self.time_slot.min) % 60 == 0 ? "00" : (remember_min + self.time_slot.min) % 60
 				time_slot_array << ["#{a}:#{b}-#{c}:#{d}", index]
+
 				remember_hour = ((remember_min + self.time_slot.min)/60 )+remember_hour+self.time_slot.hour
 				remember_min = (remember_min + self.time_slot.min) % 60
 			end

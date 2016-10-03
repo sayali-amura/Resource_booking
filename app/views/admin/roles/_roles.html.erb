@@ -3,6 +3,9 @@
 <hr>
 <div class="col-md-12" align="center">
 	<div class="col-md-2">
+	<strong>Priority</strong>
+	</div>
+	<div class="col-md-2">
 	<strong>Name</strong>
 	</div>
 	<div class="col-md-2">
@@ -11,16 +14,28 @@
 	
 </div>
 </div>
-<% @roles.each do |role|%>
+<% @roles.sort_by(&:priority).each do |role|%>
 <div class="row" align="center">
 <hr>
 <div class="col-md-12">
 	<div class="col-md-2">
-		<%= role.designation%></td>
+		<%= role.priority%>
 	</div>
 	<div class="col-md-2">
-		<%= role.department%></td>
+		<%= role.designation%>
 	</div>
+	<div class="col-md-2">
+		<%= role.department%>
+	</div>
+	<% if role.priority!=0 %>
+		<div class="col-md-1">
+			<%= button_to "Edit",edit_admin_role_path(role), method: "get", class: "btn btn-success" %>
+		</div>
+
+		<div class="col-md-1">
+			<%= button_to "Delete", admin_role_path(role),method: "delete", class: "btn btn-danger", data: {confirm: "Are you sure?"} %>
+		</div>
+	<% end %>
 </div>
 </div>
 <% end %>

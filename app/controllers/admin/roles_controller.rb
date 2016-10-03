@@ -8,7 +8,7 @@ class Admin::RolesController < ApplicationController
   end
 
   def new
-  	@role = @company.roles.build
+  	@role = @company.roles.new
   end
 
   def create
@@ -25,9 +25,23 @@ class Admin::RolesController < ApplicationController
 
   def edit;   end
 
-  def update; end
+  def update; 
+    if @role.update_attributes(role_params)
+      flash[:success] = "Role has succefully updated"
+      redirect_to admin_roles_path
+    else
+      render :edit
+    end
+  end
 
-  def destroy; end
+  def destroy; 
+    if @role.destroy
+      flash[:success] = "Role has been succefully deleted"
+    else
+      flash[:error] = "Error while deleting role."
+      redirect_to admin_roles_path
+    end
+  end
 
 
   private
