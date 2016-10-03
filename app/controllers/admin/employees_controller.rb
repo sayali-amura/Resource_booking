@@ -41,15 +41,16 @@ class Admin::EmployeesController < ApplicationController
 		if @company.resources.any?
 			@bookings = @company.bookings.where(status:0).where("date_of_booking >= ?",Date.today) if @company.bookings
 			@complaints = @complaints.where(status:0) if @complaints
+			#@ongoing_bookings = @company.bookings.ongoing_bookings
 		end
 	end
 	
 	def change_status
-		if(params[:status])
+		if(params[:status])			
 			booking = @company.bookings.find(params[:status][:booking_id])
-			if params[:status][:status] =="Grant"
+			if params[:commit] =="Grant"
 				booking.status = 1
-			elsif params[:status][:status] == "Reject"
+			elsif params[:commit] == "Reject"
 				booking.status = 2
 			end
 			if !booking.save
@@ -59,7 +60,7 @@ class Admin::EmployeesController < ApplicationController
 		end
 		if(params[:status_complaint])
 			complaint = @complaints.find(params[:status_complaint][:complaint_id])
-			if params[:status_complaint][:status] == "Solve"
+			if params[:commit] == "Solve"
 				complaint.status = 1
 			end
 			if complaint.save

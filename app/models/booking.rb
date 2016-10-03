@@ -7,7 +7,7 @@ class Booking < ActiveRecord::Base
 	has_many	:messages, as: :property
 
 	before_create :is_slot_alloted?, :slot_valid?, :is_resource_valid?, :is_date_valid?,:check_holiday?
-	before_validation 	:ensure_date_has_value,:add_company_id, :ensure_is_resource_valid
+	before_validation 	:ensure_date_has_value,:add_company_id
 
 
 	validates :slot,:date_of_booking,:comment , presence: true
@@ -16,9 +16,6 @@ class Booking < ActiveRecord::Base
 	validates :resource_id,:employee_id, :slot,:company_id, numericality: { only_integer: true }	
 	validate :is_slot_alloted?,:slot_valid?, :is_date_valid?,:check_holiday?
 
-
-	# before_save :add_company_id
-	
 	protected
 
 	def is_date_valid?
@@ -28,7 +25,7 @@ class Booking < ActiveRecord::Base
 	end
 
 	def check_holiday?
-		unless self.date_of_booking.wday!=7 
+		unless self.date_of_booking.wday != 0 
 			self.errors[:day_validation] << "Booking can't be done on holidays"
 		end
 	end
@@ -38,10 +35,6 @@ class Booking < ActiveRecord::Base
 			if self.new_record?
 				days_booking = self.company.bookings.where(date_of_booking: self.date_of_booking)
 			else
-<<<<<<< HEAD
-				# byebug
-=======
->>>>>>> c2c41e314988f9bfa7686e017b2aa6d4d14e1906
 				days_booking = self.company.bookings.where(date_of_booking: self.date_of_booking).where.not(id: self.id)
 			end
 			# binding.pry
@@ -67,13 +60,8 @@ class Booking < ActiveRecord::Base
 		true
 	end
 
-<<<<<<< HEAD
-	def ensure_is_resource_valid
-		unless self.company.resources.find_by_id(self.resource_id)  
-=======
 	def is_resource_valid?
 		unless (self.company.resources.find(self.resource_id))
->>>>>>> c2c41e314988f9bfa7686e017b2aa6d4d14e1906
 			self.errors[:resource_not_present] << "Requested resource is not available."
 			raise "resource is not valid"
 		end
@@ -89,6 +77,37 @@ class Booking < ActiveRecord::Base
 	def add_company_id
 		company = self.employee.company
 		self.company_id = company[:id]
+	end
+	def self.ongoing_bookings(company)
+		bookings_of_today = company.bookings.where("date_of_booking = ?",Date.today)
+		granted = bookings_of_today.where(status:1)
+		current_bookings = []
+		granted.each do | booking |
+			resource = booking.resource
+			timeslot_min = resource.time_slot.min
+			timeslot_hour = resource.time_slot.hour
+			start_time = booking.company.start_time
+			start_min = (start_time.min + (booking.slot) * timeslot_min) % 60
+			carry_hours = (start_time.min + (booking.slot) * timeslot_min) / 60
+			start_hour = start_time.hour + (booking.slot) * timeslot_hour + carry_hours
+			end_min = (start_time.min + (booking.slot + 1) * timeslot_min) % 60
+			carry_end_hours = (start_time.min + (booking.slot + 1) * timeslot_min) / 60
+			end_hour = start_time.hour + (booking.slot + 1) * timeslot_hour + carry_end_hours
+			if Time.now.hour.between?(start_hour,end_hour) and end_hour != 0
+				#byebug
+				if end_min != 0 and Time.now.min.between?(start_min,end_min)
+					current_bookings << booking
+				else
+					if Time.now.min.between?(start_min,59) and end_min == 0
+						current_bookings << booking
+					end
+				end
+			elsif Time.now.hour.between?(start_hour,23) and end_hour == 0
+						current_bookings << booking
+			end 		
+		end
+		current_bookings
+		
 	end
 
 end
