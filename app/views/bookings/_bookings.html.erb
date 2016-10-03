@@ -1,76 +1,82 @@
 
 <div class="row">
 		<div class="col-md-12">
-			<div class="col-md-1">
-			<strong>Subject</strong>
+			<div class="col-md-1", align="center">
+			<strong align = "center">Subject</strong>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-2", align="center">
 			<strong>Employee</strong>
 			</div>
-		 	<div class="col-md-2">
+		 	<div class="col-md-2", align="center">
 			<strong>Date</strong>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-2", align="center">
 			<strong>Time</strong>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-2", align="center">
 			<strong>Resource</strong>
 			</div>
-			<div class="col-md-1">
+			<div class="col-md-1", align="center">
 			<strong>Status</strong>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-2", align="center">
+				
 			</div>
 		</div>
 </div>
 <hr>
-<% @bookings.each do |booking|%>
 <div class="row">
-<hr>
 		<div class="col-md-12">
-				<div class="col-md-1">
+			<% @bookings.each do |booking|%>
+				<div class="col-md-1", align="center">
 					<%=booking.comment%>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-2", align="center">
 					<%=booking.employee.name%>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-2", align="center">
 					<%=booking.date_of_booking.to_formatted_s(:long)%>
 				</div>
-				<div class="col-md-2">
-					<%byebug%>
+				<div class="col-md-2", align="center">
 					<%=show_slot_time(booking.resource_id,booking.slot)%>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-2", align="center">
 					<%=booking.resource.name%>
 				</div>
-				<div class="col-md-1">
+				<div class="col-md-1", align="center">
 					<%=status_normalization1(booking.status)%>
 				</div>
 
-				
+
 					<% if booking.employee_id == current_employee.id and booking.status!= 1 %>
 
-						<div class="col-md-1">
-							<%= button_to "Delete", [booking],method: "delete",:class =>"btn btn-danger" %>
+						<div class="col-md-1", align="center">
+							<%= button_to "Delete", [booking],method: "delete",:class =>"btn btn-danger", data: {confirm: "Are you sure?"}  %>
 						</div>	
 						<% if booking.status == 0 %>
-							<div class="col-md-1">
-							<%= button_to "Edit",[:edit, booking],:class =>"btn btn-info"%>
+							<div class="col-md-1", align="center">
+							<%= button_to "Edit",[:edit, booking],:class =>"btn btn-info", :method => "get"%>
 							</div>
 						<% else %>
-							<div class="col-md-1">
-						
+							<div class="col-md-1", align="center">
+								.
 							</div>
 						<% end %>	
 					<% else %>
-						<div class="col-md-2">
-						
-						</div>
+
+						<% if @ongoing_bookings.include?(booking) %>	
+							<div class="col-md-2", align="center">
+							<b>
+							<font color="green">Ongoing</font>
+							</b>
+							</div>
+							<% else %>
+							<div class="col-md-2", align="center">
+							.
+							</div>
+						<% end %>
 
 					<% end %> <! end for checking employee id>
-			</div>
-</div>
-
-
 			<% end %>
+		</div>
+	</div>

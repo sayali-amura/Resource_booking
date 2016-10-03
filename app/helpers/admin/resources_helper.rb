@@ -1,6 +1,5 @@
 module Admin::ResourcesHelper
 
-
 	def check_avability resource
 		time_slot_array = resource.timeslots
 		days_booking =	Booking.where("created_at >= ? and created_at<=?", Time.zone.now.beginning_of_day,Time.zone.now.end_of_day)
@@ -25,4 +24,11 @@ module Admin::ResourcesHelper
 	    @id_array
   	end
 
+  	def humanize resource
+  		# byebug
+  		slot = resource.time_slot
+  		hour = slot.strftime("%H")
+  		minute = slot.strftime("%M")
+  		"#{pluralize(hour.to_i, "Hour")}, #{pluralize(minute.to_i, "Minute")}"
+  	end
 end

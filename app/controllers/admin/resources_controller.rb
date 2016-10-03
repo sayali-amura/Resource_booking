@@ -1,10 +1,7 @@
 class Admin::ResourcesController < ApplicationController
-	#layout "_layout",only: [:edit, :new]
-
 	before_action :find_company
 	before_action :find_resource, only: [:show, :edit, :update, :destroy]
 
-	#before_action :admin?
 	load_and_authorize_resource :resource
 	def index
 		@resources = @company.resources
@@ -16,9 +13,8 @@ class Admin::ResourcesController < ApplicationController
 	
 	def create
 		@resource = @company.resources.build(resource_params)
-		# @company.resources.build(resource_params)
 		if @resource.save
-			flash[:success] << "Resource is successfully created."
+			flash[:success] = "Resource is successfully created."
 			redirect_to ["admin",@resource] 
 		else
 			render :new
@@ -32,7 +28,7 @@ class Admin::ResourcesController < ApplicationController
 
 	def update
 		if @resource.update(resource_params)
-			flash[:success] << "Resource is successfully updated."
+			flash[:success] = "Resource is successfully updated."
 			redirect_to ["admin",@resource]
 		else
 			render :edit
@@ -40,21 +36,20 @@ class Admin::ResourcesController < ApplicationController
 	end
 	
 	def destroy
-		# @company.resources.destroy(params[:id])
 		if @resource.destroy
 			if @company.bookings.where(resource_id:params[:id]).destroy_all 
 				if @company.complaints.where(resource_id:params[:id]).destroy_all 
-					flash[:success] << "Resource, complaints and bookings are destroyed."
+					flash[:success] = "Resource, complaints and bookings are destroyed."
 					redirect_to admin_dashbord_path
 				else
-					flash[:error]<<"Error while deleting complaints"
+					flash[:error] = "Error while deleting complaints"
 				end
 			else
-				flash[:error] << "Error while deleting bookings"
+				flash[:error] = "Error while deleting bookings"
 			end
 
 		else
-			flash[:error] << "Error while deleting resource"
+			flash[:error] = "Error while deleting resource"
 		end
 		redirect_to request.referer
 	end
@@ -62,16 +57,10 @@ class Admin::ResourcesController < ApplicationController
 	private
 	
 	def resource_params
-		params.require(:resource).permit(:name, :count, :company_id,:time_slot)
+		params.require(:resource).permit(:name, :company_id,:time_slot)
 	end
-
-	# def find_company
-	# 	@company = Company.find(current_employee.company_id)
-	# end
 	
 	def find_resource
-
-		# find_company
 		@resource = @company.resources.find(params[:id])
 	end
 

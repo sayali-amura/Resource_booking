@@ -25,7 +25,4 @@ class Role < ActiveRecord::Base
 		self.department.downcase!
 	end
 
-
-
-
 end

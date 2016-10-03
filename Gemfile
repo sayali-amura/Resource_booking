@@ -8,7 +8,7 @@ gem 'devise'
 gem 'simple_form'
 # gem 'rubocop', '~> 0.43.0', require: false
 
-gem 'cancan'
+gem 'cancancan'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'

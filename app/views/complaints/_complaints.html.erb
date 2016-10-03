@@ -6,52 +6,49 @@
 	<div class="col-md-2">
 	<strong>Comment</strong>
 	</div>
-	<div class="col-md-1">
+	<div class="col-md-2">
 	<strong>Resource Id</strong>
 	</div>
-	<div class="col-md-1">
+	<div class="col-md-2">
 	<strong>Employee Id</strong>
 	</div>
-	<div class="col-md-6">
+	<div class="col-md-4">
 	</div>
 </div>
 <hr>
 <% @complaints.each do |complaint|%>
-<div class="row">
-<hr>
-	<div class="col-md-12">
-		<div class="col-md-2">
-		<%=status_normalization(complaint.status)%>
-		</div>
-		<div class="col-md-2	">
-		<%=complaint.comment%>
-		</div>
-		<div class="col-md-1">
-		<%=complaint.resource_id%>
-		</div>
-		<div class="col-md-1">
-		<%=complaint.employee_id%>
-		</div>
-		<% if complaint.employee_id == current_employee.id and complaint.status!=1%>
+<div class="col-md-12">
+	<div class="col-md-2">
+	<%=status_normalization(complaint.status)%>
+	</div>
+	<div class="col-md-2	">
+	<%=complaint.comment%>
+	</div>
+	<div class="col-md-2">
+	<%=complaint.resource_id%>
+	</div>
+	<div class="col-md-2">
+	<%=complaint.employee_id%>
+	</div>
+	<% if complaint.employee_id == current_employee.id %>
 			<div class="col-md-2">
-				<%= button_to "Delete", [complaint],method: "delete",:class =>"btn btn-danger" %>
+				<%= button_to "Delete", [complaint],method: "delete",:class =>"btn btn-danger", data: {confirm: "Are you sure?"}  %>
 			</div>	
 			<% if complaint.status == 0 %>
 				<div class="col-md-2">
-				<%= button_to "Edit",[:edit, complaint],:class =>"btn btn-info" %>
+				<%= button_to "Edit",[:edit, complaint],:class =>"btn btn-info", :method => "get" %>
 				</div>
 			<% else %>
 				<div class="col-md-2">
-			
+			.
 				</div>
 			<% end %>	
-		<% else %>
-				<div class="col-md-6">
-				
-				</div>
+	<% else %>
+			<div class="col-md-4">
+			.
+			</div>
 
-		<% end %>
-	</div>
+	<% end %>
 </div>
 <% end %>
 </body>	
