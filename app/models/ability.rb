@@ -18,6 +18,7 @@ class Ability
         end
       else
         can [:entry], [Employee]
+        can [:read], [Company] 
       end
 
   end
