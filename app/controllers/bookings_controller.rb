@@ -56,6 +56,7 @@ class BookingsController < ApplicationController
 		@company.bookings.destroy(params[:id])
 		redirect_to bookings_path
 	end
+	
 	def resource_time_slot
 		@resource = @company.resources.find_by_name(params[:name])
 	end
@@ -64,6 +65,7 @@ class BookingsController < ApplicationController
 		resource = @company.resources.find_by_name(params[:resource])
 		@slot_array = resource.available_time_slot params[:date_of_booking]
 	end
+
 	private
 
 	def booking_params
