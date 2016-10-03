@@ -7,6 +7,7 @@ module ComplaintsHelper
 		end
 		@arr
 	end
+
 	def status_normalization(status_code)
 		case 
 		when status_code == 0
@@ -15,6 +16,7 @@ module ComplaintsHelper
 			 "Solved"
 		end
 	end
+	
 	def resource_name(resource_id)
 		@resource = current_employee.company.resources.find(resource_id)
 		@resource.name

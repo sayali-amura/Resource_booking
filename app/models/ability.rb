@@ -10,6 +10,7 @@ class Ability
         if employee.role_id == admin_role_id
           can :manage, [Employee,Resource,Role]
           can [:read,:change_status], [Booking,Complaint]
+          can [:manage], [Company]
         else        
           cannot :change_status, [Booking,Complaint]
           can :manage, [Booking,Complaint] 
@@ -20,6 +21,5 @@ class Ability
         can [:entry], [Employee]
         can [:read], [Company] 
       end
-
   end
 end

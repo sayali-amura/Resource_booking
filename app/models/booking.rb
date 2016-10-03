@@ -36,8 +36,6 @@ class Booking < ActiveRecord::Base
 			else
 				days_booking = self.company.bookings.where(date_of_booking: self.date_of_booking).where.not(id: self.id)
 			end
-			# binding.pry
-			# byebug
 			days_booking.each do |x|
 				unless x.slot != self.slot
 					self.errors[:allocated_slot] << "This slot is already alloted"
