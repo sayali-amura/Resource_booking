@@ -3,19 +3,12 @@ require 'rails_helper'
 
 RSpec.describe Company, type: :model do
   before(:each) do 
-    @company = Company.new(name: "hello1",email: "hello2@gmail.com",phone: "+911254567890",start_time:9.00,end_time: 6.00)
+    @company = Company.new(name: "hello1",email: "hello2@gmail.com",phone: "+911254567890",start_time:9.00,end_time: 18.00)
   end
   context "check Company table do" do 
-    it "check empty object validation" do
-      expect(Company.new).to_not be_valid
-    end
   	it "check if Company table is empty" do
   		companies = Company.all
   		expect(companies.count).to eq(0)
-  	end
-  	it "check whether company count increments" do 
-  		company = Company.create(name: "hello1",email: "hello2@gmail.com",phone: "+911254567890",start_time:9.00,end_time: 6.00)
-  		expect(Company.all.count).to eq(1)
   	end
   end
 
@@ -49,9 +42,22 @@ RSpec.describe Company, type: :model do
     end
   end
 
-  context "check entry count" do 
-    it "add entry to company" do 
-      expect{@company.save}.to change(Company,:count).by(1)
+  context "Associations" do 
+    it "has many role" do 
+      assc = described_class.reflect_on_association(:roles)
+      expect(assc.macro).to eq :has_many
+    end
+    it "has many employee" do 
+      assc = described_class.reflect_on_association(:employees)
+      expect(assc.macro).to eq :has_many
+    end
+    it "has many resources" do 
+      assc = described_class.reflect_on_association(:resources)
+      expect(assc.macro).to eq :has_many
+    end
+    it "has many bookings" do 
+      assc = described_class.reflect_on_association(:bookings)
+      expect(assc.macro).to eq :has_many
     end
   end
 
