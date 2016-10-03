@@ -32,9 +32,11 @@ $(document).on('turbolinks:load',function() {
       }
     });
 
-     // $('#datepicker').datepicker({
-     //  startDate: new Date()
-     // });
+     $('.selectpicker').selectpicker({
+  style: 'btn-info',
+  size: 4
+});
+
 
 
   });
