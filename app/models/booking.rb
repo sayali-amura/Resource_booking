@@ -13,7 +13,7 @@ class Booking < ActiveRecord::Base
 	validates :slot,:date_of_booking,:comment , presence: true
 	validates :status , inclusion: {in:[0,1,2]}
 	validates :resource_id,:employee_id, :slot,:company_id, numericality: { only_integer: true }	
-	validate :is_slot_alloted?,:slot_valid?, :is_date_valid?,:check_holiday?
+	validate :is_slot_alloted?,:slot_valid?, :is_date_valid?,:check_holiday?,:is_slot_already_passed?
 
 	protected
 
@@ -49,6 +49,14 @@ class Booking < ActiveRecord::Base
 	def slot_valid? 
 		if self.slot.to_i > self.resource.available_time_slot(self.date_of_booking).length || self.slot%1!=0
 			self.errors[:slot_invalid] << "This slot is invalid"
+		end
+	end
+
+	def is_slot_already_passed?
+		unless self.date_of_booking != Time.zone.now.beginning_of_day 
+			unless self.resource.next_time_slots.include?(self.resource.timeslots[self.slot])
+				self.errors[:slot_avaibility] << "This slot is already passed"
+			end
 		end
 	end
 
