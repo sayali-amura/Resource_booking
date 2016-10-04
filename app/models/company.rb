@@ -18,7 +18,7 @@ class Company < ActiveRecord::Base
 	VALID_PHONE_REGEX = /\A\+\d+\z/
 	validates :name,:phone,:start_time,:end_time , presence: true
 	validates :phone ,format: {with: VALID_PHONE_REGEX}
-	validates :end_time, presence: true, time: true
+	validates :end_time, presence: {:message => "Enter end time"}, time: true
 
 	before_save :lower_fields
 	after_save :add_defaults
@@ -42,7 +42,11 @@ class Company < ActiveRecord::Base
 			@employee.role_id = @role.id
 			if !@employee.save(validate: false)
 				self.errors[:default] << "Error while adding default employee"
+			else
+				@employee.manager_id = @employee.id
+				@employee.save
 			end
+
 		else
 			self.errors[:default_role] << "Error while adding default role"
 		end
