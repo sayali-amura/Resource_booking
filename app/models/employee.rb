@@ -4,11 +4,11 @@ class Employee < ActiveRecord::Base
 	has_many :bookings
 	has_many :complaints
 	
-  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i,
-    message: "email format" }, uniqueness: true
+  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i,   message: "email format" }, uniqueness: true
   validates :name, :email,:age, :role_id, :manager_id, :date_of_joining, presence: true
   validates :role_id, :manager_id, :age, numericality: { only_integer: true } 
-  
+  validates :password, :password_confirmation, presence: {message: "give pass idiot"}, length: { in: 3..20 }, on: :update
+
   before_save :lower_email
   
 	
@@ -47,11 +47,6 @@ class Employee < ActiveRecord::Base
   # Instead you should use `pending_any_confirmation`.  
   def only_if_unconfirmed
     pending_any_confirmation {yield}
-  end
-
-  def self.edited_employee(employee_parameters,company)
-    employee_parameters[:email]<<"@#{company.name}.com"
-    employee_parameters
   end
 
   private
