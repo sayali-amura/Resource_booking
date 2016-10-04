@@ -21,6 +21,11 @@ RSpec.describe Booking, type: :model do
 	  		@booking.date_of_booking = '2016-09-12'
 	  		expect(@booking).to_not be_valid
 	  	end
+	  	it "empty date" do 
+	  		@booking.date_of_booking = ""
+	  		@booking.errors
+	  		expect(@booking).to_not be_valid
+	  	end
 	  	it "future date" do
 	  		expect(@booking).to be_valid
 	  	end
@@ -28,6 +33,13 @@ RSpec.describe Booking, type: :model do
 	  		@booking.date_of_booking = '2016-09-02'
 	  		expect(@booking).to_not be_valid
 	  	end
+	end
+
+	context "resource" do 
+		it "empty resource" do 
+			@booking.resource_id = ""
+			expect(@booking).to_not be_valid
+		end
 	end
 
 	context "slot" do 
@@ -51,6 +63,7 @@ RSpec.describe Booking, type: :model do
 			expect(@booking).to_not be_valid
 		end
 	end
+
 
   end
 
