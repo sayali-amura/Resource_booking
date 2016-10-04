@@ -26,8 +26,9 @@
 		</div>
 </div>
 <hr>
-
+<ul class="list-group">
 <% @bookings.each do |booking|%>
+<li class="list-group-item">
 	<div class="row">
 		<div class="col-md-12">
 				<div class="col-md-1", align="center">
@@ -82,5 +83,6 @@
 					<% end %> <! end for checking employee id>
 		</div>
 	</div>
+	</li>
 <% end %>
-		
+</ul>

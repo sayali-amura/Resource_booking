@@ -1,6 +1,7 @@
-<b>Pending Bookings</b>
+
 <hr>
 <% if @bookings.any? %>
+<b>Pending Bookings</b>
 	<div class="row">
 	<div class="col-md-12">
 		<div class="col-md-1">
@@ -78,9 +79,9 @@
 <br>
 <br>
 <br>
-<b>Pending Complaints</b>
 <hr>
 <% if @complaints.any? %>
+	<b>Pending Complaints</b>
 	<div class="col-md-12">
 		<div class="col-md-2">
 		<strong>Status</strong>
@@ -141,7 +142,8 @@
 	<% end %>
 
 <% else %>
-<h2>No any pending complaints</h2>
+<h2>No any pending complaints. Relax...!</h2>
+
 <% end %>
 <br>
 <br>
