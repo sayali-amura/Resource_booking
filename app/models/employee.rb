@@ -8,7 +8,7 @@ class Employee < ActiveRecord::Base
     message: "email format" }, uniqueness: true
   validates :name, :email,:age, :role_id, :manager_id, :date_of_joining, presence: true
   validates :role_id, :manager_id, :age, numericality: { only_integer: true } 
-  
+  validates :password, :password_confirmation, presence: {:message => 'no password'}, on: :update
   before_save :lower_email
   
 	
