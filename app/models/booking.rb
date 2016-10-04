@@ -1,18 +1,17 @@
-
 class Booking < ActiveRecord::Base
 	include Admin::ResourcesHelper
 	belongs_to :employee
 	belongs_to :resource
 	belongs_to :company
 
-	before_create :is_slot_alloted?, :slot_valid?, :is_resource_valid?, :is_date_valid?,:check_holiday?
-	before_validation 	:ensure_date_has_value,:add_company_id
+	# before_create :is_slot_alloted?, :slot_valid?, :is_resource_valid?, :is_date_valid?,:check_holiday?
+	before_validation 	:add_company_id
 
 
 	validates :slot,:date_of_booking,:comment , presence: true
 	validates :status , inclusion: {in:[0,1,2]}
 	validates :resource_id,:employee_id, :slot,:company_id, numericality: { only_integer: true }	
-	validate :is_slot_alloted?,:slot_valid?, :is_date_valid?,:check_holiday?,:is_slot_already_passed?
+	validate :is_slot_alloted?,:slot_valid?, :is_date_valid?,:check_holiday?,:is_slot_already_passed?, if: :ensure_dependencies
 
 	protected
 
@@ -64,18 +63,16 @@ class Booking < ActiveRecord::Base
 		true
 	end
 
-	def is_resource_valid?
-		unless (self.company.resources.find(self.resource_id))
-			self.errors[:resource_not_present] << "Requested resource is not available."
-			# raise "resource is not valid"
-		end
-	end
-
-	def ensure_date_has_value
+	def ensure_dependencies
 		unless !self.date_of_booking.blank?
 			self.errors[:date_of_booking] << "=>Date of booking can't be empty"
-			# raise "date_of_booking empty"
+			return false
 		end
+		unless ( self.company.resources.find_by_id(self.resource_id) )
+			self.errors[:resource_not_present] << "=> Requested resource is not available."
+			return false
+		end
+		true
 	end	
 
 	def add_company_id
