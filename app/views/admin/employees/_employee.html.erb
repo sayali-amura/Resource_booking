@@ -12,10 +12,10 @@
 		<strong>Date of Joining</strong>
 		</div>
 		<div class="col-md-1">
-		<strong>Role Id</strong>
+		<strong>Role</strong>
 		</div>
 		<div class="col-md-1">
-		<strong>Manager Id</strong>
+		<strong>Manager</strong>
 		</div>
 		<div class="col-md-2">
 		<strong>Edit Link</strong>
@@ -39,10 +39,10 @@
 			<%=employee.date_of_joining%>
 		</div>
 		<div class="col-md-1">
-			<%=employee.role_id%>
+			<%=role_name(employee.role_id)%>
 		</div>
 		<div class="col-md-1">
-			<%=employee.manager_id%>
+			<%=employee_name(employee.manager_id)%>
 		</div>
 		<div class="col-md-1">
 			<%= button_to "Edit ", edit_admin_employee_path(employee),:class => "btn btn-info", :method => "get" %>
