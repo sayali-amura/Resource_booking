@@ -58,6 +58,7 @@ class Company < ActiveRecord::Base
 			self.errors[:timing] << "=> Provide start and end timing for Company"
 			return false
 		end
+		true
 	end	
 
 end
