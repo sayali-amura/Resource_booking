@@ -37,14 +37,13 @@ class Company < ActiveRecord::Base
 	def add_defaults
 		@role = self.roles.create(designation: "Admin",department: self.name,priority: 0 )
 		if @role.save(validate: false)
-			@employee = self.employees.new(name: "Admin",email: self.email ,age:22,date_of_joining: Date.today,
-									 manager_id: 0)
+			@employee = self.employees.new(name: "Admin",email: self.email ,age:22,date_of_joining: Date.today)
 			@employee.role_id = @role.id
 			if !@employee.save(validate: false)
 				self.errors[:default] << "Error while adding default employee"
 			else
 				@employee.manager_id = @employee.id
-				@employee.save
+				@employee.save(validate: false)
 			end
 
 		else
