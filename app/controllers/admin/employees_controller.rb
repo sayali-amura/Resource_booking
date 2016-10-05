@@ -13,6 +13,7 @@ class Admin::EmployeesController < ApplicationController
 
 	def create
 		@employee = @company.employees.build(employee_params)
+		@employee.skip_password_validation = true
 		if @employee.save
 			redirect_to admin_employees_path
 		else
@@ -34,10 +35,12 @@ class Admin::EmployeesController < ApplicationController
 	end
 
 	def destroy
-		if emp = @company.employees.destroy(params[:id])
-			@company.complaints.where(employee_id:params[:id]).destroy_all
-			@company.bookings.where(employee_id:params[:id]).destroy_all
+		if @company.employees.destroy(params[:id])
+			flash[:success] = "Employee and his bookings and complaints are succeesfully deleted"
+		else
+			flash[:danger] = "Error while deleting employee"
 		end
+
 		redirect_to admin_employees_path
 	end
 	

@@ -23,7 +23,7 @@ class BookingsController < ApplicationController
 			# byebug
 			if  @booking.save
 				flash[:success] = "Your booking is done"
-				redirect_to bookings
+				redirect_to bookings_path
 			else
 				render :new	
 			end

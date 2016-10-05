@@ -16,6 +16,15 @@
 		end
 	end
 
+	def destroy
+		@company = Company.find(params[:id])
+		if @company.destroy
+			flash[:success] = "Company has been successfully deleted"
+		else
+			flash[:danger] = "Error while deleting company"
+		end
+	end
+
 	def show
 		@company = Company.find(params[:id])
 	end

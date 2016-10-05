@@ -37,11 +37,10 @@ class Admin::RolesController < ApplicationController
   def destroy; 
     if @role.destroy
       flash[:success] = "Role has been succefully deleted"
-      redirect_to admin_roles_path
     else
-      flash[:error] = "Error while deleting role."
-      redirect_to admin_roles_path
+      flash[:error] = "Error while deleting role"
     end
+    redirect_to admin_roles_path
   end
 
 
