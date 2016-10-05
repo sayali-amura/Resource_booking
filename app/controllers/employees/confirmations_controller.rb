@@ -3,21 +3,32 @@ class Employees::ConfirmationsController < Devise::ConfirmationsController
   # don't want to enable logged users to access the confirmation page.
   skip_before_filter :require_no_authentication
   skip_before_filter :authenticate_employee!
+  before_action :check, only: [:update]
+
+  def check
+    flag = 0
+    if (params[:employee][:password].empty?)
+        flash[:danger] = "password can not be blank"
+        flag = 1
+    elsif (params[:employee][:password] != params[:employee][:password_confirmation])
+        flash[:danger] = "password and password_confirmation should match"
+        flag = 1
+    elsif (params[:employee][:password].length < 6)
+        flash[:danger] = "password length should be atleast 6"
+        flag = 1
+    end
+    if flag == 1
+      redirect_to :back, params
+    end 
+  end 
+
+
 
   # PUT /resource/confirmation
   def update
     with_unconfirmed_confirmable do
-      if (params[:employee][:password].empty?)
-        @confirmable.errors.add(:password)
-        flash.now[:danger] = "password can not be blank"
-      end
-      if (params[:employee][:password] != params[:employee][:password_confirmation])
-        flash.now[:danger] = "password and password_confirmation should match"
-      end
-
       if @confirmable.has_no_password?
         @confirmable.attempt_set_password(params[:employee])
-
         if @confirmable.valid? and @confirmable.password_match?
           do_confirm
         else
@@ -25,7 +36,6 @@ class Employees::ConfirmationsController < Devise::ConfirmationsController
           @confirmable.errors.clear #so that we wont render :new
         end
       else
-
         @confirmable.errors.add(:email, :password_already_set)
       end
     end
