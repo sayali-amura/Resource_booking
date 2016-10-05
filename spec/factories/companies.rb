@@ -1,11 +1,17 @@
 require 'faker'
 
 FactoryGirl.define do
-	factory :company do |c| 
-		c.name {Faker::Company.name}
-		c.email {Faker::Internet.email}
-		c.phone {Faker::PhoneNumber.cell_phone}
-		c.start_time {Faker::Time.between(DateTime.now - 1, DateTime.now)}
-		c.end_time {Faker::Time.between(DateTime.now - 1, DateTime.now)}
+	factory :company do 
+		name {Faker::Company.name}
+		email {Faker::Internet.email}
+		phone {"+91" << Faker::Number.number(10)}
+		start_time {Faker::Time.between(DateTime.now - 1, DateTime.now)}
+		end_time {Faker::Time.between(DateTime.now - 1, DateTime.now)}
+		after(:create) do |company|
+			create_list(:role, 3, company: company)
+		end
+
+
 	end
+
 end
