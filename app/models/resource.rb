@@ -1,7 +1,7 @@
 class Resource < ActiveRecord::Base
 	belongs_to :company
-	has_many :bookings
-	has_many :complaints
+	has_many :bookings, dependent: :destroy
+	has_many :complaints, dependent: :destroy
 	validates :time_slot, presence:true
 	validates :name, presence: {message: "name should be present"}, uniqueness: { scope: :company_id,  message: "should have one per company" }
 
@@ -32,6 +32,7 @@ class Resource < ActiveRecord::Base
 	def available_time_slot date_of_booking
 		if date_of_booking.gsub(/[-]+/,"").to_i != Time.zone.now.strftime("%Y%m%d").to_i
 			resource_slot = self.timeslots
+			byebug
 			if self.bookings.where(date_of_booking:date_of_booking)
 				bookings_of_day = self.bookings.where(date_of_booking: date_of_booking)
 				bookings_of_day.each do |x|

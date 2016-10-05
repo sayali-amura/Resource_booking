@@ -6,11 +6,11 @@ class TimeValidator < ActiveModel::EachValidator
   end
 end
 class Company < ActiveRecord::Base
-	has_many :roles
-	has_many :resources
-	has_many :employees
-	has_many :bookings
-	has_many :complaints
+	has_many :roles, dependent: :destroy
+	has_many :resources, dependent: :destroy
+	has_many :employees, dependent: :destroy
+	has_many :bookings, dependent: :destroy
+	has_many :complaints, dependent: :destroy
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	
 	validates :email, presence: true, length: { maximum: 255 }, format: {with: VALID_EMAIL_REGEX },

@@ -4,8 +4,8 @@ class Employee < ActiveRecord::Base
 
 	belongs_to :role
 	belongs_to :company
-	has_many :bookings
-	has_many :complaints
+	has_many :bookings, dependent: :destroy
+	has_many :complaints, dependent: :destroy
 	
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i,   message: "email format" }, uniqueness: true
   validates :name, :email,:age, :role_id, :manager_id, :date_of_joining, presence: true
