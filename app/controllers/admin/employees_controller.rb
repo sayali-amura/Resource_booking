@@ -26,6 +26,7 @@ class Admin::EmployeesController < ApplicationController
 	def edit;	end
 	
 	def update 
+		@employee.skip_password_validation = true
 			if @employee.update_attributes(employee_params)
 				redirect_to admin_employees_path
 			else

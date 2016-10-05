@@ -17,7 +17,7 @@ class Company < ActiveRecord::Base
 																uniqueness: { case_sensitive: false }
 	VALID_PHONE_REGEX = /\A\+\d+\z/
 	validates :name,:phone,:start_time,:end_time , presence: true
-	validates :phone ,format: {with: VALID_PHONE_REGEX,message: "Not a valid phone number format"}
+	validates :phone ,format: {with: VALID_PHONE_REGEX,message: "Not a valid phone number format"}, uniqueness: true
 	validates :end_time, presence: true, time: true, if: :ensure_timing_has_value
 
 	before_save :lower_fields
@@ -39,6 +39,7 @@ class Company < ActiveRecord::Base
 		if @role.save(validate: false)
 			@employee = self.employees.new(name: "Admin",email: self.email ,age:22,date_of_joining: Date.today,
 									 manager_id: 0)
+			@employee.skip_password_validation = true
 			@employee.role_id = @role.id
 			if !@employee.save(validate: false)
 				self.errors[:default] << "Error while adding default employee"

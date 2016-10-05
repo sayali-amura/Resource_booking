@@ -15,7 +15,7 @@ class Admin::RolesController < ApplicationController
     @role =  @company.roles.build(role_params)
   	if @role.save
       flash[:success] = "Role has successfully created"
-  		redirect_to ["admin",@role]
+  		redirect_to admin_roles_path
   	else
   		render :new
   	end
@@ -38,8 +38,8 @@ class Admin::RolesController < ApplicationController
 
   def destroy; 
     if @role.destroy
-      
       flash[:success] = "Role has been succefully deleted"
+      redirect_to admin_roles_path
     else
       flash[:error] = "Error while deleting role."
       redirect_to admin_roles_path

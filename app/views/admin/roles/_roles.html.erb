@@ -1,7 +1,7 @@
 
 <div class="row">
 <hr>
-<div class="col-md-12" align="center">
+<div class="col-md-12 col-md-offset-3" align="center">
 	<div class="col-md-2">
 	<strong>Priority</strong>
 	</div>
@@ -14,10 +14,12 @@
 	
 </div>
 </div>
+
+<ul class="list-group">
 <% @roles.sort_by(&:priority).each do |role|%>
+<li class="list-group-item">
 <div class="row" align="center">
-<hr>
-<div class="col-md-12">
+<div class="col-md-12 col-md-offset-3">
 	<div class="col-md-2">
 		<%= role.priority%>
 	</div>
@@ -38,4 +40,6 @@
 	<% end %>
 </div>
 </div>
+</li>
 <% end %>
+</ul>
