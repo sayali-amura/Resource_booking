@@ -1,7 +1,7 @@
 class Role < ActiveRecord::Base
 	belongs_to :company
 	has_many :employees
-	# validates :priority ,inclusion: {in: 0..19}
+
 	validates :designation, :department, :priority, presence: true
 	validates :priority, numericality: { only_integer: true, greater_than: 0, less_than: 2147483647 }
 
@@ -12,6 +12,17 @@ class Role < ActiveRecord::Base
 	validate :is_name_admin?
 
 	before_validation :lower_fields
+
+	after_destroy :add_default_role
+
+	def add_default_role 
+		empty_role_id = self.company.roles.find_by_designation("none").id
+		self.employees.each do |x| 
+			x.skip_password_validation = true
+			x.update(role_id: empty_role_id)
+			byebug
+		end
+	end
 
 	private 
 
