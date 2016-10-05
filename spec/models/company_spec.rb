@@ -11,6 +11,13 @@ RSpec.describe Company, type: :model do
   		expect(companies.count).to eq(0)
   	end
   end
+  context "check presence" do 
+    it "empty start_time" do 
+      @company.start_time = ""
+      puts @company.errors.inspect
+      expect(@company).to_not be_valid
+    end
+  end
 
   context "column datatype validation" do
   	context "check phone column" do 

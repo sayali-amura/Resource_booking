@@ -1,5 +1,6 @@
 <b>Pending Bookings</b>
-<% if @company.bookings.any? %>
+<hr>
+<% if @bookings.any? %>
 	<div class="row">
 	<div class="col-md-12">
 		<div class="col-md-1">
@@ -78,7 +79,8 @@
 <br>
 <br>
 <b>Pending Complaints</b>
-<% if @company.complaints.any? %>
+<hr>
+<% if @complaints.any? %>
 	<div class="col-md-12">
 		<div class="col-md-2">
 		<strong>Status</strong>
@@ -90,7 +92,7 @@
 		<strong>Resource Name</strong>
 		</div>
 		<div class="col-md-1">
-		<strong>Employee Id</strong>
+		<strong>Employee</strong>
 		</div>
 		<div class="col-md-1">
 		<%= label_tag(:status_solve, "Solve") %>

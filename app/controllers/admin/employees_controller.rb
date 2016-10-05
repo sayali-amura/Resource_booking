@@ -1,6 +1,6 @@
 class Admin::EmployeesController < ApplicationController
-	before_action :find_employee, only: [:show, :edit, :update]
-	before_action :find_company, only: [:index, :create, :dashbord,:change_status,:destroy]
+	before_action :find_company
+	before_action :find_another_employee, only: [:show,:edit, :update]
 	before_action :find_complaints, only: [ :dashbord, :change_status]
 
 	def index
@@ -11,9 +11,9 @@ class Admin::EmployeesController < ApplicationController
 	end
 
 	def create
-		@employee = @company.employees.build(Employee.edited_employee( employee_params,@company ) )
+		@employee = @company.employees.build(employee_params)
 		if @employee.save
-			redirect_to ["admin",@employee]
+			redirect_to admin_employees_path
 		else
 			render :new
 		end
@@ -26,11 +26,11 @@ class Admin::EmployeesController < ApplicationController
 	def edit;	end
 	
 	def update 
-		if @employee.update(employee_params)
-			redirect_to ["admin",@employee]
-		else
-			render :edit
-		end
+			if @employee.update_attributes(employee_params)
+				redirect_to admin_employees_path
+			else
+				render :edit
+			end
 	end
 
 	def destroy
@@ -73,12 +73,17 @@ class Admin::EmployeesController < ApplicationController
 		
 	end
 	private
+	
 	def employee_params
 		params.require(:employee).permit(:name, :email,:age, :date_of_joining, :role_id, :manager_id)
 	end
+	
 	def find_complaints
 		@complaints = @company.complaints
 	end
-
+	
+	def find_another_employee
+		@employee = @company.employees.find(params[:id])
+	end
 end
 

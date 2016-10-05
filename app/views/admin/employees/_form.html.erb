@@ -1,6 +1,7 @@
 
 <%= render "error" %>
 
+
 <%list_roles%>
 <% if !@roles.empty?%>
 	<div class="row">
@@ -9,14 +10,17 @@
 			<%=f.label :Name%>
 			<%=f.text_field :name , class: "form-control", required: true%>
 			<%=f.label :Email%>
-			<div class="input-group">
 	  			<%=f.text_field :email , class: "form-control",required: true%>
-	  			<span class="input-group-addon" id="basic-addon2"><%= company_domain %></span>
-			</div>
 			<br>
+			<div class="col-md-12">
 			<div class="col-md-6">
-				<%=f.label :Age%>
-				<%=f.text_field :age , class: "form-control",required: true%>	
+				<%list_employees%>		
+				<%=f.label :Manager%>
+				<%= f.select(:manager_id) do %>
+					  <% @employees.each do |c| %>
+					    <%= content_tag(:option, c.first, value: c.last) %>
+					  <% end %>
+				<% end %>
 			</div>
 			<div class="col-md-6">
 				<%=f.label :RoleId%>
@@ -26,17 +30,24 @@
 				  <% end %>
 				<% end %>
 			</div>
-			<%list_employees%>		
-			<%=f.label :Manager%>
-			<%= f.select(:manager_id) do %>
-				  <% @employees.each do |c| %>
-				    <%= content_tag(:option, c.first, value: c.last) %>
-				  <% end %>
-			<% end %>
-			<%=f.label "Date Of Joining" %>
-			<%=f.date_field :date_of_joining , class: "form-control",required: true%>
-			<%= f.submit 'Save Employee', class: "btn btn-primary btn-default"%>
-	<% end %>
+			</div>
+			<div class="col-md-12">
+				
+			<div class="col-md-6">
+				<%=f.label :Age%>
+				<%=f.text_field :age , class: "form-control",required: true%>	
+				
+			</div>
+			<div class="col-md-6">
+				<%=f.label "Date Of Joining" %>
+				<%=f.date_field :date_of_joining ,required: true%>
+			</div>
+
+			</div>
+			
+				<%= f.submit 'Save Employee', class: "btn btn-primary btn-default"%>
+			
+		<% end %>
 	</div>
 	</div>
 <% else %>

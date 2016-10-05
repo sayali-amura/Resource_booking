@@ -38,6 +38,7 @@ class Admin::RolesController < ApplicationController
 
   def destroy; 
     if @role.destroy
+      
       flash[:success] = "Role has been succefully deleted"
     else
       flash[:error] = "Error while deleting role."

@@ -7,7 +7,7 @@ gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'devise'
 gem 'simple_form'
 # gem 'rubocop', '~> 0.43.0', require: false
-
+gem 'bootstrap-select-rails'
 gem 'cancancan'
 
 # Use sqlite3 as the database for Active Record

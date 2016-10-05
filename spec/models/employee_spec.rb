@@ -45,8 +45,53 @@ RSpec.describe Employee, type: :model do
 	    expect(assc.macro).to eq :belongs_to
 	end	
   end
+  context "validations" do 
+  	it "has to have name" do 
+  		@employee.name = nil
+  		expect(@employee).to_not be_valid
+  	end
+  	it "has to have email" do 
+  		@employee.email = nil
+  		expect(@employee).to be_invalid
+  	end
+  	it "has to have age" do 
+  		@employee.age = nil
+  		expect(@employee).to be_invalid
+  	end
+  	it "has to have role_id" do 
+  		@employee.role_id = nil
+  		expect(@employee).to be_invalid
+  	end
+  	it "has to have manager_id" do 
+  		@employee.manager_id = nil
+  		expect(@employee).to be_invalid
+  	end
+  	it "has to have date_of_joining" do 
+  		@employee.date_of_joining = nil
+  		expect(@employee).to be_invalid
+  	end
+  	it "has integer age" do
+  		@employee.age = "abcd"
+  		expect(@employee).to_not be_valid 
+  	end
+  	it "has integer value for role_id" do
+  		@employee.role_id = "aaa"
+  		expect(@employee).to_not be_valid 
+  	end
+  	it "has integer value for manager_id" do
+  		@employee.manager_id = "abcd"
+  		expect(@employee.manager_id.class).to_not be(Integer) 
+  	end
+  	it "has valid email format" do
+  		@employee.email = "hello @foo"
+  		expect(@employee.email).to_not match(/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i)
+  	end
+  	it "is expected to be an Employee" do 
+  		expect(@employee).to be_an_instance_of(Employee)
+  	end
+
+  end
+
+
 end
 
-
-
- end

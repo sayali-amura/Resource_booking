@@ -1,6 +1,4 @@
 <h2>Account Activation</h2>
-
-
 <%= simple_form_for(resource, as: resource_name, url: update_employee_confirmation_path, html: { :method => 'patch' },:id => 'activation-form') do |f| %>
   <%= devise_error_messages! %>
   <%= f.error_notification %>

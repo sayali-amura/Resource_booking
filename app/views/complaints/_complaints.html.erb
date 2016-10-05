@@ -7,10 +7,10 @@
 	<strong>Comment</strong>
 	</div>
 	<div class="col-md-2">
-	<strong>Resource Id</strong>
+	<strong>Resource</strong>
 	</div>
 	<div class="col-md-2">
-	<strong>Employee Id</strong>
+	<strong>Employee</strong>
 	</div>
 	<div class="col-md-4">
 	</div>
@@ -25,10 +25,10 @@
 	<%=complaint.comment%>
 	</div>
 	<div class="col-md-2">
-	<%=complaint.resource_id%>
+	<%=	@company.resources.find(complaint.resource_id).name%>
 	</div>
 	<div class="col-md-2">
-	<%=complaint.employee_id%>
+	<%= @company.employees.find(complaint.employee_id).name%>
 	</div>
 	<% if complaint.employee_id == current_employee.id %>
 			<div class="col-md-1">

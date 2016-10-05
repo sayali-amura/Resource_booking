@@ -32,9 +32,6 @@ $(document).on('turbolinks:load',function() {
       }
     });
 
-     // $('#datepicker').datepicker({
-     //  startDate: new Date()
-     // });
 
 
   });

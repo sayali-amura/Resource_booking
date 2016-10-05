@@ -17,8 +17,8 @@ class Company < ActiveRecord::Base
 																uniqueness: { case_sensitive: false }
 	VALID_PHONE_REGEX = /\A\+\d+\z/
 	validates :name,:phone,:start_time,:end_time , presence: true
-	validates :phone ,format: {with: VALID_PHONE_REGEX}
-	validates :end_time, presence: {:message => "Enter end time"}, time: true
+	validates :phone ,format: {with: VALID_PHONE_REGEX,message: "Not a valid phone number format"}
+	validates :end_time, presence: true, time: true, if: :ensure_timing_has_value
 
 	before_save :lower_fields
 	after_save :add_defaults
@@ -37,7 +37,7 @@ class Company < ActiveRecord::Base
 	def add_defaults
 		@role = self.roles.create(designation: "Admin",department: self.name,priority: 0 )
 		if @role.save(validate: false)
-			@employee = self.employees.new(name: "Admin",email: "admin@#{self.name}.com",age:22,date_of_joining: Date.today,
+			@employee = self.employees.new(name: "Admin",email: self.email ,age:22,date_of_joining: Date.today,
 									 manager_id: 0)
 			@employee.role_id = @role.id
 			if !@employee.save(validate: false)
@@ -52,6 +52,12 @@ class Company < ActiveRecord::Base
 		end
 	end
 
+	def ensure_timing_has_value
+		if (self.start_time.blank? || self.end_time.blank?)
+			self.errors[:timing] << "=> Provide start and end timing for Company"
+			return false
+		end
+	end	
 
 end
 

@@ -24,7 +24,7 @@ class Admin::ResourcesController < ApplicationController
 
 	def show
 		resource = resource_array.collect {|x|  x[1] }
-		if !resource.include?(params[:resource_id])
+		if !resource.include?(params[:id].to_i)
 			flash[:danger] = "no such resource"
 			redirect_to root_path
 		else

@@ -17,19 +17,17 @@ class BookingsController < ApplicationController
 	end
 
 	def create
-		begin
+		
 			@booking = current_employee.bookings.build(booking_params)
 			@booking.company_id = current_employee.company_id
+			# byebug
 			if  @booking.save
-
 				flash[:success] = "Your booking is done"
 				redirect_to @booking
 			else
 				render :new	
 			end
-		rescue
-			render :new
-		end
+		
 	end
 
 	def show
