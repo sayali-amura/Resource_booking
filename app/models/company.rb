@@ -22,7 +22,7 @@ class Company < ActiveRecord::Base
 	validates :end_time, presence: true, time: true, if: :ensure_timing_has_value
 
 	before_save :lower_fields
-	after_save :add_defaults
+	after_save :add_defaults, :add_empty_role
 
 	def is_resource_available?
 		(self.resources.any?) ? true : false
@@ -35,11 +35,16 @@ class Company < ActiveRecord::Base
 		self.name.downcase!
 	end
 
+
+	def add_empty_role
+		empty_role = self.roles.build(designation: "none",department: self.name,priority: 0)
+		empty_role.save(validate: false)
+	end
+
 	def add_defaults
-		@role = self.roles.create(designation: "admin",department: self.name,priority: 0 )
+		@role = self.roles.create(designation: "admin",department: self.name,priority: 1 )
 		if @role.save(validate: false)
-			@employee = self.employees.new(name: "admin",email: self.email ,age:22,date_of_joining: Date.today,
-									 manager_id: 0)
+			@employee = self.employees.new(name: "admin",email: self.email ,age:22,date_of_joining: Date.today)
 			@employee.role_id = @role.id
 			if !@employee.save(validate: false)
 				self.errors[:default] << "Error while adding default employee"
