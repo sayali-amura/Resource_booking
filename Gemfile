@@ -42,10 +42,12 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'w'
 group :development, :test do
   gem 'rspec-rails', '~> 3.5'
-  gem 'factory_girl_rails'
+  # gem 'factory_girl_rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   # gem 'byebug'
-
+  gem 'faker', '~> 1.6', '>= 1.6.6'
+  gem "factory_girl_rails", "~> 4.0"
+  gem 'as-duration'
 end
 
 group :development do
