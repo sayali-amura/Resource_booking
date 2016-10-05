@@ -3,7 +3,7 @@ require 'rails_helper'
 
 RSpec.describe Company, type: :model do
   before(:each) do 
-    @company = Company.new(name: "hello1",email: "hello2@gmail.com",phone: "+911254567890",start_time:9.00,end_time: 18.00)
+    @company = Company.new(name: "hello1",email: "hello2@gmail.com",phone: "+911254567890",start_time:Time.new(2016,3,1,9,0),end_time:Time.new(2016,3,1,18,0))
   end
   context "check Company table do" do 
   	it "check if Company table is empty" do
