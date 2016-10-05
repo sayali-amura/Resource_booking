@@ -10,4 +10,4 @@ FactoryGirl.define do
 		role
 		company
 	end
-end 
+end

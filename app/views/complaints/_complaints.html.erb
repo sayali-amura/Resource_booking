@@ -15,11 +15,8 @@
 	<div class="col-md-4">
 	</div>
 </div>
-<hr>
 
-<ul class="list-group">
 <% @complaints.each do |complaint|%>
-<li class="list-group-item">
 <div class="col-md-12">
 	<div class="col-md-2">
 	<%=status_normalization(complaint.status)%>
@@ -53,6 +50,5 @@
 
 	<% end %>
 </div>
-</li>
+
 <% end %>
-</ul>
