@@ -9,22 +9,31 @@ class Role < ActiveRecord::Base
 	validates :priority, uniqueness:{scope: :company_id, message: "Priority should be uniq across the company"}
 
 
-	validate :is_name_admin?
+	validate :is_name_admin?, :is_none_fields
 
 	before_validation :lower_fields
 
 	after_destroy :add_default_role
+	
+	private 
 
-	def add_default_role 
-		empty_role_id = self.company.roles.find_by_designation("none").id
-		self.employees.each do |x| 
-			x.skip_password_validation = true
-			x.update(role_id: empty_role_id)
-			byebug
+	def is_none_fields
+		unless designation!="none" || department!="none"
+			self.errors[:none] << "=> You can't create none role"
 		end
 	end
 
-	private 
+	def add_default_role 
+		empty_role_id = self.company.roles.find_by_designation("none").id
+		if self.employees.any? 
+			self.employees.each do |x| 
+				x.skip_password_validation = true
+				x.update(role_id: empty_role_id)
+				byebug
+			end
+		end
+	end
+
 
 	def is_name_admin?
 		unless self.designation != 'admin' 
