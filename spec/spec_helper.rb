@@ -96,5 +96,5 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
-  require 'support/factory_girl'
+  # require 'support/factory_girl'
 end

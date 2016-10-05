@@ -3,18 +3,24 @@ require 'rails_helper'
 
 RSpec.describe Company, type: :model do
   before(:each) do 
-    @company = Company.new(name: "hello1",email: "hello2@gmail.com",phone: "+911254567890",start_time:9.00,end_time: 18.00)
+    @company = Company.new(name: "hello1",email: "Hello2@gmail.com",phone: "+911254567890",start_time:"9:00",end_time: "18:00")
   end
-  context "check Company table do" do 
-  	it "check if Company table is empty" do
-  		companies = Company.all
-  		expect(companies.count).to eq(0)
-  	end
+  context "check methods" do 
+    it "add two default role" do 
+      @company.save
+      puts @company.roles.inspect
+      expect(@company.roles.count).to eq(2)
+    end
+    it "lower fields" do
+      @company.save
+      expect(@company.email).to  eq("hello2@gmail.com")
+    end
   end
+
   context "check presence" do 
     it "empty start_time" do 
       @company.start_time = ""
-      puts @company.errors.inspect
+      # puts @company.errors.inspect
       expect(@company).to_not be_valid
     end
   end
