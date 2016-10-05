@@ -17,17 +17,14 @@ class BookingsController < ApplicationController
 	end
 
 	def create
-		
-			@booking = current_employee.bookings.build(booking_params)
-			@booking.company_id = current_employee.company_id
-			# byebug
-			if  @booking.save
-				flash[:success] = "Your booking is done"
-				redirect_to bookings_path
-			else
-				render :new	
-			end
-		
+		@booking = current_employee.bookings.build(booking_params)
+		@booking.company_id = current_employee.company_id
+		if  @booking.save
+			flash[:success] = "Your booking is done"
+			redirect_to bookings_path
+		else
+			render :new	
+		end
 	end
 
 	def show
@@ -44,13 +41,19 @@ class BookingsController < ApplicationController
 			flash[:success] = "Your booking is successfully updated"
 			redirect_to @booking
 		else
+			flash[:success] = "Error while updating booking"
 			render :edit
 		end
 	end
 
 	def destroy
-		@company.bookings.destroy(params[:id])
-		redirect_to bookings_path
+		if @company.bookings.destroy(params[:id])
+			flash[:success] = "Booking is successfully delted"
+		else
+			flash[:success] = "Error while deleting booking"
+		end
+			redirect_to bookings_path
+
 	end
 	
 	def resource_time_slot
