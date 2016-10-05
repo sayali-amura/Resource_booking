@@ -7,7 +7,8 @@ class Employee < ActiveRecord::Base
 	has_many :bookings, dependent: :destroy
 	has_many :complaints, dependent: :destroy
 	
-  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i,   message: "email format" }, uniqueness: true
+  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i,   message: "email format" },
+                       uniqueness:{scope: :company_id, message: "Email should be unique across the company"}
   validates :name, :email,:age, :role_id, :manager_id, :date_of_joining, presence: true
   validates :role_id, :manager_id, :age, numericality: { only_integer: true, less_than: 2147483647, greater_than: 1}
   validates :password, :password_confirmation, presence: {:message => 'no password'}, unless: :skip_password_validation
