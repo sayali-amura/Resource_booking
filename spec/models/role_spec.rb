@@ -73,7 +73,6 @@ RSpec.describe Role, type: :model do
   #       end
   #     end
   #   end
-
   #   context "valid fields" do 
   #     context "priority" do 
   #       it "greater than 0" do 
@@ -86,7 +85,12 @@ RSpec.describe Role, type: :model do
   #   end
   # end
 #belongs_to :company
- # has_many :employees
+  # context "delete" do 
+  #   it "delete role " do 
+  #     @role.save
+  #     @role.destroy
+  #   end
+  # end
   context "Asscociations" do 
     it "belongs to company" do 
       assc = described_class.reflect_on_association(:company)

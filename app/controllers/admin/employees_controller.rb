@@ -36,19 +36,17 @@ class Admin::EmployeesController < ApplicationController
 	end
 
 	def destroy
-		@admin = @company.employees.where(name:"admin").first
+		@admin = @company.employees.find(name:"admin")
 		if @company.employees.destroy(params[:id])
 			flash[:success] = "Employee and his bookings and complaints are succeesfully deleted"
 			@company.employees.where(manager_id:params[:id]).each do | record_emp |
 				record_emp.manager_id = @admin.id
 				record_emp.skip_password_validation = true
-				a = record_emp.save
+				record_emp.save
 			end
 		else
 			flash[:danger] = "Error while deleting employee"
 		end
-
-
 		redirect_to admin_employees_path
 	end
 	
