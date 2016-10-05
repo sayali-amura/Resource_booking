@@ -6,6 +6,7 @@ class Employees::ConfirmationsController < Devise::ConfirmationsController
   before_action :check, only: [:update]
 
   def check
+
     flag = 0
     if (params[:employee][:password].empty?)
         flash[:danger] = "password can not be blank"
@@ -29,6 +30,7 @@ class Employees::ConfirmationsController < Devise::ConfirmationsController
     with_unconfirmed_confirmable do
       if @confirmable.has_no_password?
         @confirmable.attempt_set_password(params[:employee])
+        binding.pry
         if @confirmable.valid? and @confirmable.password_match?
           do_confirm
         else
