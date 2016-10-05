@@ -21,7 +21,9 @@ class Admin::RolesController < ApplicationController
   	end
   end
 
-  def show;   end
+  def show
+    redirect_to admin_roles_path
+  end
 
   def edit;   end
 

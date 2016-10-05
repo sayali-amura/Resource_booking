@@ -43,7 +43,11 @@ class Company < ActiveRecord::Base
 			@employee.role_id = @role.id
 			if !@employee.save(validate: false)
 				self.errors[:default] << "Error while adding default employee"
+			else
+				@employee.manager_id = @employee.id
+				@employee.save
 			end
+
 		else
 			self.errors[:default_role] << "Error while adding default role"
 		end

@@ -10,7 +10,8 @@ class Booking < ActiveRecord::Base
 
 	validates :slot,:date_of_booking,:comment , presence: true
 	validates :status , inclusion: {in:[0,1,2]}
-	validates :resource_id,:employee_id, :slot,:company_id, numericality: { only_integer: true }	
+	validates :resource_id,:employee_id,:company_id, numericality: { only_integer: true, less_than: 2147483647, greater_than: 0 }
+	validates :slot, numericality: 	{ only_integer: true, less_than: 2147483647, greater_than_or_equal_to: 0 }
 	validate :is_slot_alloted?,:slot_valid?, :is_date_valid?,:check_holiday?,:is_slot_already_passed?, if: :ensure_dependencies
 
 	protected

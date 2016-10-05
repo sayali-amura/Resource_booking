@@ -3,7 +3,7 @@ class Role < ActiveRecord::Base
 	has_many :employees
 	# validates :priority ,inclusion: {in: 0..19}
 	validates :designation, :department, :priority, presence: true
-	validates :priority, numericality: { only_integer: true, greater_than: 0 }
+	validates :priority, numericality: { only_integer: true, greater_than: 0, less_than: 2147483647 }
 
 	validates :designation, uniqueness:{scope: [:company_id,:department], message: "Designation in department should be unique"}
 	validates :priority, uniqueness:{scope: :company_id, message: "Priority should be uniq across the company"}

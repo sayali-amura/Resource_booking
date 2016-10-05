@@ -7,8 +7,17 @@ class Employees::ConfirmationsController < Devise::ConfirmationsController
   # PUT /resource/confirmation
   def update
     with_unconfirmed_confirmable do
+      if (params[:employee][:password].empty?)
+        @confirmable.errors.add(:password)
+        flash.now[:danger] = "password can not be blank"
+      end
+      if (params[:employee][:password] != params[:employee][:password_confirmation])
+        flash.now[:danger] = "password and password_confirmation should match"
+      end
+
       if @confirmable.has_no_password?
         @confirmable.attempt_set_password(params[:employee])
+
         if @confirmable.valid? and @confirmable.password_match?
           do_confirm
         else
@@ -16,6 +25,7 @@ class Employees::ConfirmationsController < Devise::ConfirmationsController
           @confirmable.errors.clear #so that we wont render :new
         end
       else
+
         @confirmable.errors.add(:email, :password_already_set)
       end
     end

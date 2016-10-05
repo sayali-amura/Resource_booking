@@ -2,36 +2,57 @@
 <%= render "error" %>
 
 
-<div class="row">
-<div class="col-md-6 col-md-offset-3">
-	<%= form_for ['admin', @employee] do | f |%>
-		<%=f.label :Name%>
-		<%=f.text_field :name , class: "form-control", required: true%>
-		<%=f.label :Email%>
-  			<%=f.text_field :email , class: "form-control",required: true%>
-		<br>
-		<div class="col-md-6">
-			<%=f.label :Age%>
-			<%=f.text_field :age , class: "form-control",required: true%>	
-		</div>
-		<%list_roles%>
-		<div class="col-md-6">
-			<%=f.label :RoleId%>
-			<%= f.select(:role_id) do %>
-			  <% @roles.each do |c| %>
-			    <%= content_tag(:option, c.first, value: c.last) %>
-			  <% end %>
-			<% end %>
-		</div>
-		<%list_employees%>		
-		<%=f.label :Manager%>
-		<%= f.select(:manager_id) do %>
-			  <% @employees.each do |c| %>
-			    <%= content_tag(:option, c.first, value: c.last) %>
-			  <% end %>
+<%list_roles%>
+<% if !@roles.empty?%>
+	<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<%= form_for ['admin', @employee] do | f |%>
+			<%=f.label :Name%>
+			<%=f.text_field :name , class: "form-control", required: true%>
+			<%=f.label :Email%>
+	  			<%=f.text_field :email , class: "form-control",required: true%>
+			<br>
+			<div class="col-md-12">
+			<div class="col-md-6">
+				<%list_employees%>		
+				<%=f.label :Manager%>
+				<%= f.select(:manager_id) do %>
+					  <% @employees.each do |c| %>
+					    <%= content_tag(:option, c.first, value: c.last) %>
+					  <% end %>
+				<% end %>
+			</div>
+			<div class="col-md-6">
+				<%=f.label :RoleId%>
+				<%= f.select(:role_id) do %>
+				  <% @roles.each do |c| %>
+				    <%= content_tag(:option, c.first, value: c.last) %>
+				  <% end %>
+				<% end %>
+			</div>
+			</div>
+			<div class="col-md-12">
+				
+			<div class="col-md-6">
+				<%=f.label :Age%>
+				<%=f.text_field :age , class: "form-control",required: true%>	
+				
+			</div>
+			<div class="col-md-6">
+				<%=f.label "Date Of Joining" %>
+				<%=f.date_field :date_of_joining ,required: true%>
+			</div>
+
+			</div>
+			
+				<%= f.submit 'Save Employee', class: "btn btn-primary btn-default"%>
+			
 		<% end %>
-		<%=f.label "Date Of Joining" %>
-		<%=f.date_field :date_of_joining , class: "form-control",required: true%>
-		
-		<%= f.submit 'Save Employee', class: "btn btn-primary btn-default"%>
+	</div>
+	</div>
+<% else %>
+	<h4>There are currently no roles in company</h4>
+	<div class="col-md-2">
+	<%= button_to "Add Roles", new_admin_role_path ,:class => "btn btn-info", :method => "get" %>
+	</div>
 <% end %>

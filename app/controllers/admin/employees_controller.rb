@@ -2,7 +2,6 @@ class Admin::EmployeesController < ApplicationController
 	before_action :find_company
 	before_action :find_another_employee, only: [:show,:edit, :update]
 	before_action :find_complaints, only: [ :dashbord, :change_status]
-	load_and_authorize_resource :employee
 
 	def index
 		@employees = @company.employees
@@ -21,7 +20,9 @@ class Admin::EmployeesController < ApplicationController
 		end
 	end 
 
-	def show;	end
+	def show
+		redirect_to admin_employees_path
+	end
 
 	def edit;	end
 	
@@ -35,12 +36,17 @@ class Admin::EmployeesController < ApplicationController
 	end
 
 	def destroy
+		@admin = @company.employees.find(name:"admin")
 		if @company.employees.destroy(params[:id])
 			flash[:success] = "Employee and his bookings and complaints are succeesfully deleted"
+			@company.employees.where(manager_id:params[:id]).each do | record_emp |
+				record_emp.manager_id = @admin.id
+				record_emp.skip_password_validation = true
+				record_emp.save
+			end
 		else
 			flash[:danger] = "Error while deleting employee"
 		end
-
 		redirect_to admin_employees_path
 	end
 	

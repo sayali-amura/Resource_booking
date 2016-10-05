@@ -1,6 +1,6 @@
 class Admin::ResourcesController < ApplicationController
 	before_action :find_company
-	before_action :find_resource, only: [:show, :edit, :update, :destroy]
+	before_action :find_resource, only: [:edit, :update, :destroy]
 
 	load_and_authorize_resource :resource
 	def index
@@ -22,7 +22,15 @@ class Admin::ResourcesController < ApplicationController
 	end
 	
 
-	def show; end
+	def show
+		resource = resource_array.collect {|x|  x[1] }
+		if !resource.include?(params[:id].to_i)
+			flash[:danger] = "no such resource"
+			redirect_to root_path
+		else
+			redirect_to :admin_resources
+		end
+	end
 	
 	def edit; 	end
 

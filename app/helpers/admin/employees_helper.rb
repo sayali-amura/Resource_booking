@@ -20,4 +20,10 @@ module Admin::EmployeesHelper
 			@employees << [emp.name, emp.id]
 		end
 	end
+	def role_name(role_id)
+		name = current_employee.company.roles.find(role_id).designation
+	end
+	def employee_name(eid)
+		name = current_employee.company.employees.find(eid).name
+	end
 end
