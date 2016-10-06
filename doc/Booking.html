@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Booking
+  
+    &mdash; Documentation by YARD 0.9.5
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "Booking";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index (B)</a> &raquo;
+    
+    
+    <span class="title">Booking</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <iframe id="search_frame" src="class_list.html"></iframe>
+
+      <div id="content"><h1>Class: Booking
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">ActiveRecord::Base</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActiveRecord::Base</li>
+          
+            <li class="next">Booking</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  <dl>
+      <dt>Includes:</dt>
+      <dd>Admin::ResourcesHelper</dd>
+  </dl>
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>app/models/booking.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Class Booking provides validations and associations to bookings</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Author:</p>
+<ul class="author">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'>
+<p>Amrut Jadhav amrut@amuratech.com</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#ongoing_bookings-class_method" title="ongoing_bookings (class method)">.<strong>ongoing_bookings</strong>(company)  &#x21d2; Array </a>
+    
+
+    
+  </span>
+  
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns currently going on meetings in company.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#add_company_id-instance_method" title="#add_company_id (instance method)">#<strong>add_company_id</strong>  &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Add company_id to booking.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#check_holiday%3F-instance_method" title="#check_holiday? (instance method)">#<strong>check_holiday?</strong>  &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Checks whether the date of booking is holiday?.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#ensure_dependencies-instance_method" title="#ensure_dependencies (instance method)">#<strong>ensure_dependencies</strong>  &#x21d2; Trueclass/FalseClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Check whether date_of_bookingg is empty.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#is_date_valid%3F-instance_method" title="#is_date_valid? (instance method)">#<strong>is_date_valid?</strong>  &#x21d2; TrueClass/FalseClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Check whether the date of booking is past date.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#is_resource_added_to_company%3F-instance_method" title="#is_resource_added_to_company? (instance method)">#<strong>is_resource_added_to_company?</strong>  &#x21d2; TrueClass/FalseClass </a>
+    
+
+    
+  </span>
+  
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Check whether any resources are added to company?.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#is_slot_alloted%3F-instance_method" title="#is_slot_alloted? (instance method)">#<strong>is_slot_alloted?</strong>  &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Check whether the requested time slot for booking is avaible or not.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#is_slot_already_passed%3F-instance_method" title="#is_slot_already_passed? (instance method)">#<strong>is_slot_already_passed?</strong>  &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>If date of booking is today check whether the requested time slot is
+already passed?.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#slot_valid%3F-instance_method" title="#slot_valid? (instance method)">#<strong>slot_valid?</strong>  &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Checks whether requested slot of booking is valid?.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="ongoing_bookings-class_method">
+  
+    .<strong>ongoing_bookings</strong>(company)  &#x21d2; <tt>Array</tt>  <span class="extras">(protected)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns currently going on meetings in company</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>company</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Company.html" title="Company (class)">Company</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The object of company model</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>current_bookings The currently going on bookings objects</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/booking.rb', line 148</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_ongoing_bookings'>ongoing_bookings</span><span class='lparen'>(</span><span class='id identifier rubyid_company'>company</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_bookings_of_today'>bookings_of_today</span> <span class='op'>=</span> <span class='id identifier rubyid_company'>company</span><span class='period'>.</span><span class='id identifier rubyid_bookings'>bookings</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>date_of_booking = ?</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_today'>today</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_granted'>granted</span> <span class='op'>=</span> <span class='id identifier rubyid_bookings_of_today'>bookings_of_today</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>status:</span><span class='int'>1</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_current_bookings'>current_bookings</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+	<span class='id identifier rubyid_granted'>granted</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span> <span class='id identifier rubyid_booking'>booking</span> <span class='op'>|</span>
+		<span class='id identifier rubyid_resource'>resource</span> <span class='op'>=</span> <span class='id identifier rubyid_booking'>booking</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span>
+		<span class='id identifier rubyid_timeslot_min'>timeslot_min</span> <span class='op'>=</span> <span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_time_slot'>time_slot</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span>
+		<span class='id identifier rubyid_timeslot_hour'>timeslot_hour</span> <span class='op'>=</span> <span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_time_slot'>time_slot</span><span class='period'>.</span><span class='id identifier rubyid_hour'>hour</span>
+		<span class='id identifier rubyid_start_time'>start_time</span> <span class='op'>=</span> <span class='id identifier rubyid_booking'>booking</span><span class='period'>.</span><span class='id identifier rubyid_company'>company</span><span class='period'>.</span><span class='id identifier rubyid_start_time'>start_time</span>
+		<span class='id identifier rubyid_start_min'>start_min</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_start_time'>start_time</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span> <span class='op'>+</span> <span class='lparen'>(</span><span class='id identifier rubyid_booking'>booking</span><span class='period'>.</span><span class='id identifier rubyid_slot'>slot</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='id identifier rubyid_timeslot_min'>timeslot_min</span><span class='rparen'>)</span> <span class='op'>%</span> <span class='int'>60</span>
+		<span class='id identifier rubyid_carry_hours'>carry_hours</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_start_time'>start_time</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span> <span class='op'>+</span> <span class='lparen'>(</span><span class='id identifier rubyid_booking'>booking</span><span class='period'>.</span><span class='id identifier rubyid_slot'>slot</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='id identifier rubyid_timeslot_min'>timeslot_min</span><span class='rparen'>)</span> <span class='op'>/</span> <span class='int'>60</span>
+		<span class='id identifier rubyid_start_hour'>start_hour</span> <span class='op'>=</span> <span class='id identifier rubyid_start_time'>start_time</span><span class='period'>.</span><span class='id identifier rubyid_hour'>hour</span> <span class='op'>+</span> <span class='lparen'>(</span><span class='id identifier rubyid_booking'>booking</span><span class='period'>.</span><span class='id identifier rubyid_slot'>slot</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='id identifier rubyid_timeslot_hour'>timeslot_hour</span> <span class='op'>+</span> <span class='id identifier rubyid_carry_hours'>carry_hours</span>
+		<span class='id identifier rubyid_end_min'>end_min</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_start_time'>start_time</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span> <span class='op'>+</span> <span class='lparen'>(</span><span class='id identifier rubyid_booking'>booking</span><span class='period'>.</span><span class='id identifier rubyid_slot'>slot</span> <span class='op'>+</span> <span class='int'>1</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='id identifier rubyid_timeslot_min'>timeslot_min</span><span class='rparen'>)</span> <span class='op'>%</span> <span class='int'>60</span>
+		<span class='id identifier rubyid_carry_end_hours'>carry_end_hours</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_start_time'>start_time</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span> <span class='op'>+</span> <span class='lparen'>(</span><span class='id identifier rubyid_booking'>booking</span><span class='period'>.</span><span class='id identifier rubyid_slot'>slot</span> <span class='op'>+</span> <span class='int'>1</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='id identifier rubyid_timeslot_min'>timeslot_min</span><span class='rparen'>)</span> <span class='op'>/</span> <span class='int'>60</span>
+		<span class='id identifier rubyid_end_hour'>end_hour</span> <span class='op'>=</span> <span class='id identifier rubyid_start_time'>start_time</span><span class='period'>.</span><span class='id identifier rubyid_hour'>hour</span> <span class='op'>+</span> <span class='lparen'>(</span><span class='id identifier rubyid_booking'>booking</span><span class='period'>.</span><span class='id identifier rubyid_slot'>slot</span> <span class='op'>+</span> <span class='int'>1</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='id identifier rubyid_timeslot_hour'>timeslot_hour</span> <span class='op'>+</span> <span class='id identifier rubyid_carry_end_hours'>carry_end_hours</span>
+		<span class='kw'>if</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span><span class='period'>.</span><span class='id identifier rubyid_hour'>hour</span><span class='period'>.</span><span class='id identifier rubyid_between?'>between?</span><span class='lparen'>(</span><span class='id identifier rubyid_start_hour'>start_hour</span><span class='comma'>,</span><span class='id identifier rubyid_end_hour'>end_hour</span><span class='rparen'>)</span> <span class='kw'>and</span> <span class='id identifier rubyid_end_hour'>end_hour</span> <span class='op'>!=</span> <span class='int'>0</span>
+			<span class='comment'>#byebug
+</span>			<span class='kw'>if</span> <span class='id identifier rubyid_end_min'>end_min</span> <span class='op'>!=</span> <span class='int'>0</span> <span class='kw'>and</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span><span class='period'>.</span><span class='id identifier rubyid_between?'>between?</span><span class='lparen'>(</span><span class='id identifier rubyid_start_min'>start_min</span><span class='comma'>,</span><span class='id identifier rubyid_end_min'>end_min</span><span class='rparen'>)</span>
+				<span class='id identifier rubyid_current_bookings'>current_bookings</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_booking'>booking</span>
+			<span class='kw'>else</span>
+				<span class='kw'>if</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span><span class='period'>.</span><span class='id identifier rubyid_between?'>between?</span><span class='lparen'>(</span><span class='id identifier rubyid_start_min'>start_min</span><span class='comma'>,</span><span class='int'>59</span><span class='rparen'>)</span> <span class='kw'>and</span> <span class='id identifier rubyid_end_min'>end_min</span> <span class='op'>==</span> <span class='int'>0</span>
+					<span class='id identifier rubyid_current_bookings'>current_bookings</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_booking'>booking</span>
+				<span class='kw'>end</span>
+			<span class='kw'>end</span>
+		<span class='kw'>elsif</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span><span class='period'>.</span><span class='id identifier rubyid_hour'>hour</span><span class='period'>.</span><span class='id identifier rubyid_between?'>between?</span><span class='lparen'>(</span><span class='id identifier rubyid_start_hour'>start_hour</span><span class='comma'>,</span><span class='int'>23</span><span class='rparen'>)</span> <span class='kw'>and</span> <span class='id identifier rubyid_end_hour'>end_hour</span> <span class='op'>==</span> <span class='int'>0</span>
+					<span class='id identifier rubyid_current_bookings'>current_bookings</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_booking'>booking</span>
+		<span class='kw'>end</span> 		
+	<span class='kw'>end</span>
+	<span class='id identifier rubyid_current_bookings'>current_bookings</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_company_id-instance_method">
+  
+    #<strong>add_company_id</strong>  &#x21d2; <tt>void</tt>  <span class="extras">(protected)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p>
+<p>Add company_id to booking</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+137
+138
+139
+140</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/booking.rb', line 137</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_add_company_id'>add_company_id</span>
+	<span class='id identifier rubyid_company'>company</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_employee'>employee</span><span class='period'>.</span><span class='id identifier rubyid_company'>company</span>
+	<span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_company_id'>company_id</span> <span class='op'>=</span> <span class='id identifier rubyid_company'>company</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="check_holiday?-instance_method">
+  
+    #<strong>check_holiday?</strong>  &#x21d2; <tt>void</tt>  <span class="extras">(protected)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p>
+<p>Checks whether the date of booking is holiday?</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+50
+51
+52
+53
+54</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/booking.rb', line 50</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_check_holiday?'>check_holiday?</span>
+	<span class='kw'>unless</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_date_of_booking'>date_of_booking</span><span class='period'>.</span><span class='id identifier rubyid_wday'>wday</span> <span class='op'>!=</span> <span class='int'>0</span> 
+		<span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='lbracket'>[</span><span class='symbol'>:day_validation</span><span class='rbracket'>]</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Booking can&#39;t be done on holidays</span><span class='tstring_end'>&quot;</span></span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ensure_dependencies-instance_method">
+  
+    #<strong>ensure_dependencies</strong>  &#x21d2; <tt>Trueclass/FalseClass</tt>  <span class="extras">(protected)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Check whether date_of_bookingg is empty</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Trueclass/FalseClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Whether dependencies are present or not</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/booking.rb', line 120</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_ensure_dependencies'>ensure_dependencies</span>
+	<span class='kw'>unless</span> <span class='op'>!</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_date_of_booking'>date_of_booking</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span>
+		<span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='lbracket'>[</span><span class='symbol'>:date_of_booking</span><span class='rbracket'>]</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>=&gt;Date of booking can&#39;t be empty</span><span class='tstring_end'>&quot;</span></span>
+		<span class='kw'>return</span> <span class='kw'>false</span>
+	<span class='kw'>end</span>
+	<span class='kw'>unless</span> <span class='lparen'>(</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_company'>company</span><span class='period'>.</span><span class='id identifier rubyid_resources'>resources</span><span class='period'>.</span><span class='id identifier rubyid_find_by_id'>find_by_id</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_resource_id'>resource_id</span><span class='rparen'>)</span> <span class='rparen'>)</span>
+		<span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='lbracket'>[</span><span class='symbol'>:resource_not_present</span><span class='rbracket'>]</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>=&gt; Requested resource is not available.</span><span class='tstring_end'>&quot;</span></span>
+		<span class='kw'>return</span> <span class='kw'>false</span>
+	<span class='kw'>end</span>
+	<span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_date_valid?-instance_method">
+  
+    #<strong>is_date_valid?</strong>  &#x21d2; <tt>TrueClass/FalseClass</tt>  <span class="extras">(protected)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Check whether the date of booking is past date</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass/FalseClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Add error to self if date of booking is past date</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+38
+39
+40
+41
+42</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/booking.rb', line 38</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_is_date_valid?'>is_date_valid?</span>
+	<span class='kw'>unless</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_date_of_booking'>date_of_booking</span> <span class='op'>&gt;=</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_zone'>zone</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span><span class='period'>.</span><span class='id identifier rubyid_beginning_of_day'>beginning_of_day</span> 
+		<span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='lbracket'>[</span><span class='symbol'>:date_validation</span><span class='rbracket'>]</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>You can&#39;t book resource for previous day</span><span class='tstring_end'>&quot;</span></span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_resource_added_to_company?-instance_method">
+  
+    #<strong>is_resource_added_to_company?</strong>  &#x21d2; <tt>TrueClass/FalseClass</tt>  <span class="extras">(protected)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Check whether any resources are added to company?</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TrueClass/FalseClass</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>If there are not resources in company return false else true</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+108
+109
+110
+111
+112
+113</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/booking.rb', line 108</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_is_resource_added_to_company?'>is_resource_added_to_company?</span>
+	<span class='kw'>if</span> <span class='op'>!</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_employee'>employee</span><span class='period'>.</span><span class='id identifier rubyid_company'>company</span><span class='period'>.</span><span class='id identifier rubyid_resources'>resources</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span><span class='rparen'>)</span>
+		<span class='kw'>return</span> <span class='kw'>false</span>
+	<span class='kw'>end</span>
+	<span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_slot_alloted?-instance_method">
+  
+    #<strong>is_slot_alloted?</strong>  &#x21d2; <tt>void</tt>  <span class="extras">(protected)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p>
+<p>Check whether the requested time slot for booking is avaible or not</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/booking.rb', line 62</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_is_slot_alloted?'>is_slot_alloted?</span>
+	<span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_company'>company</span><span class='period'>.</span><span class='id identifier rubyid_bookings'>bookings</span><span class='period'>.</span><span class='id identifier rubyid_find_by_date_of_booking'>find_by_date_of_booking</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_date_of_booking'>date_of_booking</span><span class='rparen'>)</span>
+		<span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new_record?'>new_record?</span>
+			<span class='id identifier rubyid_days_booking'>days_booking</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_company'>company</span><span class='period'>.</span><span class='id identifier rubyid_bookings'>bookings</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>date_of_booking:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_date_of_booking'>date_of_booking</span><span class='rparen'>)</span>
+		<span class='kw'>else</span>
+			<span class='id identifier rubyid_days_booking'>days_booking</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_company'>company</span><span class='period'>.</span><span class='id identifier rubyid_bookings'>bookings</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>date_of_booking:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_date_of_booking'>date_of_booking</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='period'>.</span><span class='id identifier rubyid_not'>not</span><span class='lparen'>(</span><span class='label'>id:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+		<span class='kw'>end</span>
+		<span class='id identifier rubyid_days_booking'>days_booking</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_x'>x</span><span class='op'>|</span>
+			<span class='kw'>unless</span> <span class='id identifier rubyid_x'>x</span><span class='period'>.</span><span class='id identifier rubyid_slot'>slot</span> <span class='op'>!=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_slot'>slot</span>
+				<span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='lbracket'>[</span><span class='symbol'>:allocated_slot</span><span class='rbracket'>]</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>This slot is already alloted</span><span class='tstring_end'>&quot;</span></span>
+			<span class='kw'>end</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_slot_already_passed?-instance_method">
+  
+    #<strong>is_slot_already_passed?</strong>  &#x21d2; <tt>void</tt>  <span class="extras">(protected)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p>
+<p>If date of booking is today check whether the requested time slot is
+already passed?</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+94
+95
+96
+97
+98
+99
+100</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/booking.rb', line 94</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_is_slot_already_passed?'>is_slot_already_passed?</span>
+	<span class='kw'>unless</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_date_of_booking'>date_of_booking</span> <span class='op'>!=</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_zone'>zone</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span><span class='period'>.</span><span class='id identifier rubyid_beginning_of_day'>beginning_of_day</span> 
+		<span class='kw'>unless</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_next_time_slots'>next_time_slots</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_timeslots'>timeslots</span><span class='lbracket'>[</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_slot'>slot</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+			<span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='lbracket'>[</span><span class='symbol'>:slot_avaibility</span><span class='rbracket'>]</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>This slot is already passed</span><span class='tstring_end'>&quot;</span></span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="slot_valid?-instance_method">
+  
+    #<strong>slot_valid?</strong>  &#x21d2; <tt>void</tt>  <span class="extras">(protected)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p>
+<p>Checks whether requested slot of booking is valid?</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+83
+84
+85
+86
+87</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/booking.rb', line 83</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_slot_valid?'>slot_valid?</span> 
+	<span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_slot'>slot</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>&gt;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_available_time_slot'>available_time_slot</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_date_of_booking'>date_of_booking</span><span class='period'>.</span><span class='id identifier rubyid_strftime'>strftime</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>%Y%m%d</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_slot'>slot</span><span class='op'>%</span><span class='int'>1</span><span class='op'>!=</span><span class='int'>0</span>
+		<span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='lbracket'>[</span><span class='symbol'>:slot_invalid</span><span class='rbracket'>]</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>This slot is invalid</span><span class='tstring_end'>&quot;</span></span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Oct  6 12:29:32 2016 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.5 (ruby-2.3.0).
+</div>
+
+    </div>
+  </body>
+</html>
