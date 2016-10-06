@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe Employee, type: :model do
 
   before(:each) do 
-  	@employee = Employee.new(name: "Admin",email: "admin@amura.com",age:22,date_of_joining: Date.today,manager_id: 0, company_id: 1)
+  	#@employee = Employee.new(name: "Admin",email: "admin@amura.com",age:22,date_of_joining: Date.today,manager_id: 0, company_id: 1)
+    @company = create(:company)
+    @employee = @company.employees[3]
   end
   context "Associations" do 
   	it "belongs to company" do 
@@ -53,6 +55,10 @@ RSpec.describe Employee, type: :model do
   		@employee.age = "abcd"
   		expect(@employee).to_not be_valid 
   	end
+    it "has positive age" do
+      @employee.age = -2
+      expect(@employee).to_not be_valid
+    end
   	it "has integer value for role_id" do
   		@employee.role_id = "aaa"
   		expect(@employee).to_not be_valid 

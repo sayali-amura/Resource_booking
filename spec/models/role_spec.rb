@@ -3,10 +3,8 @@ require 'rails_helper'
 RSpec.describe Role, type: :model do
 
   before(:each) do 
-    #@company = Company.create(name: "hello1",email: "hello2@gmail.com",phone: "+911254567890",start_time:Time.new(2016,3,1,9,0),end_time:Time.new(2016,3,1,18,0))
-	 #@role = @company.roles.new(designation: "Admin",department: "Company",priority: 0,company_id:1 )
-  @company = create(:company)
-  @role = @company.roles.first
+    @company = create(:company)
+    @role = @company.roles.first
   end
 
   context "validations" do
@@ -37,53 +35,40 @@ RSpec.describe Role, type: :model do
         @role.priority = 2147483648
         expect(@role).to_not be_valid
       end
-
+      it "is positive" do
+        @role.priority = -1
+        expect(@role).to_not be_valid
+      end
+      it "is not admin" do
+        @role.designation = "admin"
+        expect(@role).to_not be_valid
+      end
 
     end
+    context "designation validations" do
+      it "has designation unique accross company's department" do
+        @role.designation = "developer"
+        @role.department = "sell.do"
+        @role.save
+        @role2 = @company.roles[1]
+        @role2.designation = "developer"
+        @role2.department = "sell.do"
+        expect(@role2).to_not be_valid
+      end
+    end
+    context "priority validations" do
+      it "has priority unique accross company" do
+        @role = @company.roles[3]
+        @role.priority = 10001
+        @role.save
+        @role2 = @company.roles[2]
+        @role2.priority = 10001
+        expect(@role2).to_not be_valid
+      end
+    end
+
   end
   
-  # context "validation" do 
-  #   context "repeat fields" do
-  #     it "designation" do 
-  #       @role.designation = "admin"
-  #       @role.save
-  #       @role2 = @company.roles[1]
-  #       @role2.designation = "admin"
-  #     end
-  #     it "department" do 
-  #       @role.department = "company"
-  #       @role.save
-  #       @role2 = @company.roles[1]
-  #       @role2.department = "Company"
-  #     end
-  #     after(:each) do 
-  #       expect(@role).to_not be_valid
-  #     end
-  #   end
-
-  #   context "invalid fields" do 
-  #     context "priority" do 
-  #       it "less than 0" do
-  #         @role.priority = -1
-  #         expect(@role).to_not be_valid
-  #       end
-  #       it "alphabetics" do 
-  #         @role.priority = "admin"
-  #         expect(@role).to_not be_valid
-  #       end
-  #     end
-  #   end
-  #   context "valid fields" do 
-  #     context "priority" do 
-  #       it "greater than 0" do 
-  #         @role.priority = 12
-  #       end
-  #     end
-  #     after(:each) do 
-  #       expect(@role2).to_not be_valid
-  #     end
-  #   end
-  # end
 #belongs_to :company
   # context "delete" do 
   #   it "delete role " do 

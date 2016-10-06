@@ -1,13 +1,12 @@
 require 'faker'
 
 FactoryGirl.define do
-	factory :employee do |e|
-		e.email {Faker::Internet.email}
-		e.name {Faker::Name.name}
-		e.age {Faker::Number.number(2)}
-		e.date_of_joining
-		e.manager_id
-		role
-		company
+	factory :employee do
+		email {Faker::Internet.email}
+		name {Faker::Name.name}
+		age {Faker::Number.number(2)}
+		date_of_joining {Faker::Date.between(2.years.ago, Date.today)}
+		password {Faker::Internet.password(6, 20)}
+		password_confirmation { password }
 	end
 end
