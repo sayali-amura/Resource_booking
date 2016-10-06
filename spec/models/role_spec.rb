@@ -44,6 +44,22 @@ RSpec.describe Role, type: :model do
         expect(@role).to_not be_valid
       end
 
+<<<<<<< HEAD
+=======
+  context "duplicate priority" do 
+    it "priority" do 
+      @role.save
+      @role1 = @company.roles.build(designation: "coder",department: "development",priority: 3)
+      @role1.save
+      @company = Company.find(@company.id)
+      # @company.reload
+      p @company.roles.inspect
+      @role2 = @company.roles[1]
+      @role2.priority = 3
+      # p @role2.errors
+      expect(@role2.save).to eq(true)
+      p @company.roles.inspect
+>>>>>>> 6f621bac91073b3cf8f78704725bd4fd4931637c
     end
     context "designation validations" do
       it "has designation unique accross company's department" do

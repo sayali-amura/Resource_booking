@@ -1,11 +1,25 @@
+#
+# Class Resource provides company's resource related functionality			
+# 
+# @author Amrut Jadhav amrut@amuratech.com
+#
 class Resource < ActiveRecord::Base
+
+	# Association
 	belongs_to :company
 	has_many :bookings, dependent: :destroy
 	has_many :complaints, dependent: :destroy
+
+	# Validations
 	validates :time_slot, presence:true
 	validates :name, presence: {message: "name should be present"}, uniqueness: { scope: :company_id,  message: "should have one per company" }
 
-#gives time slot array from resource
+	#
+	# Provide array of all timeslots available in the company's timing based upon the resource time_slot and
+	#   companies start_time, end_time		
+	#
+	# @return [Array<String,Integer>] time_slot_array Array of time slots of resource 
+	# 
 	def timeslots
 		if (self != nil)
 			company = self.company
@@ -29,11 +43,17 @@ class Resource < ActiveRecord::Base
 		end
 	end
 
+	#
+	# Provide future available time slots for resource. 
+	#   If date of booking is today provide today's available time slots (see #next_time_slots)	
+	#
+	# @return [Array<String,Integer>] time_slot_array Array of available time slots of resource 
+	# 
 	def available_time_slot date_of_booking
 		if date_of_booking.gsub(/[-]+/,"").to_i != Time.zone.now.strftime("%Y%m%d").to_i
 			resource_slot = self.timeslots
-			if self.bookings.where(date_of_booking:date_of_booking)
-				bookings_of_day = self.bookings.where(date_of_booking: date_of_booking)
+			if self.bookings.where(date_of_booking:date_of_booking).where(status:1)
+				bookings_of_day = self.bookings.where(date_of_booking: date_of_booking).where(status:1)
 				bookings_of_day.each do |x|
 					resource_slot.delete_at(x.slot)
 				end
@@ -44,6 +64,12 @@ class Resource < ActiveRecord::Base
 		resource_slot
 	end
 
+	#
+	# Provide array of today's available time slots 
+	#
+	#
+	# @return [Array<String,Integer>] time_slot_array Array of today's available time slots of resource 
+	# 
 	def next_time_slots
 		time_slot_array = self.timeslots
 		time_slot_array.drop_while do |x|

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.9.5
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "README";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <iframe id="search_frame" src="class_list.html"></iframe>
+
+      <div id="content"><div id='filecontents'>
+<h3 id="label-Tables">Tables</h3>
+<ul><li>
+<p>companies <code>sh id name address password_digest </code></p>
+</li><li>
+<p>resources <code>sh id name count company_id		=&gt; foreign key of company
+</code></p>
+</li><li>
+<p>employees <code>sh id name email password_digest date_of_joining role_id   
+=&gt; foreign key manager_id		=&gt;	employee id of manager </code></p>
+</li><li>
+<p>roles <code>sh id designation	 department		=&gt;	dept in company priority		
+company_id		=&gt; foreign key of company     </code></p>
+</li><li>
+<p>complaints <code>sh id owner_id		=&gt; 	foreign key of employee   comment
+status resource_id	=&gt; resource id </code></p>
+</li><li>
+<p>bookings "`sh id employee_id =&gt; foreign key of employee status =&gt;
+status of booking.<br> expected values= [0=request, 1=grant, 2=reject,
+3=release ] priority =&gt; define priority of booking. expected values=
+[0=high, 1=medium, 2=low] duration =&gt; total booking duration timestamp
+=&gt; booking timestamp comment =&gt; additional comments for booking. Also
+used to decide priority of booking. shift =&gt; to check whether booking is
+shifted or not feedback =&gt; feedback about resource use</p>
+</li></ul>
+
+<pre class="code ruby"><code class="ruby">
+* messages</code></pre>
+
+<p>sh id content booking_id =&gt; foreign key of booking “`</p>
+
+<h1 id="label-Relations">Relations</h1>
+<ul><li>
+<p>Companies <code>sh 1) Company has_many employees 2) company has_many
+resources 3) company has_many roles </code></p>
+</li><li>
+<p>employees <code>sh 2) employee belongs to role 3) employee has_many booking
+4) employee has_one manager(i.e. employee)(self join) 5) employee has_many
+complaints 6) employee has_many messages </code></p>
+</li><li>
+<p>bookings <code>sh 1) booking belongs to employee 2) has_many messages
+</code></p>
+</li><li>
+<p>complaints <code>sh 1) complaint belongs to employee </code></p>
+</li><li>
+<p>messages "`sh 1) belongs to booking</p>
+</li></ul>
+
+<pre class="code ruby"><code class="ruby">* resources</code></pre>
+
+<p>sh 1) resource belongs to company</p>
+
+<pre class="code ruby"><code class="ruby">* roles</code></pre>
+
+<p>sh 1) role has many employee 2) role belongs to comapny “`</p>
+
+<h1 id="label-ROLES">ROLES</h1>
+<ul><li>
+<p>employee(regular) <code>sh 1) request resource [conference room, projector,
+company car ] to HR 2) complain against resources [fan, AC, coffee etc] to
+HR 3) release resource 4) provide feedback about resource </code></p>
+</li><li>
+<p>employee(HR) <code>sh 1) grant/reject request for resource to employee 2)
+shifting resource allocation timing 3) update resources 4) add employees.
+(also assign manager) </code></p>
+</li></ul>
+
+<h1 id="label-dashboard-28VIEW-29">dashboard(VIEW)</h1>
+<ul><li>
+<p>employee <code>sh 1) history of actions 2) future resource allocation
+timetable (i.e calender) 3) notification regarding resource state 4) info  
+</code></p>
+</li><li>
+<p>HR <code>sh 1) resource requests 2) resource stats </code></p>
+</li></ul>
+
+<h1 id="label-Model">Model</h1>
+
+<pre class="code ruby"><code class="ruby"><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>Company
+</span><span class='regexp_end'>/Resource</span></span>
+<span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>Employee
+</span><span class='regexp_end'>/Role</span></span> 
+<span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>Complaint
+</span><span class='regexp_end'>/Booking</span></span>
+<span class='tstring'><span class='regexp_beg'>/</span><span class='regexp_end'>Message</span></span></code></pre>
+
+<h1 id="label-Controller">Controller</h1>
+
+<pre class="code ruby"><code class="ruby"><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>CompanyController
+</span><span class='regexp_end'>/employee</span></span><span class='op'>/</span><span class='id identifier rubyid_admincontroller'>admincontroller</span>
+<span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>employee</span><span class='regexp_end'>/employeecontroller</span></span></code></pre>
+
+<h1 id="label-view">view</h1>
+
+<pre class="code ruby"><code class="ruby">/company
+/employee/admin/
+/employee/employee/</code></pre>
+
+<h1 id="label-routes">routes</h1>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_root'>root</span> <span class='id identifier rubyid_employee'>employee</span><span class='comment'>#index	(loginpage)</span></code></pre>
+</div></div>
+
+      <div id="footer">
+  Generated on Thu Oct  6 18:41:32 2016 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.5 (ruby-2.3.0).
+</div>
+
+    </div>
+  </body>
+</html>

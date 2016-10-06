@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Resource
+  
+    &mdash; Documentation by YARD 0.9.5
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "Resource";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index (R)</a> &raquo;
+    
+    
+    <span class="title">Resource</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <iframe id="search_frame" src="class_list.html"></iframe>
+
+      <div id="content"><h1>Class: Resource
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">ActiveRecord::Base</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActiveRecord::Base</li>
+          
+            <li class="next">Resource</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>app/models/resource.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Class Resource provides company&#39;s resource related functionality</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Author:</p>
+<ul class="author">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'>
+<p>Amrut Jadhav amrut@amuratech.com</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#available_time_slot-instance_method" title="#available_time_slot (instance method)">#<strong>available_time_slot</strong>(date_of_booking)  &#x21d2; Array&lt;String,Integer&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Provide future available time slots for resource.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#next_time_slots-instance_method" title="#next_time_slots (instance method)">#<strong>next_time_slots</strong>  &#x21d2; Array&lt;String,Integer&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Provide array of today&#39;s available time slots.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#timeslots-instance_method" title="#timeslots (instance method)">#<strong>timeslots</strong>  &#x21d2; Array&lt;String,Integer&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Provide array of all timeslots available in the company&#39;s timing based
+upon the resource time_slot and   companies start_time, end_time.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="available_time_slot-instance_method">
+  
+    #<strong>available_time_slot</strong>(date_of_booking)  &#x21d2; <tt>Array&lt;String,Integer&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Provide future available time slots for resource.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>If</span> <span class='id identifier rubyid_date'>date</span> <span class='id identifier rubyid_of'>of</span> <span class='id identifier rubyid_booking'>booking</span> <span class='id identifier rubyid_is'>is</span> <span class='id identifier rubyid_today'>today</span> <span class='id identifier rubyid_provide'>provide</span> <span class='id identifier rubyid_today'>today</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>s available time slots (see #next_time_slots)</span></span></code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String,Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>time_slot_array Array of available time slots of resource</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/resource.rb', line 52</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_available_time_slot'>available_time_slot</span> <span class='id identifier rubyid_date_of_booking'>date_of_booking</span>
+	<span class='kw'>if</span> <span class='id identifier rubyid_date_of_booking'>date_of_booking</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>[-]+</span><span class='regexp_end'>/</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>!=</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_zone'>zone</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span><span class='period'>.</span><span class='id identifier rubyid_strftime'>strftime</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>%Y%m%d</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
+		<span class='id identifier rubyid_resource_slot'>resource_slot</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_timeslots'>timeslots</span>
+		<span class='comment'># byebug
+</span>		<span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_bookings'>bookings</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>date_of_booking:</span><span class='id identifier rubyid_date_of_booking'>date_of_booking</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>status:</span><span class='int'>1</span><span class='rparen'>)</span>
+			<span class='id identifier rubyid_bookings_of_day'>bookings_of_day</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_bookings'>bookings</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>date_of_booking:</span> <span class='id identifier rubyid_date_of_booking'>date_of_booking</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>status:</span><span class='int'>1</span><span class='rparen'>)</span>
+			<span class='id identifier rubyid_bookings_of_day'>bookings_of_day</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_x'>x</span><span class='op'>|</span>
+				<span class='id identifier rubyid_resource_slot'>resource_slot</span><span class='period'>.</span><span class='id identifier rubyid_delete_at'>delete_at</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='period'>.</span><span class='id identifier rubyid_slot'>slot</span><span class='rparen'>)</span>
+			<span class='kw'>end</span>
+		<span class='kw'>end</span>
+	<span class='kw'>else</span>
+		<span class='id identifier rubyid_resource_slot'>resource_slot</span> <span class='op'>=</span> <span class='id identifier rubyid_next_time_slots'>next_time_slots</span>
+	<span class='kw'>end</span>
+	<span class='id identifier rubyid_resource_slot'>resource_slot</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="next_time_slots-instance_method">
+  
+    #<strong>next_time_slots</strong>  &#x21d2; <tt>Array&lt;String,Integer&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Provide array of today&#39;s available time slots</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String,Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>time_slot_array Array of today&#39;s available time slots of resource</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+74
+75
+76
+77
+78
+79</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/resource.rb', line 74</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_next_time_slots'>next_time_slots</span>
+	<span class='id identifier rubyid_time_slot_array'>time_slot_array</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_timeslots'>timeslots</span>
+	<span class='id identifier rubyid_time_slot_array'>time_slot_array</span><span class='period'>.</span><span class='id identifier rubyid_drop_while'>drop_while</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_x'>x</span><span class='op'>|</span>
+		<span class='id identifier rubyid_x'>x</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>-</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_time'>to_time</span> <span class='op'>&lt;</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="timeslots-instance_method">
+  
+    #<strong>timeslots</strong>  &#x21d2; <tt>Array&lt;String,Integer&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Provide array of all timeslots available in the company&#39;s timing based
+upon the resource time_slot and</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_companies'>companies</span> <span class='id identifier rubyid_start_time'>start_time</span><span class='comma'>,</span> <span class='id identifier rubyid_end_time'>end_time</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String,Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>time_slot_array Array of time slots of resource</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/resource.rb', line 23</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_timeslots'>timeslots</span>
+	<span class='kw'>if</span> <span class='lparen'>(</span><span class='kw'>self</span> <span class='op'>!=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_company'>company</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_company'>company</span>
+		<span class='id identifier rubyid_start_time'>start_time</span> <span class='op'>=</span> <span class='id identifier rubyid_company'>company</span><span class='period'>.</span><span class='id identifier rubyid_start_time'>start_time</span>
+		<span class='id identifier rubyid_end_time'>end_time</span> <span class='op'>=</span> <span class='id identifier rubyid_company'>company</span><span class='period'>.</span><span class='id identifier rubyid_end_time'>end_time</span>
+		<span class='id identifier rubyid_company_duration'>company_duration</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='lparen'>(</span> <span class='id identifier rubyid_end_time'>end_time</span> <span class='op'>-</span> <span class='id identifier rubyid_start_time'>start_time</span> <span class='rparen'>)</span><span class='op'>/</span><span class='int'>60</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_round'>round</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_no_of_slots'>no_of_slots</span> <span class='op'>=</span> <span class='lparen'>(</span> <span class='id identifier rubyid_company_duration'>company_duration</span> <span class='op'>/</span> <span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_time_slot'>time_slot</span><span class='period'>.</span><span class='id identifier rubyid_hour'>hour</span><span class='op'>*</span><span class='int'>60</span> <span class='op'>+</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_time_slot'>time_slot</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span><span class='rparen'>)</span> <span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
+		<span class='id identifier rubyid_time_slot_array'>time_slot_array</span> <span class='op'>=</span><span class='const'>Array</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+		<span class='id identifier rubyid_remember_hour'>remember_hour</span> <span class='op'>=</span> <span class='id identifier rubyid_start_time'>start_time</span><span class='period'>.</span><span class='id identifier rubyid_hour'>hour</span><span class='period'>.</span><span class='id identifier rubyid_round'>round</span>
+		<span class='id identifier rubyid_remember_min'>remember_min</span> <span class='op'>=</span> <span class='id identifier rubyid_start_time'>start_time</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span>
+		<span class='id identifier rubyid_no_of_slots'>no_of_slots</span><span class='period'>.</span><span class='id identifier rubyid_times'>times</span> <span class='kw'>do</span> <span class='op'>|</span> <span class='id identifier rubyid_index'>index</span> <span class='op'>|</span>
+			<span class='id identifier rubyid_a'>a</span> <span class='op'>=</span> <span class='id identifier rubyid_remember_hour'>remember_hour</span> <span class='op'>==</span> <span class='int'>0</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>00</span><span class='tstring_end'>&quot;</span></span> <span class='op'>:</span> <span class='id identifier rubyid_remember_hour'>remember_hour</span>
+			<span class='id identifier rubyid_b'>b</span> <span class='op'>=</span> <span class='id identifier rubyid_remember_min'>remember_min</span> <span class='op'>==</span> <span class='int'>0</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>00</span><span class='tstring_end'>&quot;</span></span> <span class='op'>:</span> <span class='id identifier rubyid_remember_min'>remember_min</span>
+			<span class='id identifier rubyid_c'>c</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='lparen'>(</span><span class='id identifier rubyid_remember_min'>remember_min</span> <span class='op'>+</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_time_slot'>time_slot</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span><span class='rparen'>)</span><span class='op'>/</span><span class='int'>60</span> <span class='rparen'>)</span><span class='op'>+</span><span class='id identifier rubyid_remember_hour'>remember_hour</span><span class='op'>+</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_time_slot'>time_slot</span><span class='period'>.</span><span class='id identifier rubyid_hour'>hour</span> <span class='op'>==</span> <span class='int'>0</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>00</span><span class='tstring_end'>&quot;</span></span> <span class='op'>:</span><span class='lparen'>(</span><span class='lparen'>(</span><span class='id identifier rubyid_remember_min'>remember_min</span> <span class='op'>+</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_time_slot'>time_slot</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span><span class='rparen'>)</span><span class='op'>/</span><span class='int'>60</span> <span class='rparen'>)</span><span class='op'>+</span><span class='id identifier rubyid_remember_hour'>remember_hour</span><span class='op'>+</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_time_slot'>time_slot</span><span class='period'>.</span><span class='id identifier rubyid_hour'>hour</span>
+			<span class='id identifier rubyid_d'>d</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_remember_min'>remember_min</span> <span class='op'>+</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_time_slot'>time_slot</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span><span class='rparen'>)</span> <span class='op'>%</span> <span class='int'>60</span> <span class='op'>==</span> <span class='int'>0</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>00</span><span class='tstring_end'>&quot;</span></span> <span class='op'>:</span> <span class='lparen'>(</span><span class='id identifier rubyid_remember_min'>remember_min</span> <span class='op'>+</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_time_slot'>time_slot</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span><span class='rparen'>)</span> <span class='op'>%</span> <span class='int'>60</span>
+			<span class='id identifier rubyid_time_slot_array'>time_slot_array</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_a'>a</span><span class='embexpr_end'>}</span><span class='tstring_content'>:</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_b'>b</span><span class='embexpr_end'>}</span><span class='tstring_content'>-</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_c'>c</span><span class='embexpr_end'>}</span><span class='tstring_content'>:</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_d'>d</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_index'>index</span><span class='rbracket'>]</span>
+			<span class='id identifier rubyid_remember_hour'>remember_hour</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='lparen'>(</span><span class='id identifier rubyid_remember_min'>remember_min</span> <span class='op'>+</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_time_slot'>time_slot</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span><span class='rparen'>)</span><span class='op'>/</span><span class='int'>60</span> <span class='rparen'>)</span><span class='op'>+</span><span class='id identifier rubyid_remember_hour'>remember_hour</span><span class='op'>+</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_time_slot'>time_slot</span><span class='period'>.</span><span class='id identifier rubyid_hour'>hour</span>
+			<span class='id identifier rubyid_remember_min'>remember_min</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_remember_min'>remember_min</span> <span class='op'>+</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_time_slot'>time_slot</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span><span class='rparen'>)</span> <span class='op'>%</span> <span class='int'>60</span>
+		<span class='kw'>end</span>
+		<span class='id identifier rubyid_time_slot_array'>time_slot_array</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Oct  6 18:41:33 2016 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.5 (ruby-2.3.0).
+</div>
+
+    </div>
+  </body>
+</html>
