@@ -29,7 +29,6 @@ class Role < ActiveRecord::Base
 			self.employees.each do |x| 
 				x.skip_password_validation = true
 				x.update(role_id: empty_role_id)
-				byebug
 			end
 		end
 	end

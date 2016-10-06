@@ -44,9 +44,12 @@ class Booking < ActiveRecord::Base
 	end
 
 	def slot_valid? 
-		if self.slot.to_i > self.resource.available_time_slot(self.date_of_booking.strftime("%Y%m%d") ).length || self.slot%1!=0
-			self.errors[:slot_invalid] << "This slot is invalid"
+		byebug
+		available_slots = self.resource.available_time_slot(self.date_of_booking.strftime("%Y%m%d") )
+		available_slots.each do | slot |
+			return if slot[1] == self.slot.to_i
 		end
+			self.errors[:slot_invalid] << "This slot is invalid"
 	end
 
 	def is_slot_already_passed?
