@@ -6,7 +6,8 @@ class Employee < ActiveRecord::Base
 	belongs_to :company
 	has_many :bookings, dependent: :destroy
 	has_many :complaints, dependent: :destroy
-	
+  has_many :subordinates, class_name: "Employee", foreign_key: "manager_id"
+  belongs_to :manager, class_name: "Employee"
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i,   message: "email format" },
                        uniqueness:{scope: :company_id, message: "Email should be unique across the company"}
   validates :name, :email,:age, :role_id, :manager_id, :date_of_joining, presence: true
@@ -15,6 +16,7 @@ class Employee < ActiveRecord::Base
   before_save :lower_email	
   devise :database_authenticatable, :registerable,:recoverable, :rememberable, :trackable, :validatable, :confirmable
 
+  scope :employees, -> id { where(company_id:id) }
   def attempt_set_password(params)
     p = {}
     p[:password] = params[:password]
@@ -47,10 +49,16 @@ class Employee < ActiveRecord::Base
   def only_if_unconfirmed
     pending_any_confirmation {yield}
   end
-
+  def manager
+    Employee.find(self.manager_id)
+  end
+  def subordinates
+    e = Employee.where(manager_id:self.id)
+  end
   private
   def lower_email
 	 self.email.downcase!
    self.name.downcase!
 	end
+
 end
