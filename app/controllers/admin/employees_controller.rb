@@ -36,7 +36,8 @@ class Admin::EmployeesController < ApplicationController
 	end
 
 	def destroy
-		@admin = @company.employees.find(name:"admin")
+		byebug
+		@admin = @company.employees.find_by(name:"admin")
 		if @company.employees.destroy(params[:id])
 			flash[:success] = "Employee and his bookings and complaints are succeesfully deleted"
 			@company.employees.where(manager_id:params[:id]).each do | record_emp |
