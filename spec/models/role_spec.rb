@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Role, type: :model do
   before(:each) do 
-    @company = Company.create(name: "hello1",email: "hello2@gmail.com",phone: "+911254567890",start_time:9.00,end_time: 6.00)
-	 @role = @company.roles.new(designation: "Admin",department: "Company",priority: 0,company_id:1 )
+    @company = Company.create(name: "hello1",email: "hello2@gmail.com",phone: "+911254567890",start_time:"9:00",end_time: "18:00")
+    # p @company.errors
+	 @role = @company.roles.build(designation: "Admin",department: "Company",priority: 2)
   end
 
   context "validation" do 
@@ -50,10 +51,19 @@ RSpec.describe Role, type: :model do
     end
   end
 
-  context "delete" do 
-    it "delete role " do 
+  context "duplicate priority" do 
+    it "priority" do 
       @role.save
-      @role.destroy
+      @role1 = @company.roles.build(designation: "coder",department: "development",priority: 3)
+      @role1.save
+      @company = Company.find(@company.id)
+      # @company.reload
+      p @company.roles.inspect
+      @role2 = @company.roles[1]
+      @role2.priority = 3
+      # p @role2.errors
+      expect(@role2.save).to eq(true)
+      p @company.roles.inspect
     end
   end
 

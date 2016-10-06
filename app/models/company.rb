@@ -44,7 +44,7 @@ class Company < ActiveRecord::Base
 	# Checks whether any resources are added to company 
 	#
 	#
-	# @return [TrueClass/FalseClass] return true if company has resources else false
+	# @return [Boolean] return true if company has resources else false
 	# 
 	def is_resource_available?
 		(self.resources.any?) ? true : false
@@ -73,6 +73,7 @@ class Company < ActiveRecord::Base
 	def add_empty_role
 		empty_role = self.roles.build(designation: "none",department: self.name,priority: 0)
 		empty_role.save(validate: false)
+		# byebug
 	end
 
 	#
@@ -82,7 +83,8 @@ class Company < ActiveRecord::Base
 	# @return [void] Add default role and admin to company
 	# 
 	def add_defaults
-		@role = self.roles.create(designation: "admin",department: self.name,priority: 1 )
+		@role = self.roles.build(designation: "admin",department: self.name,priority: 1 )
+		# byebug
 		if @role.save(validate: false)
 			@employee = self.employees.new(name: "admin",email: self.email ,age:22,date_of_joining: Date.today)
 			@employee.role_id = @role.id
@@ -102,7 +104,7 @@ class Company < ActiveRecord::Base
 	# Check whether start_time and time_time is provided for company
 	#
 	#
-	# @return [TrueClass/FalseClass] If both fields given return true else false
+	# @return [Boolean] If both fields given return true else false
 	# 
 	def ensure_timing_has_value
 		if (self.start_time.blank? || self.end_time.blank?)

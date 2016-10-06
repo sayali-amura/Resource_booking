@@ -90,7 +90,35 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Module Admin::ResourcesHelper provides resource time slot related helpers
+to use across controller and views</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Author:</p>
+<ul class="author">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'>
+<p>Amrut Jadhav amrut@amuratech.com</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
 
 
 
@@ -108,7 +136,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#humanize-instance_method" title="#humanize (instance method)">#<strong>humanize</strong>(resource)  &#x21d2; Object </a>
+      <a href="#humanize-instance_method" title="#humanize (instance method)">#<strong>humanize</strong>(resource)  &#x21d2; String </a>
     
 
     
@@ -123,7 +151,8 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>display resource timing in format.</p>
+<p>Function display resource timing in humanized format   @example Humanized
+format    “ 2000-01-01 01:00:00 UTC” #=&gt; “1 Hour, 0 Minutes”.</p>
 </div></span>
   
 </li>
@@ -132,7 +161,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#resource_array-instance_method" title="#resource_array (instance method)">#<strong>resource_array</strong>  &#x21d2; Object </a>
+      <a href="#resource_array-instance_method" title="#resource_array (instance method)">#<strong>resource_array</strong>  &#x21d2; Array&lt;String,Integer&gt; </a>
     
 
     
@@ -147,7 +176,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>build resource [name,id] array.</p>
+<p>Build resource [name,id] array.</p>
 </div></span>
   
 </li>
@@ -156,7 +185,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#show_slot_time-instance_method" title="#show_slot_time (instance method)">#<strong>show_slot_time</strong>(resource_id, slot_id)  &#x21d2; Object </a>
+      <a href="#show_slot_time-instance_method" title="#show_slot_time (instance method)">#<strong>show_slot_time</strong>(resource_id, slot_id)  &#x21d2; String </a>
     
 
     
@@ -171,7 +200,8 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>returns slot time text from slot id.</p>
+<p>Function provides slots time text related to slot_id i.e “9:00-10:00” of
+resource.</p>
 </div></span>
   
 </li>
@@ -189,7 +219,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="humanize-instance_method">
   
-    #<strong>humanize</strong>(resource)  &#x21d2; <tt>Object</tt> 
+    #<strong>humanize</strong>(resource)  &#x21d2; <tt>String</tt> 
   
 
   
@@ -198,13 +228,34 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>display resource timing in format</p>
+<p>Function display resource timing in humanized format</p>
+
+<pre class="code ruby"><code class="ruby">@example Humanized format 
+&quot; 2000-01-01 01:00:00 UTC&quot; #=&gt; &quot;1 Hour, 0 Minutes&quot;</code></pre>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Humanized format of resource time slot</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -212,15 +263,15 @@
       <pre class="lines">
 
 
-13
-14
-15
-16
-17
-18</pre>
+37
+38
+39
+40
+41
+42</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/admin/resources_helper.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/admin/resources_helper.rb', line 37</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_humanize'>humanize</span> <span class='id identifier rubyid_resource'>resource</span>
 	<span class='id identifier rubyid_slot'>slot</span> <span class='op'>=</span> <span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_time_slot'>time_slot</span>
@@ -236,7 +287,7 @@
       <div class="method_details ">
   <h3 class="signature " id="resource_array-instance_method">
   
-    #<strong>resource_array</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>resource_array</strong>  &#x21d2; <tt>Array&lt;String,Integer&gt;</tt> 
   
 
   
@@ -245,13 +296,35 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>build resource [name,id] array</p>
+<p>Build resource [name,id] array. This array is used in the view to create
+select box for seleting resource.</p>
+
+<pre class="code ruby"><code class="ruby">It find out resources of company using the current_emlpoyee helper provided by devise.
+For more info about current_employee refer this @see https://github.com/plataformatec/devise</code></pre>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String,Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Resource array</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -259,15 +332,15 @@
       <pre class="lines">
 
 
-9
-10
-11</pre>
+26
+27
+28</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/admin/resources_helper.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/admin/resources_helper.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resource_array'>resource_array</span>
-<span class='id identifier rubyid_resource'>resource</span> <span class='op'>=</span> <span class='id identifier rubyid_current_employee'>current_employee</span><span class='period'>.</span><span class='id identifier rubyid_company'>company</span><span class='period'>.</span><span class='id identifier rubyid_resources'>resources</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_x'>x</span><span class='op'>|</span>  <span class='lbracket'>[</span><span class='id identifier rubyid_x'>x</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span><span class='id identifier rubyid_x'>x</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
+	<span class='id identifier rubyid_resource'>resource</span> <span class='op'>=</span> <span class='id identifier rubyid_current_employee'>current_employee</span><span class='period'>.</span><span class='id identifier rubyid_company'>company</span><span class='period'>.</span><span class='id identifier rubyid_resources'>resources</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_x'>x</span><span class='op'>|</span>  <span class='lbracket'>[</span><span class='id identifier rubyid_x'>x</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span><span class='id identifier rubyid_x'>x</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -277,7 +350,7 @@
       <div class="method_details ">
   <h3 class="signature " id="show_slot_time-instance_method">
   
-    #<strong>show_slot_time</strong>(resource_id, slot_id)  &#x21d2; <tt>Object</tt> 
+    #<strong>show_slot_time</strong>(resource_id, slot_id)  &#x21d2; <tt>String</tt> 
   
 
   
@@ -286,13 +359,70 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>returns slot time text from slot id</p>
+<p>Function provides slots time text related to slot_id i.e “9:00-10:00” of
+resource. This method utilize the timeslots method</p>
+
+<pre class="code ruby"><code class="ruby">of Resource class. (see Resource#timeslots)</code></pre>
 
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>resource_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Id of resource</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>slot_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Id of resource slot</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Slot correspoding to slot_id</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -300,14 +430,14 @@
       <pre class="lines">
 
 
-3
-4
-5
-6
-7</pre>
+15
+16
+17
+18
+19</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/admin/resources_helper.rb', line 3</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/admin/resources_helper.rb', line 15</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_show_slot_time'>show_slot_time</span> <span class='id identifier rubyid_resource_id'>resource_id</span><span class='comma'>,</span><span class='id identifier rubyid_slot_id'>slot_id</span>
 	<span class='id identifier rubyid_resource'>resource</span> <span class='op'>=</span> <span class='const'>Resource</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_resource_id'>resource_id</span><span class='rparen'>)</span>
@@ -324,7 +454,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Oct  6 12:29:32 2016 by
+  Generated on Thu Oct  6 18:41:32 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.3.0).
 </div>

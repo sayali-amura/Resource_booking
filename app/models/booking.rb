@@ -33,7 +33,7 @@ class Booking < ActiveRecord::Base
 	# Check whether the date of booking is past date
 	#
 	#
-	# @return [TrueClass/FalseClass] Add error to self if date of booking is past date
+	# @return [void] Add error to self if date of booking is past date
 	# 
 	def is_date_valid?
 		unless self.date_of_booking >= Time.zone.now.beginning_of_day 
@@ -74,16 +74,18 @@ class Booking < ActiveRecord::Base
 		end
 	end
 
-	#
-	# Checks whether requested slot of booking is valid?
-	#
+	# 
+	# Checks whether requested slot of booking is valid? i.e check whether  the requested slot is present in 
+	#   in the reource's slot or not
 	#
 	# @return [void] Add error to self if slot is out of range of avaible slot of resource and it is not integer
 	# 
 	def slot_valid? 
-		if self.slot.to_i > self.resource.available_time_slot(self.date_of_booking.strftime("%Y%m%d") ).length || self.slot%1!=0
-			self.errors[:slot_invalid] << "This slot is invalid"
+		avaible_slots =  self.resource.available_time_slot(self.date_of_booking.strftime("%Y%m%d"))
+		avaible_slots.each do |x|
+			return if x[1] == self.slot.to_i
 		end
+		self.errors[:slot_invalid] << "This slot is invalid"
 	end
 
 	#
@@ -103,7 +105,7 @@ class Booking < ActiveRecord::Base
 	# Check whether any resources are added to company?
 	#
 	#
-	# @return [TrueClass/FalseClass] If there are not resources in company return false else true
+	# @return [Boolean] If there are not resources in company return false else true
 	# 
 	def is_resource_added_to_company?
 		if !(self.employee.company.resources.any?)
@@ -115,7 +117,7 @@ class Booking < ActiveRecord::Base
 	# Check whether date_of_bookingg is empty
 	#
 	#
-	# @return [Trueclass/FalseClass] Whether dependencies are present or not 
+	# @return [Boolean] Whether dependencies are present or not 
 	# 
 	def ensure_dependencies
 		unless !self.date_of_booking.blank?

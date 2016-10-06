@@ -52,7 +52,6 @@ class Role < ActiveRecord::Base
 		end
 	end
 
-
 	#
 	# Check whether user trying to add admin role to company
 	#

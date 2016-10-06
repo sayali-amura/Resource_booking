@@ -103,99 +103,47 @@
   
 </div>
 
-
-
-
-
-
-
-
-  
-    <h2>
-      Class Method Summary
-      <small><a href="#" class="summary_toggle">collapse</a></small>
-    </h2>
-
-    <ul class="summary">
-      
-        <li class="public ">
-  <span class="summary_signature">
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
     
-      <a href="#resource_ids-class_method" title="resource_ids (class method)">.<strong>resource_ids</strong>(company_id)  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-    </ul>
-  
+<p>Class Complaint provides associations and validations for complaint object</p>
 
 
-  
-
-  <div id="class_method_details" class="method_details_list">
-    <h2>Class Method Details</h2>
-
-    
-      <div class="method_details first">
-  <h3 class="signature first" id="resource_ids-class_method">
-  
-    .<strong>resource_ids</strong>(company_id)  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-9
-10
-11
-12
-13
-14
-15
-16</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'app/models/complaint.rb', line 9</span>
-
-<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_resource_ids'>resource_ids</span><span class='lparen'>(</span><span class='id identifier rubyid_company_id'>company_id</span><span class='rparen'>)</span>
-	<span class='ivar'>@resources</span> <span class='op'>=</span> <span class='const'>Resource</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>company_id:</span><span class='id identifier rubyid_company_id'>company_id</span><span class='rparen'>)</span>
-	<span class='ivar'>@id_array</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-	<span class='ivar'>@resources</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span> <span class='id identifier rubyid_resource'>resource</span> <span class='op'>|</span>
-		<span class='ivar'>@id_array</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
-	<span class='kw'>end</span>
-	<span class='ivar'>@id_array</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
   </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Author:</p>
+<ul class="author">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'>
+<p>Amrut Jadhav amrut@amuratech.com</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+
+
+
+
+
+
+
+  
 
 </div>
 
       <div id="footer">
-  Generated on Thu Oct  6 12:29:32 2016 by
+  Generated on Thu Oct  6 18:41:33 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.3.0).
 </div>

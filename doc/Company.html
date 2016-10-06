@@ -103,17 +103,66 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Class Company provides validation and associations for company object</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Author:</p>
+<ul class="author">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'>
+<p>Amrut Jadhav  amrut@amuratech.com</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
   <h2>Constant Summary</h2>
   <dl class="constants">
     
       <dt id="VALID_EMAIL_REGEX-constant" class="">VALID_EMAIL_REGEX =
-        
+        <div class="docstring">
+  <div class="discussion">
+    
+<p>Email regex</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
       </dt>
       <dd><pre class="code"><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z</span><span class='regexp_end'>/i</span></span></pre></dd>
     
       <dt id="VALID_PHONE_REGEX-constant" class="">VALID_PHONE_REGEX =
-        
+        <div class="docstring">
+  <div class="discussion">
+    
+<p>Company phone regex</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
       </dt>
       <dd><pre class="code"><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\A\+\d+\z</span><span class='regexp_end'>/</span></span></pre></dd>
     
@@ -150,7 +199,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Checks whether any resources are added to company.</p>
+</div></span>
   
 </li>
 
@@ -177,6 +228,8 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+<p>Checks whether any resources are added to company</p>
+
 
   </div>
 </div>
@@ -192,6 +245,11 @@
       
       
       
+        &mdash;
+        <div class='inline'>
+<p>return true if company has resources else false</p>
+</div>
+      
     </li>
   
 </ul>
@@ -202,12 +260,12 @@
       <pre class="lines">
 
 
-27
-28
-29</pre>
+49
+50
+51</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/company.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'app/models/company.rb', line 49</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_is_resource_available?'>is_resource_available?</span>
 	<span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_resources'>resources</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='kw'>true</span> <span class='op'>:</span> <span class='kw'>false</span>
@@ -222,7 +280,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Oct  6 12:29:32 2016 by
+  Generated on Thu Oct  6 18:41:33 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.3.0).
 </div>
