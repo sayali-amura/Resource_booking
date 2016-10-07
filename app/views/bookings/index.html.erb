@@ -1,6 +1,6 @@
-<% if @bookings %>
+<% if @company.resources.any? %>
 
-	<% if @bookings.any? %>
+	<% if @company.bookings.any? %>
 		<%= render "bookings" %>
 	<% else %>
 	<h2>No Bookings</h2>
