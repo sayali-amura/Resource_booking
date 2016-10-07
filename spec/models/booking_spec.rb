@@ -3,13 +3,10 @@ require 'rails_helper'
 RSpec.describe Booking, type: :model do
 
   before(:each) do 
-  	@company = Company.new(name: "hello1",email: "hello2@gmail.com",phone: "+911254567890",start_time:"9:00",end_time:"18:00")
-  	@company.save
-  	@resource = @company.resources.create(name: "ac", time_slot:"1:00")
-
-  	@employee = @company.employees.first
+  	@company = create(:company)
   	@resource = @company.resources.first
-  	@booking = @employee.bookings.new({comment: "hello",feedback: "",employee_id:6,date_of_booking: '2016-10-28', slot: 0})
+  	@employee = @company.employees.first
+  	@booking = @employee.bookings.new({comment: "hello",feedback: "",employee_id:6,date_of_booking: '2016-10-28', slot: 6})
   	@booking.resource_id = @resource.id
   end
 
@@ -17,7 +14,6 @@ RSpec.describe Booking, type: :model do
   context "field validations" do 
   	context "date" do 
 	  	it "previous date" do 
-	  		puts @company.inspect
 	  		@booking.date_of_booking = '2016-09-12'
 	  		expect(@booking).to_not be_valid
 	  	end
@@ -25,9 +21,6 @@ RSpec.describe Booking, type: :model do
 	  		@booking.date_of_booking = ""
 	  		@booking.errors
 	  		expect(@booking).to_not be_valid
-	  	end
-	  	it "future date" do
-	  		expect(@booking).to be_valid
 	  	end
 	  	it "holiday" do 
 	  		@booking.date_of_booking = '2016-09-02'

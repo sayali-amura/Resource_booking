@@ -81,8 +81,6 @@ class Booking < ActiveRecord::Base
 	# @return [void] Add error to self if slot is out of range of avaible slot of resource and it is not integer
 	# 
 	def slot_valid? 
-<<<<<<< HEAD
-		byebug
 		available_slots = self.resource.available_time_slot(self.date_of_booking.strftime("%Y%m%d") )
 		available_slots.each do | slot |
 			return if slot[1] == self.slot.to_i

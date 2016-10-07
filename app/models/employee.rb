@@ -81,7 +81,7 @@ class Employee < ActiveRecord::Base
   private
 
   #
-  # Downcase the email and name of employe
+  # Downcase the email and name of employee
   #
   #
   # @return [void] Downcase the fields
@@ -89,10 +89,6 @@ class Employee < ActiveRecord::Base
   def lower_email
    self.email.downcase!
    self.name.downcase!
-<<<<<<< HEAD
-	end
-=======
   end
->>>>>>> 6f621bac91073b3cf8f78704725bd4fd4931637c
 
 end

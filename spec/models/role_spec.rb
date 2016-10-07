@@ -68,13 +68,6 @@ RSpec.describe Role, type: :model do
 
   end
   
-#belongs_to :company
-  # context "delete" do 
-  #   it "delete role " do 
-  #     @role.save
-  #     @role.destroy
-  #   end
-  # end
   context "Asscociations" do 
     it "belongs to company" do 
       assc = described_class.reflect_on_association(:company)
