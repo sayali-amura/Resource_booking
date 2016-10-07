@@ -86,6 +86,7 @@
 	# @return [Hash] Strong parameters hash
 	# 
 	def company_params
+		# byebug
 		params.require(:company).permit(:name,:email,:phone,:start_time,:end_time)
 	end
 
