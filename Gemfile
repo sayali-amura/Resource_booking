@@ -10,6 +10,7 @@ gem 'simple_form'
 gem 'bootstrap-select-rails'
 gem 'cancancan'
 gem 'yard', '~> 0.9.5'
+gem 'intl-tel-input-rails'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
