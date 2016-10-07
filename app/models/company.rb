@@ -38,7 +38,7 @@ class Company < ActiveRecord::Base
 	# Callbacks
 	# (see #lower_fields)
 	before_save :lower_fields
-	after_save :add_defaults, :add_empty_role
+	after_create :add_defaults, :add_empty_role
 
 	#
 	# Checks whether any resources are added to company 
