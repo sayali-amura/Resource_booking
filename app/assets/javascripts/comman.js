@@ -69,8 +69,12 @@ $(document).on('turbolinks:load',function() {
 
   // After the form submit event occurs, contry code and phone number is concaneted and value is set to hidden field company[phone]
   // and this field is submitted to server.
-    $("form").submit(function() {
+    $("form").submit(function(e) {
        $("#hidden").val($("#go").intlTelInput("getNumber"));
+       if (!telInput.intlTelInput("isValidNumber")){
+          e.preventDefault();
+          alert("Phone number is not valid.");
+       }
     });
 
   });
