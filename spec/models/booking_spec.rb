@@ -113,13 +113,15 @@ RSpec.describe Booking, type: :model do
 					error_check "is_date_valid?", "to_not", "=> You can't book resource for previous day"
 				end
 			end
-			context "#is_slot_alloted?" do 
+			context "#is_slot_alloted?" do
 				it "no bookings" do 
+					@booking.valid?
 					error_check "is_slot_alloted?","to_not","=> This slot is already alloted"
 				end
 				it "new record with different slot" do 
 					@booking.save
 					@booking = @employee.bookings.build({comment: "hello",feedback: "",employee_id:6,date_of_booking: "2016-10-28", slot: 1})
+					@booking.valid?
 					error_check "is_slot_alloted?","to_not","=> This slot is already alloted"
 				end
 				it "old record with different slot" do 
@@ -135,6 +137,7 @@ RSpec.describe Booking, type: :model do
 				it "new record but already alloted slot" do
 					@booking.save
 					@booking = @employee.bookings.build({comment: "hello",feedback: "",employee_id:6,date_of_booking: '2016-10-28', slot: 0})
+  					@booking.valid?
   					@booking.resource_id = @resource.id
   					error_check "is_slot_alloted?","to","=> This slot is already alloted"
 				end

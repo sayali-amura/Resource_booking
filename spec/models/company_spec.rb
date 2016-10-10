@@ -46,6 +46,51 @@ RSpec.describe Company, type: :model do
    			expect(@company).to_not be_valid
    	  end
     end
+
+    context "instance methods" do 
+      it "#validate_each" do 
+        @company.end_time =  Time.zone.now.beginning_of_day
+        expect(@company).to_not be_valid
+      end
+      context "#is_resource_available?" do 
+        it "no resources" do 
+          @company.resources.destroy_all
+          expect(@company.is_resource_available?).to eq(false)
+        end
+        it "company have resources" do 
+           expect(@company.is_resource_available?).to eq(true)
+        end
+      end
+      context "#add_empty_role" do 
+        it "none role added" do 
+          @company.send(:add_empty_role)
+          expect(@company.roles.where(designation: "none").count).to eq(2)
+        end
+      end
+      context "#lower_fields" do
+        it "lowering the email and name" do 
+          name = @company.name
+          email = @company.email
+          @company.send(:lower_fields)
+          expect(@company.name).to eq(name.downcase)
+          expect(@company.email).to eq(email.downcase)
+        end
+      end
+      context "#ensure_timing_has_value" do 
+        it "timing provided" do 
+          expect(@company.send(:ensure_timing_has_value)).to eq(true)
+        end
+        it "start_time is not provided" do 
+          @company.start_time = ""
+          expect(@company.send(:ensure_timing_has_value)).to eq(false)
+        end
+        it "end_time is not provided" do 
+          @company.end_time = ""
+          expect(@company.send(:ensure_timing_has_value)).to eq(false)
+        end
+      end
+    end
+
   end
 
   context "Associations" do 
