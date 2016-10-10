@@ -10,6 +10,32 @@ RSpec.describe Booking, type: :model do
   	@booking.resource_id = @resource.id
   end
 
+  context "ongoing booking" do
+  	it "check ongoing bookings" do
+  		today_bookings = @company.bookings.where("date_of_booking = ?",Date.today)
+  		# p today_bookings
+  		today_bookings.each do |booking|
+  			booking.date_of_booking = Date.tomorrow
+  			booking.save
+  		end
+  		ongoing_bookings = Booking.ongoing_bookings(@company)
+  		expect(ongoing_bookings).to be_empty
+  	end
+  	# it "check ongoing_bookings" do
+  	# 	today_bookings = @company.bookings.where("date_of_booking = ?",Date.today)
+  	# 	if today_bookings.empty?
+  	# 		byebug
+  	# 		@book = @employee.bookings.new({comment: "hello",feedback: "",employee_id:6,date_of_booking: Date.today, slot: 7})
+  	# 		@book.resource_id = @resource.id
+  	# 		@book.save
+  	# 	end
+  	# 	ongoing_bookings = Booking.ongoing_bookings(@company)
+  	# 	byebug
+  	# 	expect(ongoing_bookings).to_not be_empty
+  	# end
+  end
+
+
   
   context "field validations" do 
   	context "date" do 
@@ -37,7 +63,7 @@ RSpec.describe Booking, type: :model do
 
 	context "slot" do 
 		it "out of bound " do 
-			@booking.slot = 12
+			@booking.slot = 120000
 			expect(@booking).to_not be_valid
 		end
 		it "float " do 

@@ -36,7 +36,6 @@ class Admin::EmployeesController < ApplicationController
 	end
 
 	def destroy
-		byebug
 		@admin = @company.employees.find_by(name:"admin")
 		if @company.employees.destroy(params[:id])
 			flash[:success] = "Employee and his bookings and complaints are succeesfully deleted"
@@ -57,9 +56,9 @@ class Admin::EmployeesController < ApplicationController
 			@complaints = @complaints.where(status:0) if @complaints
 		end
 	end
-	
+
 	def change_status
-		if(params[:status])		
+		if(params[:status])	
 			flag = 0	
 			booking = @company.bookings.find(params[:status][:booking_id])
 			if params[:commit] =="Grant"

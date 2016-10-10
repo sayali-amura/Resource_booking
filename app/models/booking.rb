@@ -16,7 +16,7 @@ class Booking < ActiveRecord::Base
 
 	# callbacks
 	# (see #add_company_id)
-	after_initialize 	:add_company_id
+	before_validation 	:add_company_id
 
 	# validations
 	validates :slot,:date_of_booking,:comment , presence: true

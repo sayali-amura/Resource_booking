@@ -21,6 +21,23 @@ RSpec.describe Admin::EmployeesController, type: :controller do
   		post :create, employee: params
   		assert_redirected_to admin_employees_path
 	end
+	it "redirects to the home page upon update" do
+		update_params = {"name"=>"sayali", "email"=>"sayalip@gmail.com", "manager_id"=>"1", "role_id"=>"2", "age"=>"22", "date_of_joining"=>"2014-11-30"}
+		@employee = Employee.last
+  		patch :update, :id => @employee.id, employee: update_params
+  		assert_redirected_to admin_employees_path
 	end
+	it "redirect to dashbord" do
+		get :dashbord
+		expect(response).to render_template("dashbord")
+	end
+	it "change status of booking" do
+		resource = subject.current_employee.company.resources.sample
+		@booking = subject.current_employee.bookings.create(resource_id: resource.id, comment: "conference", date_of_booking: Date.tomorrow, slot:0)
+		params = {"booking_id"=>@booking.id, "commit"=>"Grant"}
+		post :change_status, status: params
+		assert_redirected_to admin_dashbord_path
+	end
+
 end
 
