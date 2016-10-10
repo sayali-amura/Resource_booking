@@ -15,12 +15,12 @@ class Employee < ActiveRecord::Base
 	belongs_to :company
 	has_many :bookings, dependent: :destroy
 	has_many :complaints, dependent: :destroy
-	
-  # Validations
+  has_many :subordinates, class_name: "Employee", foreign_key: "manager_id"
+  belongs_to :manager, class_name: "Employee"
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i,   message: "email format" },
                        uniqueness:{scope: :company_id, message: "Email should be unique across the company"}
   validates :name, :email,:age, :role_id, :manager_id, :date_of_joining, presence: true
-  validates :role_id, :manager_id, :age, numericality: { only_integer: true, less_than: 2147483647, greater_than: 1}
+  validates :role_id, :manager_id, :age, numericality: { only_integer: true, less_than: 2147483647, greater_than_or_equal_to: 1}
   validates :password, :password_confirmation, presence: {:message => 'no password'}, unless: :skip_password_validation
 
   # Callbacks
@@ -29,6 +29,7 @@ class Employee < ActiveRecord::Base
   # Devise options
   devise :database_authenticatable, :registerable,:recoverable, :rememberable, :trackable, :validatable, :confirmable
 
+  scope :employees, -> id { where(company_id:id) }
   def attempt_set_password(params)
     p = {}
     p[:password] = params[:password]
@@ -71,11 +72,16 @@ class Employee < ActiveRecord::Base
   def only_if_unconfirmed
     pending_any_confirmation {yield}
   end
-
+  def manager
+    Employee.find(self.manager_id)
+  end
+  def subordinates
+    e = Employee.where(manager_id:self.id)
+  end
   private
 
   #
-  # Downcase the email and name of employe
+  # Downcase the email and name of employee
   #
   #
   # @return [void] Downcase the fields

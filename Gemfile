@@ -48,6 +48,7 @@ group :development, :test do
   # gem 'factory_girl_rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   # gem 'byebug'
+  gem 'pry'
   gem 'faker', '~> 1.6', '>= 1.6.6'
   gem "factory_girl_rails", "~> 4.0"
   gem 'as-duration'
@@ -61,5 +62,4 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'byebug'
-  gem 'pry'
 end

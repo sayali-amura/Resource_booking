@@ -52,7 +52,6 @@ class Resource < ActiveRecord::Base
 	def available_time_slot date_of_booking
 		if date_of_booking.gsub(/[-]+/,"").to_i != Time.zone.now.strftime("%Y%m%d").to_i
 			resource_slot = self.timeslots
-			# byebug
 			if self.bookings.where(date_of_booking:date_of_booking).where(status:1)
 				bookings_of_day = self.bookings.where(date_of_booking: date_of_booking).where(status:1)
 				bookings_of_day.each do |x|

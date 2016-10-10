@@ -6,6 +6,7 @@ class Employees::ConfirmationsController < Devise::ConfirmationsController
   before_action :check, only: [:update]
 
   def check
+
     flag = 0
     if (params[:employee][:password].empty?)
         flash[:danger] = "password can not be blank"

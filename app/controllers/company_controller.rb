@@ -6,7 +6,7 @@
 	class CompanyController < ApplicationController
 		# Filter skip authentication of employee before actions
 		skip_before_action :authenticate_employee!, only: [:new, :create, :show]
-	
+		load_and_authorize_resource :company, only: [:edit, :update, :destroy]
 	#
 	# Index page
 	#
@@ -31,7 +31,20 @@
 			render :new
 		end
 	end
+	def edit
+		@company = current_employee.company
 
+	end
+	def update
+		@company = current_employee.company
+		company_params[:email] = @company.email
+		if @company.update(company_params)
+			flash[:success] = "company is successfully updated."
+			redirect_to company_index_path
+		else
+			render :edit
+		end
+	end
 	#
 	# Destroy company of particular id
 	# @param [Hash] params The params from delete request

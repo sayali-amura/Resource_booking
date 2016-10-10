@@ -37,7 +37,7 @@ class Booking < ActiveRecord::Base
 	# 
 	def is_date_valid?
 		unless self.date_of_booking >= Time.zone.now.beginning_of_day 
-			self.errors[:date_validation] << "You can't book resource for previous day"
+			self.errors[:date_validation] << "=> You can't book resource for previous day"
 		end
 	end
 
@@ -49,7 +49,7 @@ class Booking < ActiveRecord::Base
 	# 
 	def check_holiday?
 		unless self.date_of_booking.wday != 0 
-			self.errors[:day_validation] << "Booking can't be done on holidays"
+			self.errors[:day_validation] << "=> Booking can't be done on holidays"
 		end
 	end
 
@@ -68,7 +68,7 @@ class Booking < ActiveRecord::Base
 			end
 			days_booking.each do |x|
 				unless x.slot != self.slot
-					self.errors[:allocated_slot] << "This slot is already alloted"
+					self.errors[:allocated_slot] << "=> This slot is already alloted"
 				end
 			end
 		end
@@ -85,7 +85,7 @@ class Booking < ActiveRecord::Base
 		available_slots.each do | slot |
 			return if slot[1] == self.slot.to_i
 		end
-			self.errors[:slot_invalid] << "This slot is invalid"
+			self.errors[:slot_invalid] << "=> This slot is invalid"
 	end
 
 	#
@@ -96,7 +96,7 @@ class Booking < ActiveRecord::Base
 	def is_slot_already_passed?
 		unless self.date_of_booking != Time.zone.now.beginning_of_day 
 			unless self.resource.next_time_slots.include?(self.resource.timeslots[self.slot])
-				self.errors[:slot_avaibility] << "This slot is already passed"
+				self.errors[:slot_avaibility] << "=> This slot is already passed"
 			end
 		end
 	end
@@ -121,7 +121,7 @@ class Booking < ActiveRecord::Base
 	# 
 	def ensure_dependencies
 		unless !self.date_of_booking.blank?
-			self.errors[:date_of_booking] << "=>Date of booking can't be empty"
+			self.errors[:date_of_booking] << "=> Date of booking can't be empty"
 			return false
 		end
 		unless ( self.company.resources.find_by_id(self.resource_id) )
