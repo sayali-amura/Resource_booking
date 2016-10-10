@@ -16,7 +16,7 @@ class Booking < ActiveRecord::Base
 
 	# callbacks
 	# (see #add_company_id)
-	before_validation 	:add_company_id
+	after_initialize 	:add_company_id
 
 	# validations
 	validates :slot,:date_of_booking,:comment , presence: true
@@ -81,11 +81,11 @@ class Booking < ActiveRecord::Base
 	# @return [void] Add error to self if slot is out of range of avaible slot of resource and it is not integer
 	# 
 	def slot_valid? 
-		avaible_slots =  self.resource.available_time_slot(self.date_of_booking.strftime("%Y%m%d"))
-		avaible_slots.each do |x|
-			return if x[1] == self.slot.to_i
+		available_slots = self.resource.available_time_slot(self.date_of_booking.strftime("%Y%m%d") )
+		available_slots.each do | slot |
+			return if slot[1] == self.slot.to_i
 		end
-		self.errors[:slot_invalid] << "This slot is invalid"
+			self.errors[:slot_invalid] << "This slot is invalid"
 	end
 
 	#
