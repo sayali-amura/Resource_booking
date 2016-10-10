@@ -1,76 +1,80 @@
 require 'rails_helper'
 
 RSpec.describe Role, type: :model do
+
   before(:each) do 
-    @company = Company.create(name: "hello1",email: "hello2@gmail.com",phone: "+911254567890",start_time:"9:00",end_time: "18:00")
-    # p @company.errors
-	 @role = @company.roles.build(designation: "Admin",department: "Company",priority: 2)
+    @company = create(:company)
+    @role = @company.roles[3]
   end
 
-  context "validation" do 
-    context "repeat fields" do
-      it "admin " do 
-        @role.save
-        @role = Role.new(designation: "Admin",department: "Company",priority: 0,company_id:1 )
+  context "validations" do
+    context "check presence true" do 
+      
+      it "is not valid without designation" do
+        @role.designation = nil
+        expect(@role).to_not be_valid
       end
-      it "designation" do 
-        @role.save
+      it "is not valid without department" do
+        @role.department = nil
+        expect(@role).to_not be_valid
+      end
+
+    end
+
+    context "priority validations" do
+      
+      it "s priority is integer" do
+        @role.priority = "hello"
+        expect(@role).to_not be_valid
+      end
+      it "is not zero" do
+        @role.priority = 0
+        expect(@role).to_not be_valid
+      end
+      it "is less than or equal to 2147483647" do
+        @role.priority = 2147483648
+        expect(@role).to_not be_valid
+      end
+      it "is positive" do
+        @role.priority = -1
+        expect(@role).to_not be_valid
+      end
+      it "is not admin" do
         @role.designation = "admin"
+        expect(@role).to_not be_valid
       end
-      it "department" do 
+    end
+    context "designation validations" do
+      it "has designation unique accross company's department" do
+        @role.designation = "developer"
+        @role.department = "sell.do"
         @role.save
-        @role.department = "Company"
+        @role2 = @company.roles[1]
+        @role2.designation = "developer"
+        @role2.department = "sell.do"
+        expect(@role2).to_not be_valid
       end
-      after(:each) do 
-        expect(@role).to_not be_valid
+    end
+    context "priority validations" do
+      it "has priority unique accross company" do
+        @role = @company.roles[3]
+        @role.priority = 10001
+        @role.save
+        @role2 = @company.roles[2]
+        @role2.priority = 10001
+        expect(@role2).to_not be_valid
       end
     end
 
-    context "invalid fields" do 
-      context "priority" do 
-        it "less than 0" do
-          @role.priority = -1
-          expect(@role).to_not be_valid
-        end
-        it "alphabetics" do 
-          @role.priority = "admin"
-          expect(@role).to_not be_valid
-        end
-      end
-    end
-
-    context "valid fields" do 
-      context "priority" do 
-        it "greater than 0" do 
-          @role.priority = 12
-        end
-      end
-      after(:each) do 
-        expect(@role).to_not be_valid
-      end
-    end
   end
-
-  context "duplicate priority" do 
-    it "priority" do 
-      @role.save
-      @role1 = @company.roles.build(designation: "coder",department: "development",priority: 3)
-      @role1.save
-      @company = Company.find(@company.id)
-      # @company.reload
-      p @company.roles.inspect
-      @role2 = @company.roles[1]
-      @role2.priority = 3
-      # p @role2.errors
-      expect(@role2.save).to eq(true)
-      p @company.roles.inspect
-    end
-  end
-
+  
   context "Asscociations" do 
-    it "has one company_id" do 
+    it "belongs to company" do 
       assc = described_class.reflect_on_association(:company)
       expect(assc.macro).to eq :belongs_to
+    end
+    it "has many employees" do
+      association = described_class.reflect_on_association(:employees)
     end
   end
 

@@ -30,6 +30,7 @@ class Ability
         can :manage, [Booking,Complaint] 
         can [:read,:index], [Resource]
         can [:entry], [Employee]
+        cannot :manage, [Company]
       end
     else                                  # If employee is not existed in databse
       can [:entry], [Employee]
