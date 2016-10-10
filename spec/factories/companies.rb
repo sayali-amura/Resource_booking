@@ -12,6 +12,8 @@ FactoryGirl.define do
 		phone {"+91" << Faker::Number.number(10)}
 		start_time {Faker::Time.between(DateTime.now - 3, DateTime.now - 2)}
 		end_time {Faker::Time.between(DateTime.now - 1, DateTime.now)}
+		start_time {Time.zone.now.beginning_of_day}
+		end_time {Time.zone.now.end_of_day }
 		after(:create) do |company|
 			role_array = create_list(:role, 3, company: company)
 			resource_array = create_list(:resource, 10, company: company)

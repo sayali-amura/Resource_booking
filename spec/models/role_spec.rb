@@ -34,11 +34,19 @@ RSpec.describe Role, type: :model do
       it "is less than or equal to 2147483647" do
         @role.priority = 2147483648
         expect(@role).to_not be_valid
+<<<<<<< HEAD
       end
       it "is positive" do
         @role.priority = -1
         expect(@role).to_not be_valid
       end
+=======
+      end
+      it "is positive" do
+        @role.priority = -1
+        expect(@role).to_not be_valid
+      end
+>>>>>>> 7100172608f0c8c0cc887e121430000c55ad5f3a
       it "is not admin" do
         @role.designation = "admin"
         expect(@role).to_not be_valid

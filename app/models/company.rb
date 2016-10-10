@@ -73,7 +73,6 @@ class Company < ActiveRecord::Base
 	def add_empty_role
 		empty_role = self.roles.build(designation: "none",department: self.name,priority: 0)
 		empty_role.save(validate: false)
-		# byebug
 	end
 
 	#

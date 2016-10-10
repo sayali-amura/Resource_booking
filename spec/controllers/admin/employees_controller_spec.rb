@@ -21,7 +21,6 @@ RSpec.describe Admin::EmployeesController, type: :controller do
   		post :create, employee: params
   		assert_redirected_to admin_employees_path
 	end
-
-
+	end
 end
 

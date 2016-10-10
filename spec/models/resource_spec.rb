@@ -47,6 +47,7 @@ RSpec.describe Resource, type: :model do
       array = @resource.timeslots
       expect(array.sample.last).to be_kind_of(Integer)
     end
+    it "has "
   end
 
 end

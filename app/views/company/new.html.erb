@@ -12,18 +12,22 @@
  				<%= f.email_field :email , class: 'form-control', required: true, placeholder: "Enter email of company"%>
  			Phone:<br>
  				<div class="input-group">
- 					<input type="tel" name="phone1" id="go" class="form-control">
+ 					<input type="tel" name="phone1" id="go" class="form-control" >
 				</div>
 				<%= f.hidden_field :phone, class: "form-control" , id: "hidden" %>
 				<span id="valid-msg" class="hide" style="color: green">✓ Valid</span>
 				<span id="error-msg" class="hide"  style="color: red">Invalid number</span>
 				<br>
- 			Start Time
- 				<%= f.time_field :start_time , class: 'form-control', required: true%>
- 			End Time
- 				<%= f.time_field :end_time , class: 'form-control', required: true%>
- 				<div class="col-md-4" align="center">
- 					<%= f.submit "Register" %>
+				<div class="col-md-6">	
+	 				Start Time
+	 				<%= f.time_field :start_time , class: 'form-control', required: true%>
+				</div>	
+				<div class="col-md-6">
+	 				End Time
+	 				<%= f.time_field :end_time , class: 'form-control', required: true%>
+				</div>
+ 				<div class="col-md-4 col-md-offset-4" align="center">
+ 					<%= f.submit "Register" , class: "btn btn-primary" %>
  				</div>
  		<% end %>	
  	</div>
