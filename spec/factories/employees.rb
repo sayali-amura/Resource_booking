@@ -8,5 +8,6 @@ FactoryGirl.define do
 		date_of_joining {Faker::Date.between(2.years.ago, Date.today)}
 		password {Faker::Internet.password(6, 20)}
 		password_confirmation { password }
+		confirmed_at Date.today
 	end
 end

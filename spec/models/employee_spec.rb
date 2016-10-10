@@ -71,12 +71,30 @@ RSpec.describe Employee, type: :model do
   		@employee.email = "hello @foo"
   		expect(@employee.email).to_not match(/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i)
   	end
+
   	it "is expected to be an Employee" do 
   		expect(@employee).to be_an_instance_of(Employee)
   	end
-
   end
-
-
+    it "returns correct manager" do 
+      manager = Employee.find(@employee.manager_id)
+      expect(@employee.manager).to eq(manager)
+    end
+    it "returns subordinates" do
+      subordinates = Employee.where(manager_id:@employee.id)
+      expect(@employee.subordinates).to eq(subordinates) 
+    end
+    it "lowers email content" do
+      @employee.email = "sayali@GMAIL.com"
+      @employee.skip_password_validation = true
+      employee.save
+      expect(@employee.email).to eq("sayali@gmail.com")
+    end
+    it "lowers name" do
+      @employee.name = "SAYALIp"
+      @employee.skip_password_validation = true
+      @employee.save
+      expect(@employee.name).to eq("sayalip")
+    end
 end
 

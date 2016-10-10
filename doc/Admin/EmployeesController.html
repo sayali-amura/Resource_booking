@@ -341,7 +341,6 @@
       <pre class="lines">
 
 
-60
 61
 62
 63
@@ -364,20 +363,29 @@
 80
 81
 82
-83</pre>
+83
+84
+85
+86
+87
+88</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/admin/employees_controller.rb', line 60</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/admin/employees_controller.rb', line 61</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_change_status'>change_status</span>
-	<span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:status</span><span class='rbracket'>]</span><span class='rparen'>)</span>			
+	<span class='kw'>if</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:status</span><span class='rbracket'>]</span><span class='rparen'>)</span>		
+		<span class='id identifier rubyid_flag'>flag</span> <span class='op'>=</span> <span class='int'>0</span>	
 		<span class='id identifier rubyid_booking'>booking</span> <span class='op'>=</span> <span class='ivar'>@company</span><span class='period'>.</span><span class='id identifier rubyid_bookings'>bookings</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:status</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:booking_id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
 		<span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:commit</span><span class='rbracket'>]</span> <span class='op'>==</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Grant</span><span class='tstring_end'>&quot;</span></span>
 			<span class='id identifier rubyid_booking'>booking</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span> <span class='op'>=</span> <span class='int'>1</span>
 		<span class='kw'>elsif</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:commit</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Reject</span><span class='tstring_end'>&quot;</span></span>
+			<span class='id identifier rubyid_flag'>flag</span> <span class='op'>=</span> <span class='int'>1</span>
 			<span class='id identifier rubyid_booking'>booking</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span> <span class='op'>=</span> <span class='int'>2</span>
 		<span class='kw'>end</span>
-		<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_booking'>booking</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+		<span class='kw'>if</span> <span class='id identifier rubyid_flag'>flag</span> <span class='op'>==</span> <span class='int'>1</span>
+			<span class='id identifier rubyid_booking'>booking</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span><span class='lparen'>(</span><span class='label'>validate:</span><span class='kw'>false</span><span class='rparen'>)</span>
+		<span class='kw'>elsif</span> <span class='op'>!</span><span class='id identifier rubyid_booking'>booking</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
 			<span class='id identifier rubyid_flash'>flash</span><span class='lbracket'>[</span><span class='symbol'>:alert</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_booking'>booking</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_full_messages'>full_messages</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
 		<span class='kw'>end</span>
 		<span class='id identifier rubyid_redirect_to'>redirect_to</span> <span class='symbol'>:admin_dashbord</span>
@@ -455,15 +463,15 @@
       <pre class="lines">
 
 
-53
 54
 55
 56
 57
-58</pre>
+58
+59</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/admin/employees_controller.rb', line 53</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/admin/employees_controller.rb', line 54</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_dashbord'>dashbord</span>
 	<span class='kw'>if</span> <span class='ivar'>@company</span><span class='period'>.</span><span class='id identifier rubyid_resources'>resources</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span>
@@ -504,13 +512,15 @@
 48
 49
 50
-51</pre>
+51
+52</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'app/controllers/admin/employees_controller.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_destroy'>destroy</span>
-	<span class='ivar'>@admin</span> <span class='op'>=</span> <span class='ivar'>@company</span><span class='period'>.</span><span class='id identifier rubyid_employees'>employees</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='label'>name:</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_byebug'>byebug</span>
+	<span class='ivar'>@admin</span> <span class='op'>=</span> <span class='ivar'>@company</span><span class='period'>.</span><span class='id identifier rubyid_employees'>employees</span><span class='period'>.</span><span class='id identifier rubyid_find_by'>find_by</span><span class='lparen'>(</span><span class='label'>name:</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 	<span class='kw'>if</span> <span class='ivar'>@company</span><span class='period'>.</span><span class='id identifier rubyid_employees'>employees</span><span class='period'>.</span><span class='id identifier rubyid_destroy'>destroy</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
 		<span class='id identifier rubyid_flash'>flash</span><span class='lbracket'>[</span><span class='symbol'>:success</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Employee and his bookings and complaints are succeesfully deleted</span><span class='tstring_end'>&quot;</span></span>
 		<span class='ivar'>@company</span><span class='period'>.</span><span class='id identifier rubyid_employees'>employees</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>manager_id:</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span> <span class='id identifier rubyid_record_emp'>record_emp</span> <span class='op'>|</span>
@@ -689,7 +699,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Oct  6 18:41:34 2016 by
+  Generated on Sat Oct  8 11:40:32 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.3.0).
 </div>

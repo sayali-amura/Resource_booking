@@ -1,5 +1,5 @@
 require 'rails_helper'
-
+require 'byebug'
 
   # belongs_to :company
   # has_many :bookings, dependent: :destroy
@@ -36,6 +36,16 @@ RSpec.describe Resource, type: :model do
     it "has many complaints" do
       assc = described_class.reflect_on_association(:complaints)
       expect(assc.macro).to eq :has_many
+    end
+  end
+  context "time_slot method" do
+    it "returns slot array string" do
+      array = @resource.timeslots
+      expect(array.sample.first).to be_kind_of(String)
+    end
+    it "returns slot array integer" do
+      array = @resource.timeslots
+      expect(array.sample.last).to be_kind_of(Integer)
     end
   end
 

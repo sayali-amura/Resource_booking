@@ -287,8 +287,7 @@ upon the resource time_slot and   companies start_time, end_time.</p>
 62
 63
 64
-65
-66</pre>
+65</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'app/models/resource.rb', line 52</span>
@@ -296,8 +295,7 @@ upon the resource time_slot and   companies start_time, end_time.</p>
 <span class='kw'>def</span> <span class='id identifier rubyid_available_time_slot'>available_time_slot</span> <span class='id identifier rubyid_date_of_booking'>date_of_booking</span>
 	<span class='kw'>if</span> <span class='id identifier rubyid_date_of_booking'>date_of_booking</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>[-]+</span><span class='regexp_end'>/</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>!=</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_zone'>zone</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span><span class='period'>.</span><span class='id identifier rubyid_strftime'>strftime</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>%Y%m%d</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
 		<span class='id identifier rubyid_resource_slot'>resource_slot</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_timeslots'>timeslots</span>
-		<span class='comment'># byebug
-</span>		<span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_bookings'>bookings</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>date_of_booking:</span><span class='id identifier rubyid_date_of_booking'>date_of_booking</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>status:</span><span class='int'>1</span><span class='rparen'>)</span>
+		<span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_bookings'>bookings</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>date_of_booking:</span><span class='id identifier rubyid_date_of_booking'>date_of_booking</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>status:</span><span class='int'>1</span><span class='rparen'>)</span>
 			<span class='id identifier rubyid_bookings_of_day'>bookings_of_day</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_bookings'>bookings</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>date_of_booking:</span> <span class='id identifier rubyid_date_of_booking'>date_of_booking</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>status:</span><span class='int'>1</span><span class='rparen'>)</span>
 			<span class='id identifier rubyid_bookings_of_day'>bookings_of_day</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_x'>x</span><span class='op'>|</span>
 				<span class='id identifier rubyid_resource_slot'>resource_slot</span><span class='period'>.</span><span class='id identifier rubyid_delete_at'>delete_at</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='period'>.</span><span class='id identifier rubyid_slot'>slot</span><span class='rparen'>)</span>
@@ -357,15 +355,15 @@ upon the resource time_slot and   companies start_time, end_time.</p>
       <pre class="lines">
 
 
+73
 74
 75
 76
 77
-78
-79</pre>
+78</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/resource.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'app/models/resource.rb', line 73</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_next_time_slots'>next_time_slots</span>
 	<span class='id identifier rubyid_time_slot_array'>time_slot_array</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_timeslots'>timeslots</span>
@@ -484,7 +482,7 @@ upon the resource time_slot and</p>
 </div>
 
       <div id="footer">
-  Generated on Thu Oct  6 18:41:33 2016 by
+  Generated on Sat Oct  8 11:40:32 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.3.0).
 </div>

@@ -250,7 +250,8 @@
 35
 36
 37
-38</pre>
+38
+39</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'app/models/ability.rb', line 15</span>
@@ -273,6 +274,7 @@
       <span class='id identifier rubyid_can'>can</span> <span class='symbol'>:manage</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='const'>Booking</span><span class='comma'>,</span><span class='const'>Complaint</span><span class='rbracket'>]</span> 
       <span class='id identifier rubyid_can'>can</span> <span class='lbracket'>[</span><span class='symbol'>:read</span><span class='comma'>,</span><span class='symbol'>:index</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='const'>Resource</span><span class='rbracket'>]</span>
       <span class='id identifier rubyid_can'>can</span> <span class='lbracket'>[</span><span class='symbol'>:entry</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='const'>Employee</span><span class='rbracket'>]</span>
+      <span class='id identifier rubyid_cannot'>cannot</span> <span class='symbol'>:manage</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='const'>Company</span><span class='rbracket'>]</span>
     <span class='kw'>end</span>
   <span class='kw'>else</span>                                  <span class='comment'># If employee is not existed in databse
 </span>    <span class='id identifier rubyid_can'>can</span> <span class='lbracket'>[</span><span class='symbol'>:entry</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='const'>Employee</span><span class='rbracket'>]</span>
@@ -290,7 +292,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Oct  6 18:41:32 2016 by
+  Generated on Sat Oct  8 11:40:31 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.3.0).
 </div>

@@ -77,6 +77,19 @@ RSpec.describe Role, type: :model do
       association = described_class.reflect_on_association(:employees)
     end
   end
+  it "checks name validity not admin" do
+    @role.designation = "admin"
+    a = @role.save
+    expect(@role.errors.messages.has_key?(:admin_designation)).to be true
+  end
+  it "checks name validity not none" do
+    @role.designation = "none"
+    a = @role.save
+    byebug
+    expect(@role.errors.messages.has_key?(:none)).to be true
+  end
+  it "check add_default_role" do
+  end
 
 
 end

@@ -85,13 +85,17 @@ class BookingsController < ApplicationController
 	# 
 	def update
 		@booking = @company.bookings.find(params[:id])
-		if @booking.update_attributes(booking_params)
-			flash[:success] = "Your booking is successfully updated"
-			redirect_to @booking
+		if @booking.status != 1
+			if @booking.update_attributes(booking_params)
+				flash[:success] = "Your booking is successfully updated"
+			else
+				flash[:success] = "Error while updating booking"
+				render :edit
+			end
 		else
-			flash[:success] = "Error while updating booking"
-			render :edit
+			flash[:danger] = "Sorry. This booking is already granted"
 		end
+		redirect_to @booking
 	end
 
 	#
@@ -102,7 +106,7 @@ class BookingsController < ApplicationController
 	# 
 	def destroy
 		if @company.bookings.destroy(params[:id])
-			flash[:success] = "Booking is successfully delted"
+			flash[:success] = "Booking is successfully deleted"
 		else
 			flash[:success] = "Error while deleting booking"
 		end

@@ -59,14 +59,18 @@ class Admin::EmployeesController < ApplicationController
 	end
 	
 	def change_status
-		if(params[:status])			
+		if(params[:status])		
+			flag = 0	
 			booking = @company.bookings.find(params[:status][:booking_id])
 			if params[:commit] =="Grant"
 				booking.status = 1
 			elsif params[:commit] == "Reject"
+				flag = 1
 				booking.status = 2
 			end
-			if !booking.save
+			if flag == 1
+				booking.save(validate:false)
+			elsif !booking.save
 				flash[:alert] = "#{booking.errors.full_messages}"
 			end
 			redirect_to :admin_dashbord
