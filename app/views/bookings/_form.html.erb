@@ -1,13 +1,12 @@
 <%= render "error" %>
 <div class="row"> 
 <div class="col-md-6 col-md-offset-3">
-
 	<%= form_for :booking ,url: bookings_path do |f|%>
 		<%= f.select :resource_id ,{}, {:class => 'form-control'} do  %>
-					<% resource_array.each do |c| %>
-						<%= content_tag(:option,c.first,value: c.last) %>
-						<br>
-					<%end %>
+			<% resource_array.each do |c| %>
+				<%= content_tag(:option,c.first,value: c.last) %>
+				<br>
+			<%end %>
 		<%end %>
 			Booking Subject
 		<%= f.text_field :comment, placeholder: "Purpose of booking", class: 'form-control' %>
