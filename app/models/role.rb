@@ -32,7 +32,7 @@ class Role < ActiveRecord::Base
 	# @return [void] Add errors to self if role is none
 	# 
 	def is_none_fields
-		unless designation!="none" || department!="none"
+		unless self.designation!="none" && self.department!="none"
 			self.errors[:none] << "=> You can't create none role"
 		end
 	end
@@ -61,7 +61,7 @@ class Role < ActiveRecord::Base
 	# 
 	def is_name_admin?
 		unless self.designation != 'admin' 
-			self.errors[:admin_designation] << "=>You can't assign the admin designation to anthoer employees"
+			self.errors[:admin_designation] << "=> You can't assign the admin designation to anthoer employees"
 		end
 	end
 
