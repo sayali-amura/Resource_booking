@@ -51,6 +51,7 @@ group :development, :test do
   gem 'faker', '~> 1.6', '>= 1.6.6'
   gem "factory_girl_rails", "~> 4.0"
   gem 'as-duration'
+  gem 'simplecov', :require => false, :group => :test
 end
 
 group :development do
