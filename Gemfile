@@ -11,7 +11,6 @@ gem 'bootstrap-select-rails'
 gem 'cancancan'
 gem 'yard', '~> 0.9.5'
 gem 'intl-tel-input-rails'
-gem 'simplecov', :require => false, :group => :test
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 

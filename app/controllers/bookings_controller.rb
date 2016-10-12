@@ -88,14 +88,16 @@ class BookingsController < ApplicationController
 		if @booking.status != 1
 			if @booking.update_attributes(booking_params)
 				flash[:success] = "Your booking is successfully updated"
+				redirect_to @booking and return
 			else
 				flash[:success] = "Error while updating booking"
 				render :edit
 			end
 		else
 			flash[:danger] = "Sorry. This booking is already granted"
+			render :edit
 		end
-		redirect_to @booking
+		 
 	end
 
 	#
