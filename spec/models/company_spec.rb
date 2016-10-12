@@ -64,7 +64,7 @@ RSpec.describe Company, type: :model do
       context "#add_empty_role" do 
         it "none role added" do 
           @company.send(:add_empty_role)
-          expect(@company.roles.where(designation: "none").count).to eq(2)
+          expect(@company.roles.where(designation: "none").count).to eq(1)
         end
       end
       context "#lower_fields" do
