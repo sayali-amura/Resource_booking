@@ -72,7 +72,8 @@ class Company < ActiveRecord::Base
 	# 
 	def add_empty_role
 		empty_role = self.roles.build(designation: "none",department: self.name,priority: 0)
-		empty_role.save(validate: false)
+		empty_role.skip_validation = true
+		empty_role.save
 	end
 
 	#
@@ -83,15 +84,18 @@ class Company < ActiveRecord::Base
 	# 
 	def add_defaults
 		@role = self.roles.build(designation: "admin",department: self.name,priority: 1 )
-		# byebug
+		@role.skip_validation = true     # to skip validation of role to add admin role in company
 		if @role.save(validate: false)
-			@employee = self.employees.new(name: "admin",email: self.email ,age:22,date_of_joining: Date.today)
+			@employee = self.employees.build(name: "admin",email: self.email ,age:22,date_of_joining: Date.today)
+			@employee.skip_password_validation = true
+			@employee.skip_validation = true         # to skip validation of manager id
 			@employee.role_id = @role.id
-			if !@employee.save(validate: false)
+			# byebug
+			if !@employee.save
 				self.errors[:default] << "Error while adding default employee"
 			else
 				@employee.manager_id = @employee.id
-				@employee.save(validate: false)
+				@employee.save
 			end
 
 		else
