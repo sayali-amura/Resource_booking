@@ -1,6 +1,8 @@
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
 <% if @booking.errors.any? %>
 <div id="error_explanation">
-<div class="alert alert-danger">
+<div class="alert alert-danger" id="form-errors">
 The form contains <%= pluralize(@booking.errors.count, "error") %>.
 </div>
 <ul>
@@ -10,3 +12,5 @@ The form contains <%= pluralize(@booking.errors.count, "error") %>.
 </ul>
 </div>
 <% end %>
+</div>
+</div>

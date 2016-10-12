@@ -1,0 +1,24 @@
+<div class="col-md-6">
+	
+
+<table class="table">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Priority</th>
+      <th>Designation</th>
+      <th>Department</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%	Role.where(company_id:current_employee.company.id).sort_by(&:priority).each do |x| %>
+    <tr>
+      
+      <td><%= x.priority %></td>
+      <td><%= x.designation %></td>
+      <td><%= x.department %></td>
+    </tr>
+  <% end %>
+ </tbody>
+ </table>
+
+</div>

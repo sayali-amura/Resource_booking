@@ -1,0 +1,62 @@
+<b>Employees</b>
+<div class="row">
+	<hr>
+	<div class="col-md-14">
+		<div class="col-md-2">
+		<strong>Name</strong>
+		</div>
+		<div class="col-md-2">
+		<strong>Email</strong>
+		</div>
+		<div class="col-md-2">
+		<strong>Date of Joining</strong>
+		</div>
+		<div class="col-md-1">
+		<strong>Role</strong>
+		</div>
+		<div class="col-md-1">
+		<strong>Manager</strong>
+		</div>
+		<div class="col-md-2">
+		<strong>Edit Link</strong>
+		</div>
+		<div class="col-md-2">
+		</div>
+	</div>
+</div>
+
+<ul class="list-group">
+<% @employees.each do |employee|%>
+<li class="list-group-item">
+<div class="row">
+	<div class="col-md-14">
+		<div class="col-md-2">
+			<%=employee.name%>
+		</div>
+		<div class="col-md-2">
+			<%=employee.email%>
+		</div>
+		<div class="col-md-2">
+			<%=employee.date_of_joining%>
+		</div>
+		<div class="col-md-1">
+			<%=role_name(employee.role_id)%>
+		</div>
+		<div class="col-md-1">
+			<%=employee_name(employee.manager_id)%>
+		</div>
+		<% if employee.id!=current_employee.id %>
+		<div class="col-md-1">
+			<%= button_to "Edit ", edit_admin_employee_path(employee),:class => "btn btn-info", :method => "get" %>
+		</div>
+			<div class="col-md-1">
+				<%= button_to "Delete ", admin_employee_path(employee), :method => "delete",:class => "btn btn-danger", data: {confirm: "Are you sure?"}  %>
+			</div>
+		<% end %>
+		<div class="col-md-4">
+		</div>
+	</div>
+</div>
+</li>
+<% end %>
+</ul>

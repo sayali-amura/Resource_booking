@@ -1,65 +1,82 @@
 class Admin::EmployeesController < ApplicationController
-	before_action :find_employee, only: [:show, :edit, :update]
-	before_action :find_company, only: [:index, :create, :dashbord,:change_status]
-	before_action :find_complaints, only: [:index, :dashbord, :change_status]
-	before_action :admin?
-	load_and_authorize_resource :employee
+	before_action :find_company
+	before_action :find_another_employee, only: [:show,:edit, :update]
+	before_action :find_complaints, only: [ :dashbord, :change_status]
 
 	def index
-		@bookings = @company.bookings.where("date_of_booking >= ?",Date.today)
 		@employees = @company.employees
-		
 	end
 	def new
 		@employee = Employee.new
 	end
 
 	def create
-		@employee = @company.employees.new(Employee.edited_employee( employee_params,@company ))
+		@employee = @company.employees.build(employee_params)
+		@employee.skip_password_validation = true
 		if @employee.save
-			redirect_to ["admin",@employee]
+			redirect_to admin_employees_path
 		else
-			flash[:alert] = "#{@employee.errors.full_messages}"
 			render :new
 		end
 	end 
 
 	def show
+		redirect_to admin_employees_path
 	end
 
-	def edit
-	end
+	def edit;	end
 	
 	def update 
-		if @employee.update(employee_params)
-			redirect_to ["admin",@employee]
+		@employee.skip_password_validation = true
+			if @employee.update_attributes(employee_params)
+				redirect_to admin_employees_path
+			else
+				render :edit
+			end
+	end
+
+	def destroy
+		@admin = @company.employees.find_by(name:"admin")
+		if @company.employees.destroy(params[:id])
+			flash[:success] = "Employee and his bookings and complaints are succeesfully deleted"
+			@company.employees.where(manager_id:params[:id]).each do | record_emp |
+				record_emp.manager_id = @admin.id
+				record_emp.skip_password_validation = true
+				record_emp.save
+			end
 		else
-			render :edit
+			flash[:danger] = "Error while deleting employee"
 		end
+		redirect_to admin_employees_path
 	end
 	
 	def dashbord
-
-		@bookings = @company.bookings.where(status:0).where("date_of_booking >= ?",Date.today) if @company.bookings
-		@complaints = @complaints.where(status:0) if @complaints
+		if @company.resources.any?
+			@bookings = @company.bookings.where(status:0).where("date_of_booking >= ?",Date.today) if @company.bookings
+			@complaints = @complaints.where(status:0) if @complaints
+		end
 	end
-	
+
 	def change_status
-		if(params[:status])
+		if(params[:status])	
+			flag = 0	
 			booking = @company.bookings.find(params[:status][:booking_id])
-			if params[:status][:status] =="Grant"
+			if params[:commit] =="Grant"
 				booking.status = 1
-			elsif params[:status][:status] == "Reject"
+			elsif params[:commit] == "Reject"
+				flag = 1
 				booking.status = 2
 			end
-			if !booking.save
+			if flag == 1
+				booking.save(validate:false)
+			elsif !booking.save
 				flash[:alert] = "#{booking.errors.full_messages}"
 			end
 			redirect_to :admin_dashbord
 		end
 		if(params[:status_complaint])
 			complaint = @complaints.find(params[:status_complaint][:complaint_id])
-			if params[:status_complaint][:status] == "Solve"
+			if params[:commit] == "Solve"
 				complaint.status = 1
 			end
 			if complaint.save
@@ -69,19 +86,17 @@ class Admin::EmployeesController < ApplicationController
 		
 	end
 	private
+	
 	def employee_params
 		params.require(:employee).permit(:name, :email,:age, :date_of_joining, :role_id, :manager_id)
 	end
-	def find_employee
-		@employee = current_employee
-	end
-	def find_company
-		@company = Company.find(current_employee.company_id)
-	end
+	
 	def find_complaints
-		give_id(current_employee.company_id)
-		@complaints = Complaint.where(resource_id:@id_array)
+		@complaints = @company.complaints
 	end
-
+	
+	def find_another_employee
+		@employee = @company.employees.find(params[:id])
+	end
 end
 

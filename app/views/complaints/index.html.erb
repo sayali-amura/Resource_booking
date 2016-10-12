@@ -1,1 +1,5 @@
+<% if @company.complaints.any? %>
 <%= render "complaints" %>
+<% else %>
+<h2 align="center">There are no complaints.</h2>
+<% end %>

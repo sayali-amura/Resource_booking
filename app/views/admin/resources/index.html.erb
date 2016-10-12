@@ -1,48 +1,5 @@
-
-<h4><%= current_employee.inspect%></h4>
-<%= session["warden.user.employee.key"][0][0] %>
-
-<!DOCTYPE html>
-<html>
-<head>
-<title>Resources</title>
-</head>
-<body>
-<div class="col-md-12">
-	<div class="col-md-4">
-	<strong>Name</strong>
-	</div>
-	<div class="col-md-2">
-	<strong>Count</strong>
-	</div>
-	<div class="col-md-2">
-	<strong>TimeSlot</strong>
-	</div>
-	<div class="col-md-2">
-	<strong>Update</strong>
-	</div>
-	<div class="col-md-2">
-	<strong>Delete</strong>
-	</div>
-</div>
-<% @resources.each do |resource|%>
-<div class="col-md-12">
-	<div class="col-md-4">
-	<%= resource.name%></td>
-	</div>
-	<div class="col-md-2">
-	<%= resource.count%>
-	</div>
-	<div class="col-md-2">
-	<%= resource.time_slot%>
-	</div>
-	<div class="col-md-2">
-	<%= link_to 'Update Resource',edit_admin_resource_path(resource)%>
-	</div>
-	<div class="col-md-2">
-	<%= link_to 'Delete Resource',admin_resource_path(resource),method:"delete"%>
-	</div>
-	
-</div>
+<% if @company.resources.any? %>
+<%= render "resources" %>
+<% else %>
+<h2>No resources are available in your company.</h2>
 <% end %>
-</body>

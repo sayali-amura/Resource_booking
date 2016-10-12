@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160927091630) do
+ActiveRecord::Schema.define(version: 20161006074139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 20160927091630) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "status",          default: 0
-    t.integer  "priority"
     t.string   "feedback"
     t.string   "comment"
     t.integer  "employee_id"
@@ -38,8 +37,8 @@ ActiveRecord::Schema.define(version: 20160927091630) do
     t.string   "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.float    "start_time"
-    t.float    "end_time"
+    t.time     "start_time"
+    t.time     "end_time"
   end
 
   add_index "companies", ["email"], name: "index_companies_on_email", unique: true, using: :btree
@@ -52,12 +51,12 @@ ActiveRecord::Schema.define(version: 20160927091630) do
     t.integer  "status"
     t.integer  "resource_id"
     t.integer  "employee_id"
+    t.integer  "company_id"
   end
 
   add_index "complaints", ["employee_id"], name: "index_complaints_on_employee_id", using: :btree
 
   create_table "employees", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -79,10 +78,11 @@ ActiveRecord::Schema.define(version: 20160927091630) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.integer  "company_id"
+    t.string   "email"
   end
 
   add_index "employees", ["confirmation_token"], name: "index_employees_on_confirmation_token", unique: true, using: :btree
-  add_index "employees", ["email"], name: "index_employees_on_email", unique: true, using: :btree
+  add_index "employees", ["manager_id"], name: "index_employees_on_manager_id", using: :btree
   add_index "employees", ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true, using: :btree
 
   create_table "messages", force: :cascade do |t|
@@ -100,9 +100,8 @@ ActiveRecord::Schema.define(version: 20160927091630) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "name"
-    t.integer  "count"
     t.integer  "company_id"
-    t.float    "time_slot"
+    t.time     "time_slot"
   end
 
   create_table "roles", force: :cascade do |t|

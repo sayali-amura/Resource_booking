@@ -1,0 +1,45 @@
+
+<div class="row">
+<hr>
+<div class="col-md-12 col-md-offset-3" align="center">
+	<div class="col-md-2">
+	<strong>Priority</strong>
+	</div>
+	<div class="col-md-2">
+	<strong>Name</strong>
+	</div>
+	<div class="col-md-2">
+	<strong>Department</strong>
+	</div>
+	
+</div>
+</div>
+
+<ul class="list-group">
+<% @roles.sort_by(&:priority).each do |role|%>
+<li class="list-group-item">
+<div class="row" align="center">
+<div class="col-md-12 col-md-offset-3">
+	<div class="col-md-2">
+		<%= role.priority%>
+	</div>
+	<div class="col-md-2">
+		<%= role.designation%>
+	</div>
+	<div class="col-md-2">
+		<%= role.department%>
+	</div>
+	<% if role.priority!=0 && role.priority!=1 %>
+		<div class="col-md-1">
+			<%= button_to "Edit",edit_admin_role_path(role), method: "get", class: "btn btn-success" %>
+		</div>
+
+		<div class="col-md-1">
+			<%= button_to "Delete", admin_role_path(role),method: "delete", class: "btn btn-danger", data: {confirm: "Are you sure?"} %>
+		</div>
+	<% end %>
+</div>
+</div>
+</li>
+<% end %>
+</ul>

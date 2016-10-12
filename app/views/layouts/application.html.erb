@@ -1,21 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-<%= stylesheet_link_tag 'application', media: 'all',
-'data-turbolinks-track' => true %>
+
+<%= stylesheet_link_tag 'application', media: 'all','data-turbolinks-track' => true %>
 <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 <%= csrf_meta_tags %>
 <%= render 'layouts/shim' %>
-
 </head>
 <body>
 
 <% if employee_signed_in? %>
 <% @company =current_employee.company %>
-<% admin_role_id = @company.roles.find_by_designation("Admin").id %>
+<% admin_role_id = @company.roles.find_by_designation("admin").id %>
 <%= (current_employee.role_id==admin_role_id )? (render 'layouts/adminheader') :( render   'layouts/employeeheader') %>
 <% else %>
 <%= render 'layouts/employeeheader' %>
@@ -37,10 +33,12 @@
 </body>
 <%= render 'layouts/footer' %>
 <div align="center">
-	<%= debug(params) if Rails.env.development? %>
-	<% if employee_signed_in? %>
-	<%= current_employee.inspect %>
-<% end %>	
+<br>
+<br>
+	<!%= debug(params) if Rails.env.development? %>
+	<!% if employee_signed_in? %>
+		<!%= current_employee.inspect %>
+	<!% end %>	
 </div>
 
 

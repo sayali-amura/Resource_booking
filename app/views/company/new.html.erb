@@ -1,33 +1,34 @@
  
 
 	
- <div class="row">
- 	<div class="col-md-6 col-md-offset-3">
- 		<% if @company.errors.any? %>
- 			<% @company.errors.full_messages.each do |error| %>
- 				<%= error %>
- 				<br>
- 			<% end %>
- 		<%end  %>
- 	</div>
-</div>
+<%= render "error" %>
 
 <div class="row">
  	<div class="col-md-6 col-md-offset-3" >
  		<%= form_for :company ,url: company_index_path do |f| %>
  			Name:
- 			<%= f.text_field :name, class: 'form-control' %>
+ 				<%= f.text_field :name, class: 'form-control' , required: true, placeholder: "Enter name of company"%>
  			Email
- 			<%= f.email_field :email , class: 'form-control'%>
- 			Phone:
- 			<%= f.text_field :phone , class: 'form-control'%>
- 			Start Time
- 			<%= f.text_field :start_time , class: 'form-control'%>
- 			End Time
- 			<%= f.text_field :end_time , class: 'form-control'%>
- 			<div class="col-md-4" align="center">
- 				<%= f.submit "Register" %>
- 			</div>
+ 				<%= f.email_field :email , class: 'form-control', required: true, placeholder: "Enter email of company"%>
+ 			Phone:<br>
+ 				<div class="input-group">
+ 					<input type="tel" name="phone1" id="go" class="form-control" >
+				</div>
+				<%= f.hidden_field :phone, class: "form-control" , id: "hidden" %>
+				<span id="valid-msg" class="hide" style="color: green">✓ Valid</span>
+				<span id="error-msg" class="hide"  style="color: red">Invalid number</span>
+				<br>
+				<div class="col-md-6">	
+	 				Start Time
+	 				<%= f.time_field :start_time , class: 'form-control', required: true%>
+				</div>	
+				<div class="col-md-6">
+	 				End Time
+	 				<%= f.time_field :end_time , class: 'form-control', required: true%>
+				</div>
+ 				<div class="col-md-4 col-md-offset-4" align="center">
+ 					<%= f.submit "Register" , class: "btn btn-primary" %>
+ 				</div>
  		<% end %>	
  	</div>
  </div>

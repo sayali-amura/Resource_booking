@@ -1,35 +1,95 @@
+	#
+	# Class CompanyController provides CRUD operations to company object
+	#
+	# @author Amrut Jadhav amrut@amuratech.com	
+	#
 	class CompanyController < ApplicationController
-		skip_before_action :authenticate_employee!, only: [:new, :create]
-	def index
-
-	end
+		# Filter skip authentication of employee before actions
+		skip_before_action :authenticate_employee!, only: [:new, :create, :show]
+		load_and_authorize_resource :company, only: [:edit, :update, :destroy]
+	#
+	# Index page
+	#
+	def index;	end
+	
+	#
+	# Company object built for the company new form
+	# 
 	def new
 		@company = Company.new
 	end
 
+	# Create company in database
+	# (see #company_params)
+	# @return redirect to company object if creation is successful else redirect to new
+	# 
 	def create
 		@company = Company.new(company_params)
 		if @company.save
-			@role = @company.roles.new(designation: "Admin",department: @company.name,priority: 0 )
-			@employee = @company.employees.new(name: "Admin",email: "admin@#{@company.name}.com",age:22,date_of_joining: Date.today,
-									 manager_id: 0,role_id: @role.id)
-			if !(@employee.save && @role.save)
-				flash[:alert] = "There is error while adding default user to company account"
-				render new_company_path
-			else
-				redirect_to @company
-			end
-			
+			redirect_to @company
 		else
 			render :new
 		end
 	end
+	def edit
+		@company = current_employee.company
 
+	end
+	def update
+		@company = current_employee.company
+		company_params[:email] = @company.email
+		if @company.update(company_params)
+			flash[:success] = "company is successfully updated."
+			redirect_to company_index_path
+		else
+			render :edit
+		end
+	end
+	#
+	# Destroy company of particular id
+	# @param [Hash] params The params from delete request
+	#
+	# @return redirect_to root
+	# 
+	# def destroy
+		
+	# 	@company = Company.find(params[:id])
+	# 	byebug
+	# 	if @company.destroy
+	# 		flash[:success] = "Company has been successfully deleted"
+	# 	else
+	# 		flash[:danger] = "Error while deleting company"
+	# 	end
+	# 	redirect_to root_path
+	# end
+
+	#
+	# Display company of particular id
+	# @param [Hash] params The params from get request
+	# @option params [Integer] id Id of company
+	#
+	# @return [Company] @company Company object
+	# 
 	def show
 		@company = Company.find(params[:id])
 	end
+
 	private
+
+	#
+	# Allowing strong parameters
+	# @param [Hash] params The params from post request	
+	# @option params [String] name Name of company
+	# @option params [String] email Email of company
+	# @option params [String] phone Phone of company
+	# @option params [Time] start_time Start time of company 
+	#
+	#
+	# @return [Hash] Strong parameters hash
+	# 
 	def company_params
+		# byebug
 		params.require(:company).permit(:name,:email,:phone,:start_time,:end_time)
 	end
+
 end

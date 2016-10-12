@@ -1,18 +1,40 @@
+#
+# Class Employee provides functionality for managing employees related to company
+#
+# @author Amrut Jadhav  amrut@amuratech.com
+#
 class Employee < ActiveRecord::Base
+
+  #
+  # @!attribute [rw] skip_password_validation
+  #   @return [Boolean] whether to skip password validation or not
+  attr_accessor :skip_password_validation
+  #
+  # @!attribute [rw] skip_validation
+  #   @return [Boolean] Whether to skip validation or not 
+  attr_accessor :skip_validation
+
+  # Associations
 	belongs_to :role
 	belongs_to :company
-	has_many :bookings
-	has_many :complaints
-	has_many :messages
-	validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i,
-    message: "email format" }, uniqueness: true
-    validates :name,:email, presence: true
-    before_save :lower_email
-	
+	has_many :bookings, dependent: :destroy
+	has_many :complaints, dependent: :destroy
+  has_many :subordinates, class_name: "Employee", foreign_key: "manager_id"
+  belongs_to :manager, class_name: "Employee"
+  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i,   message: "email format" },
+                       uniqueness:{scope: :company_id, message: "Email should be unique across the company"}
+  validates :name, :email,:age, :role_id, :date_of_joining, presence: true
+  validates :manager_id, presence: true, unless: :skip_validation
+  validates :role_id, :manager_id, :age, numericality: { only_integer: true, less_than: 2147483647, greater_than_or_equal_to: 1}, unless: :skip_validation
+  validates :password, :password_confirmation, presence: {:message => 'no password'}, unless: :skip_password_validation
+
+  # Callbacks
+  before_save :lower_email
+
+  # Devise options
   devise :database_authenticatable, :registerable,:recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-# new function to set the password without knowing the current 
-  # password used in our confirmation controller. 
+  scope :employees, -> id { where(company_id:id) }
   def attempt_set_password(params)
     p = {}
     p[:password] = params[:password]
@@ -20,22 +42,32 @@ class Employee < ActiveRecord::Base
     update_attributes(p)
   end
 
-
-
+  #
+  # Check whther password is required or not
+  #
+  #
+  # @return [Boolean] Whether password is required or not
+  # 
   def password_required?
-  	super if confirmed?
+    super if confirmed?
   end
 
-
+  #
+  # Checks whether password and password_confirmation match?
+  #
+  #
+  # @return [Boolean] Whether fields match or not
+  # 
   def password_match?
     self.password == self.password_confirmation
   end
  
-
-
-
-
-  # new function to return whether a password has been set
+  #
+  # Function to check whether password has been set or not
+  #
+  #
+  # @return [Boolean] Whether the encrypted_password field is blank or not
+  # 
   def has_no_password?
     self.encrypted_password.blank?
   end
@@ -45,14 +77,23 @@ class Employee < ActiveRecord::Base
   def only_if_unconfirmed
     pending_any_confirmation {yield}
   end
+  def manager
+    Employee.find(self.manager_id)
+  end
+  def subordinates
+    e = Employee.where(manager_id:self.id)
+  end
+  private
 
-  def self.edited_employee(employee_parameters,company)
-    employee_parameters[:email]<<"@#{company.name}.com"
-    employee_parameters
+  #
+  # Downcase the email and name of employee
+  #
+  #
+  # @return [void] Downcase the fields
+  # 
+  def lower_email
+   self.email.downcase!
+   self.name.downcase!
   end
 
-  private
-  def lower_email
-	 self.email.downcase!
-	end
 end

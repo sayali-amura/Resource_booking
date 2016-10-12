@@ -1,51 +1,66 @@
 class Admin::ResourcesController < ApplicationController
-	#layout "_layout",only: [:edit, :new]
-	before_action :find_company, only: [:create]
-	before_action :find_resource, only: [:show, :edit, :update]
-	#before_action :admin?
+	before_action :find_company
+	before_action :find_resource, only: [:edit, :update, :destroy]
+
 	load_and_authorize_resource :resource
 	def index
-		@resources = Resource.where(company_id:current_employee.company_id)
-		
+		@resources = @company.resources
 	end
+
 	def new
-		@resource = Resource.new
+		@resource = @company.resources.build
 	end
+	
 	def create
-		
-		@resource = @company.resources.new(resource_params)
+		@resource = @company.resources.build(resource_params)
 		if @resource.save
-			redirect_to ["admin",@resource] 
-		else 
+			flash[:success] = "Resource is successfully created."
+			redirect_to admin_resources_path
+		else
 			render :new
 		end
 	end
+	
+
 	def show
-			
+		resource = resource_array.collect {|x|  x[1] }
+		if !resource.include?(params[:id].to_i)
+			flash[:danger] = "no such resource"
+			redirect_to root_path
+		else
+			redirect_to :admin_resources
+		end
 	end
-	def edit
-		
-	end
+	
+	def edit; 	end
+
 	def update
 		if @resource.update(resource_params)
-			redirect_to ["admin",@resource]
+			flash[:success] = "Resource is successfully updated."
+			redirect_to admin_resources_path
 		else
 			render :edit
 		end
 	end
+	
 	def destroy
-		Resource.destroy(params[:id])
-		redirect_to admin_dashbord_path
+		if @resource.destroy
+			flash[:success] = "Resource and its complaints, bookings are destroyed."
+		else
+			flash[:error] = "Error while deleting resource"
+		end
+		redirect_to admin_resources_path
 	end
+
 	private
+	
 	def resource_params
-		params.require(:resource).permit(:name, :count, :company_id,:time_slot)
+		params.require(:resource).permit(:name, :company_id,:time_slot)
 	end
-	def find_company
-		@company = Company.find(current_employee.company_id)
-	end
+	
 	def find_resource
-		find_company
 		@resource = @company.resources.find(params[:id])
 	end
+
 end
+

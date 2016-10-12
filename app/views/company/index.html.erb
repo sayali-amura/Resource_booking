@@ -1,6 +1,55 @@
+ <% if current_employee %>
+ <h2>Your company details are</h2>
+<h4>Details</h4>
+<%@company = current_employee.company%>
+<div class="col-md-12">
+	<div class="col-md-2">
+		<strong>Name</strong>
+	</div>
+	<div class="col-md-2">
+		<strong>Email</strong>
+	</div>
+	<div class="col-md-2">
+		<strong>Contact no</strong>
+	</div>
+	<div class="col-md-2">
+		<strong>Start Time</strong>
+	</div>
+
+	<div class="col-md-2">
+		<strong>End Time</strong>
+	</div>
+	<div class="col-md-2">
+	</div>	
+</div>
+<hr>
+<div class="col-md-12">
+	<div class="col-md-2">
+		<%= @company.name %>
+	</div>
+	<div class="col-md-2">
+		<%= @company.email %>
+	</div>
+	<div class="col-md-2">
+		<%= @company.phone %>
+	</div>
+	<div class="col-md-2">
+		<%=humanizing @company.start_time %>
+	</div>
+
+	<div class="col-md-2">
+		<%=humanizing @company.end_time%>
+	</div>
+	<div class="col-md-2">
+	<%= button_to "Edit ", edit_company_path(@company),:class => "btn btn-info", :method => "get" %>
+	</div>	
+</div>
+
+<% else %>
  <div class="row">
  	<div class="col-md-12">
  		Lets create you company account
  		<%= link_to "Register",new_company_path %>
  	</div>
 </div>
+<%end%>

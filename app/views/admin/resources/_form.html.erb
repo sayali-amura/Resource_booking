@@ -1,33 +1,13 @@
+<%= render "error" %>
 
-
-<%= form_for ["admin",@resource] do | f |%>
-<table>
-	<tr>
-		<td>
-			<%=f.label :Name%></td>
-		<td>
-			<%=f.text_field :name %>
-		</td>
-	</tr>
-	<tr></tr>
-	<tr>
-		<td>
-			<%=f.label :Count%></td>
-		<td><%=f.text_field :count %>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<%=f.label :Timeslot%></td>
-		<td><%=f.text_field :time_slot %>
-		</td>
-	</tr>
-	<tr></tr>
-<tr>
-	<td>
-	<%= f.submit 'Save Resource'%>
-	</td>
-</tr>
-
-</table>
-<% end %>
+<div class="row">
+ 	<div class="col-md-3 col-md-offset-4" >
+	<%= form_for ["admin",@resource] do | f |%>
+		<%=f.label :Name%></td>
+		<%=f.text_field :name , required: true, class: "form-control"%>
+		<%=f.label :Timeslot%>
+		<%=f.time_field :time_slot , required: true%>
+	<%= f.submit 'Save Resource',class: "btn btn-success" %>
+	<% end %>
+</div>
+</div>

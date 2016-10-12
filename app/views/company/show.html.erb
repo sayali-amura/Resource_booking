@@ -4,7 +4,7 @@
 			<div class="alert alert-<%= message_type %>"><%= message %></div>
 		<% end %>
 		Your company has been created.  Default admin also been created. 
-		Credentials of default user are mailed at <%= "admin@#{@company.name}.com" %>
+		Credentials of default user are mailed at <%= @company.email %>
 		Thank You!
 	</div>
 </div>
