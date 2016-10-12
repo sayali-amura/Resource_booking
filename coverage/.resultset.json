@@ -1,14 +1,14 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/amura/change1/clone/Resource_booking/config/environment.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/config/environment.rb": [
         null,
         1,
         null,
         null,
         1
       ],
-      "/home/amura/change1/clone/Resource_booking/config/application.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/config/application.rb": [
         1,
         null,
         1,
@@ -36,12 +36,12 @@
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/config/boot.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/config/boot.rb": [
         1,
         null,
         1
       ],
-      "/home/amura/change1/clone/Resource_booking/config/environments/test.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/config/environments/test.rb": [
         1,
         null,
         null,
@@ -85,7 +85,7 @@
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/config/initializers/assets.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/config/initializers/assets.rb": [
         null,
         null,
         null,
@@ -98,7 +98,7 @@
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/config/initializers/backtrace_silencers.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/config/initializers/backtrace_silencers.rb": [
         null,
         null,
         null,
@@ -107,12 +107,12 @@
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/config/initializers/cookies_serializer.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/config/initializers/cookies_serializer.rb": [
         null,
         null,
         1
       ],
-      "/home/amura/change1/clone/Resource_booking/config/initializers/devise.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/config/initializers/devise.rb": [
         null,
         null,
         1,
@@ -394,13 +394,13 @@
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/config/initializers/filter_parameter_logging.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/config/initializers/filter_parameter_logging.rb": [
         null,
         null,
         null,
         1
       ],
-      "/home/amura/change1/clone/Resource_booking/config/initializers/inflections.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/config/initializers/inflections.rb": [
         null,
         null,
         null,
@@ -418,18 +418,18 @@
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/config/initializers/mime_types.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/config/initializers/mime_types.rb": [
         null,
         null,
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/config/initializers/session_store.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/config/initializers/session_store.rb": [
         null,
         null,
         1
       ],
-      "/home/amura/change1/clone/Resource_booking/config/initializers/simple_form.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/config/initializers/simple_form.rb": [
         null,
         1,
         null,
@@ -596,7 +596,7 @@
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/config/initializers/simple_form_bootstrap.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/config/initializers/simple_form_bootstrap.rb": [
         null,
         1,
         1,
@@ -747,7 +747,7 @@
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/config/initializers/wrap_parameters.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/config/initializers/wrap_parameters.rb": [
         null,
         null,
         null,
@@ -763,7 +763,7 @@
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/spec/factories/bookings.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/spec/factories/bookings.rb": [
         1,
         null,
         1,
@@ -777,7 +777,7 @@
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/spec/factories/companies.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/spec/factories/companies.rb": [
         1,
         null,
         null,
@@ -805,7 +805,7 @@
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/spec/factories/complaints.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/spec/factories/complaints.rb": [
         1,
         null,
         1,
@@ -816,7 +816,7 @@
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/spec/factories/employees.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/spec/factories/employees.rb": [
         1,
         null,
         1,
@@ -831,7 +831,7 @@
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/spec/factories/resources.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/spec/factories/resources.rb": [
         1,
         1,
         null,
@@ -842,7 +842,7 @@
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/spec/factories/roles.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/spec/factories/roles.rb": [
         1,
         null,
         1,
@@ -854,7 +854,7 @@
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/config/routes.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/config/routes.rb": [
         1,
         null,
         null,
@@ -932,7 +932,7 @@
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/app/models/employee.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/app/models/employee.rb": [
         null,
         null,
         null,
@@ -1028,7 +1028,7 @@
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/app/helpers/admin/employees_helper.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/app/helpers/admin/employees_helper.rb": [
         null,
         null,
         null,
@@ -1092,7 +1092,7 @@
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/app/helpers/admin/resources_helper.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/app/helpers/admin/resources_helper.rb": [
         null,
         null,
         null,
@@ -1137,7 +1137,7 @@
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/app/helpers/admin/roles_helper.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/app/helpers/admin/roles_helper.rb": [
         null,
         null,
         null,
@@ -1146,12 +1146,12 @@
         1,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/app/helpers/application_helper.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/app/helpers/application_helper.rb": [
         1,
         1,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/app/helpers/bookings_helper.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/app/helpers/bookings_helper.rb": [
         1,
         null,
         1,
@@ -1176,43 +1176,38 @@
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/app/helpers/company_helper.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/app/helpers/company_helper.rb": [
         1,
         1,
         0,
-        0,
-        0,
-        null,
-        null
-      ],
-      "/home/amura/change1/clone/Resource_booking/app/helpers/complaints_helper.rb": [
-        1,
-        null,
-        1,
-        null,
-        null,
-        0,
-        null,
-        0,
-        0,
-        null,
-        null,
-        1,
         0,
         0,
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/app/helpers/employees_helper.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/app/helpers/complaints_helper.rb": [
+        1,
+        null,
+        1,
+        null,
+        null,
+        0,
+        null,
+        0,
+        0,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        null
+      ],
+      "/home/amura/workspace/webapps/Resource_booking/app/helpers/employees_helper.rb": [
         1,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/spec/support/factory_girl.rb": [
-        1,
-        1,
-        null
-      ],
-      "/home/amura/change1/clone/Resource_booking/spec/support/controller_macros.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/spec/support/controller_macros.rb": [
         1,
         1,
         0,
@@ -1236,7 +1231,12 @@
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/app/controllers/company_controller.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/spec/support/factory_girl.rb": [
+        1,
+        1,
+        null
+      ],
+      "/home/amura/workspace/webapps/Resource_booking/app/controllers/company_controller.rb": [
         null,
         null,
         null,
@@ -1331,7 +1331,7 @@
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/app/controllers/application_controller.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/app/controllers/application_controller.rb": [
         1,
         1,
         null,
@@ -1361,7 +1361,7 @@
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/app/models/company.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/app/models/company.rb": [
         null,
         null,
         null,
@@ -1481,7 +1481,7 @@
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/app/models/role.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/app/models/role.rb": [
         null,
         null,
         null,
@@ -1564,7 +1564,7 @@
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/app/models/resource.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/app/models/resource.rb": [
         null,
         null,
         null,
@@ -1646,7 +1646,7 @@
         null,
         null
       ],
-      "/home/amura/change1/clone/Resource_booking/app/models/complaint.rb": [
+      "/home/amura/workspace/webapps/Resource_booking/app/models/complaint.rb": [
         null,
         null,
         null,
@@ -1667,6 +1667,6 @@
         null
       ]
     },
-    "timestamp": 1476251035
+    "timestamp": 1476252685
   }
 }
