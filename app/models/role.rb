@@ -5,19 +5,24 @@
 #
 class Role < ActiveRecord::Base
 
+	#
+	# @!attribute [rw] skip_validation
+	#   @return [Boolean] Whether to skip validation or not 
+	attr_accessor :skip_validation
+
 	# Associations
 	belongs_to :company
 	has_many :employees
 
 	# Validations
 	validates :designation, :department, :priority, presence: true
-	validates :priority, numericality: { only_integer: true, greater_than: 0, less_than_or_equal_to: 2147483647 }
+	validates :priority, numericality: { only_integer: true, greater_than: 0, less_than_or_equal_to: 2147483647 }, unless: :skip_validation
 
 	validates :designation, uniqueness:{scope: [:company_id,:department], message: "Designation in department should be unique"}
 	validates :priority, uniqueness:{scope: :company_id, message: "Priority should be uniq across the company"}
 
 	# Custom validation
-	validate :is_name_admin?, :is_none_fields
+	validate :is_name_admin?, :is_none_fields, unless: :skip_validation
 
 	# Callbacks
 	before_validation :lower_fields
