@@ -85,7 +85,7 @@ class Company < ActiveRecord::Base
 	def add_defaults
 		@role = self.roles.build(designation: "admin",department: self.name,priority: 1 )
 		@role.skip_validation = true     # to skip validation of role to add admin role in company
-		if @role.save(validate: false)
+		if @role.save
 			@employee = self.employees.build(name: "admin",email: self.email ,age:22,date_of_joining: Date.today)
 			@employee.skip_password_validation = true
 			@employee.skip_validation = true         # to skip validation of manager id
