@@ -9,6 +9,10 @@ class Employee < ActiveRecord::Base
   # @!attribute [rw] skip_password_validation
   #   @return [Boolean] whether to skip password validation or not
   attr_accessor :skip_password_validation
+  #
+  # @!attribute [rw] skip_validation
+  #   @return [Boolean] Whether to skip validation or not 
+  attr_accessor :skip_validation
 
   # Associations
 	belongs_to :role
@@ -19,8 +23,9 @@ class Employee < ActiveRecord::Base
   belongs_to :manager, class_name: "Employee"
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i,   message: "email format" },
                        uniqueness:{scope: :company_id, message: "Email should be unique across the company"}
-  validates :name, :email,:age, :role_id, :manager_id, :date_of_joining, presence: true
-  validates :role_id, :manager_id, :age, numericality: { only_integer: true, less_than: 2147483647, greater_than_or_equal_to: 1}
+  validates :name, :email,:age, :role_id, :date_of_joining, presence: true
+  validates :manager_id, presence: true, unless: :skip_validation
+  validates :role_id, :manager_id, :age, numericality: { only_integer: true, less_than: 2147483647, greater_than_or_equal_to: 1}, unless: :skip_validation
   validates :password, :password_confirmation, presence: {:message => 'no password'}, unless: :skip_password_validation
 
   # Callbacks
