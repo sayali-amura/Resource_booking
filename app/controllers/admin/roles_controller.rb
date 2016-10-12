@@ -27,7 +27,7 @@ class Admin::RolesController < ApplicationController
 
   def edit;   end
 
-  def update; 
+  def update
     if @role.update_attributes(role_params)
       flash[:success] = "Role has succefully updated"
       redirect_to admin_roles_path
@@ -36,7 +36,7 @@ class Admin::RolesController < ApplicationController
     end
   end
 
-  def destroy; 
+  def destroy
     if @role.destroy
       flash[:success] = "Role has been succefully deleted"
     else
