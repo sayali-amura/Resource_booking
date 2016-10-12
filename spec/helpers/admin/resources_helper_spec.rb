@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Admin::ResourcesHelper, type: :helper do 
+  login_employee
 	before(:each) do 
-	  	@company = create(:company)
+	  	# @company = create(:company)
 	  	@resource = @company.resources.first
 	  	# @employee = @company.employees.first
 	  	# @booking = @employee.bookings.build({comment: "hello",feedback: "",employee_id:6,date_of_booking: '2016-10-28', slot: 0})
@@ -18,6 +19,12 @@ RSpec.describe Admin::ResourcesHelper, type: :helper do
   			expect(humanize(@resource)).to eq(result)
   		end
   	end
+
+    context "#resource_array" do 
+      it "check dataype" do 
+        expect(resource_array.class).to eq(Array)
+      end
+    end
   	
   	context "#show_slot_time" do 
   		it "check first element timing" do 
