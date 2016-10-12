@@ -4,12 +4,9 @@
 # @author Amrut Jadhav
 #
 class Role < ActiveRecord::Base
-
-	#
 	# @!attribute [rw] skip_validation
 	#   @return [Boolean] Whether to skip validation or not 
 	attr_accessor :skip_validation
-
 	# Associations
 	belongs_to :company
 	has_many :employees
@@ -26,7 +23,7 @@ class Role < ActiveRecord::Base
 
 	# Callbacks
 	before_validation :lower_fields
-	after_destroy :add_default_role
+	after_destroy :add_default_role #unless :company_destruction
 	
 	private 
 

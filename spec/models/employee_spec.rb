@@ -85,10 +85,10 @@ RSpec.describe Employee, type: :model do
       expect(@employee.subordinates).to eq(subordinates) 
     end
     it "lowers email content" do
-      @employee.email = "sayali@GMAIL.com"
       @employee.skip_password_validation = true
-      employee.save
-      expect(@employee.email).to eq("sayali@gmail.com")
+      @employee.update(email: "sayali@GMAIL.com")
+      @employee.reload
+      expect(@employee.email).to eq(@employee.email.downcase)
     end
     it "lowers name" do
       @employee.name = "SAYALIp"

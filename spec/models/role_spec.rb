@@ -72,7 +72,7 @@ RSpec.describe Role, type: :model do
       it "role is admin" do 
         @role = build(:role ,designation: "admin", department: "bolo", priority:2, company: @company)
         @role.send(:is_name_admin?)
-        error_check "is_name_admin?", "to", "=> You can't assign the admin designation to anthoer employees"
+        error_check "is_name_admin?", "to", "[Admin designation  => You can't assign the admin designation to anthoer employees]"
       end
       it "role is not admin" do 
          @role = build(:role ,designation: "other_than_admin", department: "check", priority:2, company: @company)
@@ -84,9 +84,10 @@ RSpec.describe Role, type: :model do
       it "company has none role" do 
         @company.send(:add_empty_role)
         none_role_id = @company.roles.find_by_designation("none").id
-        first_role = @company.roles[1]
+        first_role = @company.roles[3]
         employee = create(:employee, manager_id: 4,role_id: first_role.id, company: @company)
         first_role.destroy
+        employee.reload
         expect(employee.role_id).to eq(none_role_id)
       end
     end
