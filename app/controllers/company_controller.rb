@@ -51,15 +51,17 @@
 	#
 	# @return redirect_to root
 	# 
-	def destroy
-		@company = Company.find(params[:id])
-		if @company.destroy
-			flash[:success] = "Company has been successfully deleted"
-		else
-			flash[:danger] = "Error while deleting company"
-		end
-		redirect_to root_path
-	end
+	# def destroy
+		
+	# 	@company = Company.find(params[:id])
+	# 	byebug
+	# 	if @company.destroy
+	# 		flash[:success] = "Company has been successfully deleted"
+	# 	else
+	# 		flash[:danger] = "Error while deleting company"
+	# 	end
+	# 	redirect_to root_path
+	# end
 
 	#
 	# Display company of particular id
