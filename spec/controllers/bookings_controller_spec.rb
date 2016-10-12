@@ -64,6 +64,12 @@ RSpec.describe BookingsController, type: :controller do
   		patch :update, :id => @booking.id, booking: update_params
   		expect(response).to render_template("edit")
 	end
+	# it "checks resource_time_slot" do
+	# 	params = {name: @resource.name}
+	# 	byebug
+	# 	get :resource_time_slot,params
+	# 	expect(response.headers["Content-Type"]).to eq "text/javascript; charset=utf-8"
+	# end
 	it "removes booking from database" do
 		@booking = subject.current_employee.bookings.build(resource_id:@resource.id, comment:"bdhbc",date_of_booking:"2016-10-15",slot:0)
 		@booking.save
