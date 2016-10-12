@@ -1,15 +1,10 @@
 require 'rails_helper'
-require 'byebug'
-
-  # belongs_to :company
-  # has_many :bookings, dependent: :destroy
-  # has_many :complaints, dependent: :destroy
 
 RSpec.describe Resource, type: :model do
 	before(:each) do 
 		@company = create(:company)
     @resource = @company.resources.last
-	end
+  end
   context "validations" do  
     it "must have time_slot" do
       @resource.time_slot = nil
@@ -20,6 +15,35 @@ RSpec.describe Resource, type: :model do
         @resource.name = "Same"
         @resource1 = Resource.new(name: "Same",time_slot: "67:90",company_id:1)
         expect(@resource1).to_not be_valid
+      end
+    end
+  end
+
+  context "instance methods" do 
+    context "#available_time_slot" do
+      it "date is today" do 
+        @resource = @company.resources.first
+        @employee = @company.employees.first
+        @booking = build(:booking,comment: "hello",feedback: "",employee_id:6,date_of_booking: '2016-10-10', slot: 0,employee: @employee,resource: @resource)
+        return_available_array = @resource.send :available_time_slot,@booking.date_of_booking.strftime("%Y%m%d")
+        expect(return_available_array).to_not include(@resource.timeslots[0])
+      end
+      it "date is today" do 
+        @resource = @company.resources.first
+        @employee = @company.employees.first
+         @booking = build(:booking,comment: "hello",feedback: "",employee_id:6,date_of_booking: '2017-10-10', slot: 0,employee: @employee,resource: @resource)
+        return_available_array = @resource.send :available_time_slot,@booking.date_of_booking.strftime("%Y%m%d")
+        expect(return_available_array).to include(@resource.timeslots[0])
+      end
+      it "same date" do 
+        @resource = @company.resources.first
+        @employee = @company.employees.first
+        @booking = build(:booking,comment: "hello",feedback: "",employee_id:6,date_of_booking: '2017-10-10', slot: 0,employee: @employee,resource: @resource)
+        @booking.status = 1
+        @booking.save
+        @booking = build(:booking,comment: "hello",feedback: "",employee_id:6,date_of_booking: '2017-10-10', slot: 0,employee: @employee,resource: @resource)
+        return_available_array = @resource.send :available_time_slot,@booking.date_of_booking.strftime("%Y%m%d")
+        expect(return_available_array).to_not include(@resource.timeslots[0])
       end
     end
   end

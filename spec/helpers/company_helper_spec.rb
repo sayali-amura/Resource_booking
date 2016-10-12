@@ -1,15 +1,8 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the CompanyHelper. For example:
-#
-# describe CompanyHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
-RSpec.describe CompanyHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe CompanyHelper, type: :helper do 
+  	it "humanize timing" do 
+  		result = "0:0"
+  		expect(humanizing(Time.new("2016-10-10 00:00:00"))).to eq(result)
+  	end
 end
