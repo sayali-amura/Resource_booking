@@ -32,11 +32,13 @@ RSpec.describe CompanyController, type: :controller do
 	it "renders show form" do
 		get :show, :id => @company.id
 		expect(response).to render_template("show")
+
 	end
 
 	it "redirects to the home page upon update" do
 		update_params = {"name"=>"facebook", "email"=>"fb@gmail.com", "phone"=>"+919867542398", "start_time"=>"08:00", "end_time"=>"20:00"}
   		patch :update, :id => @company.id, company: update_params
+
   		assert_redirected_to company_index_path
 	end
 	it "redirects to edit on failed update" do
