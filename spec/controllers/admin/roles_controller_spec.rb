@@ -24,32 +24,31 @@ RSpec.describe Admin::RolesController, type: :controller do
       post :create, role: params
       assert_redirected_to admin_roles_path
   end
-  # it "renders new on wrong employee attributes" do
-  #   byebug
-  #   params = {"designation"=>"founder", "department"=>"amura", "priority"=>"1"}
-  #   post :create, employee: params
-  #   expect(response).to render_template("new")
-  # end
+  it "renders new on wrong role attributes" do
+    params = {"designation"=>"founder", "department"=>"amura", "priority"=>"1"}
+    post :create, role: params
+    expect(response).to render_template("new")
+  end
   it "renders new form" do
     get :new
     expect(response).to render_template("new")
   end
-  # it "renders show form" do
-  #   get :show, :id => subject.current_employee.id
-  #   assert_redirected_to admin_employees_path
-  # end
+  it "renders show form" do
+    get :show, :id => @role.id
+    assert_redirected_to admin_roles_path
+  end
 
 
   it "redirects to the home page upon update" do
-      update_params = {"name"=>"sayali", "email"=>"sayalip@gmail.com", "manager_id"=>"1", "role_id"=>"2", "age"=>"22", "date_of_joining"=>"2014-11-30"}
+      update_params = {"designation"=>"clerk", "department"=>"amura", "priority"=>"4"}
       patch :update, :id => @role.id, role: update_params
       assert_redirected_to admin_roles_path
   end
-  # it "redirects to edit on failed update" do
-  #     update_params = {"name"=>nil  , "email"=>"sayalip@gmail.com", "manager_id"=>"1", "role_id"=>"2", "age"=>"22", "date_of_joining"=>"2014-11-30"}
-  #     patch :update, :id => @role.id, role: update_params
-  #     expect(response).to render_template("edit")
-  # end
+  it "redirects to edit on failed update" do
+      update_params = {"designation"=>"clerk", "department"=>nil, "priority"=>"5"}
+      patch :update, :id => @role.id, role: update_params
+      expect(response).to render_template("edit")
+  end
   
   it "removes role from database" do
     params = {"id"=>"#{@role.id}"}

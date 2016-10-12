@@ -27,7 +27,7 @@ class Admin::RolesController < ApplicationController
 
   def edit;   end
 
-  def update; 
+  def update 
     if @role.update_attributes(role_params)
       flash[:success] = "Role has succefully updated"
       redirect_to admin_roles_path
