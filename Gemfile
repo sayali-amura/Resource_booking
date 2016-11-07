@@ -6,13 +6,15 @@ gem 'rails', '4.2.6'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'devise'
 gem 'simple_form'
+gem 'mongo'
+gem 'mongoid'
 # gem 'rubocop', '~> 0.43.0', require: false
 gem 'bootstrap-select-rails'
 gem 'cancancan'
 gem 'yard', '~> 0.9.5'
 gem 'intl-tel-input-rails'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# gem 'sqlite3'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
