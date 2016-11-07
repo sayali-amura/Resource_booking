@@ -45,13 +45,15 @@ class Company
 	# Company phone regex 
 	VALID_PHONE_REGEX = /\A\+\d+\z/
 	
-	# Validations
-	validates :email, presence: true, length: { maximum: 255 }, format: {with: VALID_EMAIL_REGEX },
-																uniqueness: { case_sensitive: false }
-	validates :name,:phone,:start_time,:end_time , presence: true
-	validates :phone ,format: {with: VALID_PHONE_REGEX,message: "Not a valid phone number format"}, uniqueness: true
-	validates :end_time, presence: true, time: true, if: :ensure_timing_has_value
+	attr_accessor :skip_email
 
+	# Validations
+	validates :email, presence: {message: "provide email"}, length: { maximum: 255 }, format: {with: VALID_EMAIL_REGEX },
+																uniqueness: { case_sensitive: false }, unless: :skip_email
+	validates :name,:phone,:start_time,:end_time , presence: {message: "presence not fullfilled"}
+	validates :phone ,format: {with: VALID_PHONE_REGEX,message: "Not a valid phone number format"}, uniqueness: true
+	validates :end_time, presence: {message: "end time"}, time: true, if: :ensure_timing_has_value
+	# byebug	
 	# Callbacks
 	# (see #lower_fields)
 	before_save :lower_fields
@@ -78,6 +80,7 @@ class Company
 	def lower_fields
 		self.email.downcase!
 		self.name.downcase!
+		# byebug
 	end
 
 	#
@@ -87,6 +90,7 @@ class Company
 	# @return [void] Add none role to company
 	# 
 	def add_empty_role
+		p "i am in add empty role"
 		empty_role = self.roles.build(designation: "none",department: self.name,priority: 0)
 		empty_role.skip_validation = true
 		empty_role.save
@@ -99,6 +103,8 @@ class Company
 	# @return [void] Add default role and admin to company
 	# 
 	def add_defaults
+		byebug
+		p "i am in add defaults"
 		@role = self.roles.build(designation: "admin",department: self.name,priority: 1 )
 		@role.skip_validation = true     # to skip validation of role to add admin role in company
 		if @role.save

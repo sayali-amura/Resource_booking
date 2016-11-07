@@ -35,10 +35,10 @@
 <div align="center">
 <br>
 <br>
-	<!%= debug(params) if Rails.env.development? %>
-	<!% if employee_signed_in? %>
-		<!%= current_employee.inspect %>
-	<!% end %>	
+	<%= debug(params) if Rails.env.development? %>
+	<% if employee_signed_in? %>
+		<%= current_employee.inspect %>
+	<% end %>	
 </div>
 
 

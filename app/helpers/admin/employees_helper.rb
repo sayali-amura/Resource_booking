@@ -48,7 +48,7 @@ module Admin::EmployeesHelper
 	# @return [String] name Designation of employee
 	# 
 	def role_name role_id
-		name = current_employee.company.roles.find(role_id).designation
+		current_employee.company.roles.find(role_id).designation
 	end
 	#
 	# Function provide role name corresponding to employee_id
@@ -57,6 +57,6 @@ module Admin::EmployeesHelper
 	# @return [String] name Name of employee
 	# 
 	def employee_name employee_id
-		name = current_employee.company.employees.find(employee_id).name
+		current_employee.company.employees.find(employee_id).name
 	end
 end

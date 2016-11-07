@@ -40,7 +40,7 @@ class Employee
   field :last_sign_in_at,    :type => Time
   field :current_sign_in_ip, :type => String
   field :last_sign_in_ip,    :type => String
-
+  
   ## Confirmable
   field :confirmation_token,   :type => String
   field :confirmed_at,         :type => Time
@@ -61,7 +61,7 @@ class Employee
 	belongs_to :company
 	has_many :bookings, dependent: :destroy
 	has_many :complaints, dependent: :destroy
-  has_many :subordinates, class_name: "Employee", foreign_key: "manager_id"
+  # has_many :subordinates, class_name: "Employee", foreign_key: "manager_id"
   belongs_to :manager, class_name: "Employee"
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i,   message: "email format" },
                        uniqueness:{scope: :company_id, message: "Email should be unique across the company"}
@@ -121,7 +121,8 @@ class Employee
     Employee.find(self.manager_id)
   end
   def subordinates
-    e = Employee.where(manager_id:self.id)
+    Employee.where(manager_id:self.id)
+    byebug
   end
   private
 

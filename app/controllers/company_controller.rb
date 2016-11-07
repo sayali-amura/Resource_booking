@@ -31,17 +31,18 @@
 			render :new
 		end
 	end
+	
 	def edit
 		@company = current_employee.company
 
 	end
+
 	def update
-		@company = current_employee.company
-		company_params[:email] = @company.email
-		if @company.update(company_params)
+		if Company.find(current_employee.company.id).update(company_params)
 			flash[:success] = "company is successfully updated."
 			redirect_to company_index_path
 		else
+			# byebug
 			render :edit
 		end
 	end
@@ -84,12 +85,11 @@
 	# @option params [String] phone Phone of company
 	# @option params [Time] start_time Start time of company 
 	#
-	#
 	# @return [Hash] Strong parameters hash
 	# 
 	def company_params
 		# byebug
-		params.require(:company).permit(:name,:email,:phone,:start_time,:end_time)
+		params.require(:company).permit(:name,:phone,:start_time,:end_time)
 	end
 
 end
