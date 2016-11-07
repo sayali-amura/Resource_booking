@@ -14,9 +14,9 @@ class Complaint
 	field	:updated_at, type: DateTime
 	field	:comment, type: String
 	field	:status, type: String
-	field	:resource_id, type: Integer
-	field	:employee_id, type: Integer
-	field	:company_id, type: Integer
+	field	:resource_id, type: BSON::ObjectId
+	field	:employee_id, type: BSON::ObjectId
+	field	:company_id, type: BSON::ObjectId
 
 	# define index
 	index({employee_id: 1})

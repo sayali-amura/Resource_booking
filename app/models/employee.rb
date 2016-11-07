@@ -18,11 +18,11 @@ class Employee
   field      :name, type: String
   field      :age, type: Integer
   field      :date_of_joining, type: DateTime
-  field      :manager_id, type: Integer
-  field      :role_id, type: Integer
+  field      :manager_id, type: BSON::ObjectId
+  field      :role_id, type: BSON::ObjectId
   field      :created_at, type: DateTime
   field      :updated_at, type: DateTime
-  field      :company_id, type: Integer
+  field      :company_id, type: BSON::ObjectId
   field      :email, type: String
 
 
@@ -67,7 +67,7 @@ class Employee
                        uniqueness:{scope: :company_id, message: "Email should be unique across the company"}
   validates :name, :email,:age, :role_id, :date_of_joining, presence: true
   validates :manager_id, presence: true, unless: :skip_validation
-  validates :role_id, :manager_id, :age, numericality: { only_integer: true, less_than: 2147483647, greater_than_or_equal_to: 1}, unless: :skip_validation
+  validates :age, numericality: { only_integer: true, less_than: 2147483647, greater_than_or_equal_to: 1}, unless: :skip_validation
   validates :password, :password_confirmation, presence: {:message => 'no password'}, unless: :skip_password_validation
 
   # Callbacks
@@ -79,6 +79,7 @@ class Employee
     p = {}
     p[:password] = params[:password]
     p[:password_confirmation] = params[:password_confirmation]
+    byebug
     update_attributes(p)
   end
 
