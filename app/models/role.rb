@@ -15,7 +15,6 @@ class Role
 	field	:designation, type: String
 	field	:department, type: String
 	field	:priority, type: Integer
-	field	:company_id, type: Integer
 
 
 	# @!attribute [rw] skip_validation

@@ -19,11 +19,11 @@ class Booking
 	field	:status, type: String
 	field	:feedback, type: String
 	field	:comment, type: String
-	field	:employee_id, type: Integer
+	field	:employee_id, type: BSON::ObjectId
 	field	:date_of_booking, type: Date
-	field	:esource_id, type: Integer
+	field	:resource_id, type: BSON::ObjectId
 	field	:slot, type: Integer
-	field	:company_id, type: Integer
+	field	:company_id, type: BSON::ObjectId
 
 	# define index
 	index({employee_id: 1})

@@ -13,7 +13,7 @@ class Resource
 	field 	:created_at, type: DateTime
 	field 	:updated_at, type: DateTime
 	field 	:name, type: String
-	field 	:company_id, type: Integer
+	field 	:company_id, type: BSON::ObjectId
 	field 	:time_slot, type: Integer
 
 	# define index
