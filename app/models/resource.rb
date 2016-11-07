@@ -14,7 +14,7 @@ class Resource
 	field 	:updated_at, type: DateTime
 	field 	:name, type: String
 	field 	:company_id, type: BSON::ObjectId
-	field 	:time_slot, type: Integer
+	field 	:time_slot, type: Time
 
 	# define index
 	index({company_id: 1})

@@ -19,7 +19,7 @@ class EmployeesController < ApplicationController
 		if current_employee.role_id == admin_role_id 
 			redirect_to admin_dashbord_path
 		end
-			@bookings = @employee.bookings.where(:date_of_booking.gt => Date.today)
+			@bookings = @employee.bookings.where(:date_of_booking.gte => Date.today)
 			@complaints = @employee.complaints
 	end
 

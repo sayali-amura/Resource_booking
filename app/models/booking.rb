@@ -16,7 +16,7 @@ class Booking
 	# specify modle fields
 	field	:created_at, type: DateTime
 	field	:updated_at, type: DateTime
-	field	:status, type: String
+	field	:status, type: Integer, default: 0
 	field	:feedback, type: String
 	field	:comment, type: String
 	field	:employee_id, type: BSON::ObjectId
@@ -38,9 +38,9 @@ class Booking
 	before_validation 	:add_company_id
 
 	# validations
-	validates :slot,:date_of_booking,:comment , presence: true
+	validates :slot,:date_of_booking,:comment,:resource_id,:employee_id,:company_id , presence: true
 	validates :status , inclusion: {in:[0,1,2]}
-	validates :resource_id,:employee_id,:company_id, numericality: { only_integer: true, less_than: 2147483647, greater_than: 0 }
+	# validates , numericality: { only_integer: true, less_than: 2147483647, greater_than: 0 }
 	validates :slot, numericality: 	{ only_integer: true, less_than: 2147483647, greater_than_or_equal_to: 0 }
 
 	# conditional validation 
@@ -79,11 +79,11 @@ class Booking
 	# @return [void] add errors to self if slot is already alloted
 	# 
 	def is_slot_alloted?
-		if self.company.bookings.find_by_date_of_booking(self.date_of_booking)
+		if self.company.bookings.where(date_of_booking: self.date_of_booking)
 			if self.new_record?
 				days_booking = self.company.bookings.where(date_of_booking: self.date_of_booking)
 			else
-				days_booking = self.company.bookings.where(date_of_booking: self.date_of_booking).where.not(id: self.id)
+				days_booking = self.company.bookings.where(date_of_booking: self.date_of_booking).where(:id.ne => self.id)
 			end
 			days_booking.each do |x|
 				unless x.slot != self.slot
@@ -143,7 +143,7 @@ class Booking
 			self.errors[:date_of_booking] << "=> Date of booking can't be empty"
 			return false
 		end
-		unless ( self.company.resources.find_by_id(self.resource_id) )
+		unless ( self.company.resources.find_by(id: self.resource_id) )
 			self.errors[:resource_not_present] << "=> Requested resource is not available."
 			return false
 		end
@@ -167,8 +167,8 @@ class Booking
 	# @return [Array] current_bookings The currently going on bookings objects
 	# 
 	def self.ongoing_bookings(company)
-		bookings_of_today = company.bookings.where("date_of_booking = ?",Date.today)
-		granted = bookings_of_today.where(status:1)
+		bookings_of_today = company.bookings.where(:date_of_booking.gte => Date.today)
+		granted = bookings_of_today.where(status: 1)
 		current_bookings = []
 		granted.each do | booking |
 			resource = booking.resource

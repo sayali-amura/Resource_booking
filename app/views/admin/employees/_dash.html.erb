@@ -11,7 +11,7 @@
 		<strong>Comment</strong>
 		</div>
 	 	<div class="col-md-1">
-		<strong>Employee_id</strong>
+		<strong>Employee</strong>
 		</div>
 		<div class="col-md-2">
 		<strong>Resource Name</strong>	
@@ -45,7 +45,7 @@
 		<%=booking.comment%>
 		</div>
 		<div class="col-md-1">
-		<%=booking.employee_id%>
+		<%=booking.employee.name%>
 		</div>
 		<div class="col-md-2">
 		<%=resource_name(booking.resource_id)%>
@@ -121,7 +121,7 @@
 		<%=resource_name(complaint.resource_id)%>
 		</div>
 		<div class="col-md-1">
-		<%=complaint.employee_id%>
+		<%=complaint.employee.name%>
 		</div>
 	<%= form_for:status_complaint, url:admin_change_status_path do | f |%>
 		<div class="col-md-1">
