@@ -37,9 +37,9 @@
 	end
 	def update
 		byebug
-		@company = current_employee.company
+
 		company_params[:email] = @company.email
-		if @company.update(company_params)
+		if Company.find(current_employee.company.id).update(company_params)
 			flash[:success] = "company is successfully updated."
 			redirect_to company_index_path
 		else
