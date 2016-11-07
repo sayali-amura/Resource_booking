@@ -3,7 +3,21 @@
 # 
 # @author Amrut Jadhav amrut@amuratech.com
 #
-class Resource < ActiveRecord::Base
+class Resource
+
+	# include mongoid dependancies
+	include Mongoid::Document
+	include Mongoid::Timestamps
+
+	# specify modle fields
+	field 	:created_at, type: DateTime
+	field 	:updated_at, type: DateTime
+	field 	:name, type: String
+	field 	:company_id, type: Integer
+	field 	:time_slot, type: Integer
+
+	# define index
+	index({company_id: 1})
 
 	# Association
 	belongs_to :company

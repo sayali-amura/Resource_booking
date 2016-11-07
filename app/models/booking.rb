@@ -4,10 +4,29 @@
 #
 # @author Amrut Jadhav amrut@amuratech.com
 #
-class Booking < ActiveRecord::Base
+class Booking
+
+	# include mongoid dependancies
+	include Mongoid::Document
+	include Mongoid::Timestamps
 
 	#include Admin::ResourcesHelper  
 	include Admin::ResourcesHelper
+
+	# specify modle fields
+	field	:created_at, type: DateTime
+	field	:updated_at, type: DateTime
+	field	:status, type: String
+	field	:feedback, type: String
+	field	:comment, type: String
+	field	:employee_id, type: Integer
+	field	:date_of_booking, type: Date
+	field	:esource_id, type: Integer
+	field	:slot, type: Integer
+	field	:company_id, type: Integer
+
+	# define index
+	index({employee_id: 1})
 
 	# associations 
 	belongs_to :employee

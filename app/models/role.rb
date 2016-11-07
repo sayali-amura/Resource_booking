@@ -3,7 +3,21 @@
 #
 # @author Amrut Jadhav
 #
-class Role < ActiveRecord::Base
+class Role
+
+	# include mongoid dependancies
+	include Mongoid::Document
+	include Mongoid::Timestamps
+
+	# specify modle fields
+	field	:created_at, type: DateTime
+	field	:updated_at, type: DateTime
+	field	:designation, type: String
+	field	:department, type: String
+	field	:priority, type: Integer
+	field	:company_id, type: Integer
+
+
 	# @!attribute [rw] skip_validation
 	#   @return [Boolean] Whether to skip validation or not 
 	attr_accessor :skip_validation

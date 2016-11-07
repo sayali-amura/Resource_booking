@@ -14,7 +14,24 @@ end
 #
 # @author Amrut Jadhav  amrut@amuratech.com	
 #
-class Company < ActiveRecord::Base
+class Company 
+
+	# include mongoid dependancies
+	include Mongoid::Document
+	include Mongoid::Timestamps
+
+	# specify model fileds
+	field	:name, type: String
+	field	:email, type: String
+	field	:phone, type: String
+	field	:created_at, type: DateTime
+	field	:updated_at, type: DateTime
+	field	:start_time, type: Time
+	field	:end_time, type: Time
+
+	# define index
+	index({email: 1, phone: 1},{unique: true})
+
 	# Associations
 	has_many :roles, dependent: :destroy
 	has_many :resources, dependent: :destroy
@@ -62,7 +79,6 @@ class Company < ActiveRecord::Base
 		self.email.downcase!
 		self.name.downcase!
 	end
-
 
 	#
 	# Create none role for company

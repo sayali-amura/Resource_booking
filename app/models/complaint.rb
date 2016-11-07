@@ -3,7 +3,23 @@
 #
 # @author Amrut Jadhav amrut@amuratech.com
 #
-class Complaint < ActiveRecord::Base
+class Complaint 
+
+	# include mongoid dependancies
+	include Mongoid::Document
+	include Mongoid::Timestamps
+
+	# specify modle fields
+	field	:created_at, type: DateTime
+	field	:updated_at, type: DateTime
+	field	:comment, type: String
+	field	:status, type: String
+	field	:resource_id, type: Integer
+	field	:employee_id, type: Integer
+	field	:company_id, type: Integer
+
+	# define index
+	index({employee_id: 1})
 
 	# Associations 
 	belongs_to :employee
