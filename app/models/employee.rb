@@ -3,7 +3,49 @@
 #
 # @author Amrut Jadhav  amrut@amuratech.com
 #
-class Employee < ActiveRecord::Base
+class Employee 
+
+  # include mongoid dependancies
+  include Mongoid::Document
+  include Mongoid::Timestamps
+
+
+  # Devise options
+  devise :database_authenticatable, :registerable,:recoverable, :rememberable, :trackable, :validatable, :confirmable
+
+  # specify model fields
+  
+  field      :name, type: String
+  field      :age, type: Integer
+  field      :date_of_joining, type: DateTime
+  field      :manager_id, type: Integer
+  field      :role_id, type: Integer
+  field      :created_at, type: DateTime
+  field      :updated_at, type: DateTime
+  field      :company_id, type: Integer
+  field      :email, type: String
+
+
+  field :encrypted_password, :type => String, :default => ""
+  ## Recoverable
+  field :reset_password_token,   :type => String
+  field :reset_password_sent_at, :type => Time
+
+  ## Rememberable
+  field :remember_created_at, :type => Time
+
+  ## Trackable
+  field :sign_in_count,      :type => Integer, :default => 0
+  field :current_sign_in_at, :type => Time
+  field :last_sign_in_at,    :type => Time
+  field :current_sign_in_ip, :type => String
+  field :last_sign_in_ip,    :type => String
+
+  ## Confirmable
+  field :confirmation_token,   :type => String
+  field :confirmed_at,         :type => Time
+  field :confirmation_sent_at, :type => Time
+  field :unconfirmed_email,    :type => String # Only if using reconfirmable
 
   #
   # @!attribute [rw] skip_password_validation
@@ -31,9 +73,7 @@ class Employee < ActiveRecord::Base
   # Callbacks
   before_save :lower_email
 
-  # Devise options
-  devise :database_authenticatable, :registerable,:recoverable, :rememberable, :trackable, :validatable, :confirmable
-
+  
   scope :employees, -> id { where(company_id:id) }
   def attempt_set_password(params)
     p = {}
