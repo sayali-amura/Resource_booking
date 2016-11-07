@@ -79,7 +79,6 @@ class Employee
     p = {}
     p[:password] = params[:password]
     p[:password_confirmation] = params[:password_confirmation]
-    byebug
     update_attributes(p)
   end
 
