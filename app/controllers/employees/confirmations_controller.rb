@@ -27,6 +27,7 @@ class Employees::ConfirmationsController < Devise::ConfirmationsController
 
   # PUT /resource/confirmation
   def update
+    byebug
     with_unconfirmed_confirmable do
       if @confirmable.has_no_password?
         @confirmable.attempt_set_password(params[:employee])

@@ -1,11 +1,17 @@
 require File.expand_path('../boot', __FILE__)
 # require 'devise'
-require 'rails/all'
+# require 'rails/all'
+require "action_controller/railtie"
+require "action_mailer/railtie"
+require "sprockets/railtie"
+require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
-Bundler.require(*Rails.groups)
-
+#Bundler.require(*Rails.groups)
+Bundler.require(*Rails.groups(assets: %w(development test)))
+Mongoid.load!('config/mongoid.yml')
+# Mongoid.load!("/home/amura/change1/clone/Resource_booking/config/mongoid.yml")
 module ResourceBooking
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -19,8 +25,13 @@ module ResourceBooking
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+    config.generators do |g|
+        g.orm :mongoid
+    end
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
+    #config.active_record.raise_in_transactional_callbacks = true
+    
+
   end
 end

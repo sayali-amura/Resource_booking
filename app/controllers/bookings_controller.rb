@@ -21,7 +21,7 @@ class BookingsController < ApplicationController
 	# 
 	def index
 		if @company.is_resource_available?
-			@bookings = @company.bookings.where("date_of_booking >= ?",Date.today)
+			@bookings = @company.bookings.where(:date_of_booking.gte => Date.today)
 			@ongoing_bookings = Booking.ongoing_bookings(current_employee.company)
 		end
 	end
@@ -107,7 +107,8 @@ class BookingsController < ApplicationController
 	# @return [void] redirect_to bookings index page.
 	# 
 	def destroy
-		if @company.bookings.destroy(params[:id])
+		byebug
+		if @company.bookings.where(_id:params[:id]).destroy
 			flash[:success] = "Booking is successfully deleted"
 		else
 			flash[:success] = "Error while deleting booking"
@@ -120,7 +121,7 @@ class BookingsController < ApplicationController
 	#  It restuns all the available and non-available slots of resource
 	# 
 	def resource_time_slot
-		@resource = @company.resources.find_by_name(params[:name])
+		@resource = @company.resources.find_by(name: params[:name])
 	end
 
 	#
@@ -128,7 +129,7 @@ class BookingsController < ApplicationController
 	#
 	#
 	def booking_date_slots
-		resource = @company.resources.find_by_name(params[:resource])
+		resource = @company.resources.find_by(name: params[:resource])
 		@slot_array = resource.available_time_slot params[:date_of_booking]
 	end
 

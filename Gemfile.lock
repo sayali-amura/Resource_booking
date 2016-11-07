@@ -47,6 +47,7 @@ GEM
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
     bootstrap-select-rails (1.6.3)
+    bson (4.1.1)
     builder (3.2.2)
     byebug (9.0.5)
     cancancan (1.15.0)
@@ -101,10 +102,18 @@ GEM
     mime-types-data (3.2016.0521)
     mini_portile2 (2.1.0)
     minitest (5.8.3)
+    mongo (2.3.1)
+      bson (~> 4.1)
+    mongoid (5.1.5)
+      activemodel (~> 4.0)
+      mongo (~> 2.1)
+      origin (~> 2.2)
+      tzinfo (>= 0.3.37)
     multi_json (1.12.1)
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
+    origin (2.2.2)
     orm_adapter (0.5.0)
     pg (0.18.4)
     pkg-config (1.1.7)
@@ -225,6 +234,7 @@ DEPENDENCIES
   intl-tel-input-rails
   jbuilder (~> 2.0)
   jquery-rails
+  mongoid
   pg
   pry
   rails (= 4.2.6)
@@ -243,4 +253,4 @@ DEPENDENCIES
   yard (~> 0.9.5)
 
 BUNDLED WITH
-   1.13.1
+   1.13.6

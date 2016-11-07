@@ -20,7 +20,8 @@ class Ability
     # Check whether employee is existed in database or it is new?
     if !employee.new_record?
       company = employee.company
-      admin_role_id = company.roles.find_by_designation("admin").id
+      
+      admin_role_id = company.roles.find_by(designation: "admin").id
       if employee.role_id == admin_role_id      #Check whether employee is admin or regular employee
         can :manage, [Employee,Resource,Role]
         can [:read,:change_status], [Booking,Complaint]

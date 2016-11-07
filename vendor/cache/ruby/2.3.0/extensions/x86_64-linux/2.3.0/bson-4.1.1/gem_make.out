@@ -1,0 +1,25 @@
+current directory: /home/amura/change1/clone/Resource_booking/vendor/cache/ruby/2.3.0/gems/bson-4.1.1/ext/bson
+/home/amura/.rvm/rubies/ruby-2.3.0/bin/ruby -r ./siteconf20161107-22380-2s05st.rb extconf.rb
+creating Makefile
+
+current directory: /home/amura/change1/clone/Resource_booking/vendor/cache/ruby/2.3.0/gems/bson-4.1.1/ext/bson
+make "DESTDIR=" clean
+
+current directory: /home/amura/change1/clone/Resource_booking/vendor/cache/ruby/2.3.0/gems/bson-4.1.1/ext/bson
+make "DESTDIR="
+compiling native.c
+In file included from native.c:21:0:
+native-endian.h:144:17: warning: ‘__bson_uint32_swap_slow’ defined but not used [-Wunused-function]
+ static uint32_t __bson_uint32_swap_slow(uint32_t v)
+                 ^
+native-endian.h:168:17: warning: ‘__bson_uint64_swap_slow’ defined but not used [-Wunused-function]
+ static uint64_t __bson_uint64_swap_slow(uint64_t v)
+                 ^
+native-endian.h:195:15: warning: ‘__bson_double_swap_slow’ defined but not used [-Wunused-function]
+ static double __bson_double_swap_slow(double v)
+               ^
+linking shared-object native.so
+
+current directory: /home/amura/change1/clone/Resource_booking/vendor/cache/ruby/2.3.0/gems/bson-4.1.1/ext/bson
+make "DESTDIR=" install
+/usr/bin/install -m 0755 native.so ./.gem.20161107-22380-lw67k8

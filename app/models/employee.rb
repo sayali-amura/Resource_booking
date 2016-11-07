@@ -3,8 +3,9 @@
 #
 # @author Amrut Jadhav  amrut@amuratech.com
 #
-class Employee < ActiveRecord::Base
-
+class Employee 
+  include Mongoid::Document
+  include Mongoid::Timestamps
   #
   # @!attribute [rw] skip_password_validation
   #   @return [Boolean] whether to skip password validation or not
@@ -19,13 +20,13 @@ class Employee < ActiveRecord::Base
 	belongs_to :company
 	has_many :bookings, dependent: :destroy
 	has_many :complaints, dependent: :destroy
-  has_many :subordinates, class_name: "Employee", foreign_key: "manager_id"
-  belongs_to :manager, class_name: "Employee"
+  has_many :subordinates, class_name: "Employee", :inverse_of => :manager
+  belongs_to :manager, class_name: "Employee", :inverse_of => :subordinates
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i,   message: "email format" },
                        uniqueness:{scope: :company_id, message: "Email should be unique across the company"}
   validates :name, :email,:age, :role_id, :date_of_joining, presence: true
   validates :manager_id, presence: true, unless: :skip_validation
-  validates :role_id, :manager_id, :age, numericality: { only_integer: true, less_than: 2147483647, greater_than_or_equal_to: 1}, unless: :skip_validation
+  #validates :role_id, :manager_id, :age, numericality: { only_integer: true, less_than: 2147483647, greater_than_or_equal_to: 1}, unless: :skip_validation
   validates :password, :password_confirmation, presence: {:message => 'no password'}, unless: :skip_password_validation
 
   # Callbacks
@@ -34,8 +35,46 @@ class Employee < ActiveRecord::Base
   # Devise options
   devise :database_authenticatable, :registerable,:recoverable, :rememberable, :trackable, :validatable, :confirmable
 
+
+
+
+
+
+  field :name, type: String
+  field :age, type: Integer
+  field :date_of_joining, type: Date
+  field :manager_id, type: BSON::ObjectId
+  field :role_id, type: BSON::ObjectId
+  field :company_id, type: BSON::ObjectId 
+  field :email, type: String
+## Database authenticatable
+  field :email,              type: String, default: ""
+  field :encrypted_password, type: String, default: ""
+
+  ## Recoverable
+  field :reset_password_token,   type: String
+  field :reset_password_sent_at, type: Time
+
+  ## Rememberable
+  field :remember_created_at, type: Time
+
+  ## Trackable
+  field :sign_in_count,      type: Integer, default: 0
+  field :current_sign_in_at, type: Time
+  field :last_sign_in_at,    type: Time
+  field :current_sign_in_ip, type: String
+  field :last_sign_in_ip,    type: String
+
+  # Confirmable
+  field :confirmation_token,   type: String
+  field :confirmed_at,         type: Time
+  field :confirmation_sent_at, type: Time
+  field :unconfirmed_email,    type: String # Only if using reconfirmable
+
+
   scope :employees, -> id { where(company_id:id) }
   def attempt_set_password(params)
+    byebug
     p = {}
     p[:password] = params[:password]
     p[:password_confirmation] = params[:password_confirmation]
@@ -80,9 +119,10 @@ class Employee < ActiveRecord::Base
   def manager
     Employee.find(self.manager_id)
   end
-  def subordinates
-    e = Employee.where(manager_id:self.id)
-  end
+  # def subordinates
+  #   byebug
+  #   e = Employee.where(manager_id:self.id)
+  # end
   private
 
   #

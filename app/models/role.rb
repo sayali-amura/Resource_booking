@@ -3,9 +3,16 @@
 #
 # @author Amrut Jadhav
 #
-class Role < ActiveRecord::Base
+class Role
+	include Mongoid::Document
+	include Mongoid::Timestamps
 	# @!attribute [rw] skip_validation
-	#   @return [Boolean] Whether to skip validation or not 
+	#   @return [Boolean] Whether to skip validation or not
+	
+	 field :designation, type: String
+	 field :priority, type: Integer
+	 field :company_id, type: BSON::ObjectId
+	 field :department, type: String  
 	attr_accessor :skip_validation
 	# Associations
 	belongs_to :company

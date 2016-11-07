@@ -6,16 +6,14 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-
-  # config.secret_key = 'f50fa5ee4f771d6ccf62eb4443679eaa05642e82712b5a176685fbdb67741e1b548878f5cc835a51435c9bf82a0e575445d068398b81a4ac13a94b1788fb9b3c'
-
+  # config.secret_key = '846c21873f2f1c674915de3ec22a97c8a4adec90a0c3d64da2e9bfcbc7face2d99019d63a782f3e4b75d1f5dabf4fe48a4e8500fdc282fb919c43eba96619527'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
-
+  #config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
 
@@ -26,7 +24,7 @@ Devise.setup do |config|
   # Load and configure the ORM. Supports :active_record (default) and
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
   # available as additional gems.
-  require 'devise/orm/active_record'
+  require 'devise/orm/mongoid'
 
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is
@@ -108,11 +106,9 @@ Devise.setup do |config|
   # algorithm), the cost increases exponentially with the number of stretches (e.g.
   # a value of 20 is already extremely slow: approx. 60 seconds for 1 calculation).
   config.stretches = Rails.env.test? ? 1 : 11
-  config.password_length = 6..128
+
   # Set up a pepper to generate the hashed password.
-
-  # config.pepper = '74966beea18c0884f0a97bbcd14e973a6be1b4e28a51bcad37a63c9241474b201162e90a8bf3bf6d9cb11f6621f1cb340004c0b597791e24da81c8aad01edf42'
-
+  # config.pepper = '633068aeb276ff70f4ee1dd575a65d9a30c26d9f11cef7872269ed17cc728e70192d26e85059988aea5e6a30f84af110635cafaf25ea2c81427552217c0457b7'
 
   # Send a notification email when the user's password is changed
   # config.send_password_change_notification = false
@@ -224,9 +220,7 @@ Devise.setup do |config|
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
   # are using only default views.
-
-  config.scoped_views = true
-
+  # config.scoped_views = false
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).

@@ -14,7 +14,23 @@ end
 #
 # @author Amrut Jadhav  amrut@amuratech.com	
 #
-class Company < ActiveRecord::Base
+class Company 
+	include Mongoid::Document
+	include Mongoid::Timestamps
+
+ field :name, type: String
+ #   field :status, type: Integer
+ #   field :date_of_booking, type: Date
+ #   field :resource_id, type: Integer
+ #   field :company_id, type: Integer
+ field :start_time, type: Time
+ field :end_time, type: Time
+ field :email, type: String
+ field :phone, type: String
+
+
+
+
 	# Associations
 	has_many :roles, dependent: :destroy
 	has_many :resources, dependent: :destroy

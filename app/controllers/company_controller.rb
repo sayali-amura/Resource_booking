@@ -36,6 +36,7 @@
 
 	end
 	def update
+		byebug
 		@company = current_employee.company
 		company_params[:email] = @company.email
 		if @company.update(company_params)

@@ -15,11 +15,11 @@ class EmployeesController < ApplicationController
 	#    and @complaints to all complaints in his company 
 	def entry
 		@company =current_employee.company
-      	admin_role_id = @company.roles.find_by_designation("admin").id
+      	admin_role_id = @company.roles.find_by(designation: "admin").id
 		if current_employee.role_id == admin_role_id 
 			redirect_to admin_dashbord_path
 		end
-			@bookings = @employee.bookings.where("date_of_booking >= ?",Date.today)
+			@bookings = @employee.bookings.where(:date_of_booking.gte => Date.today)
 			@complaints = @employee.complaints
 	end
 

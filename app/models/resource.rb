@@ -3,7 +3,17 @@
 # 
 # @author Amrut Jadhav amrut@amuratech.com
 #
-class Resource < ActiveRecord::Base
+class Resource 
+	include Mongoid::Document
+	include Mongoid::Timestamps
+
+
+  field :name, type: String
+  field :time_slot, type: Time
+  field :company_id, type: BSON::ObjectId
+
+
+
 
 	# Association
 	belongs_to :company

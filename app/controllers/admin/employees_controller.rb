@@ -14,6 +14,7 @@ class Admin::EmployeesController < ApplicationController
 		@employee = @company.employees.build(employee_params)
 		@employee.skip_password_validation = true
 		if @employee.save
+
 			redirect_to admin_employees_path
 		else
 			render :new
@@ -37,9 +38,10 @@ class Admin::EmployeesController < ApplicationController
 
 	def destroy
 		@admin = @company.employees.find_by(name:"admin")
-		if @company.employees.destroy(params[:id])
+		#ClassName.delete_all(conditions: { _id: BSON::ObjectId("whatevertheidis")})
+		if @company.employees.where(_id: params[:id]).destroy
 			flash[:success] = "Employee and his bookings and complaints are succeesfully deleted"
-			@company.employees.where(manager_id:params[:id]).each do | record_emp |
+			@company.employees.snapshot().where(manager_id:params[:id]).each do | record_emp |
 				record_emp.manager_id = @admin.id
 				record_emp.skip_password_validation = true
 				record_emp.save
@@ -52,7 +54,7 @@ class Admin::EmployeesController < ApplicationController
 	
 	def dashbord
 		if @company.resources.any?
-			@bookings = @company.bookings.where(status:0).where("date_of_booking >= ?",Date.today) if @company.bookings
+			@bookings = @company.bookings.where(status:0).where(:date_of_booking.gte => Date.today) if @company.bookings
 			@complaints = @complaints.where(status:0) if @complaints
 		end
 	end

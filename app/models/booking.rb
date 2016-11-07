@@ -4,10 +4,23 @@
 #
 # @author Amrut Jadhav amrut@amuratech.com
 #
-class Booking < ActiveRecord::Base
-
+class Booking 
+	include Mongoid::Document
+	include Mongoid::Timestamps
 	#include Admin::ResourcesHelper  
 	include Admin::ResourcesHelper
+
+   field :feedback, type: String
+   field :status, type: Integer, default:0
+   field :date_of_booking, type: Date
+   field :resource_id, type: BSON::ObjectId
+   field :company_id, type: BSON::ObjectId
+   field :slot, type: Integer
+   field :employee_id, type: BSON::ObjectId
+   field :comment, type: String
+
+
+	
 
 	# associations 
 	belongs_to :employee
@@ -21,7 +34,7 @@ class Booking < ActiveRecord::Base
 	# validations
 	validates :slot,:date_of_booking,:comment , presence: true
 	validates :status , inclusion: {in:[0,1,2]}
-	validates :resource_id,:employee_id,:company_id, numericality: { only_integer: true, less_than: 2147483647, greater_than: 0 }
+	#validates :resource_id,:employee_id,:company_id, numericality: { only_integer: true, less_than: 2147483647, greater_than: 0 }
 	validates :slot, numericality: 	{ only_integer: true, less_than: 2147483647, greater_than_or_equal_to: 0 }
 
 	# conditional validation 
@@ -60,11 +73,13 @@ class Booking < ActiveRecord::Base
 	# @return [void] add errors to self if slot is already alloted
 	# 
 	def is_slot_alloted?
-		if self.company.bookings.find_by_date_of_booking(self.date_of_booking)
+
+		if self.company.bookings.where(date_of_booking: self.date_of_booking).first
 			if self.new_record?
 				days_booking = self.company.bookings.where(date_of_booking: self.date_of_booking)
 			else
-				days_booking = self.company.bookings.where(date_of_booking: self.date_of_booking).where.not(id: self.id)
+				 byebug
+				days_booking = self.company.bookings.where(date_of_booking: self.date_of_booking).where(:id.ne => self.id)
 			end
 			days_booking.each do |x|
 				unless x.slot != self.slot
@@ -124,7 +139,7 @@ class Booking < ActiveRecord::Base
 			self.errors[:date_of_booking] << "=> Date of booking can't be empty"
 			return false
 		end
-		unless ( self.company.resources.find_by_id(self.resource_id) )
+		unless ( self.company.resources.find_by(id:self.resource_id) )
 			self.errors[:resource_not_present] << "=> Requested resource is not available."
 			return false
 		end
@@ -148,7 +163,7 @@ class Booking < ActiveRecord::Base
 	# @return [Array] current_bookings The currently going on bookings objects
 	# 
 	def self.ongoing_bookings(company)
-		bookings_of_today = company.bookings.where("date_of_booking = ?",Date.today)
+		bookings_of_today = company.bookings.where(:date_of_booking.gte => Date.today)
 		granted = bookings_of_today.where(status:1)
 		current_bookings = []
 		granted.each do | booking |
