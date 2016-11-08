@@ -36,8 +36,6 @@
 
 	end
 	def update
-		byebug
-
 		company_params[:email] = @company.email
 		if Company.find(current_employee.company.id).update(company_params)
 			flash[:success] = "company is successfully updated."

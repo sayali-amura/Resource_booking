@@ -107,7 +107,6 @@ class BookingsController < ApplicationController
 	# @return [void] redirect_to bookings index page.
 	# 
 	def destroy
-		byebug
 		if @company.bookings.where(_id:params[:id]).destroy
 			flash[:success] = "Booking is successfully deleted"
 		else
