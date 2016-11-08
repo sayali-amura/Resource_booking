@@ -24,7 +24,6 @@ class Role
 
 	validates :designation, uniqueness:{scope: [:company_id,:department], message: "Designation in department should be unique"}
 	validates :priority, uniqueness:{scope: :company_id, message: "Priority should be uniq across the company"}
-
 	# Custom validation
 	validate :is_name_admin?, :is_none_fields, unless: :skip_validation
 
@@ -53,7 +52,7 @@ class Role
 	# @return [void] Update the associated employees role as default
 	# 
 	def add_default_role 
-		empty_role_id = self.company.roles.find_by_designation("none").id
+		empty_role_id = self.company.roles.find_by(designation:"none").id
 		if self.employees.any? 
 			self.employees.each do |x| 
 				x.skip_password_validation = true

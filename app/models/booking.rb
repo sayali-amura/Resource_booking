@@ -78,7 +78,6 @@ class Booking
 			if self.new_record?
 				days_booking = self.company.bookings.where(date_of_booking: self.date_of_booking)
 			else
-				 byebug
 				days_booking = self.company.bookings.where(date_of_booking: self.date_of_booking).where(:id.ne => self.id)
 			end
 			days_booking.each do |x|

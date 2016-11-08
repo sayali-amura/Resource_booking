@@ -74,7 +74,6 @@ class Employee
 
   scope :employees, -> id { where(company_id:id) }
   def attempt_set_password(params)
-    byebug
     p = {}
     p[:password] = params[:password]
     p[:password_confirmation] = params[:password_confirmation]
