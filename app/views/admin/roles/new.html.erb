@@ -11,7 +11,8 @@
 		<%=f.label :Department%>
 		<%=f.text_field :department , class: "form-control", required: true, placeholder: "Department of Employee"%>
 		<%=f.label :Priority%>
-		<%=f.text_field :priority , class: "form-control", required: true, placeholder: "Priority of Employee in Company"%>
+		<!-- <input type="text" id="phone" name="phone" onkeypress="phoneno()" maxlength="10"> -->
+		<%=f.text_field :priority , class: "form-control", id:"prio", required: true, placeholder: "Priority of Employee in Company",onkeypress: "check()", maxlength: "10"%>
 		<%= f.submit 'Create Role', class: "btn btn-primary btn-default"%>
 <% end %>
 </div>
@@ -19,3 +20,19 @@
 </div>
 
 </div>
+
+
+<script>        
+           function check(){          
+            $('prio').keypress(function(e) {
+                var a = [];
+                var k = e.which;
+
+                for (i = 48; i < 58; i++)
+                    a.push(i);
+
+                if (!(a.indexOf(k)>=0))
+                    e.preventDefault();
+            });
+        }
+       </script>
